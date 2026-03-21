@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh-pages": "ng build --configuration production --base-href /driveline/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:driveline": "node dist/driveline/server/server.mjs"

@@ -51,6 +51,14 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+### GitHub Pages
+
+From the **repository root** (parent of `driveline/`), CI builds with:
+
+`npm run build:gh-pages` → base href `/driveline/` for `https://<user>.github.io/driveline/`.
+
+Enable **Pages → Source: GitHub Actions** in repo settings. See the root [README](../README.md#github-pages).
+
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
