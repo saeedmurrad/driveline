@@ -1,0 +1,102 @@
+import { Review } from '../models/review.model';
+import { BusinessInfo } from '../models/contact.model';
+import { SALES_EMAIL } from '../constants/sales-contact';
+
+export const REVIEWS: Review[] = [
+  {
+    id: '1',
+    author: 'Blayne S',
+    date: '2024-08-28',
+    rating: 5,
+    title: 'Purchased a car from DriveLine',
+    body: 'At the weekend and so far very pleased with the experience, friendly staff, welcoming and helpful. They delivered my car to my home after it was given a full valet. The car comes with a warranty. Very happy with the purchase of my car.',
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '2',
+    author: 'Anonymous',
+    date: '2024-04-22',
+    rating: 5,
+    title: 'My 1st car purchased - very happy buyer',
+    body: 'My first car as a newly passed driver and I found the staff to be very helpful. The car was exactly as described and they assisted in insuring and taxing the car. Comes with 12 months MOT. Very happy buyer.',
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '3',
+    author: 'Anonymous',
+    date: '2024-03-18',
+    rating: 5,
+    title: 'All good',
+    body: 'I recently purchased the Audi Q7 from DriveLine and I am extremely satisfied with my overall experience. All good with the vehicle and was really happy with the service.',
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '4',
+    author: 'Anonymous',
+    date: '2024-01-16',
+    rating: 5,
+    title: 'Excellent service',
+    body: 'Very friendly and helpful. Very pleased with the new vehicle. The whole process from start to finish was smooth and professional. Highly recommended.',
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '5',
+    author: 'Sher Ali',
+    date: '2023-12-17',
+    rating: 5,
+    title: 'Highly recommend for used cars',
+    body: "That's my second time buying a car from here - very cooperative staff and helpful. They really go above and beyond to make sure you're satisfied. Will definitely come back for my next car.",
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '6',
+    author: 'Anonymous',
+    date: '2023-11-05',
+    rating: 5,
+    title: 'They are very good in what they do',
+    body: 'They are very friendly. Customer relations - fantastic. Resolving problems - excellent. Everything was handled with care and professionalism. Could not ask for more.',
+    source: 'Autotrader',
+    verified: true,
+  },
+  {
+    id: '7',
+    author: 'Robert Oxford',
+    date: '2023-06-21',
+    rating: 5,
+    title: 'Friendly and honest business',
+    body: 'A good experience from start to finish. Nice people who made me feel I was not going to regret anything. Transparent pricing, no pressure tactics, and an overall excellent dealership.',
+    source: 'Autotrader',
+    verified: true,
+  },
+];
+
+export const BUSINESS_INFO: BusinessInfo = {
+  name: 'DriveLine',
+  tagline: 'Quality, affordable, and reliable used car, van, and 4x4 sales.',
+  address: {
+    line1: 'Vision House',
+    line2: '193 Fengate',
+    town: 'Peterborough',
+    county: 'Cambridgeshire',
+    postcode: 'PE1 5BH',
+  },
+  phone: '01733 563559',
+  mobile: '07423 374244',
+  email: SALES_EMAIL,
+  openingHours: [
+    { day: 'Monday', open: '09:00', close: '18:00' },
+    { day: 'Tuesday', open: '09:00', close: '18:00' },
+    { day: 'Wednesday', open: '09:00', close: '18:00' },
+    { day: 'Thursday', open: '09:00', close: '18:00' },
+    { day: 'Friday', open: '09:00', close: '18:00' },
+    { day: 'Saturday', open: '09:00', close: '18:00' },
+    { day: 'Sunday', open: '10:00', close: '16:00' },
+  ],
+  bankHolidayNote:
+    'We are open on all bank holidays (including Boxing Day, New Year\'s Day & Easter Weekend). Alternative times available by appointment.',
+};

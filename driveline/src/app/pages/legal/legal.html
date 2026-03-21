@@ -1,0 +1,50 @@
+<div class="page-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center gap-2 text-blue-300 text-sm mb-3">
+      <a routerLink="/" class="hover:text-white transition-colors">Home</a>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <span class="text-white">{{ content.title }}</span>
+    </div>
+    <h1 class="text-4xl font-bold font-display text-white">{{ content.title }}</h1>
+  </div>
+</div>
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  @if (currentPage() !== 'sitemap') {
+    <div class="space-y-8">
+      @for (section of content.sections; track section.heading) {
+        <div>
+          <h2 class="text-xl font-bold text-gray-900 mb-3">{{ section.heading }}</h2>
+          <p class="text-gray-600 leading-relaxed">{{ section.body }}</p>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+      @for (group of sitemapLinks; track group.section) {
+        <div>
+          <h2 class="text-lg font-bold text-gray-900 mb-4">{{ group.section }}</h2>
+          <ul class="space-y-2">
+            @for (link of group.links; track link.route) {
+              <li>
+                <a [routerLink]="link.route" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors text-sm">
+                  <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                  {{ link.label }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
+
+  <div class="mt-12 pt-8 border-t border-gray-100 flex flex-wrap gap-4">
+    <a routerLink="/legal/privacy-policy" class="text-sm text-gray-500 hover:text-blue-600 transition-colors" [class.text-blue-600]="currentPage() === 'privacy-policy'" [class.font-medium]="currentPage() === 'privacy-policy'">Privacy Policy</a>
+    <a routerLink="/legal/cookie-policy" class="text-sm text-gray-500 hover:text-blue-600 transition-colors" [class.text-blue-600]="currentPage() === 'cookie-policy'" [class.font-medium]="currentPage() === 'cookie-policy'">Cookie Policy</a>
+    <a routerLink="/legal/disclaimer" class="text-sm text-gray-500 hover:text-blue-600 transition-colors" [class.text-blue-600]="currentPage() === 'disclaimer'" [class.font-medium]="currentPage() === 'disclaimer'">Disclaimer</a>
+    <a routerLink="/legal/sitemap" class="text-sm text-gray-500 hover:text-blue-600 transition-colors" [class.text-blue-600]="currentPage() === 'sitemap'" [class.font-medium]="currentPage() === 'sitemap'">Sitemap</a>
+  </div>
+</div>

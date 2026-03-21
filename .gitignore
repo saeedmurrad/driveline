@@ -1,0 +1,6 @@
+# Workspace root — keep secrets and OS junk out of Git
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db

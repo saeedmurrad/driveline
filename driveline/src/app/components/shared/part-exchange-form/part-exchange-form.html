@@ -1,0 +1,428 @@
+<div
+  class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+  [class.rounded-none]="variant === 'modal'"
+  [class.border-0]="variant === 'modal'"
+  [class.shadow-none]="variant === 'modal'"
+>
+  @if (vehicleOfInterest) {
+    <div class="px-4 py-3 sm:px-6 bg-blue-50 border-b border-blue-100">
+      <p class="text-xs font-semibold text-blue-800 uppercase tracking-wide">Vehicle you're interested in</p>
+      <p class="text-sm font-medium text-blue-950">
+        {{ vehicleOfInterest.year }} {{ vehicleOfInterest.make }} {{ vehicleOfInterest.model }}
+        {{ vehicleOfInterest.derivative }}
+      </p>
+      <p class="text-xs text-blue-700 mt-0.5">We'll use this to match your part exchange enquiry.</p>
+    </div>
+  }
+
+  @if (isSubmitted()) {
+    @if (variant === 'modal') {
+      <div class="p-8 text-center">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-2">Request received</h3>
+        <p class="text-gray-600 text-sm mb-6">We'll review your part exchange details and contact you shortly.</p>
+        <button type="button" (click)="onModalDone()" class="btn-primary px-8">Done</button>
+      </div>
+    } @else {
+      <div class="p-12 text-center">
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
+          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-3">Valuation Request Submitted!</h3>
+        <p class="text-gray-500 text-lg mb-8">Thank you! A member of our team will review your vehicle details and get back to you with a competitive valuation shortly.</p>
+        <a routerLink="/cars" class="btn-primary">Browse Our Cars</a>
+      </div>
+    }
+  } @else {
+    <div class="p-4 sm:p-6 border-b border-gray-100">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg sm:text-xl font-bold text-gray-900">{{ stepTitle }}</h2>
+        <span class="text-sm text-gray-500">Step {{ currentStep() }} of 3</span>
+      </div>
+      <div class="flex items-center gap-2">
+        @for (step of [1, 2, 3]; track step) {
+          <div class="flex items-center gap-2 flex-1">
+            <div
+              class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all flex-shrink-0"
+              [class.bg-blue-600]="currentStep() >= step"
+              [class.text-white]="currentStep() >= step"
+              [class.bg-gray-100]="currentStep() < step"
+              [class.text-gray-400]="currentStep() < step"
+            >
+              @if (currentStep() > step) {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              } @else {
+                {{ step }}
+              }
+            </div>
+            @if (step < 3) {
+              <div
+                class="h-0.5 flex-1 rounded-full transition-all"
+                [class.bg-blue-600]="currentStep() > step"
+                [class.bg-gray-100]="currentStep() <= step"
+              ></div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (currentStep() === 1) {
+      <div class="p-4 sm:p-6">
+        <div class="mb-6">
+          <label class="form-label">Vehicle Registration</label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input
+              [(ngModel)]="vehicle.registration"
+              name="peRegistration"
+              type="text"
+              placeholder="e.g. AB12 CDE"
+              class="form-input flex-1 uppercase"
+              style="text-transform: uppercase;"
+            />
+            <button
+              type="button"
+              (click)="lookupVehicle()"
+              class="btn-primary px-5 py-3 rounded-xl whitespace-nowrap inline-flex items-center justify-center gap-2"
+              [disabled]="!vehicle.registration || registrationLookupLoading()"
+            >
+              @if (registrationLookupLoading()) {
+                <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Looking up…</span>
+              } @else {
+                <span>Look up</span>
+              }
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 mt-1.5">
+            Uses the DVLA Vehicle Enquiry API. Model is not provided — please enter make/model below after lookup.
+          </p>
+        </div>
+
+        @if (registrationLookupError()) {
+          <div class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+            {{ registrationLookupError() }}
+          </div>
+        }
+
+        @if (dvlaVehicleDetails(); as dvla) {
+          <div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50/80 p-4">
+            <h3 class="text-sm font-semibold text-emerald-900 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              DVLA record (fields below are pre-filled where possible)
+            </h3>
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
+              <div class="flex flex-col sm:flex-row sm:gap-2">
+                <dt class="text-gray-500 font-medium shrink-0">Registration</dt>
+                <dd class="text-gray-900 font-semibold">{{ dvla.registrationNumber }}</dd>
+              </div>
+              @if (dvla.make) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Make</dt>
+                  <dd class="text-gray-900">{{ dvla.make }}</dd>
+                </div>
+              }
+              @if (dvla.yearOfManufacture) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Year of manufacture</dt>
+                  <dd class="text-gray-900">{{ dvla.yearOfManufacture }}</dd>
+                </div>
+              }
+              @if (dvla.colour) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Colour</dt>
+                  <dd class="text-gray-900">{{ dvla.colour }}</dd>
+                </div>
+              }
+              @if (dvla.fuelType) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Fuel (DVLA)</dt>
+                  <dd class="text-gray-900">{{ dvla.fuelType }}</dd>
+                </div>
+              }
+              @if (dvla.engineCapacity) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Engine</dt>
+                  <dd class="text-gray-900">{{ dvla.engineCapacity }}cc</dd>
+                </div>
+              }
+              @if (dvla.taxStatus) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">Tax status</dt>
+                  <dd class="text-gray-900">{{ dvla.taxStatus }}</dd>
+                </div>
+              }
+              @if (dvla.motStatus) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">MOT status</dt>
+                  <dd class="text-gray-900">{{ dvla.motStatus }}</dd>
+                </div>
+              }
+              @if (dvla.motExpiryDate) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">MOT expiry</dt>
+                  <dd class="text-gray-900">{{ dvla.motExpiryDate }}</dd>
+                </div>
+              }
+              @if (dvla.co2Emissions != null && dvla.co2Emissions > 0) {
+                <div class="flex flex-col sm:flex-row sm:gap-2">
+                  <dt class="text-gray-500 font-medium shrink-0">CO₂</dt>
+                  <dd class="text-gray-900">{{ dvla.co2Emissions }} g/km</dd>
+                </div>
+              }
+            </dl>
+          </div>
+        }
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Mileage*</label>
+            <input [(ngModel)]="vehicle.mileage" name="peMileage" required type="number" placeholder="e.g. 35000" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Make*</label>
+            <input [(ngModel)]="vehicle.make" name="peMake" required type="text" placeholder="e.g. Ford" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Model*</label>
+            <input [(ngModel)]="vehicle.model" name="peModel" required type="text" placeholder="e.g. Focus" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Derivative</label>
+            <input [(ngModel)]="vehicle.derivative" name="peDerivative" type="text" placeholder="e.g. 1.5T Titanium" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Colour</label>
+            <input [(ngModel)]="vehicle.colour" name="peColour" type="text" placeholder="e.g. Midnight Black" class="form-input" />
+          </div>
+          <div class="relative">
+            <label class="form-label">Fuel Type</label>
+            <select [(ngModel)]="vehicle.fuel" name="peFuel" class="form-select pr-10">
+              <option value="">Select</option>
+              @for (fuel of fuelOptions; track fuel) {
+                <option [value]="fuel">{{ fuel }}</option>
+              }
+            </select>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="relative">
+            <label class="form-label">Gearbox</label>
+            <select [(ngModel)]="vehicle.gearbox" name="peGearbox" class="form-select pr-10">
+              @for (gb of gearboxOptions; track gb) {
+                <option [value]="gb">{{ gb }}</option>
+              }
+            </select>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div>
+            <label class="form-label">Number of Owners</label>
+            <input [(ngModel)]="vehicle.numberOfOwners" name="peOwners" type="number" min="1" placeholder="e.g. 2" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">MOT Expiry</label>
+            <input [(ngModel)]="vehicle.motExpiry" name="peMot" type="date" class="form-input" />
+          </div>
+          <div class="relative sm:col-span-2">
+            <label class="form-label">Service History</label>
+            <select [(ngModel)]="vehicle.serviceHistory" name="peSh" class="form-select pr-10">
+              <option value="">Select</option>
+              @for (sh of serviceHistoryOptions; track sh) {
+                <option [value]="sh">{{ sh }}</option>
+              }
+            </select>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+        </div>
+
+        <div class="flex justify-end mt-6">
+          <button type="button" (click)="nextStep()" class="btn-primary">
+            Next: Condition
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (currentStep() === 2) {
+      <div class="p-4 sm:p-6">
+        <div class="mb-6">
+          <label class="form-label">Overall Condition*</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            @for (cond of conditionOptions; track cond) {
+              <button
+                type="button"
+                (click)="vehicle.condition = cond"
+                class="p-3 rounded-xl border-2 text-sm font-medium transition-all text-center"
+                [class.border-blue-600]="vehicle.condition === cond"
+                [class.bg-blue-50]="vehicle.condition === cond"
+                [class.text-blue-700]="vehicle.condition === cond"
+                [class.border-gray-200]="vehicle.condition !== cond"
+                [class.text-gray-600]="vehicle.condition !== cond"
+              >
+                {{ cond }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="space-y-3 mb-6">
+          <label class="form-label">Vehicle History</label>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+            <span class="text-sm font-medium text-gray-700">Was your vehicle used as a taxi?</span>
+            <div class="flex gap-3">
+              <button type="button" (click)="vehicle.usedAsTaxi = true"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.usedAsTaxi === true"
+                [class.text-white]="vehicle.usedAsTaxi === true"
+                [class.bg-white]="vehicle.usedAsTaxi !== true"
+                [class.border]="vehicle.usedAsTaxi !== true"
+                [class.border-gray-200]="vehicle.usedAsTaxi !== true"
+              >Yes</button>
+              <button type="button" (click)="vehicle.usedAsTaxi = false"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.usedAsTaxi === false"
+                [class.text-white]="vehicle.usedAsTaxi === false"
+                [class.bg-white]="vehicle.usedAsTaxi !== false"
+                [class.border]="vehicle.usedAsTaxi !== false"
+                [class.border-gray-200]="vehicle.usedAsTaxi !== false"
+              >No</button>
+            </div>
+          </label>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+            <span class="text-sm font-medium text-gray-700">Was it used to transport animals?</span>
+            <div class="flex gap-3">
+              <button type="button" (click)="vehicle.transportedAnimals = true"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.transportedAnimals === true"
+                [class.text-white]="vehicle.transportedAnimals === true"
+                [class.bg-white]="vehicle.transportedAnimals !== true"
+                [class.border]="vehicle.transportedAnimals !== true"
+                [class.border-gray-200]="vehicle.transportedAnimals !== true"
+              >Yes</button>
+              <button type="button" (click)="vehicle.transportedAnimals = false"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.transportedAnimals === false"
+                [class.text-white]="vehicle.transportedAnimals === false"
+                [class.bg-white]="vehicle.transportedAnimals !== false"
+                [class.border]="vehicle.transportedAnimals !== false"
+                [class.border-gray-200]="vehicle.transportedAnimals !== false"
+              >No</button>
+            </div>
+          </label>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
+            <span class="text-sm font-medium text-gray-700">Was it used by a smoker?</span>
+            <div class="flex gap-3">
+              <button type="button" (click)="vehicle.usedBySmoker = true"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.usedBySmoker === true"
+                [class.text-white]="vehicle.usedBySmoker === true"
+                [class.bg-white]="vehicle.usedBySmoker !== true"
+                [class.border]="vehicle.usedBySmoker !== true"
+                [class.border-gray-200]="vehicle.usedBySmoker !== true"
+              >Yes</button>
+              <button type="button" (click)="vehicle.usedBySmoker = false"
+                class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
+                [class.bg-blue-600]="vehicle.usedBySmoker === false"
+                [class.text-white]="vehicle.usedBySmoker === false"
+                [class.bg-white]="vehicle.usedBySmoker !== false"
+                [class.border]="vehicle.usedBySmoker !== false"
+                [class.border-gray-200]="vehicle.usedBySmoker !== false"
+              >No</button>
+            </div>
+          </label>
+        </div>
+
+        <div class="mb-6">
+          <label class="form-label">Additional Details</label>
+          <textarea [(ngModel)]="vehicle.additionalDetails" name="peDetails" rows="4" placeholder="Describe any damage, modifications, or other relevant information..." class="form-input resize-none"></textarea>
+        </div>
+
+        <div class="mb-6">
+          <label class="form-label">Upload Vehicle Photos (optional, up to 10)</label>
+          <div class="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center hover:border-blue-300 transition-colors cursor-pointer">
+            <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <p class="text-sm text-gray-500 mb-1">Drag and drop images here, or <span class="text-blue-600 font-medium">browse</span></p>
+            <p class="text-xs text-gray-400">JPG, PNG up to 10MB each · Max 10 images</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-between gap-3 mt-6">
+          <button type="button" (click)="prevStep()" class="btn-outline justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <button type="button" (click)="nextStep()" class="btn-primary justify-center">
+            Next: Your Details
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (currentStep() === 3) {
+      <div class="p-4 sm:p-6">
+        @if (vehicle.make) {
+          <div class="bg-gray-50 rounded-xl p-4 mb-6">
+            <h4 class="text-sm font-semibold text-gray-700 mb-2">Your vehicle summary</h4>
+            <p class="text-gray-600 text-sm">{{ vehicle.make }} {{ vehicle.model }} {{ vehicle.derivative }}</p>
+            <p class="text-gray-500 text-sm">{{ vehicle.mileage?.toLocaleString() }} miles · {{ vehicle.fuel }} · {{ vehicle.gearbox }}</p>
+          </div>
+        }
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">First Name*</label>
+            <input [(ngModel)]="contact.firstName" name="peFn" required type="text" placeholder="John" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Last Name*</label>
+            <input [(ngModel)]="contact.lastName" name="peLn" required type="text" placeholder="Smith" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Email*</label>
+            <input [(ngModel)]="contact.email" name="peEm" required type="email" placeholder="john@example.com" class="form-input" />
+          </div>
+          <div>
+            <label class="form-label">Phone*</label>
+            <input [(ngModel)]="contact.phone" name="pePh" required type="tel" placeholder="07xxx xxxxxx" class="form-input" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="form-label">Postcode</label>
+            <input [(ngModel)]="contact.postcode" name="pePc" type="text" placeholder="PE1 5BH" class="form-input" />
+          </div>
+        </div>
+
+        <label class="flex items-start gap-2.5 cursor-pointer mt-4">
+          <input [(ngModel)]="contact.newsletterOptIn" name="peNl" type="checkbox" class="mt-0.5 rounded text-blue-600" />
+          <span class="text-sm text-gray-500">Keep me updated with latest news and offers</span>
+        </label>
+
+        <div class="flex flex-col-reverse sm:flex-row sm:justify-between gap-3 mt-8">
+          <button type="button" (click)="prevStep()" class="btn-outline justify-center">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back
+          </button>
+          <button type="button" (click)="submitForm()" class="btn-primary px-8 justify-center">
+            {{ submitLabel }}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          </button>
+        </div>
+      </div>
+    }
+  }
+</div>

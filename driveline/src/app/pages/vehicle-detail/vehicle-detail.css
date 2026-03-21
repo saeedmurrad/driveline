@@ -1,0 +1,114 @@
+:host {
+  display: block;
+}
+
+/* Single-page A4 print layout (dealer-style sheet) */
+@media print {
+  :host {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  #vehicle-detail-page {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 8mm;
+  }
+
+  .vehicle-print-sheet {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    max-width: 100%;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    /* Avoid forcing an extra blank pages (some engines + min-height parents) */
+    page-break-after: auto;
+  }
+
+  /*
+   * Header/footer: high contrast without relying on background fills.
+   * When "Background graphics" is off, white-on-white is avoided — phones stay readable.
+   */
+  .veh-print-bar {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .veh-print-bar--top {
+    border-bottom: 3px solid #000000 !important;
+  }
+
+  .veh-print-bar--bottom {
+    border-top: 3px solid #000000 !important;
+  }
+
+  .veh-print-logo {
+    color: #2563eb !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .veh-print-logo-sub,
+  .veh-print-phones,
+  .veh-print-phone-line,
+  .veh-print-footer-text {
+    color: #111827 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .veh-print-delivery {
+    background: #ffffff !important;
+    border: 2px solid #0f766e !important;
+    color: #115e59 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .veh-print-hero-main {
+    height: 148px;
+    overflow: hidden;
+  }
+
+  .veh-print-hero-img {
+    max-height: 148px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .veh-print-hero-thumb {
+    max-height: 148px;
+  }
+
+  .veh-print-specs {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+  }
+
+  .veh-print-features {
+    max-height: 118px;
+    overflow: hidden;
+  }
+
+  .veh-print-desc {
+    max-height: 72px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+  }
+
+  .print-only-ref {
+    page-break-inside: avoid;
+  }
+
+  .vehicle-print-sheet img {
+    max-width: 100% !important;
+  }
+}
