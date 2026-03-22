@@ -69,4 +69,4 @@ npm run build      # Production build (swaps environment.prod.ts)
 - **Lazy Loading**: Page routes lazy-loaded
 - **View Transitions**: `withViewTransitions()` on router
 - **Platform checks**: `isPlatformBrowser(PLATFORM_ID)` for `window`, `mailto`, print, DVLA button
-- **Canonical site origin**: `VehicleDetailComponent.SITE_ORIGIN` for print QR / listing URL
+- **Print QR / listing URL**: resolved from browser `origin` + `<base href>` (`getDeployedAppBaseUrl` in vehicle detail) so GitHub Pages and any host work

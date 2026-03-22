@@ -20,9 +20,6 @@ import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
   styleUrl: './vehicle-detail.css',
 })
 export class VehicleDetailComponent implements OnInit {
-  /** Production site — used for print footer, QR code, and shareable listing links. */
-  static readonly SITE_ORIGIN = 'https://drivelinecarsales.co.uk';
-
   private route = inject(ActivatedRoute);
   private vehicleService = inject(VehicleService);
   private platformId = inject(PLATFORM_ID);
@@ -128,23 +125,46 @@ export class VehicleDetailComponent implements OnInit {
     }
   }
 
-  /** Canonical URL to this vehicle on the live site (print / QR). */
+  /**
+   * Deployed app root (origin + Angular `base href`), no trailing slash.
+   * Works on GitHub Pages (`/driveline/`), localhost, and production domains.
+   */
+  private getDeployedAppBaseUrl(): string {
+    if (!isPlatformBrowser(this.platformId)) return '';
+    const raw = document.querySelector('base')?.getAttribute('href')?.trim() || '/';
+    const resolved = new URL(raw, `${window.location.origin}/`);
+    let out = resolved.href.replace(/\/$/, '');
+    if (!out) out = window.location.origin;
+    return out;
+  }
+
+  /** Full URL to this vehicle listing where the app is actually hosted (print / QR). */
   getCanonicalVehicleListingUrl(): string {
     const v = this.vehicle();
     if (!v) return '';
-    return `${VehicleDetailComponent.SITE_ORIGIN}/vehicle/${encodeURIComponent(v.id)}`;
+    const base = this.getDeployedAppBaseUrl();
+    if (!base) return '';
+    return `${base}/vehicle/${encodeURIComponent(v.id)}`;
   }
 
-  /** QR image encoding the canonical listing URL for this vehicle only. */
+  /** QR image encoding the current deployment listing URL for this vehicle only. */
   getQrCodeImageUrl(): string {
     const url = this.getCanonicalVehicleListingUrl();
     if (!url) return '';
     return `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(url)}`;
   }
 
-  /** Website line on the print sheet footer. */
+  /** Website line on the print sheet footer (host + base path, e.g. saeedmurrad.github.io/driveline). */
   getPrintWebsiteDisplay(): string {
-    return 'drivelinecarsales.co.uk';
+    const base = this.getDeployedAppBaseUrl();
+    if (!base) return '';
+    try {
+      const u = new URL(`${base}/`);
+      const path = u.pathname.replace(/\/$/, '');
+      return path ? `${u.host}${path}` : u.host;
+    } catch {
+      return '';
+    }
   }
 
   getPrintMainImage(): string {
