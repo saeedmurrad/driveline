@@ -20,7 +20,7 @@
 - [x] Finance, Warranty, Sell Your Car, Reviews, Contact, Legal
 
 ### Vehicle detail extras
-- [x] **Print details** — single-page A4 dealer-style sheet, canonical drivelinecarsales.co.uk QR, bordered header/footer for readability
+- [x] **Print details** — single-page A4 dealer-style sheet, dynamic QR/URL from deployed origin + base href, bordered header/footer for readability
 - [x] Part exchange modal with shared form
 
 ### Forms & contact

@@ -32,7 +32,7 @@ Standalone components: Home, Vehicles, VehicleDetail, Finance, Warranty, SellYou
 ## Vehicle print pattern
 - **`#vehicle-detail-page`** contains **`vehicle-print-sheet`** (`hidden print:block`) then **`print:hidden`** wrapper for normal UI.
 - **`vehicle-detail.css`**: `@page` A4, bordered print bars, explicit text colours, compact heights.
-- QR: **`getQrCodeImageUrl()`** encodes **`https://drivelinecarsales.co.uk/vehicle/{id}`** (api.qrserver.com).
+- QR / print listing URL: **`getCanonicalVehicleListingUrl()`** uses **`origin` + `<base href>`** (e.g. GitHub Pages `…/driveline/vehicle/{id}`); **`getQrCodeImageUrl()`** encodes that (api.qrserver.com).
 
 ## Routing Pattern
 Lazy `loadComponent` with optional `data: { vehicleType }` for cars/vans.

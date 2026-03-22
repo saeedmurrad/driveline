@@ -6,7 +6,7 @@ DriveLine is a modern car dealership website, a UI clone of Fengate Car Sales (f
 ## Business Context
 - **Original Site reference**: https://www.fengatecarsales.co.uk/
 - **Brand**: DriveLine
-- **Public website (canonical for print/QR)**: **drivelinecarsales.co.uk** — listing URLs: `https://drivelinecarsales.co.uk/vehicle/:id`
+- **Live URL**: varies by deployment (e.g. **drivelinecarsales.co.uk** or **GitHub Pages**); print QR/listing link follows **current host + Angular base href**
 - **Sales enquiries email**: **sales@drivelinecarsales.co.uk** (all mailto-based form submissions)
 - **Business Type**: Family-owned used car dealership
 - **Location**: Peterborough, Cambridgeshire (Vision House, 193 Fengate, PE1 5BH)

@@ -7,7 +7,7 @@
 ## Recent Work (Memory Bank Sync)
 
 ### Print (vehicle detail)
-- Dedicated **`.vehicle-print-sheet`** (`hidden print:block`): dealer-style A4 layout — header/footer with borders (phones readable without background graphics), hero images, specs row, 3-col features (capped), description + QR to **canonical** `https://drivelinecarsales.co.uk/vehicle/:id`.
+- Dedicated **`.vehicle-print-sheet`** (`hidden print:block`): dealer-style A4 layout — header/footer with borders, hero images, specs row, 3-col features (capped), description + **dynamic** QR/URL (`origin` + `<base href>` + `/vehicle/:id`, e.g. GitHub Pages).
 - Main page chrome wrapped in **`print:hidden`**; **`main`** uses **`print:min-h-0`**; global print rules hide **`app-header` / `app-footer` / FAB** to avoid extra print pages.
 - Print styles: `vehicle-detail.css` + `styles.css` print section.
 
