@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BUSINESS_INFO } from '../../../data/reviews.data';
+import { TrustedPartnersComponent } from '../trusted-partners/trusted-partners';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink],
+  imports: [RouterLink, TrustedPartnersComponent],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })
@@ -21,10 +22,11 @@ export class FooterComponent {
     { label: 'Customer Reviews', route: '/reviews' },
   ];
 
+  /** Same order as Fengate footer */
   legalLinks = [
-    { label: 'Privacy Policy', route: '/legal/privacy-policy' },
     { label: 'Cookie Policy', route: '/legal/cookie-policy' },
     { label: 'Disclaimer', route: '/legal/disclaimer' },
+    { label: 'Privacy Policy', route: '/legal/privacy-policy' },
     { label: 'Sitemap', route: '/legal/sitemap' },
   ];
 }
