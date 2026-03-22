@@ -12,7 +12,7 @@
 - Print styles: `vehicle-detail.css` + `styles.css` print section.
 
 ### Contact / enquiries
-- **`SALES_EMAIL`**: `src/app/constants/sales-contact.ts` → **sales@drivelinecarsales.co.uk**
+- **`SALES_EMAIL`**: `src/app/constants/sales-contact.ts` → **saeedmurrad@gmail.com** (testing; TODO production sales@drivelinecarsales.co.uk)
 - **`BUSINESS_INFO.email`** in `reviews.data.ts` uses `SALES_EMAIL`.
 - **`openSalesEnquiryEmail()`** in `src/app/utils/enquiry-mailto.ts` — Contact, Finance, Warranty, Vehicle detail enquiry, and Part exchange submit open mailto with pre-filled subject/body.
 

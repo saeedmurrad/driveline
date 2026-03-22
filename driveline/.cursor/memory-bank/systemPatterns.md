@@ -25,7 +25,7 @@ Standalone components: Home, Vehicles, VehicleDetail, Finance, Warranty, SellYou
 - **`SALES_EMAIL`** defined in **`src/app/constants/sales-contact.ts`**.
 
 ## Enquiry / forms pattern
-- Not HTTP POST — **`openSalesEnquiryEmail(subject, body)`** builds **`mailto:sales@drivelinecarsales.co.uk?...`**
+- Not HTTP POST — **`openSalesEnquiryEmail(subject, body)`** builds **`mailto:`** + **`SALES_EMAIL`** (testing: saeedmurrad@gmail.com)
 - Used by: Contact, Finance, Warranty, VehicleDetail `submitEnquiry`, PartExchange `submitForm`.
 - SSR: only call mailto when `isPlatformBrowser`.
 

@@ -24,7 +24,7 @@
 - [x] Part exchange modal with shared form
 
 ### Forms & contact
-- [x] **sales@drivelinecarsales.co.uk** as single sales inbox (`SALES_EMAIL` + `BUSINESS_INFO`)
+- [x] **`SALES_EMAIL`** single inbox for mailto + `BUSINESS_INFO` (currently **saeedmurrad@gmail.com** for testing)
 - [x] **mailto enquiry flow** for Contact, Finance, Warranty, Vehicle enquiry, Part exchange / sell car submit
 
 ### Part exchange / DVLA
