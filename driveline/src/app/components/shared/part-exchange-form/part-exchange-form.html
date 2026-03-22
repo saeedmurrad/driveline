@@ -412,14 +412,31 @@
           <span class="text-sm text-gray-500">Keep me updated with latest news and offers</span>
         </label>
 
+        @if (submitError()) {
+          <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 mt-4" role="alert">
+            {{ submitError() }}
+          </div>
+        }
+
         <div class="flex flex-col-reverse sm:flex-row sm:justify-between gap-3 mt-8">
-          <button type="button" (click)="prevStep()" class="btn-outline justify-center">
+          <button type="button" (click)="prevStep()" class="btn-outline justify-center" [disabled]="submitSending()">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             Back
           </button>
-          <button type="button" (click)="submitForm()" class="btn-primary px-8 justify-center">
-            {{ submitLabel }}
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          <button
+            type="button"
+            (click)="submitForm()"
+            class="btn-primary px-8 justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+            [disabled]="submitSending()"
+          >
+            @if (submitSending()) {
+              Sending…
+            } @else {
+              <span class="inline-flex items-center gap-2">
+                {{ submitLabel }}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              </span>
+            }
           </button>
         </div>
       </div>

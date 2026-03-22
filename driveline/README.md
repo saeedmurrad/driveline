@@ -27,6 +27,17 @@ Without `DVLA_API_KEY`, the proxy forwards requests without a key and DVLA will 
 
 **Production:** `environment.prod.ts` sets `dvlaLookupUrl` to `''` by default, so lookup is disabled until you point it at a **server-side proxy** you control (recommended), then set `dvlaLookupUrl` to that URL. Do not expose the DVLA key in client-side JavaScript.
 
+### Enquiry forms (Web3Forms — free email)
+
+Contact, finance, warranty, vehicle enquiries, and part-exchange use **[Web3Forms](https://web3forms.com)** so submissions are emailed without opening the user’s mail app.
+
+1. Create a form at Web3Forms and set the **recipient email** (in their dashboard) to the inbox you want.
+2. Copy the **access key**.
+3. **Local:** set `web3formsAccessKey` in [`src/environments/environment.ts`](src/environments/environment.ts).
+4. **GitHub Pages CI:** add a repository secret **`WEB3FORMS_ACCESS_KEY`** with that key. The deploy workflow injects it into `environment.prod.ts` before build.
+
+If `web3formsAccessKey` is empty, the app falls back to `mailto:` for the same enquiry.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:

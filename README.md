@@ -27,3 +27,4 @@ Notes:
 
 - This is a **static** deploy (no Node SSR). Client-side routing uses a copied **`404.html`** (same as `index.html`).
 - **DVLA registration lookup** stays disabled on Pages unless you add a proxy URL in [`driveline/src/environments/environment.prod.ts`](driveline/src/environments/environment.prod.ts).
+- **Enquiry emails (Web3Forms):** add repo secret **`WEB3FORMS_ACCESS_KEY`** so contact/finance/etc. forms send mail on the live site. See [driveline/README.md](driveline/README.md#enquiry-forms-web3forms--free-email).

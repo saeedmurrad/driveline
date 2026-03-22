@@ -8,7 +8,8 @@ import {
   signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { openSalesEnquiryEmail } from '../../../utils/enquiry-mailto';
+import { Web3FormsEnquiryService } from '../../../services/web3forms-enquiry.service';
+import { submitEnquiryWithWeb3Fallback } from '../../../utils/submit-enquiry';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,6 +27,7 @@ import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
 export class PartExchangeFormComponent {
   private platformId = inject(PLATFORM_ID);
   private dvlaVehicle = inject(DvlaVehicleService);
+  private web3 = inject(Web3FormsEnquiryService);
 
   /** Full sell-your-car page vs compact modal on vehicle detail */
   @Input() variant: 'page' | 'modal' = 'page';
@@ -41,6 +43,8 @@ export class PartExchangeFormComponent {
   registrationLookupLoading = signal(false);
   registrationLookupError = signal<string | null>(null);
   dvlaVehicleDetails = signal<DvlaVehicleDetails | null>(null);
+  submitSending = signal(false);
+  submitError = signal<string | null>(null);
 
   vehicle = {
     registration: '',
@@ -212,10 +216,28 @@ export class PartExchangeFormComponent {
     ]
       .filter((line) => line !== '')
       .join('\n');
-    if (isPlatformBrowser(this.platformId)) {
-      openSalesEnquiryEmail(subject, body);
-    }
-    this.isSubmitted.set(true);
+    const fromName =
+      `${c.firstName} ${c.lastName}`.trim() || 'Website visitor';
+    submitEnquiryWithWeb3Fallback(
+      this.web3,
+      this.platformId,
+      {
+        subject,
+        message: body,
+        replyEmail: c.email,
+        fromName,
+      },
+      subject,
+      body,
+      {
+        onSuccess: () => {
+          this.isSubmitted.set(true);
+          this.submitError.set(null);
+        },
+        onError: (msg) => this.submitError.set(msg),
+        setSubmitting: (v) => this.submitSending.set(v),
+      },
+    );
   }
 
   onModalDone() {

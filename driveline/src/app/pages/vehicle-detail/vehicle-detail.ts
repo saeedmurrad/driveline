@@ -11,7 +11,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
-import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
+import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
+import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -23,11 +24,14 @@ export class VehicleDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private vehicleService = inject(VehicleService);
   private platformId = inject(PLATFORM_ID);
+  private web3 = inject(Web3FormsEnquiryService);
 
   vehicle = signal<Vehicle | undefined>(undefined);
   selectedImageIndex = signal(0);
   activeTab = signal<'overview' | 'features' | 'finance'>('overview');
   enquirySent = signal(false);
+  enquirySubmitting = signal(false);
+  enquiryError = signal<string | null>(null);
   partExchangeOpen = signal(false);
   shareFeedback = signal<'idle' | 'copied' | 'shared'>('idle');
 
@@ -87,15 +91,31 @@ export class VehicleDetailComponent implements OnInit {
       'Message:',
       e.message || '—',
     ].join('\n');
-    if (isPlatformBrowser(this.platformId)) {
-      openSalesEnquiryEmail(
-        v
-          ? `Vehicle enquiry — ${v.year} ${v.make} ${v.model}`
-          : 'Vehicle enquiry',
-        body,
-      );
-    }
-    this.enquirySent.set(true);
+    const subject = v
+      ? `Vehicle enquiry — ${v.year} ${v.make} ${v.model}`
+      : 'Vehicle enquiry';
+    const fromName =
+      `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
+    submitEnquiryWithWeb3Fallback(
+      this.web3,
+      this.platformId,
+      {
+        subject,
+        message: body,
+        replyEmail: e.email,
+        fromName,
+      },
+      subject,
+      body,
+      {
+        onSuccess: () => {
+          this.enquirySent.set(true);
+          this.enquiryError.set(null);
+        },
+        onError: (msg) => this.enquiryError.set(msg),
+        setSubmitting: (val) => this.enquirySubmitting.set(val),
+      },
+    );
   }
 
   formatPrice(price: number): string {

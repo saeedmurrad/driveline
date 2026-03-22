@@ -33,6 +33,31 @@ jobs:
         run: npm ci
         working-directory: driveline
 
+      - name: Inject Web3Forms access key (optional)
+        env:
+          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+        run: |
+          python3 << 'PY'
+          import os, re
+          key = os.environ.get("WEB3FORMS_ACCESS_KEY", "").strip()
+          if not key:
+              exit(0)
+          path = "driveline/src/environments/environment.prod.ts"
+          with open(path) as f:
+              text = f.read()
+          safe = key.replace("\\", "\\\\").replace("'", "\\'")
+          text, n = re.subn(
+              r"web3formsAccessKey:\s*''",
+              f"web3formsAccessKey: '{safe}'",
+              text,
+              count=1,
+          )
+          if n != 1:
+              raise SystemExit(f"Could not patch web3formsAccessKey in {path}")
+          with open(path, "w") as f:
+              f.write(text)
+          PY
+
       - name: Build (production, GitHub Pages base href)
         run: npm run build:gh-pages
         working-directory: driveline

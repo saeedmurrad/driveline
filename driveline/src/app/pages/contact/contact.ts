@@ -3,7 +3,8 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { BUSINESS_INFO } from '../../data/reviews.data';
-import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
+import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
+import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 
 @Component({
   selector: 'app-contact',
@@ -13,8 +14,11 @@ import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
 })
 export class ContactComponent {
   private platformId = inject(PLATFORM_ID);
+  private web3 = inject(Web3FormsEnquiryService);
   business = BUSINESS_INFO;
   enquirySent = signal(false);
+  enquirySubmitting = signal(false);
+  enquiryError = signal<string | null>(null);
 
   enquiry = {
     firstName: '',
@@ -49,9 +53,28 @@ export class ContactComponent {
       'Message:',
       e.message,
     ].join('\n');
-    if (isPlatformBrowser(this.platformId)) {
-      openSalesEnquiryEmail('Website enquiry — Contact page', body);
-    }
-    this.enquirySent.set(true);
+    const subject = 'Website enquiry — Contact page';
+    const fromName =
+      `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
+    submitEnquiryWithWeb3Fallback(
+      this.web3,
+      this.platformId,
+      {
+        subject,
+        message: body,
+        replyEmail: e.email,
+        fromName,
+      },
+      subject,
+      body,
+      {
+        onSuccess: () => {
+          this.enquirySent.set(true);
+          this.enquiryError.set(null);
+        },
+        onError: (msg) => this.enquiryError.set(msg),
+        setSubmitting: (v) => this.enquirySubmitting.set(v),
+      },
+    );
   }
 }

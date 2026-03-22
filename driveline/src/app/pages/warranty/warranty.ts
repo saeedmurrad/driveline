@@ -1,8 +1,8 @@
 import { Component, signal, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { isPlatformBrowser } from '@angular/common';
-import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
+import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
+import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 
 @Component({
   selector: 'app-warranty',
@@ -12,7 +12,10 @@ import { openSalesEnquiryEmail } from '../../utils/enquiry-mailto';
 })
 export class WarrantyComponent {
   private platformId = inject(PLATFORM_ID);
+  private web3 = inject(Web3FormsEnquiryService);
   enquirySent = signal(false);
+  enquirySubmitting = signal(false);
+  enquiryError = signal<string | null>(null);
 
   enquiry = {
     firstName: '',
@@ -63,9 +66,28 @@ export class WarrantyComponent {
       'Message:',
       e.message,
     ].join('\n');
-    if (isPlatformBrowser(this.platformId)) {
-      openSalesEnquiryEmail('Website enquiry — Warranty', body);
-    }
-    this.enquirySent.set(true);
+    const subject = 'Website enquiry — Warranty';
+    const fromName =
+      `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
+    submitEnquiryWithWeb3Fallback(
+      this.web3,
+      this.platformId,
+      {
+        subject,
+        message: body,
+        replyEmail: e.email,
+        fromName,
+      },
+      subject,
+      body,
+      {
+        onSuccess: () => {
+          this.enquirySent.set(true);
+          this.enquiryError.set(null);
+        },
+        onError: (msg) => this.enquiryError.set(msg),
+        setSubmitting: (v) => this.enquirySubmitting.set(v),
+      },
+    );
   }
 }
