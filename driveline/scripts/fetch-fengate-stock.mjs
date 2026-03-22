@@ -106,6 +106,10 @@ function mapToVehicle(api) {
   const doors = typeof api.doors === 'number' && api.doors > 0 ? api.doors : 5;
   const owners = typeof api.owner_count === 'number' ? api.owner_count : 0;
 
+  const seg = api.vehicle_type === 'van' ? 'vans' : 'cars';
+  const slug = `${api.manufacturer}-${api.model}-${api.derivative}-${api.id}`;
+  const sourceListingUrl = `${ORIGIN}/used/${seg}/${slug}/`;
+
   const v = {
     id: String(api.id),
     make: api.manufacturer_display || capitalize(api.manufacturer || 'Unknown'),
@@ -134,10 +138,29 @@ function mapToVehicle(api) {
     bhp: api.bhp != null ? Math.round(api.bhp) : undefined,
     topSpeedMph: api.max_speed != null ? Math.round(api.max_speed) : undefined,
     dateAdded: formatDateAdded(api),
+    sourceListingUrl,
   };
 
   if (api.monthly_price != null && !Number.isNaN(Number(api.monthly_price))) {
     v.monthlyPrice = Math.round(Number(api.monthly_price));
+  }
+  if (typeof api.seats === 'number' && api.seats > 0) v.seats = api.seats;
+  if (api.tax_rate_12 != null && !Number.isNaN(Number(api.tax_rate_12))) {
+    v.taxRate12Month = Math.round(Number(api.tax_rate_12));
+  }
+  if (api.urban_mpg != null) v.mpgUrban = Math.round(Number(api.urban_mpg));
+  if (api.extra_urban_mpg != null) v.mpgExtraUrban = Math.round(Number(api.extra_urban_mpg));
+  if (api.height != null) v.heightMm = Math.round(Number(api.height));
+  if (api.length != null) v.lengthMm = Math.round(Number(api.length));
+  if (api.width != null) v.widthMm = Math.round(Number(api.width));
+  if (api.boot_space_seats_up != null) {
+    v.bootSpaceSeatsUpLitres = Math.round(Number(api.boot_space_seats_up));
+  }
+  if (api.boot_space_seats_down != null) {
+    v.bootSpaceSeatsDownLitres = Math.round(Number(api.boot_space_seats_down));
+  }
+  if (api.acceleration != null) {
+    v.acceleration0To60Seconds = Math.round(Number(api.acceleration) * 10) / 10;
   }
 
   return v;

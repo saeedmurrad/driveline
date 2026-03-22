@@ -108,7 +108,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
         <a routerLink="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
         <svg class="w-4 h-4 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        <a routerLink="/cars" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cars</a>
+        <a [routerLink]="listingsParentPath()" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{{ vehicle()!.category === 'van' ? 'Vans' : 'Cars' }}</a>
         <svg class="w-4 h-4 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         <span class="text-gray-900 dark:text-white font-medium truncate">{{ vehicle()!.make }} {{ vehicle()!.model }}</span>
       </div>
@@ -121,12 +121,18 @@
         <div class="lg:col-span-2">
           <!-- Image Gallery -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 mb-6 print:shadow-none print:border-gray-300">
-            <!-- Main Image -->
-            <div class="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-slate-900">
+            <!-- Main Image (autoplay + swipe; pauses on hover) -->
+            <div
+              class="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-slate-900 touch-pan-y"
+              (mouseenter)="galleryHoverPaused.set(true)"
+              (mouseleave)="galleryHoverPaused.set(false)"
+              (touchstart)="onGalleryTouchStart($event)"
+              (touchend)="onGalleryTouchEnd($event)"
+            >
               <img
-                [src]="vehicle()!.images[selectedImageIndex()]"
+                [src]="mainGallerySrc()"
                 [alt]="vehicle()!.make + ' ' + vehicle()!.model"
-                class="w-full h-full object-cover"
+                class="w-full h-full object-cover transition-opacity duration-300"
               >
               <!-- Navigation Arrows -->
               @if (vehicle()!.images.length > 1) {
@@ -151,8 +157,13 @@
               }
               <!-- Image Counter -->
               <div class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full print:hidden">
-                {{ selectedImageIndex() + 1 }} / {{ vehicle()!.images.length }}
+                {{ selectedImageIndex() + 1 }} / {{ vehicle()!.images.length || 1 }}
               </div>
+              @if (vehicle()!.images.length > 1) {
+                <div class="absolute bottom-3 left-3 bg-black/40 text-white text-[10px] px-2 py-1 rounded-full print:hidden hidden sm:block max-w-[11rem] leading-tight">
+                  Slideshow · hover to pause
+                </div>
+              }
               <!-- Badges -->
               <div class="absolute top-3 left-3 flex flex-col gap-1.5">
                 @if (vehicle()!.isNew) {
@@ -244,6 +255,12 @@
                       <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Prev. Owners</p>
                       <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.previousOwners }}</p>
                     </div>
+                    @if (vehicle()!.seats != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Seats</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.seats }}</p>
+                      </div>
+                    }
                     @if (vehicle()!.bhp) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                         <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">BHP</p>
@@ -252,14 +269,50 @@
                     }
                     @if (vehicle()!.mpg) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MPG</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MPG (combined)</p>
                         <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.mpg }} mpg</p>
+                      </div>
+                    }
+                    @if (vehicle()!.mpgUrban != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MPG (urban)</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.mpgUrban }} mpg</p>
+                      </div>
+                    }
+                    @if (vehicle()!.mpgExtraUrban != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MPG (extra-urban)</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.mpgExtraUrban }} mpg</p>
                       </div>
                     }
                     @if (vehicle()!.co2Emissions) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                         <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">CO2</p>
                         <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.co2Emissions }}g/km</p>
+                      </div>
+                    }
+                    @if (vehicle()!.topSpeedMph != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Top speed</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.topSpeedMph }} mph</p>
+                      </div>
+                    }
+                    @if (vehicle()!.acceleration0To60Seconds != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">0–60 mph</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.acceleration0To60Seconds }} sec</p>
+                      </div>
+                    }
+                    @if (vehicle()!.taxRate12Month != null) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Tax (12 mo)</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ formatRoadTax(vehicle()!.taxRate12Month) }}</p>
+                      </div>
+                    }
+                    @if (vehicle()!.registration) {
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Registration</p>
+                        <p class="font-semibold text-gray-900 dark:text-white tracking-wide">{{ vehicle()!.registration }}</p>
                       </div>
                     }
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
@@ -271,6 +324,54 @@
                       <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.motExpiry }}</p>
                     </div>
                   </div>
+
+                  @if (vehicle()!.heightMm != null || vehicle()!.lengthMm != null || vehicle()!.widthMm != null || vehicle()!.bootSpaceSeatsUpLitres != null || vehicle()!.bootSpaceSeatsDownLitres != null) {
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mt-8 mb-3">Dimensions &amp; boot space</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                      @if (vehicle()!.heightMm != null) {
+                        <div class="rounded-xl border border-gray-100 dark:border-slate-600 bg-white dark:bg-slate-900/50 p-4">
+                          <p class="text-xs text-gray-500 dark:text-slate-400 uppercase mb-1">Height</p>
+                          <p class="font-semibold text-gray-900 dark:text-white">{{ formatMm(vehicle()!.heightMm) }}</p>
+                        </div>
+                      }
+                      @if (vehicle()!.lengthMm != null) {
+                        <div class="rounded-xl border border-gray-100 dark:border-slate-600 bg-white dark:bg-slate-900/50 p-4">
+                          <p class="text-xs text-gray-500 dark:text-slate-400 uppercase mb-1">Length</p>
+                          <p class="font-semibold text-gray-900 dark:text-white">{{ formatMm(vehicle()!.lengthMm) }}</p>
+                        </div>
+                      }
+                      @if (vehicle()!.widthMm != null) {
+                        <div class="rounded-xl border border-gray-100 dark:border-slate-600 bg-white dark:bg-slate-900/50 p-4">
+                          <p class="text-xs text-gray-500 dark:text-slate-400 uppercase mb-1">Width</p>
+                          <p class="font-semibold text-gray-900 dark:text-white">{{ formatMm(vehicle()!.widthMm) }}</p>
+                        </div>
+                      }
+                      @if (vehicle()!.bootSpaceSeatsUpLitres != null) {
+                        <div class="rounded-xl border border-gray-100 dark:border-slate-600 bg-white dark:bg-slate-900/50 p-4">
+                          <p class="text-xs text-gray-500 dark:text-slate-400 uppercase mb-1">Boot (seats up)</p>
+                          <p class="font-semibold text-gray-900 dark:text-white">{{ formatBootL(vehicle()!.bootSpaceSeatsUpLitres) }}</p>
+                        </div>
+                      }
+                      @if (vehicle()!.bootSpaceSeatsDownLitres != null) {
+                        <div class="rounded-xl border border-gray-100 dark:border-slate-600 bg-white dark:bg-slate-900/50 p-4">
+                          <p class="text-xs text-gray-500 dark:text-slate-400 uppercase mb-1">Boot (seats down)</p>
+                          <p class="font-semibold text-gray-900 dark:text-white">{{ formatBootL(vehicle()!.bootSpaceSeatsDownLitres) }}</p>
+                        </div>
+                      }
+                    </div>
+                  }
+
+                  @if (vehicle()!.sourceListingUrl) {
+                    <p class="text-sm text-gray-600 dark:text-slate-400 mt-6">
+                      <a
+                        [href]="vehicle()!.sourceListingUrl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+                      >View full advert on Fengate Car Sales</a>
+                      <span class="text-gray-500 dark:text-slate-500"> — same photos &amp; specification as the dealer site.</span>
+                    </p>
+                  }
                 </div>
               }
               @if (activeTab() === 'features') {
@@ -334,6 +435,11 @@
             </div>
 
             <!-- Key Details -->
+            @if (vehicle()!.registration) {
+              <p class="text-xs text-gray-500 dark:text-slate-400 mb-2">
+                Reg <span class="font-semibold text-gray-800 dark:text-slate-200 tracking-wide">{{ vehicle()!.registration }}</span>
+              </p>
+            }
             <div class="grid grid-cols-2 gap-2 mb-5">
               <div class="text-center bg-gray-50 dark:bg-slate-900/90 rounded-xl py-3 px-2 ring-1 ring-gray-100/80 dark:ring-slate-600/60">
                 <p class="text-xs font-medium text-gray-600 dark:text-slate-400 mb-0.5">Mileage</p>
@@ -385,6 +491,18 @@
                   Thanks for sharing
                 }
               </p>
+            }
+
+            @if (vehicle()!.sourceListingUrl) {
+              <a
+                [href]="vehicle()!.sourceListingUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mb-4 w-full justify-center py-2.5 text-sm inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 font-medium transition-colors print:hidden"
+              >
+                <svg class="w-4 h-4 shrink-0 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                Full advert on Fengate site
+              </a>
             }
 
             <!-- Quick Actions -->

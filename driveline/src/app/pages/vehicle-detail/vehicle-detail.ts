@@ -2,9 +2,12 @@ import {
   Component,
   inject,
   signal,
-  OnInit,
+  computed,
+  OnDestroy,
   PLATFORM_ID,
+  DestroyRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -20,14 +23,30 @@ import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
   templateUrl: './vehicle-detail.html',
   styleUrl: './vehicle-detail.css',
 })
-export class VehicleDetailComponent implements OnInit {
+export class VehicleDetailComponent implements OnDestroy {
   private route = inject(ActivatedRoute);
   private vehicleService = inject(VehicleService);
   private platformId = inject(PLATFORM_ID);
   private web3 = inject(Web3FormsEnquiryService);
+  private destroyRef = inject(DestroyRef);
 
   vehicle = signal<Vehicle | undefined>(undefined);
   selectedImageIndex = signal(0);
+  /** Pauses autoplay while user hovers the main image */
+  galleryHoverPaused = signal(false);
+  private galleryAutoplayId: ReturnType<typeof setInterval> | null = null;
+  private touchStartX = 0;
+
+  /** Safe main image URL (avoids broken index when switching vehicles) */
+  mainGallerySrc = computed(() => {
+    const v = this.vehicle();
+    if (!v) return '';
+    const imgs = v.images ?? [];
+    if (!imgs.length) return v.thumbnailImage ?? '';
+    let i = this.selectedImageIndex();
+    if (i < 0 || i >= imgs.length) i = 0;
+    return imgs[i];
+  });
   activeTab = signal<'overview' | 'features' | 'finance'>('overview');
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
@@ -44,27 +63,71 @@ export class VehicleDetailComponent implements OnInit {
     newsletterOptIn: false,
   };
 
-  ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      const v = this.vehicleService.getVehicleById(id);
-      this.vehicle.set(v);
+  constructor() {
+    this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
+      const id = params.get('id');
+      this.stopGalleryAutoplay();
+      this.selectedImageIndex.set(0);
+      this.galleryHoverPaused.set(false);
+      if (id) {
+        const v = this.vehicleService.getVehicleById(id);
+        this.vehicle.set(v);
+      } else {
+        this.vehicle.set(undefined);
+      }
+      this.startGalleryAutoplay();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.stopGalleryAutoplay();
+  }
+
+  private startGalleryAutoplay(): void {
+    this.stopGalleryAutoplay();
+    if (!isPlatformBrowser(this.platformId)) return;
+    const v = this.vehicle();
+    if (!v || v.images.length <= 1) return;
+    this.galleryAutoplayId = setInterval(() => {
+      if (this.galleryHoverPaused()) return;
+      this.nextImage();
+    }, 5000);
+  }
+
+  private stopGalleryAutoplay(): void {
+    if (this.galleryAutoplayId != null) {
+      clearInterval(this.galleryAutoplayId);
+      this.galleryAutoplayId = null;
     }
   }
 
+  onGalleryTouchStart(e: TouchEvent): void {
+    this.touchStartX = e.changedTouches[0]?.clientX ?? 0;
+  }
+
+  onGalleryTouchEnd(e: TouchEvent): void {
+    const x = e.changedTouches[0]?.clientX ?? 0;
+    const dx = x - this.touchStartX;
+    if (dx > 50) this.prevImage();
+    else if (dx < -50) this.nextImage();
+  }
+
   selectImage(index: number) {
-    this.selectedImageIndex.set(index);
+    const v = this.vehicle();
+    if (!v?.images?.length) return;
+    const i = Math.max(0, Math.min(index, v.images.length - 1));
+    this.selectedImageIndex.set(i);
   }
 
   nextImage() {
     const v = this.vehicle();
-    if (!v) return;
+    if (!v?.images?.length) return;
     this.selectedImageIndex.update((i) => (i + 1) % v.images.length);
   }
 
   prevImage() {
     const v = this.vehicle();
-    if (!v) return;
+    if (!v?.images?.length) return;
     this.selectedImageIndex.update((i) =>
       i === 0 ? v.images.length - 1 : i - 1
     );
@@ -118,6 +181,21 @@ export class VehicleDetailComponent implements OnInit {
     );
   }
 
+  /** Cars vs vans listing route for breadcrumb */
+  listingsParentPath(): string {
+    return this.vehicle()?.category === 'van' ? '/vans' : '/cars';
+  }
+
+  formatMm(value: number | undefined): string {
+    if (value == null || Number.isNaN(value)) return '—';
+    return `${value.toLocaleString('en-GB')} mm`;
+  }
+
+  formatBootL(value: number | undefined): string {
+    if (value == null || Number.isNaN(value)) return '—';
+    return `${value.toLocaleString('en-GB')} L`;
+  }
+
   formatPrice(price: number): string {
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
@@ -125,6 +203,11 @@ export class VehicleDetailComponent implements OnInit {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
+  }
+
+  formatRoadTax(value: number | undefined): string {
+    if (value == null) return '—';
+    return this.formatPrice(value);
   }
 
   formatMileage(mileage: number): string {

@@ -24,6 +24,8 @@ npm run sync:stock
 
 This overwrites [`src/app/data/vehicles.data.ts`](src/app/data/vehicles.data.ts) (and derived `MAKES` / filter lists). Commit the updated file if you want the repo to match live stock at a point in time.
 
+Vehicle detail pages use the full `images[]` from the feed (slideshow + thumbnails + hover cycle on listing cards), plus extra technical fields (dimensions, boot space, MPG urban/extra-urban, 0–60, road tax, seats) and a `sourceListingUrl` link to the matching advert on fengatecarsales.co.uk.
+
 ### UK registration lookup (DVLA API)
 
 Part exchange / sell-your-car **Look up** uses the official [DVLA Vehicle Enquiry API](https://developer-portal.driver-vehicle-licensing.api.gov.uk/). Request an API key from the DVLA developer portal.

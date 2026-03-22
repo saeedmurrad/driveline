@@ -83,6 +83,16 @@ export const VEHICLES: Vehicle[] = [
     "bhp": 242,
     "topSpeedMph": 124,
     "dateAdded": "2026-03-18",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/land-rover-range-rover-sport-30-td-v6-se-commandshift-4wd-euro-5-5dr-10370/",
+    "seats": 5,
+    "taxRate12Month": 735,
+    "mpgUrban": 25,
+    "mpgExtraUrban": 34,
+    "heightMm": 1789,
+    "lengthMm": 4783,
+    "widthMm": 2158,
+    "bootSpaceSeatsUpLitres": 958,
+    "bootSpaceSeatsDownLitres": 2013,
     "isFeatured": true
   },
   {
@@ -227,6 +237,16 @@ export const VEHICLES: Vehicle[] = [
     "bhp": 112,
     "topSpeedMph": 117,
     "dateAdded": "2026-03-16",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-grand-c4-picasso-16-e-hdi-airdream-exclusive-etg6-euro-5-ss-5dr-10369/",
+    "seats": 7,
+    "taxRate12Month": 20,
+    "mpgUrban": 62,
+    "mpgExtraUrban": 74,
+    "heightMm": 1656,
+    "lengthMm": 4597,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 165,
+    "bootSpaceSeatsDownLitres": 2181,
     "isFeatured": true
   },
   {
@@ -266,6 +286,16 @@ export const VEHICLES: Vehicle[] = [
     "bhp": 99,
     "topSpeedMph": 110,
     "dateAdded": "2026-03-14",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/vauxhall-meriva-14-16v-exclusiv-euro-5-5dr-non-ac-10368/",
+    "seats": 5,
+    "taxRate12Month": 215,
+    "mpgUrban": 37,
+    "mpgExtraUrban": 56,
+    "heightMm": 1615,
+    "lengthMm": 4288,
+    "widthMm": 1994,
+    "bootSpaceSeatsUpLitres": 397,
+    "bootSpaceSeatsDownLitres": 1496,
     "isFeatured": true
   },
   {
@@ -380,6 +410,16 @@ export const VEHICLES: Vehicle[] = [
     "bhp": 112,
     "topSpeedMph": 117,
     "dateAdded": "2026-03-10",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-grand-c4-picasso-16-e-hdi-airdream-exclusive-plus-etg6-euro-5-ss-5dr-10367/",
+    "seats": 7,
+    "taxRate12Month": 20,
+    "mpgUrban": 62,
+    "mpgExtraUrban": 74,
+    "heightMm": 1656,
+    "lengthMm": 4597,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 165,
+    "bootSpaceSeatsDownLitres": 2181,
     "isFeatured": true
   },
   {
@@ -478,6 +518,11 @@ export const VEHICLES: Vehicle[] = [
     "co2Emissions": 177,
     "bhp": 90,
     "dateAdded": "2026-03-05",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/citroen-dispatch-16-1000-hdi-enterprise-fwd-l1-h1-5dr-10364/",
+    "seats": 3,
+    "heightMm": 1942,
+    "lengthMm": 4805,
+    "widthMm": 1895,
     "isFeatured": true
   },
   {
@@ -633,6 +678,14 @@ export const VEHICLES: Vehicle[] = [
     "bhp": 221,
     "topSpeedMph": 123,
     "dateAdded": "2026-02-27",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/mini-countryman-15-76kwh-cooper-se-auto-all4-euro-6-ss-5dr-10361/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "heightMm": 1559,
+    "lengthMm": 4299,
+    "widthMm": 2005,
+    "bootSpaceSeatsUpLitres": 405,
+    "bootSpaceSeatsDownLitres": 1275,
     "isFeatured": true
   },
   {
@@ -746,7 +799,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 64,
     "bhp": 108,
     "topSpeedMph": 112,
-    "dateAdded": "2026-02-18"
+    "dateAdded": "2026-02-18",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/renault-grand-scenic-15-dci-dynamique-nav-auto-euro-6-5dr-10359/",
+    "seats": 7,
+    "taxRate12Month": 35,
+    "mpgUrban": 52,
+    "mpgExtraUrban": 65,
+    "heightMm": 1671,
+    "lengthMm": 4573,
+    "widthMm": 2077,
+    "bootSpaceSeatsUpLitres": 208,
+    "bootSpaceSeatsDownLitres": 1863
   },
   {
     "id": "10358",
@@ -892,7 +955,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 70,
     "bhp": 112,
     "topSpeedMph": 117,
-    "dateAdded": "2026-02-17"
+    "dateAdded": "2026-02-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-grand-c4-picasso-16-e-hdi-airdream-exclusive-plus-etg6-euro-5-ss-5dr-10358/",
+    "seats": 7,
+    "taxRate12Month": 20,
+    "mpgUrban": 62,
+    "mpgExtraUrban": 74,
+    "heightMm": 1656,
+    "lengthMm": 4597,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 165,
+    "bootSpaceSeatsDownLitres": 2181
   },
   {
     "id": "10357",
@@ -1037,7 +1110,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 70,
     "bhp": 112,
     "topSpeedMph": 117,
-    "dateAdded": "2026-02-16"
+    "dateAdded": "2026-02-16",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-c4-picasso-16-e-hdi-airdream-exclusive-etg6-euro-5-ss-5dr-10357/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 62,
+    "mpgExtraUrban": 74,
+    "heightMm": 1610,
+    "lengthMm": 4428,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 537,
+    "bootSpaceSeatsDownLitres": 1851
   },
   {
     "id": "10351",
@@ -1164,7 +1247,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 58,
     "bhp": 118,
     "topSpeedMph": 111,
-    "dateAdded": "2026-02-07"
+    "dateAdded": "2026-02-07",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ford-grand-c-max-15-tdci-titanium-powershift-euro-6-ss-5dr-nav-10351/",
+    "seats": 7,
+    "taxRate12Month": 35,
+    "mpgUrban": 52,
+    "mpgExtraUrban": 62,
+    "heightMm": 1642,
+    "lengthMm": 4519,
+    "widthMm": 2067,
+    "bootSpaceSeatsUpLitres": 65,
+    "bootSpaceSeatsDownLitres": 1715
   },
   {
     "id": "10349",
@@ -1308,7 +1401,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 58,
     "bhp": 108,
     "topSpeedMph": 117,
-    "dateAdded": "2026-02-06"
+    "dateAdded": "2026-02-06",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/peugeot-2008-12-puretech-allure-eat-euro-6-ss-5dr-10349/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 47,
+    "mpgExtraUrban": 68,
+    "heightMm": 1556,
+    "lengthMm": 4159,
+    "widthMm": 2004,
+    "bootSpaceSeatsUpLitres": 360,
+    "bootSpaceSeatsDownLitres": 1172
   },
   {
     "id": "10348",
@@ -1372,7 +1475,18 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 37,
     "bhp": 110,
     "topSpeedMph": 117,
-    "dateAdded": "2026-02-06"
+    "dateAdded": "2026-02-06",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-c4-16i-16v-sx-5dr-10348/",
+    "seats": 5,
+    "taxRate12Month": 345,
+    "mpgUrban": 26,
+    "mpgExtraUrban": 48,
+    "heightMm": 1458,
+    "lengthMm": 4260,
+    "widthMm": 1773,
+    "bootSpaceSeatsUpLitres": 408,
+    "bootSpaceSeatsDownLitres": 1183,
+    "acceleration0To60Seconds": 13.1
   },
   {
     "id": "10346",
@@ -1524,7 +1638,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 40,
     "bhp": 187,
     "topSpeedMph": 149,
-    "dateAdded": "2026-02-04"
+    "dateAdded": "2026-02-04",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/mercedes-benz-a-class-20-a220-amg-line-premium-plus-7g-dct-euro-6-ss-5dr-10346/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 34,
+    "mpgExtraUrban": 55,
+    "heightMm": 1445,
+    "lengthMm": 4419,
+    "widthMm": 1992,
+    "bootSpaceSeatsUpLitres": 370,
+    "bootSpaceSeatsDownLitres": 1210
   },
   {
     "id": "10344",
@@ -1670,7 +1794,18 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 53,
     "bhp": 128,
     "topSpeedMph": 119,
-    "dateAdded": "2026-01-31"
+    "dateAdded": "2026-01-31",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/vauxhall-grandland-x-15-turbo-d-blueinjection-elite-nav-euro-6-ss-5dr-10344/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 60,
+    "mpgExtraUrban": 72,
+    "heightMm": 1609,
+    "lengthMm": 4477,
+    "widthMm": 2098,
+    "bootSpaceSeatsUpLitres": 514,
+    "bootSpaceSeatsDownLitres": 1652,
+    "acceleration0To60Seconds": 10.2
   },
   {
     "id": "10342",
@@ -1820,7 +1955,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 37,
     "bhp": 316,
     "topSpeedMph": 155,
-    "dateAdded": "2026-01-30"
+    "dateAdded": "2026-01-30",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/bmw-1-series-30-m135i-auto-euro-6-ss-3dr-10342/",
+    "seats": 5,
+    "taxRate12Month": 315,
+    "mpgUrban": 27,
+    "mpgExtraUrban": 47,
+    "heightMm": 1411,
+    "lengthMm": 4324,
+    "widthMm": 1984,
+    "bootSpaceSeatsUpLitres": 360,
+    "bootSpaceSeatsDownLitres": 1200
   },
   {
     "id": "10341",
@@ -1966,7 +2111,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 80,
     "bhp": 114,
     "topSpeedMph": 127,
-    "dateAdded": "2026-01-29"
+    "dateAdded": "2026-01-29",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/mini-hatch-15-cooper-d-euro-6-ss-3dr-10341/",
+    "seats": 4,
+    "taxRate12Month": 20,
+    "mpgUrban": 65,
+    "mpgExtraUrban": 80,
+    "heightMm": 1414,
+    "lengthMm": 3821,
+    "widthMm": 1932,
+    "bootSpaceSeatsUpLitres": 211,
+    "bootSpaceSeatsDownLitres": 731
   },
   {
     "id": "10338",
@@ -2019,7 +2174,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 55,
     "bhp": 68,
     "topSpeedMph": 99,
-    "dateAdded": "2026-01-24"
+    "dateAdded": "2026-01-24",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ford-ka-12-zetec-euro-4-3dr-10338/",
+    "seats": 4,
+    "taxRate12Month": 35,
+    "mpgUrban": 44,
+    "mpgExtraUrban": 64,
+    "heightMm": 1505,
+    "lengthMm": 3620,
+    "widthMm": 1894,
+    "bootSpaceSeatsUpLitres": 224,
+    "bootSpaceSeatsDownLitres": 747
   },
   {
     "id": "10335",
@@ -2167,7 +2332,16 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 53,
     "bhp": 168,
     "topSpeedMph": 144,
-    "dateAdded": "2026-01-15"
+    "dateAdded": "2026-01-15",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/mercedes-benz-c-class-21-c220-cdi-amg-sport-edition-g-tronic-plus-euro-5-ss-2dr-10335/",
+    "seats": 4,
+    "taxRate12Month": 195,
+    "mpgUrban": 43,
+    "mpgExtraUrban": 61,
+    "heightMm": 1391,
+    "lengthMm": 4633,
+    "widthMm": 1997,
+    "bootSpaceSeatsUpLitres": 450
   },
   {
     "id": "10328",
@@ -2319,7 +2493,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 44,
     "bhp": 197,
     "topSpeedMph": 143,
-    "dateAdded": "2025-12-16"
+    "dateAdded": "2025-12-16",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/renault-clio-16-tce-renaultsport-lux-edc-euro-5-5dr-10328/",
+    "seats": 5,
+    "taxRate12Month": 215,
+    "mpgUrban": 34,
+    "mpgExtraUrban": 55,
+    "heightMm": 1448,
+    "lengthMm": 4090,
+    "widthMm": 1945,
+    "bootSpaceSeatsUpLitres": 300,
+    "bootSpaceSeatsDownLitres": 1146
   },
   {
     "id": "10327",
@@ -2463,7 +2647,14 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 134,
     "bhp": 249,
     "topSpeedMph": 140,
-    "dateAdded": "2025-12-15"
+    "dateAdded": "2025-12-15",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/bmw-3-series-20-330e-76kwh-m-sport-auto-euro-6-ss-4dr-10327/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "heightMm": 1429,
+    "lengthMm": 4633,
+    "widthMm": 2031,
+    "bootSpaceSeatsUpLitres": 370
   },
   {
     "id": "10322",
@@ -2549,7 +2740,15 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 53,
     "bhp": 118,
     "topSpeedMph": 105,
-    "dateAdded": "2025-11-26"
+    "dateAdded": "2025-11-26",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/toyota-proace-20d-comfort-long-crew-van-lwb-euro-6-ss-6dr-6-seat-10322/",
+    "seats": 6,
+    "mpgUrban": 34,
+    "mpgExtraUrban": 57,
+    "heightMm": 1910,
+    "lengthMm": 5309,
+    "widthMm": 1920,
+    "acceleration0To60Seconds": 16.6
   },
   {
     "id": "10300",
@@ -2671,7 +2870,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 67,
     "bhp": 118,
     "topSpeedMph": 120,
-    "dateAdded": "2025-11-04"
+    "dateAdded": "2025-11-04",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ford-focus-15-ecoblue-zetec-auto-euro-6-ss-5dr-10300/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 60,
+    "mpgExtraUrban": 72,
+    "heightMm": 1454,
+    "lengthMm": 4378,
+    "widthMm": 1979,
+    "bootSpaceSeatsUpLitres": 341,
+    "bootSpaceSeatsDownLitres": 1320
   },
   {
     "id": "10294",
@@ -2767,7 +2976,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 64,
     "bhp": 94,
     "topSpeedMph": 99,
-    "dateAdded": "2025-10-22"
+    "dateAdded": "2025-10-22",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ford-ecosport-15-tdci-zetec-2wd-euro-6-5dr-10294/",
+    "seats": 5,
+    "taxRate12Month": 35,
+    "mpgUrban": 58,
+    "mpgExtraUrban": 65,
+    "heightMm": 1633,
+    "lengthMm": 4017,
+    "widthMm": 2057,
+    "bootSpaceSeatsUpLitres": 310,
+    "bootSpaceSeatsDownLitres": 1238
   },
   {
     "id": "10288",
@@ -2880,7 +3099,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 58,
     "bhp": 113,
     "topSpeedMph": 114,
-    "dateAdded": "2025-10-14"
+    "dateAdded": "2025-10-14",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/peugeot-5008-16-e-hdi-allure-egc-euro-5-ss-5dr-10288/",
+    "seats": 7,
+    "taxRate12Month": 165,
+    "mpgUrban": 54,
+    "mpgExtraUrban": 61,
+    "heightMm": 1639,
+    "lengthMm": 4529,
+    "widthMm": 2118,
+    "bootSpaceSeatsUpLitres": 823,
+    "bootSpaceSeatsDownLitres": 2506
   },
   {
     "id": "10280",
@@ -3010,7 +3239,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 70,
     "bhp": 108,
     "topSpeedMph": 113,
-    "dateAdded": "2025-09-22"
+    "dateAdded": "2025-09-22",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/nissan-qashqai-15-dci-n-tec-plus-2wd-euro-6-ss-5dr-10280/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 65,
+    "mpgExtraUrban": 72,
+    "heightMm": 1590,
+    "lengthMm": 4377,
+    "widthMm": 2070,
+    "bootSpaceSeatsUpLitres": 430,
+    "bootSpaceSeatsDownLitres": 1585
   },
   {
     "id": "10276",
@@ -3133,7 +3372,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 60,
     "bhp": 81,
     "topSpeedMph": 104,
-    "dateAdded": "2025-09-17"
+    "dateAdded": "2025-09-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-c3-12-puretech-flair-euro-6-5dr-10276/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 48,
+    "mpgExtraUrban": 67,
+    "heightMm": 1474,
+    "lengthMm": 3996,
+    "widthMm": 2007,
+    "bootSpaceSeatsUpLitres": 300,
+    "bootSpaceSeatsDownLitres": 922
   },
   {
     "id": "10273",
@@ -3271,7 +3520,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 65,
     "bhp": 99,
     "topSpeedMph": 112,
-    "dateAdded": "2025-09-17"
+    "dateAdded": "2025-09-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ford-fiesta-10t-ecoboost-zetec-euro-6-ss-3dr-10273/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 52,
+    "mpgExtraUrban": 76,
+    "heightMm": 1495,
+    "lengthMm": 3969,
+    "widthMm": 1978,
+    "bootSpaceSeatsUpLitres": 290,
+    "bootSpaceSeatsDownLitres": 974
   },
   {
     "id": "10270",
@@ -3416,7 +3675,15 @@ export const VEHICLES: Vehicle[] = [
     "co2Emissions": 0,
     "bhp": 134,
     "topSpeedMph": 93,
-    "dateAdded": "2025-09-05"
+    "dateAdded": "2025-09-05",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/vauxhall-corsa-50kwh-ultimate-auto-5dr-10270/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "heightMm": 1433,
+    "lengthMm": 4060,
+    "widthMm": 1960,
+    "bootSpaceSeatsUpLitres": 267,
+    "bootSpaceSeatsDownLitres": 1081
   },
   {
     "id": "10268",
@@ -3570,7 +3837,14 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 201,
     "bhp": 288,
     "topSpeedMph": 142,
-    "dateAdded": "2025-09-01"
+    "dateAdded": "2025-09-01",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/bmw-3-series-20-330e-12kwh-m-sport-auto-euro-6-ss-4dr-10268/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "heightMm": 1444,
+    "lengthMm": 4709,
+    "widthMm": 2068,
+    "bootSpaceSeatsUpLitres": 375
   },
   {
     "id": "10257",
@@ -3715,7 +3989,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 50,
     "bhp": 138,
     "topSpeedMph": 120,
-    "dateAdded": "2025-08-17"
+    "dateAdded": "2025-08-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/seat-alhambra-20-tdi-ecomotive-cr-se-euro-5-ss-5dr-10257/",
+    "seats": 7,
+    "taxRate12Month": 215,
+    "mpgUrban": 40,
+    "mpgExtraUrban": 57,
+    "heightMm": 1720,
+    "lengthMm": 4854,
+    "widthMm": 1904,
+    "bootSpaceSeatsUpLitres": 267,
+    "bootSpaceSeatsDownLitres": 2297
   },
   {
     "id": "10236",
@@ -3842,7 +4126,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 51,
     "bhp": 59,
     "topSpeedMph": 97,
-    "dateAdded": "2025-07-24"
+    "dateAdded": "2025-07-24",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/volkswagen-polo-12-match-edition-euro-5-5dr-10236/",
+    "seats": 5,
+    "taxRate12Month": 165,
+    "mpgUrban": 38,
+    "mpgExtraUrban": 62,
+    "heightMm": 1462,
+    "lengthMm": 3970,
+    "widthMm": 1901,
+    "bootSpaceSeatsUpLitres": 280,
+    "bootSpaceSeatsDownLitres": 952
   },
   {
     "id": "10232",
@@ -4002,7 +4296,16 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 51,
     "bhp": 261,
     "topSpeedMph": 155,
-    "dateAdded": "2025-07-21"
+    "dateAdded": "2025-07-21",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/bmw-7-series-30-730d-m-sport-auto-euro-6-ss-4dr-10232/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 44,
+    "mpgExtraUrban": 56,
+    "heightMm": 1478,
+    "lengthMm": 5108,
+    "widthMm": 2169,
+    "bootSpaceSeatsUpLitres": 515
   },
   {
     "id": "10221",
@@ -4138,7 +4441,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 70,
     "bhp": 128,
     "topSpeedMph": 124,
-    "dateAdded": "2025-06-28"
+    "dateAdded": "2025-06-28",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/renault-megane-16-dci-energy-gt-line-tomtom-euro-5-ss-5dr-10221/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 58,
+    "mpgExtraUrban": 78,
+    "heightMm": 1471,
+    "lengthMm": 4302,
+    "widthMm": 2037,
+    "bootSpaceSeatsUpLitres": 372,
+    "bootSpaceSeatsDownLitres": 1162
   },
   {
     "id": "10188",
@@ -4262,7 +4575,16 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 83,
     "bhp": 99,
     "topSpeedMph": 117,
-    "dateAdded": "2025-04-17"
+    "dateAdded": "2025-04-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/ds-ds-3-16-bluehdi-chic-euro-6-ss-3dr-10188/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 74,
+    "mpgExtraUrban": 88,
+    "heightMm": 1483,
+    "lengthMm": 3948,
+    "widthMm": 1715,
+    "bootSpaceSeatsUpLitres": 285
   },
   {
     "id": "10191",
@@ -4357,7 +4679,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 40,
     "bhp": 95,
     "topSpeedMph": 104,
-    "dateAdded": "2025-04-17"
+    "dateAdded": "2025-04-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/kia-rio-14-2-ipd-5dr-10191/",
+    "seats": 5,
+    "taxRate12Month": 265,
+    "mpgUrban": 30,
+    "mpgExtraUrban": 50,
+    "heightMm": 1470,
+    "lengthMm": 3990,
+    "widthMm": 1695,
+    "bootSpaceSeatsUpLitres": 270,
+    "acceleration0To60Seconds": 14.4
   },
   {
     "id": "10165",
@@ -4473,7 +4805,18 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 64,
     "bhp": 187,
     "topSpeedMph": 144,
-    "dateAdded": "2025-02-17"
+    "dateAdded": "2025-02-17",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/audi-a6-saloon-20-tdi-ultra-se-executive-s-tronic-euro-6-ss-4dr-10165/",
+    "seats": 5,
+    "taxRate12Month": 195,
+    "mpgUrban": 55,
+    "mpgExtraUrban": 70,
+    "heightMm": 1455,
+    "lengthMm": 4932,
+    "widthMm": 2086,
+    "bootSpaceSeatsUpLitres": 530,
+    "bootSpaceSeatsDownLitres": 995,
+    "acceleration0To60Seconds": 7.9
   },
   {
     "id": "10135",
@@ -4551,7 +4894,15 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 64,
     "bhp": 80,
     "topSpeedMph": 101,
-    "dateAdded": "2024-12-14"
+    "dateAdded": "2024-12-14",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/peugeot-bipper-13-hdi-s-fwd-l1-h1-3dr-10135/",
+    "seats": 2,
+    "mpgUrban": 50,
+    "mpgExtraUrban": 76,
+    "heightMm": 1721,
+    "lengthMm": 3864,
+    "widthMm": 1816,
+    "acceleration0To60Seconds": 16.4
   },
   {
     "id": "10125",
@@ -4631,7 +4982,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 32,
     "bhp": 228,
     "topSpeedMph": 137,
-    "dateAdded": "2024-12-06"
+    "dateAdded": "2024-12-06",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/mercedes-benz-m-class-30-ml350-cdi-v6-blueefficiency-sport-g-tronic-4wd-euro-5-5dr-10125/",
+    "seats": 5,
+    "taxRate12Month": 735,
+    "mpgUrban": 25,
+    "mpgExtraUrban": 38,
+    "heightMm": 1815,
+    "lengthMm": 4781,
+    "widthMm": 2124,
+    "bootSpaceSeatsUpLitres": 551,
+    "bootSpaceSeatsDownLitres": 2050
   },
   {
     "id": "10002",
@@ -4749,7 +5110,18 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 40,
     "bhp": 302,
     "topSpeedMph": 130,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/land-rover-range-rover-sport-30-sd-v6-autobiography-dynamic-auto-4wd-euro-6-ss-5dr-10002/",
+    "seats": 5,
+    "taxRate12Month": 345,
+    "mpgUrban": 35,
+    "mpgExtraUrban": 44,
+    "heightMm": 1780,
+    "lengthMm": 4850,
+    "widthMm": 2220,
+    "bootSpaceSeatsUpLitres": 784,
+    "bootSpaceSeatsDownLitres": 1761,
+    "acceleration0To60Seconds": 6.8
   },
   {
     "id": "10010",
@@ -4827,7 +5199,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 31,
     "bhp": 237,
     "topSpeedMph": 134,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/audi-q7-30-tdi-v6-s-line-tiptronic-quattro-euro-4-5dr-10010/",
+    "seats": 7,
+    "taxRate12Month": 735,
+    "mpgUrban": 25,
+    "mpgExtraUrban": 36,
+    "heightMm": 1737,
+    "lengthMm": 5089,
+    "widthMm": 2177,
+    "bootSpaceSeatsUpLitres": 775,
+    "bootSpaceSeatsDownLitres": 2035
   },
   {
     "id": "10027",
@@ -4921,7 +5303,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 74,
     "bhp": 99,
     "topSpeedMph": 109,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-c4-picasso-16-bluehdi-vtr-euro-6-ss-5dr-10027/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 62,
+    "mpgExtraUrban": 80,
+    "heightMm": 1610,
+    "lengthMm": 4428,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 537,
+    "bootSpaceSeatsDownLitres": 1851
   },
   {
     "id": "10081",
@@ -5044,7 +5436,17 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 74,
     "bhp": 118,
     "topSpeedMph": 117,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-c4-picasso-16-bluehdi-selection-euro-6-ss-5dr-10081/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 64,
+    "mpgExtraUrban": 80,
+    "heightMm": 1625,
+    "lengthMm": 4428,
+    "widthMm": 2117,
+    "bootSpaceSeatsUpLitres": 537,
+    "bootSpaceSeatsDownLitres": 1851
   },
   {
     "id": "10004",
@@ -5155,7 +5557,18 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 74,
     "bhp": 104,
     "topSpeedMph": 121,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/skoda-octavia-16-tdi-elegance-euro-5-ss-5dr-10004/",
+    "seats": 5,
+    "taxRate12Month": 20,
+    "mpgUrban": 61,
+    "mpgExtraUrban": 85,
+    "heightMm": 1461,
+    "lengthMm": 4659,
+    "widthMm": 2017,
+    "bootSpaceSeatsUpLitres": 590,
+    "bootSpaceSeatsDownLitres": 1580,
+    "acceleration0To60Seconds": 10.4
   },
   {
     "id": "10006",
@@ -5235,7 +5648,15 @@ export const VEHICLES: Vehicle[] = [
     "mpg": 35,
     "bhp": 255,
     "topSpeedMph": 112,
-    "dateAdded": "2024-10-08"
+    "dateAdded": "2024-10-08",
+    "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/land-rover-discovery-4-30-sd-v6-se-lcv-auto-4wd-5dr-10006/",
+    "seats": 2,
+    "mpgUrban": 32,
+    "mpgExtraUrban": 37,
+    "heightMm": 1891,
+    "lengthMm": 4829,
+    "widthMm": 2200,
+    "acceleration0To60Seconds": 8.8
   }
 ];
 
