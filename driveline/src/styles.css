@@ -94,31 +94,29 @@
   }
 
   /**
-   * Modern compact actions (vehicle detail: print / share / part exchange).
-   * Pair with inner span.btn-action-icon-wrap around the SVG.
+   * Secondary row actions (print / share) — full width, high contrast in dark mode.
    */
   .btn-action-secondary {
-    @apply relative inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-sm font-semibold tracking-tight text-gray-800;
-    @apply bg-gradient-to-b from-white to-gray-50/95 shadow-sm;
-    @apply ring-1 ring-gray-200/90;
-    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:ring-gray-300 active:translate-y-0 active:shadow-sm;
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2;
+    @apply inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-semibold text-slate-800;
+    @apply border border-slate-200 bg-white shadow-sm;
+    @apply transition-colors hover:bg-slate-50 hover:border-slate-300;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2;
   }
 
   .btn-action-secondary .btn-action-icon-wrap {
-    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-600 ring-1 ring-gray-200/60;
+    @apply flex h-8 w-8 shrink-0 items-center justify-center text-slate-600;
   }
 
+  /** Primary accent in the same row (e.g. part exchange) */
   .btn-action-accent {
-    @apply relative inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-sm font-semibold tracking-tight text-white;
-    @apply bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-600 shadow-md shadow-blue-600/30;
-    @apply ring-1 ring-white/10 ring-inset;
-    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/40 hover:brightness-[1.02] active:translate-y-0 active:brightness-100;
+    @apply inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-semibold text-white;
+    @apply border border-blue-500 bg-blue-600 shadow-md shadow-blue-600/25;
+    @apply transition-colors hover:border-blue-600 hover:bg-blue-700;
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
   }
 
   .btn-action-accent .btn-action-icon-wrap {
-    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/20 backdrop-blur-sm;
+    @apply flex h-8 w-8 shrink-0 items-center justify-center text-white opacity-95;
   }
 
   /** Modal / sheet close — use with SVG X icon */
@@ -206,11 +204,16 @@
   }
 
   html.dark .btn-action-secondary {
-    @apply from-slate-800 to-slate-900 text-gray-100 shadow-none ring-slate-600/80 hover:ring-slate-500 hover:shadow-slate-950/40;
+    @apply border-slate-600 bg-slate-700 text-white shadow-none hover:border-slate-500 hover:bg-slate-600;
   }
 
   html.dark .btn-action-secondary .btn-action-icon-wrap {
-    @apply bg-slate-700/90 text-gray-300 ring-slate-600/80;
+    @apply text-slate-200;
+  }
+
+  html.dark .btn-action-secondary:focus-visible,
+  html.dark .btn-action-accent:focus-visible {
+    --tw-ring-offset-color: #0f172a;
   }
 
   html.dark .btn-modal-close {

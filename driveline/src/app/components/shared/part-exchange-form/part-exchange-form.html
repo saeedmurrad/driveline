@@ -1,49 +1,49 @@
 <div
-  class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+  class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden"
   [class.rounded-none]="variant === 'modal'"
   [class.border-0]="variant === 'modal'"
   [class.shadow-none]="variant === 'modal'"
 >
   @if (vehicleOfInterest) {
-    <div class="px-4 py-3 sm:px-6 bg-blue-50 border-b border-blue-100">
-      <p class="text-xs font-semibold text-blue-800 uppercase tracking-wide">Vehicle you're interested in</p>
-      <p class="text-sm font-medium text-blue-950">
+    <div class="px-4 py-3 sm:px-6 bg-blue-50 dark:bg-blue-950/40 border-b border-blue-100 dark:border-slate-600">
+      <p class="text-xs font-semibold text-blue-800 dark:text-blue-300 uppercase tracking-wide">Vehicle you're interested in</p>
+      <p class="text-sm font-medium text-blue-950 dark:text-white">
         {{ vehicleOfInterest.year }} {{ vehicleOfInterest.make }} {{ vehicleOfInterest.model }}
         {{ vehicleOfInterest.derivative }}
       </p>
-      <p class="text-xs text-blue-700 mt-0.5">We'll use this to match your part exchange enquiry.</p>
+      <p class="text-xs text-blue-700 dark:text-blue-200/90 mt-0.5">We'll use this to match your part exchange enquiry.</p>
     </div>
   }
 
   @if (isSubmitted()) {
     @if (variant === 'modal') {
       <div class="p-8 text-center">
-        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-16 h-16 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Request received</h3>
-        <p class="text-gray-600 text-sm mb-6">We'll review your part exchange details and contact you shortly.</p>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Request received</h3>
+        <p class="text-gray-600 dark:text-slate-300 text-sm mb-6">We'll review your part exchange details and contact you shortly.</p>
         <button type="button" (click)="onModalDone()" class="btn-primary px-8">Done</button>
       </div>
     } @else {
       <div class="p-12 text-center">
-        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
-          <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-20 h-20 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-5">
+          <svg class="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900 mb-3">Valuation Request Submitted!</h3>
-        <p class="text-gray-500 text-lg mb-8">Thank you! A member of our team will review your vehicle details and get back to you with a competitive valuation shortly.</p>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Valuation Request Submitted!</h3>
+        <p class="text-gray-600 dark:text-slate-300 text-lg mb-8">Thank you! A member of our team will review your vehicle details and get back to you with a competitive valuation shortly.</p>
         <a routerLink="/cars" class="btn-primary">Browse Our Cars</a>
       </div>
     }
   } @else {
-    <div class="p-4 sm:p-6 border-b border-gray-100">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg sm:text-xl font-bold text-gray-900">{{ stepTitle }}</h2>
-        <span class="text-sm text-gray-500">Step {{ currentStep() }} of 3</span>
+    <div class="p-4 sm:p-6 border-b border-gray-100 dark:border-slate-600">
+      <div class="flex items-center justify-between mb-4 gap-2">
+        <h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{{ stepTitle }}</h2>
+        <span class="text-sm text-gray-500 dark:text-slate-400 shrink-0">Step {{ currentStep() }} of 3</span>
       </div>
       <div class="flex items-center gap-2">
         @for (step of [1, 2, 3]; track step) {
@@ -53,7 +53,9 @@
               [class.bg-blue-600]="currentStep() >= step"
               [class.text-white]="currentStep() >= step"
               [class.bg-gray-100]="currentStep() < step"
-              [class.text-gray-400]="currentStep() < step"
+              [class.dark:bg-slate-700]="currentStep() < step"
+              [class.text-gray-500]="currentStep() < step"
+              [class.dark:text-slate-300]="currentStep() < step"
             >
               @if (currentStep() > step) {
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,6 +70,8 @@
                 class="h-0.5 flex-1 rounded-full transition-all"
                 [class.bg-blue-600]="currentStep() > step"
                 [class.bg-gray-100]="currentStep() <= step"
+                [class.dark:bg-slate-600]="currentStep() > step"
+                [class.dark:bg-slate-700]="currentStep() <= step"
               ></div>
             }
           </div>
@@ -105,82 +109,82 @@
               }
             </button>
           </div>
-          <p class="text-xs text-gray-400 mt-1.5">
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1.5">
             Uses the DVLA Vehicle Enquiry API. Model is not provided — please enter make/model below after lookup.
           </p>
         </div>
 
         @if (registrationLookupError()) {
-          <div class="mb-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+          <div class="mb-6 rounded-xl border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/40 px-4 py-3 text-sm text-red-800 dark:text-red-200" role="alert">
             {{ registrationLookupError() }}
           </div>
         }
 
         @if (dvlaVehicleDetails(); as dvla) {
-          <div class="mb-6 rounded-xl border border-emerald-200 bg-emerald-50/80 p-4">
-            <h3 class="text-sm font-semibold text-emerald-900 mb-3 flex items-center gap-2">
-              <svg class="w-5 h-5 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <div class="mb-6 rounded-xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50/80 dark:bg-emerald-950/35 p-4">
+            <h3 class="text-sm font-semibold text-emerald-900 dark:text-emerald-200 mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
               DVLA record (fields below are pre-filled where possible)
             </h3>
             <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
               <div class="flex flex-col sm:flex-row sm:gap-2">
-                <dt class="text-gray-500 font-medium shrink-0">Registration</dt>
-                <dd class="text-gray-900 font-semibold">{{ dvla.registrationNumber }}</dd>
+                <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Registration</dt>
+                <dd class="text-gray-900 dark:text-white font-semibold">{{ dvla.registrationNumber }}</dd>
               </div>
               @if (dvla.make) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Make</dt>
-                  <dd class="text-gray-900">{{ dvla.make }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Make</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.make }}</dd>
                 </div>
               }
               @if (dvla.yearOfManufacture) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Year of manufacture</dt>
-                  <dd class="text-gray-900">{{ dvla.yearOfManufacture }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Year of manufacture</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.yearOfManufacture }}</dd>
                 </div>
               }
               @if (dvla.colour) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Colour</dt>
-                  <dd class="text-gray-900">{{ dvla.colour }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Colour</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.colour }}</dd>
                 </div>
               }
               @if (dvla.fuelType) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Fuel (DVLA)</dt>
-                  <dd class="text-gray-900">{{ dvla.fuelType }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Fuel (DVLA)</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.fuelType }}</dd>
                 </div>
               }
               @if (dvla.engineCapacity) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Engine</dt>
-                  <dd class="text-gray-900">{{ dvla.engineCapacity }}cc</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Engine</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.engineCapacity }}cc</dd>
                 </div>
               }
               @if (dvla.taxStatus) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">Tax status</dt>
-                  <dd class="text-gray-900">{{ dvla.taxStatus }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Tax status</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.taxStatus }}</dd>
                 </div>
               }
               @if (dvla.motStatus) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">MOT status</dt>
-                  <dd class="text-gray-900">{{ dvla.motStatus }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">MOT status</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.motStatus }}</dd>
                 </div>
               }
               @if (dvla.motExpiryDate) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">MOT expiry</dt>
-                  <dd class="text-gray-900">{{ dvla.motExpiryDate }}</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">MOT expiry</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.motExpiryDate }}</dd>
                 </div>
               }
               @if (dvla.co2Emissions != null && dvla.co2Emissions > 0) {
                 <div class="flex flex-col sm:flex-row sm:gap-2">
-                  <dt class="text-gray-500 font-medium shrink-0">CO₂</dt>
-                  <dd class="text-gray-900">{{ dvla.co2Emissions }} g/km</dd>
+                  <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">CO₂</dt>
+                  <dd class="text-gray-900 dark:text-white">{{ dvla.co2Emissions }} g/km</dd>
                 </div>
               }
             </dl>
@@ -216,7 +220,7 @@
                 <option [value]="fuel">{{ fuel }}</option>
               }
             </select>
-            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div class="relative">
             <label class="form-label">Gearbox</label>
@@ -225,7 +229,7 @@
                 <option [value]="gb">{{ gb }}</option>
               }
             </select>
-            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
           <div>
             <label class="form-label">Number of Owners</label>
@@ -243,7 +247,7 @@
                 <option [value]="sh">{{ sh }}</option>
               }
             </select>
-            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
         </div>
 
@@ -267,10 +271,15 @@
                 (click)="vehicle.condition = cond"
                 class="p-3 rounded-xl border-2 text-sm font-medium transition-all text-center"
                 [class.border-blue-600]="vehicle.condition === cond"
+                [class.dark:border-blue-400]="vehicle.condition === cond"
                 [class.bg-blue-50]="vehicle.condition === cond"
+                [class.dark:bg-blue-900]="vehicle.condition === cond"
                 [class.text-blue-700]="vehicle.condition === cond"
+                [class.dark:text-blue-200]="vehicle.condition === cond"
                 [class.border-gray-200]="vehicle.condition !== cond"
-                [class.text-gray-600]="vehicle.condition !== cond"
+                [class.dark:border-slate-600]="vehicle.condition !== cond"
+                [class.text-gray-700]="vehicle.condition !== cond"
+                [class.dark:text-slate-200]="vehicle.condition !== cond"
               >
                 {{ cond }}
               </button>
@@ -280,66 +289,84 @@
 
         <div class="space-y-3 mb-6">
           <label class="form-label">Vehicle History</label>
-          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
-            <span class="text-sm font-medium text-gray-700">Was your vehicle used as a taxi?</span>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 border border-transparent dark:border-slate-600 transition-colors">
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-200">Was your vehicle used as a taxi?</span>
             <div class="flex gap-3">
               <button type="button" (click)="vehicle.usedAsTaxi = true"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.usedAsTaxi === true"
                 [class.text-white]="vehicle.usedAsTaxi === true"
                 [class.bg-white]="vehicle.usedAsTaxi !== true"
+                [class.dark:bg-slate-800]="vehicle.usedAsTaxi !== true"
                 [class.border]="vehicle.usedAsTaxi !== true"
                 [class.border-gray-200]="vehicle.usedAsTaxi !== true"
+                [class.dark:border-slate-500]="vehicle.usedAsTaxi !== true"
+                [class.dark:text-slate-200]="vehicle.usedAsTaxi !== true"
               >Yes</button>
               <button type="button" (click)="vehicle.usedAsTaxi = false"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.usedAsTaxi === false"
                 [class.text-white]="vehicle.usedAsTaxi === false"
                 [class.bg-white]="vehicle.usedAsTaxi !== false"
+                [class.dark:bg-slate-800]="vehicle.usedAsTaxi !== false"
                 [class.border]="vehicle.usedAsTaxi !== false"
                 [class.border-gray-200]="vehicle.usedAsTaxi !== false"
+                [class.dark:border-slate-500]="vehicle.usedAsTaxi !== false"
+                [class.dark:text-slate-200]="vehicle.usedAsTaxi !== false"
               >No</button>
             </div>
           </label>
-          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
-            <span class="text-sm font-medium text-gray-700">Was it used to transport animals?</span>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 border border-transparent dark:border-slate-600 transition-colors">
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-200">Was it used to transport animals?</span>
             <div class="flex gap-3">
               <button type="button" (click)="vehicle.transportedAnimals = true"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.transportedAnimals === true"
                 [class.text-white]="vehicle.transportedAnimals === true"
                 [class.bg-white]="vehicle.transportedAnimals !== true"
+                [class.dark:bg-slate-800]="vehicle.transportedAnimals !== true"
                 [class.border]="vehicle.transportedAnimals !== true"
                 [class.border-gray-200]="vehicle.transportedAnimals !== true"
+                [class.dark:border-slate-500]="vehicle.transportedAnimals !== true"
+                [class.dark:text-slate-200]="vehicle.transportedAnimals !== true"
               >Yes</button>
               <button type="button" (click)="vehicle.transportedAnimals = false"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.transportedAnimals === false"
                 [class.text-white]="vehicle.transportedAnimals === false"
                 [class.bg-white]="vehicle.transportedAnimals !== false"
+                [class.dark:bg-slate-800]="vehicle.transportedAnimals !== false"
                 [class.border]="vehicle.transportedAnimals !== false"
                 [class.border-gray-200]="vehicle.transportedAnimals !== false"
+                [class.dark:border-slate-500]="vehicle.transportedAnimals !== false"
+                [class.dark:text-slate-200]="vehicle.transportedAnimals !== false"
               >No</button>
             </div>
           </label>
-          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
-            <span class="text-sm font-medium text-gray-700">Was it used by a smoker?</span>
+          <label class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 border border-transparent dark:border-slate-600 transition-colors">
+            <span class="text-sm font-medium text-gray-700 dark:text-slate-200">Was it used by a smoker?</span>
             <div class="flex gap-3">
               <button type="button" (click)="vehicle.usedBySmoker = true"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.usedBySmoker === true"
                 [class.text-white]="vehicle.usedBySmoker === true"
                 [class.bg-white]="vehicle.usedBySmoker !== true"
+                [class.dark:bg-slate-800]="vehicle.usedBySmoker !== true"
                 [class.border]="vehicle.usedBySmoker !== true"
                 [class.border-gray-200]="vehicle.usedBySmoker !== true"
+                [class.dark:border-slate-500]="vehicle.usedBySmoker !== true"
+                [class.dark:text-slate-200]="vehicle.usedBySmoker !== true"
               >Yes</button>
               <button type="button" (click)="vehicle.usedBySmoker = false"
                 class="px-3 py-1 rounded-lg text-sm font-medium transition-all"
                 [class.bg-blue-600]="vehicle.usedBySmoker === false"
                 [class.text-white]="vehicle.usedBySmoker === false"
                 [class.bg-white]="vehicle.usedBySmoker !== false"
+                [class.dark:bg-slate-800]="vehicle.usedBySmoker !== false"
                 [class.border]="vehicle.usedBySmoker !== false"
                 [class.border-gray-200]="vehicle.usedBySmoker !== false"
+                [class.dark:border-slate-500]="vehicle.usedBySmoker !== false"
+                [class.dark:text-slate-200]="vehicle.usedBySmoker !== false"
               >No</button>
             </div>
           </label>
@@ -352,12 +379,12 @@
 
         <div class="mb-6">
           <label class="form-label">Upload Vehicle Photos (optional, up to 10)</label>
-          <div class="border-2 border-dashed border-gray-200 rounded-xl p-8 text-center hover:border-blue-300 transition-colors cursor-pointer">
-            <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="border-2 border-dashed border-gray-200 dark:border-slate-600 rounded-xl p-8 text-center hover:border-blue-300 dark:hover:border-blue-500 transition-colors cursor-pointer dark:bg-slate-900/40">
+            <svg class="w-10 h-10 text-gray-300 dark:text-slate-500 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
-            <p class="text-sm text-gray-500 mb-1">Drag and drop images here, or <span class="text-blue-600 font-medium">browse</span></p>
-            <p class="text-xs text-gray-400">JPG, PNG up to 10MB each · Max 10 images</p>
+            <p class="text-sm text-gray-500 dark:text-slate-300 mb-1">Drag and drop images here, or <span class="text-blue-600 dark:text-blue-400 font-medium">browse</span></p>
+            <p class="text-xs text-gray-400 dark:text-slate-500">JPG, PNG up to 10MB each · Max 10 images</p>
           </div>
         </div>
 
@@ -377,10 +404,10 @@
     @if (currentStep() === 3) {
       <div class="p-4 sm:p-6">
         @if (vehicle.make) {
-          <div class="bg-gray-50 rounded-xl p-4 mb-6">
-            <h4 class="text-sm font-semibold text-gray-700 mb-2">Your vehicle summary</h4>
-            <p class="text-gray-600 text-sm">{{ vehicle.make }} {{ vehicle.model }} {{ vehicle.derivative }}</p>
-            <p class="text-gray-500 text-sm">{{ vehicle.mileage?.toLocaleString() }} miles · {{ vehicle.fuel }} · {{ vehicle.gearbox }}</p>
+          <div class="bg-gray-50 dark:bg-slate-700/50 border border-transparent dark:border-slate-600 rounded-xl p-4 mb-6">
+            <h4 class="text-sm font-semibold text-gray-700 dark:text-slate-200 mb-2">Your vehicle summary</h4>
+            <p class="text-gray-600 dark:text-slate-200 text-sm">{{ vehicle.make }} {{ vehicle.model }} {{ vehicle.derivative }}</p>
+            <p class="text-gray-500 dark:text-slate-400 text-sm">{{ vehicle.mileage?.toLocaleString() }} miles · {{ vehicle.fuel }} · {{ vehicle.gearbox }}</p>
           </div>
         }
 
@@ -409,11 +436,11 @@
 
         <label class="flex items-start gap-2.5 cursor-pointer mt-4">
           <input [(ngModel)]="contact.newsletterOptIn" name="peNl" type="checkbox" class="mt-0.5 rounded text-blue-600" />
-          <span class="text-sm text-gray-500">Keep me updated with latest news and offers</span>
+          <span class="text-sm text-gray-500 dark:text-slate-300">Keep me updated with latest news and offers</span>
         </label>
 
         @if (submitError()) {
-          <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 mt-4" role="alert">
+          <div class="rounded-xl border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/40 px-4 py-3 text-sm text-red-800 dark:text-red-200 mt-4" role="alert">
             {{ submitError() }}
           </div>
         }

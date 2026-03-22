@@ -3,7 +3,7 @@
 
     <!-- Category Tabs -->
     <div class="flex items-center gap-2 mb-6">
-      @for (cat of categories; track cat.value) {
+      @for (cat of categories(); track cat.value) {
         <button
           (click)="setCategory(cat.value)"
           [ngClass]="

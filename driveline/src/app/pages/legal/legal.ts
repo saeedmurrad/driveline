@@ -1,11 +1,11 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterLink, ActivatedRoute } from '@angular/router';
+import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 
 type LegalPage = 'privacy-policy' | 'cookie-policy' | 'disclaimer' | 'sitemap';
 
 @Component({
   selector: 'app-legal',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './legal.html',
   styleUrl: './legal.css',
 })

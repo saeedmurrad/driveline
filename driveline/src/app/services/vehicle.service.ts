@@ -93,6 +93,18 @@ export class VehicleService {
       .slice(0, 6)
   );
 
+  /** Per-category listing counts (for search tabs, e.g. Cars (40), Vans (4)) */
+  inventoryCategoryCounts = computed(() => {
+    const all = this.allVehicles();
+    let car = 0;
+    let van = 0;
+    for (const v of all) {
+      if (v.category === 'van') van++;
+      else car++;
+    }
+    return { car, van };
+  });
+
   setFilters(filters: SearchFilters) {
     this.filters.set(filters);
   }

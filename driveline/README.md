@@ -12,6 +12,18 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+### Vehicle stock (Fengate Car Sales)
+
+Used cars and vans are **not** mocked: they are synced from **fengatecarsales.co.uk** using the same public API the dealer site uses (`/v1/vehicles/stock/{id}`). Images load from their CDN (`www.fengatecarsales.co.uk/photos/...`).
+
+Refresh the local dataset after stock changes:
+
+```bash
+npm run sync:stock
+```
+
+This overwrites [`src/app/data/vehicles.data.ts`](src/app/data/vehicles.data.ts) (and derived `MAKES` / filter lists). Commit the updated file if you want the repo to match live stock at a point in time.
+
 ### UK registration lookup (DVLA API)
 
 Part exchange / sell-your-car **Look up** uses the official [DVLA Vehicle Enquiry API](https://developer-portal.driver-vehicle-licensing.api.gov.uk/). Request an API key from the DVLA developer portal.

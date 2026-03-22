@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700 h-full flex flex-col">
+<div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm dark:shadow-lg dark:shadow-black/25 border border-gray-100 dark:border-slate-600 h-full flex flex-col ring-1 ring-black/5 dark:ring-white/10">
   <!-- Stars -->
   <div class="flex items-center gap-0.5 mb-3">
     @for (s of stars; track $index) {
@@ -27,11 +27,11 @@
       </div>
       <div>
         <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">{{ review.author }}</p>
-        <p class="text-xs text-gray-400 dark:text-gray-500">{{ formatDate(review.date) }}</p>
+        <p class="text-xs text-gray-400 dark:text-slate-400">{{ formatDate(review.date) }}</p>
       </div>
     </div>
     @if (review.verified) {
-      <div class="flex items-center gap-1 text-xs text-green-600">
+      <div class="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
         </svg>

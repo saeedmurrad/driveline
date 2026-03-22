@@ -1,4 +1,4 @@
-import { Component, inject, signal, Input } from '@angular/core';
+import { Component, inject, signal, Input, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -43,10 +43,13 @@ export class SearchWidgetComponent {
     maxEngineSize: undefined,
   };
 
-  categories = [
-    { value: 'car', label: 'Cars' },
-    { value: 'van', label: 'Vans' },
-  ];
+  categories = computed(() => {
+    const { car, van } = this.vehicleService.inventoryCategoryCounts();
+    return [
+      { value: 'car' as const, label: `Cars (${car})` },
+      { value: 'van' as const, label: `Vans (${van})` },
+    ];
+  });
 
   setCategory(cat: string) {
     this.filters.category = cat;

@@ -105,12 +105,12 @@
 
     <!-- Breadcrumb -->
     <div class="bg-gray-50 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 py-3 print:hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-sm text-gray-500">
-        <a routerLink="/" class="hover:text-blue-600 transition-colors">Home</a>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        <a routerLink="/cars" class="hover:text-blue-600 transition-colors">Cars</a>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        <span class="text-gray-800 font-medium">{{ vehicle()!.make }} {{ vehicle()!.model }}</span>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-sm text-gray-600 dark:text-slate-400">
+        <a routerLink="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Home</a>
+        <svg class="w-4 h-4 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <a routerLink="/cars" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Cars</a>
+        <svg class="w-4 h-4 shrink-0 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-gray-900 dark:text-white font-medium truncate">{{ vehicle()!.make }} {{ vehicle()!.model }}</span>
       </div>
     </div>
 
@@ -122,7 +122,7 @@
           <!-- Image Gallery -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 mb-6 print:shadow-none print:border-gray-300">
             <!-- Main Image -->
-            <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
+            <div class="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-slate-900">
               <img
                 [src]="vehicle()!.images[selectedImageIndex()]"
                 [alt]="vehicle()!.make + ' ' + vehicle()!.model"
@@ -182,7 +182,7 @@
 
           <!-- Tabs -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden print:shadow-none print:border-gray-300 print:hidden">
-            <div class="flex border-b border-gray-100">
+            <div class="flex border-b border-gray-200 dark:border-slate-600">
               @for (tab of [
                 {key: 'overview', label: 'Overview'},
                 {key: 'features', label: 'Features & Equipment'},
@@ -190,12 +190,12 @@
               ]; track tab.key) {
                 <button
                   (click)="activeTab.set($any(tab.key))"
-                  class="flex-1 py-3.5 px-4 text-sm font-medium transition-all border-b-2"
-                  [class.border-blue-600]="activeTab() === tab.key"
-                  [class.text-blue-600]="activeTab() === tab.key"
-                  [class.border-transparent]="activeTab() !== tab.key"
-                  [class.text-gray-500]="activeTab() !== tab.key"
-                  [class.hover:text-gray-700]="activeTab() !== tab.key"
+                  type="button"
+                  [ngClass]="
+                    activeTab() === tab.key
+                      ? 'flex-1 py-3.5 px-3 sm:px-4 text-sm font-semibold transition-colors border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-300'
+                      : 'flex-1 py-3.5 px-3 sm:px-4 text-sm font-medium transition-colors border-b-2 border-transparent text-gray-600 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white'
+                  "
                 >
                   {{ tab.label }}
                 </button>
@@ -204,87 +204,87 @@
             <div class="p-6">
               @if (activeTab() === 'overview') {
                 <div>
-                  <h2 class="text-xl font-bold text-gray-900 mb-4">{{ vehicle()!.make }} {{ vehicle()!.model }} {{ vehicle()!.derivative }}</h2>
-                  <p class="text-gray-600 leading-relaxed mb-6">{{ vehicle()!.description }}</p>
+                  <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ vehicle()!.make }} {{ vehicle()!.model }} {{ vehicle()!.derivative }}</h2>
+                  <p class="text-gray-600 dark:text-slate-300 leading-relaxed mb-6">{{ vehicle()!.description }}</p>
                   <!-- Specs Grid -->
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Year</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.year }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Year</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.year }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Mileage</p>
-                      <p class="font-semibold text-gray-900">{{ formatMileage(vehicle()!.mileage) }} miles</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Mileage</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ formatMileage(vehicle()!.mileage) }} miles</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Transmission</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.transmission }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Transmission</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.transmission }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Fuel Type</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.fuelType }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Fuel Type</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.fuelType }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Engine Size</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.engineSize }}L</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Engine Size</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.engineSize }}L</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Doors</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.doors }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Doors</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.doors }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Colour</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.colour }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Colour</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.colour }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Body Type</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.bodyType }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Body Type</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.bodyType }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Prev. Owners</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.previousOwners }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Prev. Owners</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.previousOwners }}</p>
                     </div>
                     @if (vehicle()!.bhp) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                        <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">BHP</p>
-                        <p class="font-semibold text-gray-900">{{ vehicle()!.bhp }} bhp</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">BHP</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.bhp }} bhp</p>
                       </div>
                     }
                     @if (vehicle()!.mpg) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                        <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">MPG</p>
-                        <p class="font-semibold text-gray-900">{{ vehicle()!.mpg }} mpg</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MPG</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.mpg }} mpg</p>
                       </div>
                     }
                     @if (vehicle()!.co2Emissions) {
                       <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                        <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">CO2</p>
-                        <p class="font-semibold text-gray-900">{{ vehicle()!.co2Emissions }}g/km</p>
+                        <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">CO2</p>
+                        <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.co2Emissions }}g/km</p>
                       </div>
                     }
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Service History</p>
-                      <p class="font-semibold text-green-600">{{ vehicle()!.serviceHistory }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">Service History</p>
+                      <p class="font-semibold text-green-600 dark:text-green-400">{{ vehicle()!.serviceHistory }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
-                      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">MOT Expiry</p>
-                      <p class="font-semibold text-gray-900">{{ vehicle()!.motExpiry }}</p>
+                      <p class="text-xs text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-1">MOT Expiry</p>
+                      <p class="font-semibold text-gray-900 dark:text-white">{{ vehicle()!.motExpiry }}</p>
                     </div>
                   </div>
                 </div>
               }
               @if (activeTab() === 'features') {
                 <div>
-                  <h3 class="font-bold text-gray-900 mb-4">Standard Equipment & Features</h3>
+                  <h3 class="font-bold text-gray-900 dark:text-white mb-4">Standard Equipment & Features</h3>
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     @for (feature of vehicle()!.features; track feature) {
-                      <div class="flex items-center gap-2.5 py-2 border-b border-gray-50 last:border-0">
-                        <div class="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                          <svg class="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div class="flex items-center gap-2.5 py-2 border-b border-gray-100 dark:border-slate-600 last:border-0">
+                        <div class="w-5 h-5 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg class="w-3 h-3 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
                           </svg>
                         </div>
-                        <span class="text-sm text-gray-700">{{ feature }}</span>
+                        <span class="text-sm text-gray-700 dark:text-slate-200">{{ feature }}</span>
                       </div>
                     }
                   </div>
@@ -292,22 +292,22 @@
               }
               @if (activeTab() === 'finance') {
                 <div>
-                  <h3 class="font-bold text-gray-900 mb-4">Finance This Vehicle</h3>
-                  <p class="text-gray-600 text-sm mb-6">We offer competitive finance packages through our FCA-registered dealership. Subject to status and credit approval.</p>
+                  <h3 class="font-bold text-gray-900 dark:text-white mb-4">Finance This Vehicle</h3>
+                  <p class="text-gray-600 dark:text-slate-300 text-sm mb-6">We offer competitive finance packages through our FCA-registered dealership. Subject to status and credit approval.</p>
                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                    <div class="text-center bg-blue-50 rounded-xl p-4">
-                      <p class="text-2xl font-bold text-blue-600">{{ formatPrice(vehicle()!.price) }}</p>
-                      <p class="text-xs text-gray-500 mt-1">Cash Price</p>
+                    <div class="text-center bg-blue-50 dark:bg-blue-950/40 rounded-xl p-4 border border-blue-100/80 dark:border-blue-800/50">
+                      <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ formatPrice(vehicle()!.price) }}</p>
+                      <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">Cash Price</p>
                     </div>
                     @if (vehicle()!.monthlyPrice) {
-                      <div class="text-center bg-green-50 rounded-xl p-4">
-                        <p class="text-2xl font-bold text-green-600">{{ formatPrice(vehicle()!.monthlyPrice!) }}/mo</p>
-                        <p class="text-xs text-gray-500 mt-1">From (subject to credit)</p>
+                      <div class="text-center bg-green-50 dark:bg-green-950/35 rounded-xl p-4 border border-green-100/80 dark:border-green-800/50">
+                        <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ formatPrice(vehicle()!.monthlyPrice!) }}/mo</p>
+                        <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">From (subject to credit)</p>
                       </div>
                     }
-                    <div class="text-center bg-orange-50 rounded-xl p-4">
-                      <p class="text-2xl font-bold text-orange-500">0%</p>
-                      <p class="text-xs text-gray-500 mt-1">Deposit Options Available</p>
+                    <div class="text-center bg-orange-50 dark:bg-orange-950/30 rounded-xl p-4 border border-orange-100/80 dark:border-orange-900/40">
+                      <p class="text-2xl font-bold text-orange-500 dark:text-orange-400">0%</p>
+                      <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">Deposit Options Available</p>
                     </div>
                   </div>
                   <a routerLink="/finance" class="btn-primary w-full justify-center">Explore Finance Options</a>
@@ -323,53 +323,53 @@
           <!-- Price Card -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
             <div class="mb-5">
-              <h1 class="text-xl font-bold text-gray-900 mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
-              <p class="text-gray-500 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
+              <p class="text-gray-600 dark:text-slate-400 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
             </div>
             <div class="mb-5">
-              <p class="text-3xl font-bold text-gray-900">{{ formatPrice(vehicle()!.price) }}</p>
+              <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatPrice(vehicle()!.price) }}</p>
               @if (vehicle()!.monthlyPrice) {
-                <p class="text-sm text-gray-500 mt-1">or from <span class="font-semibold text-green-600">{{ formatPrice(vehicle()!.monthlyPrice!) }}/month</span></p>
+                <p class="text-sm text-gray-600 dark:text-slate-400 mt-1">or from <span class="font-semibold text-green-600 dark:text-green-400">{{ formatPrice(vehicle()!.monthlyPrice!) }}/month</span></p>
               }
             </div>
 
             <!-- Key Details -->
             <div class="grid grid-cols-2 gap-2 mb-5">
-              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
-                <p class="text-xs text-gray-400 mb-0.5">Mileage</p>
-                <p class="font-semibold text-gray-800 text-sm">{{ formatMileage(vehicle()!.mileage) }}</p>
+              <div class="text-center bg-gray-50 dark:bg-slate-900/90 rounded-xl py-3 px-2 ring-1 ring-gray-100/80 dark:ring-slate-600/60">
+                <p class="text-xs font-medium text-gray-600 dark:text-slate-400 mb-0.5">Mileage</p>
+                <p class="font-semibold text-gray-900 dark:text-white text-sm tabular-nums">{{ formatMileage(vehicle()!.mileage) }}</p>
               </div>
-              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
-                <p class="text-xs text-gray-400 mb-0.5">Year</p>
-                <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.year }}</p>
+              <div class="text-center bg-gray-50 dark:bg-slate-900/90 rounded-xl py-3 px-2 ring-1 ring-gray-100/80 dark:ring-slate-600/60">
+                <p class="text-xs font-medium text-gray-600 dark:text-slate-400 mb-0.5">Year</p>
+                <p class="font-semibold text-gray-900 dark:text-white text-sm tabular-nums">{{ vehicle()!.year }}</p>
               </div>
-              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
-                <p class="text-xs text-gray-400 mb-0.5">Fuel</p>
-                <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.fuelType }}</p>
+              <div class="text-center bg-gray-50 dark:bg-slate-900/90 rounded-xl py-3 px-2 ring-1 ring-gray-100/80 dark:ring-slate-600/60">
+                <p class="text-xs font-medium text-gray-600 dark:text-slate-400 mb-0.5">Fuel</p>
+                <p class="font-semibold text-gray-900 dark:text-white text-sm">{{ vehicle()!.fuelType }}</p>
               </div>
-              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
-                <p class="text-xs text-gray-400 mb-0.5">Gearbox</p>
-                <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.transmission }}</p>
+              <div class="text-center bg-gray-50 dark:bg-slate-900/90 rounded-xl py-3 px-2 ring-1 ring-gray-100/80 dark:ring-slate-600/60">
+                <p class="text-xs font-medium text-gray-600 dark:text-slate-400 mb-0.5">Gearbox</p>
+                <p class="font-semibold text-gray-900 dark:text-white text-sm">{{ vehicle()!.transmission }}</p>
               </div>
             </div>
 
-            <!-- Print / Share / Part exchange -->
-            <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-2 mb-4 print:hidden">
-              <button type="button" (click)="printVehicleDetails()" class="btn-action-secondary">
+            <!-- Print / Share / Part exchange — stacked full width (no cramped 3-col layout) -->
+            <div class="flex flex-col gap-2 mb-4 print:hidden">
+              <button type="button" (click)="printVehicleDetails()" class="btn-action-secondary" title="Print vehicle details">
                 <span class="btn-action-icon-wrap" aria-hidden="true">
-                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 </span>
                 Print details
               </button>
-              <button type="button" (click)="shareVehicle()" class="btn-action-secondary">
+              <button type="button" (click)="shareVehicle()" class="btn-action-secondary" title="Share this vehicle">
                 <span class="btn-action-icon-wrap" aria-hidden="true">
-                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                 </span>
                 Share
               </button>
-              <button type="button" (click)="openPartExchange()" class="btn-action-accent">
+              <button type="button" (click)="openPartExchange()" class="btn-action-accent" title="Part exchange your current car">
                 <span class="btn-action-icon-wrap" aria-hidden="true">
-                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
                 </span>
                 Part exchange
               </button>
@@ -407,26 +407,26 @@
             </div>
 
             <!-- Warranty Badge -->
-            <div class="flex items-center gap-2.5 bg-green-50 rounded-xl p-3">
-              <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center gap-2.5 bg-green-50 dark:bg-green-950/35 rounded-xl p-3 border border-green-100/80 dark:border-green-800/50">
+              <svg class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
-              <p class="text-sm text-green-700 font-medium">Includes DriveLine Warranty</p>
+              <p class="text-sm text-green-800 dark:text-green-300 font-medium">Includes DriveLine Warranty</p>
             </div>
           </div>
 
           <!-- Enquiry Form -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 relative z-10 print:hidden">
-            <h3 class="font-bold text-gray-900 mb-4 text-lg">Enquire About This Vehicle</h3>
+            <h3 class="font-bold text-gray-900 dark:text-white mb-4 text-lg">Enquire About This Vehicle</h3>
             @if (enquirySent()) {
               <div class="text-center py-6">
-                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-12 h-12 bg-green-100 dark:bg-green-900/40 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                   </svg>
                 </div>
-                <p class="font-semibold text-gray-900 mb-1">Enquiry Sent!</p>
-                <p class="text-sm text-gray-500">We'll be in touch shortly.</p>
+                <p class="font-semibold text-gray-900 dark:text-white mb-1">Enquiry Sent!</p>
+                <p class="text-sm text-gray-600 dark:text-slate-400">We'll be in touch shortly.</p>
               </div>
             } @else {
               <form (ngSubmit)="submitEnquiry()" class="space-y-3">
@@ -459,7 +459,7 @@
                 </div>
                 <label class="flex items-start gap-2.5 cursor-pointer">
                   <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-blue-600">
-                  <span class="text-xs text-gray-500">Keep me updated with latest news and offers</span>
+                  <span class="text-xs text-gray-600 dark:text-slate-400">Keep me updated with latest news and offers</span>
                 </label>
                 <button
                   type="submit"
@@ -533,8 +533,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
       </div>
-      <h2 class="text-xl font-bold text-gray-800 mb-2">Vehicle Not Found</h2>
-      <p class="text-gray-500 mb-6">This vehicle may no longer be available.</p>
+      <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Vehicle Not Found</h2>
+      <p class="text-gray-600 dark:text-slate-400 mb-6">This vehicle may no longer be available.</p>
       <a routerLink="/cars" class="btn-primary">Browse All Cars</a>
     </div>
   </div>
