@@ -4,27 +4,36 @@
     'trusted-partners--dark': variant() === 'dark',
     'trusted-partners--light': variant() === 'light',
   }"
-  aria-label="Trusted finance partners"
+  aria-label="Our trusted finance partners"
 >
-  <p
-    class="text-center text-xs uppercase tracking-[0.2em] font-semibold mb-8"
+  <h2
+    class="text-center text-sm uppercase tracking-[0.18em] font-semibold mb-8"
     [ngClass]="{
-      'text-gray-500': variant() === 'dark',
+      'text-gray-400': variant() === 'dark',
       'text-gray-600 dark:text-gray-400': variant() === 'light',
     }"
   >
-    Proud to work with
-  </p>
-  <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 list-none m-0 p-0">
-    @for (p of partners; track p.name) {
-      <li>
+    Our Trusted Partners
+  </h2>
+  <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-8 list-none m-0 p-0">
+    @for (p of partners; track p.id) {
+      <li class="flex items-center">
         <a
           [href]="p.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="trusted-partners__link block text-center text-sm font-semibold tracking-tight transition-colors duration-200 max-w-[11rem] leading-snug"
+          class="trusted-partners__card block rounded-lg bg-white px-3 py-2 shadow-sm ring-1 ring-black/5 transition hover:ring-black/10 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          [attr.aria-label]="p.name + ' (opens in new tab)'"
         >
-          {{ p.name }}
+          <img
+            [src]="p.logoSrc"
+            [alt]="p.name"
+            class="trusted-partners__logo h-10 sm:h-11 w-auto max-w-[min(200px,42vw)] object-contain object-center"
+            width="200"
+            height="44"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
       </li>
     }

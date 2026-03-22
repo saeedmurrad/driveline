@@ -2,26 +2,14 @@
   display: block;
 }
 
-.trusted-partners--dark .trusted-partners__link {
-  color: rgb(209 213 219);
+/* Dark footer band: subtle lift for white logo cards */
+.trusted-partners--dark .trusted-partners__card {
+  background-color: rgb(255 255 255);
 }
 
-.trusted-partners--dark .trusted-partners__link:hover {
-  color: white;
-}
-
-.trusted-partners--light .trusted-partners__link {
-  color: rgb(55 65 81);
-}
-
-.trusted-partners--light .trusted-partners__link:hover {
-  color: rgb(37 99 235);
-}
-
-.dark .trusted-partners--light .trusted-partners__link {
-  color: rgb(203 213 225);
-}
-
-.dark .trusted-partners--light .trusted-partners__link:hover {
-  color: rgb(96 165 250);
+.trusted-partners--light .trusted-partners__card {
+  background-color: rgb(255 255 255);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.05),
+    0 1px 3px rgb(0 0 0 / 0.08);
 }

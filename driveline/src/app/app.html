@@ -2,6 +2,13 @@
 <main class="min-h-screen pt-16 md:pt-20 dark:bg-slate-950 dark:text-gray-100 print:min-h-0 print:h-auto print:pt-0">
   <router-outlet></router-outlet>
 </main>
+<!-- Trusted partners sit above the footer (not inside it), Fengate-style -->
+<section
+  class="border-t border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-900 print:hidden"
+  aria-label="Finance partners"
+>
+  <app-trusted-partners variant="light" />
+</section>
 <app-footer class="print:hidden"></app-footer>
 <app-cookie-banner class="print:hidden"></app-cookie-banner>
 

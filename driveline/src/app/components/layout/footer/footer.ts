@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BUSINESS_INFO } from '../../../data/reviews.data';
-import { TrustedPartnersComponent } from '../trusted-partners/trusted-partners';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, TrustedPartnersComponent],
+  imports: [RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })

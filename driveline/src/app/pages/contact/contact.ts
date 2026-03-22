@@ -3,13 +3,12 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { BUSINESS_INFO } from '../../data/reviews.data';
-import { TrustedPartnersComponent } from '../../components/layout/trusted-partners/trusted-partners';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 
 @Component({
   selector: 'app-contact',
-  imports: [RouterLink, FormsModule, TrustedPartnersComponent],
+  imports: [RouterLink, FormsModule],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })

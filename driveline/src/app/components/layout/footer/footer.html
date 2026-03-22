@@ -111,11 +111,6 @@
     </div>
   </div>
 
-  <!-- Finance partners (Fengate-style strip) -->
-  <div class="border-t border-gray-800 bg-gray-900/80">
-    <app-trusted-partners variant="dark" />
-  </div>
-
   <!-- Address, legal, cards (Fengate-style bottom block) -->
   <div class="border-t border-gray-800 bg-gray-950">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -159,9 +154,34 @@
             }
           </nav>
           <div class="flex flex-wrap items-center gap-3 lg:justify-end" aria-label="Card payment methods we accept">
-            <img src="payment/visa.svg" width="48" height="22" class="h-[22px] w-auto rounded" alt="Visa" />
-            <img src="payment/mastercard.svg" width="36" height="24" class="h-6 w-auto rounded" alt="Mastercard" />
-            <img src="payment/amex.svg" width="52" height="22" class="h-[22px] w-auto rounded" alt="American Express" />
+            <!-- Same 48×32 assets as fengatecarsales.co.uk footer -->
+            <img
+              src="payment/visa.svg"
+              alt="Visa"
+              class="h-8 w-auto rounded object-contain shrink-0"
+              width="48"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="payment/mastercard.svg"
+              alt="Mastercard"
+              class="h-8 w-auto rounded object-contain shrink-0"
+              width="48"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="payment/amex.svg"
+              alt="American Express"
+              class="h-8 w-auto rounded object-contain shrink-0"
+              width="48"
+              height="32"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
