@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>
+    try {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (_) {}
+  </script>
   <title>DriveLine - Quality Used Cars & Vans</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">

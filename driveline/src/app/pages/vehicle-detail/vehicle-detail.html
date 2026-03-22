@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <div class="veh-print-specs grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-2 px-2 py-2 border-x border-b border-gray-200 bg-gray-50">
+      <div class="veh-print-specs grid grid-cols-4 md:grid-cols-8 gap-x-1 gap-y-2 px-2 py-2 border-x border-b border-gray-200 dark:border-slate-600 bg-gray-50 dark:bg-slate-900">
         @for (spec of getPrintSpecItems(); track spec.label) {
           <div class="text-center px-0.5 break-inside-avoid">
             <p class="text-[7px] text-gray-500 uppercase tracking-wide m-0 leading-tight">{{ spec.label }}</p>
@@ -104,7 +104,7 @@
     </div>
 
     <!-- Breadcrumb -->
-    <div class="bg-gray-50 border-b border-gray-100 py-3 print:hidden">
+    <div class="bg-gray-50 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800 py-3 print:hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-sm text-gray-500">
         <a routerLink="/" class="hover:text-blue-600 transition-colors">Home</a>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -120,7 +120,7 @@
         <!-- Left Column: Gallery + Details -->
         <div class="lg:col-span-2">
           <!-- Image Gallery -->
-          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 mb-6 print:shadow-none print:border-gray-300">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 mb-6 print:shadow-none print:border-gray-300">
             <!-- Main Image -->
             <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
               <img
@@ -181,7 +181,7 @@
           </div>
 
           <!-- Tabs -->
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden print:shadow-none print:border-gray-300 print:hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden print:shadow-none print:border-gray-300 print:hidden">
             <div class="flex border-b border-gray-100">
               @for (tab of [
                 {key: 'overview', label: 'Overview'},
@@ -208,65 +208,65 @@
                   <p class="text-gray-600 leading-relaxed mb-6">{{ vehicle()!.description }}</p>
                   <!-- Specs Grid -->
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Year</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.year }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Mileage</p>
                       <p class="font-semibold text-gray-900">{{ formatMileage(vehicle()!.mileage) }} miles</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Transmission</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.transmission }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Fuel Type</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.fuelType }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Engine Size</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.engineSize }}L</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Doors</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.doors }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Colour</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.colour }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Body Type</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.bodyType }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Prev. Owners</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.previousOwners }}</p>
                     </div>
                     @if (vehicle()!.bhp) {
-                      <div class="bg-gray-50 rounded-xl p-4">
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                         <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">BHP</p>
                         <p class="font-semibold text-gray-900">{{ vehicle()!.bhp }} bhp</p>
                       </div>
                     }
                     @if (vehicle()!.mpg) {
-                      <div class="bg-gray-50 rounded-xl p-4">
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                         <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">MPG</p>
                         <p class="font-semibold text-gray-900">{{ vehicle()!.mpg }} mpg</p>
                       </div>
                     }
                     @if (vehicle()!.co2Emissions) {
-                      <div class="bg-gray-50 rounded-xl p-4">
+                      <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                         <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">CO2</p>
                         <p class="font-semibold text-gray-900">{{ vehicle()!.co2Emissions }}g/km</p>
                       </div>
                     }
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">Service History</p>
                       <p class="font-semibold text-green-600">{{ vehicle()!.serviceHistory }}</p>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="bg-gray-50 dark:bg-slate-900/80 rounded-xl p-4">
                       <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">MOT Expiry</p>
                       <p class="font-semibold text-gray-900">{{ vehicle()!.motExpiry }}</p>
                     </div>
@@ -321,7 +321,7 @@
         <div class="lg:col-span-1 print:hidden">
           <div class="lg:sticky lg:top-24 space-y-4">
           <!-- Price Card -->
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6">
             <div class="mb-5">
               <h1 class="text-xl font-bold text-gray-900 mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
               <p class="text-gray-500 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
@@ -335,43 +335,55 @@
 
             <!-- Key Details -->
             <div class="grid grid-cols-2 gap-2 mb-5">
-              <div class="text-center bg-gray-50 rounded-xl py-3 px-2">
+              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
                 <p class="text-xs text-gray-400 mb-0.5">Mileage</p>
                 <p class="font-semibold text-gray-800 text-sm">{{ formatMileage(vehicle()!.mileage) }}</p>
               </div>
-              <div class="text-center bg-gray-50 rounded-xl py-3 px-2">
+              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
                 <p class="text-xs text-gray-400 mb-0.5">Year</p>
                 <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.year }}</p>
               </div>
-              <div class="text-center bg-gray-50 rounded-xl py-3 px-2">
+              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
                 <p class="text-xs text-gray-400 mb-0.5">Fuel</p>
                 <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.fuelType }}</p>
               </div>
-              <div class="text-center bg-gray-50 rounded-xl py-3 px-2">
+              <div class="text-center bg-gray-50 dark:bg-slate-900/80 rounded-xl py-3 px-2">
                 <p class="text-xs text-gray-400 mb-0.5">Gearbox</p>
                 <p class="font-semibold text-gray-800 text-sm">{{ vehicle()!.transmission }}</p>
               </div>
             </div>
 
             <!-- Print / Share / Part exchange -->
-            <div class="flex flex-wrap gap-2 mb-4 print:hidden">
-              <button type="button" (click)="printVehicleDetails()" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-2 mb-4 print:hidden">
+              <button type="button" (click)="printVehicleDetails()" class="btn-action-secondary">
+                <span class="btn-action-icon-wrap" aria-hidden="true">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                </span>
                 Print details
               </button>
-              <button type="button" (click)="shareVehicle()" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+              <button type="button" (click)="shareVehicle()" class="btn-action-secondary">
+                <span class="btn-action-icon-wrap" aria-hidden="true">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                </span>
                 Share
               </button>
-              <button type="button" (click)="openPartExchange()" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-sm font-medium rounded-lg border border-blue-200 bg-blue-50 text-blue-800 hover:bg-blue-100 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <button type="button" (click)="openPartExchange()" class="btn-action-accent">
+                <span class="btn-action-icon-wrap" aria-hidden="true">
+                  <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                </span>
                 Part exchange
               </button>
             </div>
             @if (shareFeedback() !== 'idle') {
-              <p class="text-xs text-green-600 mb-3 print:hidden" role="status">
-                @if (shareFeedback() === 'copied') { Link copied to clipboard }
-                @if (shareFeedback() === 'shared') { Thanks for sharing }
+              <p class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 mb-3 print:hidden ring-1 ring-emerald-200/80 dark:ring-emerald-800/60" role="status">
+                @if (shareFeedback() === 'copied') {
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Link copied
+                }
+                @if (shareFeedback() === 'shared') {
+                  <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47A3 3 0 1015 16V8z"/></svg>
+                  Thanks for sharing
+                }
               </p>
             }
 
@@ -404,7 +416,7 @@
           </div>
 
           <!-- Enquiry Form -->
-          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 relative z-10 print:hidden">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 relative z-10 print:hidden">
             <h3 class="font-bold text-gray-900 mb-4 text-lg">Enquire About This Vehicle</h3>
             @if (enquirySent()) {
               <div class="text-center py-6">
@@ -482,16 +494,24 @@
           (click)="closePartExchange()"
           role="presentation"
         ></div>
-        <div class="relative bg-white w-full sm:max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-xl border border-gray-100 z-[61] flex flex-col">
-          <div class="sticky top-0 z-10 flex items-center justify-between gap-2 px-4 py-3 border-b border-gray-100 bg-white rounded-t-2xl sm:rounded-t-2xl">
-            <h2 id="part-exchange-title" class="font-bold text-gray-900 text-lg">Part exchange</h2>
+        <div class="relative bg-white dark:bg-slate-800 w-full sm:max-w-2xl sm:max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl shadow-2xl shadow-slate-900/20 border border-gray-100/80 dark:border-slate-700 z-[61] flex flex-col">
+          <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-4 py-4 sm:px-5 border-b border-gray-100/90 dark:border-slate-700 bg-gradient-to-r from-slate-50/95 via-white to-slate-50/80 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900/90 rounded-t-3xl sm:rounded-t-3xl">
+            <div class="flex min-w-0 items-center gap-3">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-white/20" aria-hidden="true">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              </span>
+              <div class="min-w-0">
+                <h2 id="part-exchange-title" class="font-bold text-gray-900 dark:text-white text-lg leading-tight tracking-tight">Part exchange</h2>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Get a valuation on your current car</p>
+              </div>
+            </div>
             <button
               type="button"
               (click)="closePartExchange()"
-              class="p-2 rounded-lg hover:bg-gray-100 text-gray-600 text-2xl leading-none w-10 h-10 flex items-center justify-center"
-              aria-label="Close"
+              class="btn-modal-close dark:focus-visible:ring-offset-slate-800"
+              aria-label="Close part exchange"
             >
-              ×
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
           </div>
           <div class="p-2 sm:p-4 overflow-y-auto">

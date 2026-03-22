@@ -36,35 +36,35 @@
   <div class="p-5">
     <!-- Title -->
     <div class="mb-3">
-      <h3 class="font-bold text-gray-900 text-lg leading-tight group-hover:text-blue-600 transition-colors">
+      <h3 class="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
         {{ vehicle.make }} {{ vehicle.model }}
       </h3>
-      <p class="text-gray-500 text-sm mt-0.5">{{ vehicle.derivative }}</p>
+      <p class="text-gray-500 dark:text-gray-400 text-sm mt-0.5">{{ vehicle.derivative }}</p>
     </div>
 
     <!-- Specs Grid -->
     <div class="grid grid-cols-2 gap-2 mb-4">
-      <div class="flex items-center gap-2 text-sm text-gray-600">
-        <div class="w-7 h-7 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
-          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+        <div class="w-7 h-7 bg-gray-50 dark:bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </div>
         <span class="truncate">{{ formatMileage(vehicle.mileage) }}</span>
       </div>
 
-      <div class="flex items-center gap-2 text-sm text-gray-600">
-        <div class="w-7 h-7 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
-          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+        <div class="w-7 h-7 bg-gray-50 dark:bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
           </svg>
         </div>
         <span class="truncate">{{ vehicle.engineSize }}L</span>
       </div>
 
-      <div class="flex items-center gap-2 text-sm text-gray-600">
-        <div class="w-7 h-7 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0">
-          <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+        <div class="w-7 h-7 bg-gray-50 dark:bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
           </svg>
@@ -72,8 +72,8 @@
         <span class="truncate">{{ vehicle.transmission }}</span>
       </div>
 
-      <div class="flex items-center gap-2 text-sm text-gray-600">
-        <div class="w-7 h-7 bg-gray-50 rounded-lg flex items-center justify-center flex-shrink-0 text-xs">
+      <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+        <div class="w-7 h-7 bg-gray-50 dark:bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0 text-xs">
           {{ getFuelIcon(vehicle.fuelType) }}
         </div>
         <span class="truncate">{{ vehicle.fuelType }}</span>
@@ -90,16 +90,16 @@
     </div>
 
     <!-- CTA -->
-    <div class="flex items-center gap-2 pt-3 border-t border-gray-100">
+    <div class="flex items-center gap-2 pt-3 border-t border-gray-100 dark:border-slate-700">
       <button
         [routerLink]="['/vehicle', vehicle.id]"
-        class="flex-1 text-center py-2.5 bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white font-semibold text-sm rounded-xl transition-all duration-200"
+        class="flex-1 text-center py-2.5 bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-600 dark:hover:text-white font-semibold text-sm rounded-xl transition-all duration-200"
       >
         View Details
       </button>
       <a
         href="tel:01733563559"
-        class="w-10 h-10 flex items-center justify-center bg-gray-50 hover:bg-green-50 text-gray-500 hover:text-green-600 rounded-xl transition-all duration-200"
+        class="w-10 h-10 flex items-center justify-center bg-gray-50 hover:bg-green-50 text-gray-500 hover:text-green-600 dark:bg-slate-700 dark:hover:bg-green-950/50 dark:text-gray-400 dark:hover:text-green-400 rounded-xl transition-all duration-200"
         title="Call us"
         (click)="$event.stopPropagation()"
       >

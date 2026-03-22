@@ -17,13 +17,13 @@
     <div>
       <h2 class="section-title mb-6">Why Our Warranty is Different</h2>
       <div class="prose prose-gray max-w-none mb-8">
-        <p class="text-gray-600 leading-relaxed mb-4">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
           We understand that our customers don't want to deal with third-party warranty providers, with their restrictions, exclusions, additional admin, and long waits in call centre holding queues.
         </p>
-        <p class="text-gray-600 leading-relaxed mb-4">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
           That's why we take responsibility for ensuring the continuity of good service by offering our own in-house warranties.
         </p>
-        <p class="text-gray-600 leading-relaxed mb-8">
+        <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
           Despite extensive checks and the highest possible standards of preparation, with used cars, sometimes things can go wrong. If anything were to go wrong, just give us a call and we will quickly make a plan to have it fixed, whether you are local or further afield.
         </p>
       </div>
@@ -31,8 +31,8 @@
       <!-- Warranty Features -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
         @for (feature of warrantyFeatures; track feature.title) {
-          <div class="flex items-start gap-4 p-5 bg-gray-50 rounded-2xl">
-            <div class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center flex-shrink-0">
+          <div class="flex items-start gap-4 p-5 bg-gray-50 dark:bg-slate-900 rounded-2xl">
+            <div class="w-10 h-10 bg-white dark:bg-slate-800 rounded-xl shadow-sm flex items-center justify-center flex-shrink-0">
               @if (feature.icon === 'shield') {
                 <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
               }
@@ -47,8 +47,8 @@
               }
             </div>
             <div>
-              <h4 class="font-semibold text-gray-900 mb-1 text-sm">{{ feature.title }}</h4>
-              <p class="text-gray-500 text-sm leading-relaxed">{{ feature.description }}</p>
+              <h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-1 text-sm">{{ feature.title }}</h4>
+              <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{{ feature.description }}</p>
             </div>
           </div>
         }
@@ -56,7 +56,7 @@
 
       <!-- Process -->
       <div class="bg-blue-50 rounded-2xl p-6">
-        <h3 class="font-bold text-gray-900 mb-4">How Our Warranty Works</h3>
+        <h3 class="font-bold text-gray-900 dark:text-gray-100 mb-4">How Our Warranty Works</h3>
         <div class="space-y-4">
           @for (step of [
             {num: '1', text: 'Something goes wrong with your vehicle'},
@@ -66,7 +66,7 @@
           ]; track step.num) {
             <div class="flex items-center gap-4">
               <div class="w-8 h-8 bg-blue-600 rounded-full text-white text-sm font-bold flex items-center justify-center flex-shrink-0">{{ step.num }}</div>
-              <p class="text-gray-700 text-sm">{{ step.text }}</p>
+              <p class="text-gray-700 dark:text-gray-200 text-sm">{{ step.text }}</p>
             </div>
           }
         </div>
@@ -74,9 +74,9 @@
     </div>
 
     <!-- Right: Enquiry Form -->
-    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-      <h3 class="text-2xl font-bold text-gray-900 mb-2">Enquire About Our Warranties</h3>
-      <p class="text-gray-500 text-sm mb-6">Have a question about warranty coverage? Get in touch and we'll help.</p>
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-8">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Enquire About Our Warranties</h3>
+      <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Have a question about warranty coverage? Get in touch and we'll help.</p>
 
       @if (enquirySent()) {
         <div class="text-center py-8">
@@ -85,8 +85,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
           </div>
-          <h4 class="text-xl font-bold text-gray-900 mb-2">Enquiry Received!</h4>
-          <p class="text-gray-500">We'll be in touch shortly regarding your warranty query.</p>
+          <h4 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Enquiry Received!</h4>
+          <p class="text-gray-500 dark:text-gray-400">We'll be in touch shortly regarding your warranty query.</p>
         </div>
       } @else {
         <form (ngSubmit)="submitEnquiry()" class="space-y-4">
@@ -123,7 +123,7 @@
           </div>
           <label class="flex items-start gap-2.5 cursor-pointer">
             <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-blue-600">
-            <span class="text-sm text-gray-500">Keep me updated with latest news and offers from DriveLine</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Keep me updated with latest news and offers from DriveLine</span>
           </label>
           <button
             type="submit"

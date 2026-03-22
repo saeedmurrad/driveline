@@ -6,14 +6,11 @@
       @for (cat of categories; track cat.value) {
         <button
           (click)="setCategory(cat.value)"
-          class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
-          [class.bg-blue-600]="filters.category === cat.value"
-          [class.text-white]="filters.category === cat.value"
-          [class.shadow-lg]="filters.category === cat.value"
-          [class.shadow-blue-600/25]="filters.category === cat.value"
-          [class.bg-gray-100]="filters.category !== cat.value"
-          [class.text-gray-600]="filters.category !== cat.value"
-          [class.hover:bg-gray-200]="filters.category !== cat.value"
+          [ngClass]="
+            filters.category === cat.value
+              ? 'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 bg-blue-600 text-white shadow-lg shadow-blue-600/25 dark:bg-blue-600'
+              : 'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
+          "
         >
           {{ cat.label }}
         </button>
@@ -85,7 +82,7 @@
     <!-- Advanced Filters Toggle -->
     <button
       (click)="toggleExpanded()"
-      class="flex items-center gap-2 text-sm text-blue-600 font-medium mb-4 hover:text-blue-700 transition-colors"
+      class="flex items-center gap-2 text-sm text-blue-600 font-medium mb-4 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
     >
       <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="isExpanded()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
@@ -191,7 +188,7 @@
       </button>
       <button
         (click)="resetFilters()"
-        class="px-4 py-3.5 text-sm font-medium text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition-colors duration-200"
+        class="px-4 py-3.5 text-sm font-medium text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-white dark:bg-slate-700 dark:hover:bg-slate-600 rounded-xl transition-colors duration-200"
       >
         Reset
       </button>

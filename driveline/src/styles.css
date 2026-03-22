@@ -93,6 +93,41 @@
     @apply inline-flex items-center gap-2 bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg shadow-orange-500/25 hover:bg-orange-600 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0;
   }
 
+  /**
+   * Modern compact actions (vehicle detail: print / share / part exchange).
+   * Pair with inner span.btn-action-icon-wrap around the SVG.
+   */
+  .btn-action-secondary {
+    @apply relative inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-sm font-semibold tracking-tight text-gray-800;
+    @apply bg-gradient-to-b from-white to-gray-50/95 shadow-sm;
+    @apply ring-1 ring-gray-200/90;
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md hover:ring-gray-300 active:translate-y-0 active:shadow-sm;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2;
+  }
+
+  .btn-action-secondary .btn-action-icon-wrap {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-600 ring-1 ring-gray-200/60;
+  }
+
+  .btn-action-accent {
+    @apply relative inline-flex w-full min-h-[2.75rem] items-center justify-center gap-2.5 rounded-2xl px-3.5 py-2.5 text-sm font-semibold tracking-tight text-white;
+    @apply bg-gradient-to-br from-blue-600 via-blue-600 to-indigo-600 shadow-md shadow-blue-600/30;
+    @apply ring-1 ring-white/10 ring-inset;
+    @apply transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-600/40 hover:brightness-[1.02] active:translate-y-0 active:brightness-100;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
+  }
+
+  .btn-action-accent .btn-action-icon-wrap {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/20 backdrop-blur-sm;
+  }
+
+  /** Modal / sheet close — use with SVG X icon */
+  .btn-modal-close {
+    @apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-white text-gray-500 shadow-sm;
+    @apply transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-900 hover:shadow;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-2;
+  }
+
   /* Form elements */
   .form-input {
     @apply w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 text-sm outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 placeholder:text-gray-400;
@@ -128,6 +163,80 @@
   .fab {
     @apply fixed bottom-6 right-6 z-40 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-2xl shadow-xl shadow-green-500/30 flex items-center justify-center transition-all duration-200 hover:-translate-y-1;
   }
+
+  /* Dark mode — html.dark set by header toggle + index.html script */
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html.dark .glass {
+    @apply bg-slate-800/95 border-slate-600/40;
+  }
+
+  html.dark .card {
+    @apply bg-slate-800 border-slate-700;
+  }
+
+  html.dark .section-title {
+    @apply text-gray-100;
+  }
+
+  html.dark .section-subtitle {
+    @apply text-gray-400;
+  }
+
+  html.dark .form-input {
+    @apply border-slate-600 bg-slate-800 text-gray-100 placeholder:text-gray-500 focus:border-blue-400 focus:ring-blue-400/20;
+  }
+
+  html.dark .form-select {
+    @apply border-slate-600 bg-slate-800 text-gray-100 focus:border-blue-400 focus:ring-blue-400/20;
+  }
+
+  html.dark .form-label {
+    @apply text-gray-300;
+  }
+
+  html.dark .btn-secondary {
+    @apply bg-slate-800 text-gray-100 border-slate-600 hover:bg-slate-700;
+  }
+
+  html.dark .btn-outline {
+    @apply border-blue-400 text-blue-300 hover:bg-blue-600 hover:text-white hover:border-blue-600;
+  }
+
+  html.dark .btn-action-secondary {
+    @apply from-slate-800 to-slate-900 text-gray-100 shadow-none ring-slate-600/80 hover:ring-slate-500 hover:shadow-slate-950/40;
+  }
+
+  html.dark .btn-action-secondary .btn-action-icon-wrap {
+    @apply bg-slate-700/90 text-gray-300 ring-slate-600/80;
+  }
+
+  html.dark .btn-modal-close {
+    @apply border-slate-600 bg-slate-800 text-gray-400 hover:border-slate-500 hover:bg-slate-700 hover:text-white;
+  }
+
+  html.dark .skeleton {
+    background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+    background-size: 200% 100%;
+  }
+
+  html.dark .badge-blue {
+    @apply bg-blue-900/50 text-blue-200;
+  }
+
+  html.dark .badge-green {
+    @apply bg-green-900/40 text-green-200;
+  }
+
+  html.dark .badge-orange {
+    @apply bg-orange-900/40 text-orange-200;
+  }
+
+  html.dark .badge-gray {
+    @apply bg-slate-700 text-gray-300;
+  }
 }
 
 /* ===================== VIEW TRANSITIONS ===================== */
@@ -155,12 +264,24 @@
   background: #f1f5f9;
 }
 
+html.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 4px;
 }
 
+html.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
   background: #64748b;
 }
 

@@ -49,15 +49,17 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleDarkMode() {
-    this.isDarkMode.update((v) => !v);
-    if (isPlatformBrowser(this.platformId)) {
-      if (this.isDarkMode()) {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('darkMode', 'true');
-      } else {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('darkMode', 'false');
-      }
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const next = !this.isDarkMode();
+    this.isDarkMode.set(next);
+    if (next) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
     }
   }
 }
