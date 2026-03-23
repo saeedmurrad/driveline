@@ -1,3 +1,108 @@
 :host {
   display: block;
 }
+
+/* Soft gradient hairline under header */
+.header-glow-line {
+  position: absolute;
+  bottom: 0;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(14, 165, 233, 0.45),
+    rgba(139, 92, 246, 0.35),
+    rgba(14, 165, 233, 0.45),
+    transparent
+  );
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+html.dark .header-glow-line {
+  opacity: 0.55;
+}
+
+/* Logo mark — subtle breathing glow */
+@keyframes logoGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 30px -8px rgba(37, 99, 235, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  }
+  50% {
+    box-shadow:
+      0 14px 36px -6px rgba(56, 189, 248, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.18) inset;
+  }
+}
+
+.logo-mark {
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark {
+    animation: none;
+    box-shadow: 0 10px 28px -8px rgba(37, 99, 235, 0.4);
+  }
+}
+
+/* Desktop nav pills — track surface is Tailwind in template (reliable dark mode). */
+
+.nav-pill-link {
+  position: relative;
+  border-radius: 9999px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.nav-pill-link:hover {
+  transform: translateY(-1px);
+}
+
+.nav-pill-link.router-link-active,
+.nav-pill-link.active {
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+  color: rgb(37 99 235);
+  box-shadow:
+    0 2px 8px rgba(37, 99, 235, 0.12),
+    0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+html.dark .nav-pill-link.router-link-active,
+html.dark .nav-pill-link.active {
+  background: linear-gradient(135deg, rgb(51 65 85) 0%, rgb(30 41 59) 100%);
+  color: rgb(186 230 253);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Mobile drawer */
+.mobile-drawer {
+  animation: mobileDrawerIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes mobileDrawerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-drawer {
+    animation: none;
+  }
+}

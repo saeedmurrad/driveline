@@ -41,6 +41,7 @@ export class SearchWidgetComponent {
     maxPrice: undefined,
     minEngineSize: undefined,
     maxEngineSize: undefined,
+    doors: undefined,
   };
 
   categories = computed(() => {
@@ -75,6 +76,10 @@ export class SearchWidgetComponent {
       cleanFilters.minEngineSize = this.filters.minEngineSize;
     if (this.filters.maxEngineSize !== undefined)
       cleanFilters.maxEngineSize = this.filters.maxEngineSize;
+    if (this.filters.doors !== undefined && this.filters.doors !== null) {
+      const d = Number(this.filters.doors);
+      if (!Number.isNaN(d)) cleanFilters.doors = d;
+    }
 
     this.vehicleService.setFilters(cleanFilters);
 
@@ -89,6 +94,11 @@ export class SearchWidgetComponent {
       model: '',
       transmission: '',
       fuelType: '',
+      minPrice: undefined,
+      maxPrice: undefined,
+      minEngineSize: undefined,
+      maxEngineSize: undefined,
+      doors: undefined,
     };
     this.vehicleService.clearFilters();
   }

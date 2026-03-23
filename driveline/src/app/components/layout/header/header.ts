@@ -3,6 +3,7 @@ import {
   signal,
   inject,
   OnInit,
+  OnDestroy,
   PLATFORM_ID,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -14,11 +15,13 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
 
   isMobileMenuOpen = signal(false);
   isDarkMode = signal(false);
+  /** Stronger shadow + border after scroll (desktop + mobile) */
+  headerScrolled = signal(false);
 
   navItems = [
     { label: 'Cars', route: '/cars' },
@@ -30,6 +33,8 @@ export class HeaderComponent implements OnInit {
     { label: 'Contact', route: '/contact' },
   ];
 
+  private scrollCleanup: (() => void) | null = null;
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const stored = localStorage.getItem('darkMode');
@@ -37,7 +42,20 @@ export class HeaderComponent implements OnInit {
         this.isDarkMode.set(true);
         document.documentElement.classList.add('dark');
       }
+
+      const onScroll = () => {
+        this.headerScrolled.set(window.scrollY > 12);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      this.scrollCleanup = () =>
+        window.removeEventListener('scroll', onScroll);
     }
+  }
+
+  ngOnDestroy() {
+    this.scrollCleanup?.();
+    this.scrollCleanup = null;
   }
 
   toggleMobileMenu() {

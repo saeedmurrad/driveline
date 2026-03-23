@@ -10,7 +10,7 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
@@ -29,6 +29,7 @@ export class VehicleDetailComponent implements OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private web3 = inject(Web3FormsEnquiryService);
   private destroyRef = inject(DestroyRef);
+  private viewportScroller = inject(ViewportScroller);
 
   vehicle = signal<Vehicle | undefined>(undefined);
   selectedImageIndex = signal(0);
@@ -76,6 +77,10 @@ export class VehicleDetailComponent implements OnDestroy {
         this.vehicle.set(undefined);
       }
       this.startGalleryAutoplay();
+      // Same component can be reused when switching vehicles — ensure we’re at the top
+      if (isPlatformBrowser(this.platformId)) {
+        requestAnimationFrame(() => this.viewportScroller.scrollToPosition([0, 0]));
+      }
     });
   }
 

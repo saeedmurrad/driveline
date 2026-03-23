@@ -1,7 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Fonts are loaded via <link> in index.html */
+/* Fonts: Plus Jakarta Sans (body) + Poppins (display) — index.html */
+
+/* ===================== DESIGN TOKENS & BASE ===================== */
+@layer base {
+  :root {
+    --dl-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dl-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --dl-surface: #fafaf9;
+    --dl-ink: #1c1917;
+    --dl-accent: #0ea5e9;
+    --dl-accent-deep: #0369a1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply antialiased text-stone-800 bg-stone-50;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+  }
+
+  html.dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+}
 
 /* ===================== ANIMATIONS ===================== */
 @keyframes fadeIn {
@@ -29,9 +60,110 @@
   to { opacity: 0; }
 }
 
+@keyframes heroGradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes heroOrbFloat {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(12px, -18px) scale(1.03);
+  }
+  66% {
+    transform: translate(-10px, 10px) scale(0.98);
+  }
+}
+
+@keyframes heroOrbFloatSlow {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-16px, 12px);
+  }
+}
+
 .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
-.animate-slide-up { animation: slideUp 0.4s ease-out; }
-.animate-slide-down { animation: slideDown 0.3s ease-out; }
+.animate-slide-up { animation: slideUp 0.4s var(--dl-ease-out); }
+.animate-slide-down { animation: slideDown 0.3s var(--dl-ease-out); }
+
+/* Scroll reveal (used with appReveal directive) — obvious on scroll */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(2.25rem) scale(0.98);
+  filter: blur(4px);
+  transition:
+    opacity 0.75s var(--dl-ease-out),
+    transform 0.75s var(--dl-ease-out),
+    filter 0.75s var(--dl-ease-out);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.hero-gradient-animated {
+  background: linear-gradient(
+    125deg,
+    #0c1222 0%,
+    #132447 28%,
+    #1e3a6f 52%,
+    #0f2847 78%,
+    #0c1222 100%
+  );
+  background-size: 220% 220%;
+  animation: heroGradientShift 12s ease-in-out infinite;
+}
+
+.hero-orb {
+  will-change: transform;
+  animation: heroOrbFloat 14s ease-in-out infinite;
+}
+
+.hero-orb--slow {
+  animation: heroOrbFloatSlow 20s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .hero-gradient-animated {
+    animation: none;
+    background-size: 100% 100%;
+  }
+
+  .hero-orb,
+  .hero-orb--slow {
+    animation: none;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-slide-down {
+    animation: none;
+  }
+
+  .skeleton {
+    animation: none;
+  }
+}
 
 /* ===================== COMPONENTS ===================== */
 @layer components {
@@ -40,14 +172,14 @@
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #2563eb 0%, #f97316 100%);
+    background: linear-gradient(120deg, #38bdf8 0%, #0ea5e9 35%, #a78bfa 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .hero-gradient {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 40%, #1e40af 70%, #0f172a 100%);
+    background: linear-gradient(125deg, #0c1222 0%, #1e3a6f 45%, #172554 100%);
   }
 
   .glass {
@@ -55,16 +187,39 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-shadow duration-300;
+    @apply bg-white rounded-2xl shadow-sm border border-stone-200/80 overflow-hidden transition-all duration-300;
+    transition-timing-function: var(--dl-ease-out);
   }
 
   .card:hover {
-    @apply shadow-xl;
+    @apply shadow-xl border-stone-200 shadow-blue-900/5;
+  }
+
+  @media (min-width: 768px) {
+    .card:hover {
+      @apply -translate-y-0.5;
+    }
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900;
+    @apply text-3xl md:text-4xl font-bold text-gray-900 tracking-tight;
     font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  /** Gradient accent bar under section headings — easy to spot vs plain dealer sites */
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 0.3rem;
+    margin-top: 0.85rem;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #0ea5e9, #8b5cf6, #f97316);
+  }
+
+  .text-center .section-title::after {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .section-subtitle {
@@ -72,7 +227,7 @@
   }
 
   .page-header {
-    background: linear-gradient(135deg, #111827 0%, #1e3a8a 100%);
+    background: linear-gradient(125deg, #0c1222 0%, #1e3a6f 55%, #172554 100%);
     @apply text-white py-16 px-4;
   }
 
@@ -172,11 +327,20 @@
   }
 
   html.dark .card {
-    @apply bg-slate-800 border-slate-700;
+    @apply bg-slate-800 border-slate-600/80;
+  }
+
+  html.dark .card:hover {
+    @apply border-slate-500 shadow-xl shadow-black/30;
   }
 
   html.dark .section-title {
     @apply text-gray-100;
+  }
+
+  html.dark .section-title::after {
+    opacity: 0.95;
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.25);
   }
 
   html.dark .section-subtitle {

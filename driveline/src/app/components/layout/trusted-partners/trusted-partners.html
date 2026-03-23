@@ -4,16 +4,16 @@
     'trusted-partners--dark': variant() === 'dark',
     'trusted-partners--light': variant() === 'light',
   }"
-  aria-label="Our trusted finance partners"
+  aria-label="Proud to work with"
 >
   <h2
-    class="text-center text-sm uppercase tracking-[0.18em] font-semibold mb-8"
+    class="text-center text-base sm:text-lg font-display font-semibold tracking-tight mb-8"
     [ngClass]="{
-      'text-gray-400': variant() === 'dark',
-      'text-gray-600 dark:text-gray-400': variant() === 'light',
+      'text-gray-200': variant() === 'dark',
+      'text-gray-700 dark:text-gray-300': variant() === 'light',
     }"
   >
-    Our Trusted Partners
+    Proud to work with
   </h2>
   <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-8 list-none m-0 p-0">
     @for (p of partners; track p.id) {
@@ -22,7 +22,7 @@
           [href]="p.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="trusted-partners__card block rounded-lg bg-white px-3 py-2 shadow-sm ring-1 ring-black/5 transition hover:ring-black/10 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          class="trusted-partners__card block rounded-lg bg-white px-3 py-2 shadow-sm ring-1 ring-black/5 transition hover:ring-black/10 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-slate-800 dark:ring-slate-600 dark:hover:ring-slate-500"
           [attr.aria-label]="p.name + ' (opens in new tab)'"
         >
           <img

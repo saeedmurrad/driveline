@@ -1,72 +1,77 @@
-import { Component, inject } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import {
+  afterNextRender,
+  Component,
+  DestroyRef,
+  inject,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
 import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/vehicle-card';
 import { SearchWidgetComponent } from '../../components/search/search-widget/search-widget';
 import { TestimonialCardComponent } from '../../components/shared/testimonial-card/testimonial-card';
+import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
 import { REVIEWS, BUSINESS_INFO } from '../../data/reviews.data';
 
 @Component({
   selector: 'app-home',
   imports: [
+    NgClass,
     RouterLink,
     VehicleCardComponent,
     SearchWidgetComponent,
     TestimonialCardComponent,
+    RevealOnScrollDirective,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class HomeComponent {
   private vehicleService = inject(VehicleService);
+  private destroyRef = inject(DestroyRef);
+  private platformId = inject(PLATFORM_ID);
 
   featuredVehicles = this.vehicleService.featuredVehicles;
   reviews = REVIEWS.slice(0, 3);
   business = BUSINESS_INFO;
+
+  /**
+   * Hero: premium SUV + modern saloons (`public/hero-*.jpg`, 1600w). Crossfade only.
+   * Unsplash-derived; https://unsplash.com/license
+   */
+  readonly heroSlides: readonly { src: string; alt: string }[] = [
+    { src: 'hero-1.jpg', alt: '' },
+    { src: 'hero-2.jpg', alt: '' },
+    { src: 'hero-3.jpg', alt: '' },
+  ];
+
+  heroActiveIndex = signal(0);
+  private heroRotateTimer: number | undefined;
+
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.heroRotateTimer !== undefined) clearInterval(this.heroRotateTimer);
+    });
+    afterNextRender(() => {
+      if (!isPlatformBrowser(this.platformId)) return;
+      this.heroRotateTimer = window.setInterval(() => {
+        this.heroActiveIndex.update((i) => (i + 1) % this.heroSlides.length);
+      }, 8000);
+    });
+  }
+
+  setHeroSlide(index: number): void {
+    const n = this.heroSlides.length;
+    if (n === 0) return;
+    this.heroActiveIndex.set(((index % n) + n) % n);
+  }
 
   stats = [
     { value: '500+', label: 'Cars Sold', icon: 'car' },
     { value: '18+', label: 'Years Experience', icon: 'clock' },
     { value: '5★', label: 'Average Rating', icon: 'star' },
     { value: '100%', label: 'Warranty Cover', icon: 'shield' },
-  ];
-
-  services = [
-    {
-      icon: 'search',
-      title: 'Quality Vehicles',
-      description:
-        'Every vehicle undergoes a thorough multi-point safety inspection before being offered for sale.',
-      link: '/cars',
-      linkText: 'Browse Cars',
-      color: 'blue',
-    },
-    {
-      icon: 'currency',
-      title: 'Flexible Finance',
-      description:
-        'FCA registered with competitive finance packages available to suit all budgets and circumstances.',
-      link: '/finance',
-      linkText: 'Learn More',
-      color: 'green',
-    },
-    {
-      icon: 'shield',
-      title: 'Warranty Included',
-      description:
-        'Every vehicle comes with our own in-house warranty for complete peace of mind.',
-      link: '/warranty',
-      linkText: 'View Warranty',
-      color: 'orange',
-    },
-    {
-      icon: 'exchange',
-      title: 'Part Exchange',
-      description:
-        'Get an excellent valuation for your current vehicle and use it as a deposit.',
-      link: '/sell-your-car',
-      linkText: 'Get Valuation',
-      color: 'purple',
-    },
   ];
 }

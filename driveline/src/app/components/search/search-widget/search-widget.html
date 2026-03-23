@@ -1,126 +1,125 @@
-<div class="w-full" [class.glass]="variant === 'hero'" [class.rounded-2xl]="true">
-  <div [class.p-6]="variant === 'hero'" [class.p-4]="variant === 'page'" [class.md:p-8]="variant === 'hero'">
-
-    <!-- Category Tabs -->
-    <div class="flex items-center gap-2 mb-6">
-      @for (cat of categories(); track cat.value) {
-        <button
-          (click)="setCategory(cat.value)"
-          [ngClass]="
-            filters.category === cat.value
-              ? 'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 bg-blue-600 text-white shadow-lg shadow-blue-600/25 dark:bg-blue-600'
-              : 'px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
-          "
-        >
-          {{ cat.label }}
-        </button>
-      }
-    </div>
-
-    <!-- Main Search Row -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
-      <!-- Make -->
-      <div class="relative">
-        <label class="form-label text-xs">Make</label>
-        <div class="relative">
-          <select [(ngModel)]="filters.make" class="form-select pr-10">
-            <option value="">Any Make</option>
-            @for (make of makes; track make) {
-              <option [value]="make">{{ make }}</option>
-            }
-          </select>
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Model -->
-      <div>
-        <label class="form-label text-xs">Model</label>
-        <input
-          [(ngModel)]="filters.model"
-          type="text"
-          placeholder="Any Model"
-          class="form-input"
-        >
-      </div>
-
-      <!-- Transmission -->
-      <div class="relative">
-        <label class="form-label text-xs">Transmission</label>
-        <div class="relative">
-          <select [(ngModel)]="filters.transmission" class="form-select pr-10">
-            <option value="">Any</option>
-            @for (trans of transmissions; track trans) {
-              <option [value]="trans">{{ trans }}</option>
-            }
-          </select>
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Fuel Type -->
-      <div class="relative">
-        <label class="form-label text-xs">Fuel Type</label>
-        <div class="relative">
-          <select [(ngModel)]="filters.fuelType" class="form-select pr-10">
-            <option value="">Any Fuel</option>
-            @for (fuel of fuelTypes; track fuel) {
-              <option [value]="fuel">{{ fuel }}</option>
-            }
-          </select>
-          <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Advanced Filters Toggle -->
-    <button
-      (click)="toggleExpanded()"
-      class="flex items-center gap-2 text-sm text-blue-600 font-medium mb-4 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
-    >
-      <svg class="w-4 h-4 transition-transform duration-200" [class.rotate-180]="isExpanded()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
-      </svg>
-      {{ isExpanded() ? 'Hide' : 'Show' }} Advanced Filters
-    </button>
-
-    <!-- Advanced Filters -->
-    @if (isExpanded()) {
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-4 border-t border-gray-100 pt-4">
-        <!-- Min Price -->
-        <div>
-          <label class="form-label text-xs">Min Price</label>
-          <input
-            [(ngModel)]="filters.minPrice"
-            type="number"
-            placeholder="£0"
-            class="form-input"
-          >
-        </div>
-
-        <!-- Max Price -->
-        <div>
-          <label class="form-label text-xs">Max Price</label>
-          <input
-            [(ngModel)]="filters.maxPrice"
-            type="number"
-            placeholder="No Max"
-            class="form-input"
-          >
-        </div>
-
-        <!-- Min Engine Size -->
-        <div class="relative">
-          <label class="form-label text-xs">Min Engine</label>
+@if (variant === 'hero') {
+  <!-- Hero search: frosted glass over hero (labels: stronger color in CSS only) -->
+  <div
+    class="search-widget--fengate w-full overflow-hidden rounded-2xl border border-white/25 bg-white/92 shadow-[0_24px_64px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur-md dark:border-slate-600/80 dark:bg-slate-900/92 dark:ring-slate-700/80"
+  >
+    <div class="px-4 py-4 sm:px-5 sm:py-5">
+      <!-- Row 1 -->
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div class="relative sm:col-span-2 xl:col-span-1">
+          <label class="search-widget-label">Stock</label>
           <div class="relative">
-            <select [(ngModel)]="filters.minEngineSize" class="form-select pr-10">
-              <option [value]="undefined">Any</option>
+            <select [(ngModel)]="filters.category" class="search-widget-field form-select pr-10 font-semibold">
+              @for (cat of categories(); track cat.value) {
+                <option [value]="cat.value">{{ cat.label }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div class="relative">
+          <label class="search-widget-label">Make</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.make" class="search-widget-field form-select pr-10">
+              <option value="">Any make</option>
+              @for (make of makes; track make) {
+                <option [value]="make">{{ make }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div>
+          <label class="search-widget-label">Model</label>
+          <input
+            [(ngModel)]="filters.model"
+            type="text"
+            placeholder="Any model"
+            class="search-widget-field form-input"
+          />
+        </div>
+        <div class="relative">
+          <label class="search-widget-label">Transmission</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.transmission" class="search-widget-field form-select pr-10">
+              <option value="">Any</option>
+              @for (trans of transmissions; track trans) {
+                <option [value]="trans">{{ trans }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div class="relative">
+          <label class="search-widget-label">Fuel</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.fuelType" class="search-widget-field form-select pr-10">
+              <option value="">Any fuel</option>
+              @for (fuel of fuelTypes; track fuel) {
+                <option [value]="fuel">{{ fuel }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div
+        class="mt-3 grid grid-cols-1 gap-3 border-t border-gray-200/90 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 dark:border-slate-600/80"
+      >
+        <div class="relative">
+          <label class="search-widget-label">Doors</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.doors" class="search-widget-field form-select pr-10">
+              <option [ngValue]="undefined">Any</option>
+              @for (d of doorOptions; track d) {
+                <option [ngValue]="d">{{ d }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div class="relative">
+          <label class="search-widget-label">Min engine</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.minEngineSize" class="search-widget-field form-select pr-10">
+              <option [ngValue]="undefined">Any</option>
               <option value="1.0">1.0L</option>
               <option value="1.2">1.2L</option>
               <option value="1.4">1.4L</option>
@@ -130,18 +129,21 @@
               <option value="2.5">2.5L</option>
               <option value="3.0">3.0L</option>
             </select>
-            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
-
-        <!-- Max Engine Size -->
         <div class="relative">
-          <label class="form-label text-xs">Max Engine</label>
+          <label class="search-widget-label">Max engine</label>
           <div class="relative">
-            <select [(ngModel)]="filters.maxEngineSize" class="form-select pr-10">
-              <option [value]="undefined">Any</option>
+            <select [(ngModel)]="filters.maxEngineSize" class="search-widget-field form-select pr-10">
+              <option [ngValue]="undefined">Any</option>
               <option value="1.2">1.2L</option>
               <option value="1.4">1.4L</option>
               <option value="1.5">1.5L</option>
@@ -151,47 +153,308 @@
               <option value="3.0">3.0L</option>
               <option value="5.0">5.0L+</option>
             </select>
-            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400 dark:text-slate-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div>
+          <label class="search-widget-label">Min £</label>
+          <input
+            [(ngModel)]="filters.minPrice"
+            type="number"
+            placeholder="0"
+            class="search-widget-field form-input"
+          />
+        </div>
+        <div>
+          <label class="search-widget-label">Max £</label>
+          <input
+            [(ngModel)]="filters.maxPrice"
+            type="number"
+            placeholder="No max"
+            class="search-widget-field form-input"
+          />
+        </div>
+      </div>
+
+      <!-- Actions: slim, flexible, aligned -->
+      <div
+        class="mt-4 flex flex-col-reverse gap-2 border-t border-gray-200/80 pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-3 dark:border-slate-600/80"
+      >
+        <button
+          type="button"
+          (click)="resetFilters()"
+          class="rounded-full px-4 py-2 text-sm font-medium text-gray-500 transition hover:bg-gray-100 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+        >
+          Clear all
+        </button>
+        <button
+          type="button"
+          (click)="onSearch()"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-7 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:from-blue-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-blue-500/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 sm:w-auto sm:min-w-[9.5rem]"
+        >
+          <svg class="h-4 w-4 shrink-0 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          Search stock
+        </button>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div
+    class="w-full rounded-2xl border border-gray-100 bg-white dark:border-slate-700 dark:bg-slate-800"
+  >
+    <div class="p-4">
+      <!-- Category Tabs -->
+      <div class="mb-6 flex items-center gap-2">
+        @for (cat of categories(); track cat.value) {
+          <button
+            (click)="setCategory(cat.value)"
+            [ngClass]="
+              filters.category === cat.value
+                ? 'rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-200 dark:bg-blue-600'
+                : 'rounded-xl bg-gray-100 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
+            "
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </div>
+
+      <!-- Main Search Row -->
+      <div class="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Make -->
+        <div class="relative">
+          <label class="form-label text-xs">Make</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.make" class="form-select pr-10">
+              <option value="">Any Make</option>
+              @for (make of makes; track make) {
+                <option [value]="make">{{ make }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
 
-        <!-- Doors -->
+        <!-- Model -->
+        <div>
+          <label class="form-label text-xs">Model</label>
+          <input
+            [(ngModel)]="filters.model"
+            type="text"
+            placeholder="Any Model"
+            class="form-input"
+          />
+        </div>
+
+        <!-- Transmission -->
         <div class="relative">
-          <label class="form-label text-xs">Doors</label>
+          <label class="form-label text-xs">Transmission</label>
           <div class="relative">
-            <select [(ngModel)]="filters.doors" class="form-select pr-10">
-              <option [value]="undefined">Any</option>
-              @for (d of doorOptions; track d) {
-                <option [value]="d">{{ d }}</option>
+            <select [(ngModel)]="filters.transmission" class="form-select pr-10">
+              <option value="">Any</option>
+              @for (trans of transmissions; track trans) {
+                <option [value]="trans">{{ trans }}</option>
               }
             </select>
-            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Fuel Type -->
+        <div class="relative">
+          <label class="form-label text-xs">Fuel Type</label>
+          <div class="relative">
+            <select [(ngModel)]="filters.fuelType" class="form-select pr-10">
+              <option value="">Any Fuel</option>
+              @for (fuel of fuelTypes; track fuel) {
+                <option [value]="fuel">{{ fuel }}</option>
+              }
+            </select>
+            <svg
+              class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </div>
         </div>
       </div>
-    }
 
-    <!-- Search Button -->
-    <div class="flex items-center gap-3">
+      <!-- Advanced Filters Toggle -->
       <button
-        (click)="onSearch()"
-        class="flex-1 sm:flex-none btn-primary justify-center px-8 py-3.5 text-base rounded-xl"
+        (click)="toggleExpanded()"
+        class="mb-4 flex items-center gap-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        <svg
+          class="h-4 w-4 transition-transform duration-200"
+          [class.rotate-180]="isExpanded()"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+          />
         </svg>
-        Search Vehicles
+        {{ isExpanded() ? 'Hide' : 'Show' }} Advanced Filters
       </button>
-      <button
-        (click)="resetFilters()"
-        class="px-4 py-3.5 text-sm font-medium text-gray-500 hover:text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:hover:text-white dark:bg-slate-700 dark:hover:bg-slate-600 rounded-xl transition-colors duration-200"
-      >
-        Reset
-      </button>
+
+      <!-- Advanced Filters -->
+      @if (isExpanded()) {
+        <div class="mb-4 grid grid-cols-2 gap-3 border-t border-gray-100 pt-4 sm:grid-cols-3 lg:grid-cols-5">
+          <!-- Min Price -->
+          <div>
+            <label class="form-label text-xs">Min Price</label>
+            <input
+              [(ngModel)]="filters.minPrice"
+              type="number"
+              placeholder="£0"
+              class="form-input"
+            />
+          </div>
+
+          <!-- Max Price -->
+          <div>
+            <label class="form-label text-xs">Max Price</label>
+            <input
+              [(ngModel)]="filters.maxPrice"
+              type="number"
+              placeholder="No Max"
+              class="form-input"
+            />
+          </div>
+
+          <!-- Min Engine Size -->
+          <div class="relative">
+            <label class="form-label text-xs">Min Engine</label>
+            <div class="relative">
+              <select [(ngModel)]="filters.minEngineSize" class="form-select pr-10">
+                <option [ngValue]="undefined">Any</option>
+                <option value="1.0">1.0L</option>
+                <option value="1.2">1.2L</option>
+                <option value="1.4">1.4L</option>
+                <option value="1.5">1.5L</option>
+                <option value="1.6">1.6L</option>
+                <option value="2.0">2.0L</option>
+                <option value="2.5">2.5L</option>
+                <option value="3.0">3.0L</option>
+              </select>
+              <svg
+                class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Max Engine Size -->
+          <div class="relative">
+            <label class="form-label text-xs">Max Engine</label>
+            <div class="relative">
+              <select [(ngModel)]="filters.maxEngineSize" class="form-select pr-10">
+                <option [ngValue]="undefined">Any</option>
+                <option value="1.2">1.2L</option>
+                <option value="1.4">1.4L</option>
+                <option value="1.5">1.5L</option>
+                <option value="1.6">1.6L</option>
+                <option value="2.0">2.0L</option>
+                <option value="2.5">2.5L</option>
+                <option value="3.0">3.0L</option>
+                <option value="5.0">5.0L+</option>
+              </select>
+              <svg
+                class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Doors -->
+          <div class="relative">
+            <label class="form-label text-xs">Doors</label>
+            <div class="relative">
+              <select [(ngModel)]="filters.doors" class="form-select pr-10">
+                <option [ngValue]="undefined">Any</option>
+                @for (d of doorOptions; track d) {
+                  <option [ngValue]="d">{{ d }}</option>
+                }
+              </select>
+              <svg
+                class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Search Button -->
+      <div class="flex items-center gap-3">
+        <button
+          (click)="onSearch()"
+          class="btn-primary flex flex-1 justify-center rounded-xl px-8 py-3.5 text-base sm:flex-none"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          Search Vehicles
+        </button>
+        <button
+          (click)="resetFilters()"
+          class="rounded-xl border border-transparent bg-gray-100 px-4 py-3.5 text-sm font-medium text-gray-500 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 dark:hover:text-white"
+        >
+          Reset
+        </button>
+      </div>
     </div>
   </div>
-</div>
+}

@@ -1,5 +1,5 @@
 <article
-  class="card group cursor-pointer"
+  class="card group cursor-pointer rounded-2xl ring-1 ring-stone-200/60 dark:ring-slate-600/50"
   (click)="onCardClick($event)"
   (mouseenter)="onCardEnter()"
   (mouseleave)="onCardLeave()"
@@ -9,7 +9,7 @@
     <img
       [src]="cardImageSrc()"
       [alt]="vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model"
-      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      class="w-full h-full object-cover md:transition-transform md:duration-500 md:group-hover:scale-[1.04]"
       loading="lazy"
     >
     <!-- Badges -->

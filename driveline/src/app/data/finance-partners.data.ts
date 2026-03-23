@@ -16,13 +16,7 @@ export const FINANCE_PARTNERS: FinancePartner[] = [
     logoSrc: 'partners/carmoney.svg',
   },
   {
-    id: 'midland-mgmt',
-    name: 'Midland Credit Management',
-    url: 'https://www.midlandcredit.co.uk/',
-    logoSrc: 'partners/midland-credit.svg',
-  },
-  {
-    id: 'midland-web',
+    id: 'midland-credit',
     name: 'MidlandCredit.co.uk',
     url: 'https://www.midlandcredit.co.uk/',
     logoSrc: 'partners/midland-credit.svg',

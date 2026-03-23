@@ -1,3 +1,32 @@
 :host {
   display: block;
 }
+
+/*
+ * Hero (glass) search: light “off-white” labels + slight shadow so they read on blur + photo.
+ */
+.search-widget--fengate .search-widget-label {
+  @apply mb-1 block text-[11px] font-semibold uppercase tracking-wider;
+  color: #f8fafc;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.65);
+}
+
+:host-context(html.dark) .search-widget--fengate .search-widget-label {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.75);
+}
+
+.search-widget--fengate .search-widget-field.form-input,
+.search-widget--fengate .search-widget-field.form-select {
+  @apply rounded-xl border-gray-200/90 py-2.5 text-sm shadow-sm transition-shadow dark:border-slate-600 dark:bg-slate-800/80 dark:text-slate-100;
+}
+
+.search-widget--fengate .search-widget-field.form-input:focus,
+.search-widget--fengate .search-widget-field.form-select:focus {
+  @apply border-blue-500 ring-2 ring-blue-500/15 dark:border-blue-400 dark:ring-blue-400/20;
+}
+
+:host-context(html.dark) .search-widget--fengate .search-widget-field.form-input,
+:host-context(html.dark) .search-widget--fengate .search-widget-field.form-select {
+  @apply border-slate-600 bg-slate-800 text-slate-100;
+}
