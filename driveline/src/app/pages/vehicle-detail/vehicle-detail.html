@@ -48,8 +48,8 @@
         </h1>
         <div class="text-right">
           <p class="text-lg font-bold text-gray-900 m-0">{{ formatPrice(vehicle()!.price) }}</p>
-          @if (vehicle()!.monthlyPrice) {
-            <p class="text-[9px] text-gray-600 m-0 mt-0.5">From {{ formatPrice(vehicle()!.monthlyPrice!) }}/mo (subject to status)</p>
+          @if (monthlyFinanceQuote(); as printMo) {
+            <p class="text-[9px] text-gray-600 m-0 mt-0.5">From {{ formatPrice(printMo) }}/mo HP example (subject to status)</p>
           }
         </div>
       </div>
@@ -393,25 +393,32 @@
               }
               @if (activeTab() === 'finance') {
                 <div>
-                  <h3 class="font-bold text-gray-900 dark:text-white mb-4">Finance This Vehicle</h3>
-                  <p class="text-gray-600 dark:text-slate-300 text-sm mb-6">We offer competitive finance packages through our FCA-registered dealership. Subject to status and credit approval.</p>
-                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                    <div class="text-center bg-blue-50 dark:bg-blue-950/40 rounded-xl p-4 border border-blue-100/80 dark:border-blue-800/50">
-                      <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">{{ formatPrice(vehicle()!.price) }}</p>
-                      <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">Cash Price</p>
+                  <h3 class="font-bold text-gray-900 dark:text-white mb-4">Finance this vehicle</h3>
+                  <p class="text-gray-600 dark:text-slate-300 text-sm mb-6">
+                    Competitive HP and PCP packages through our FCA-registered dealership. Use the figures below as a guide — we’ll confirm a formal quote for you.
+                  </p>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                    <div class="rounded-xl border border-blue-100/80 bg-blue-50 p-4 text-center dark:border-blue-800/50 dark:bg-blue-950/40">
+                      <p class="text-[10px] font-semibold uppercase tracking-wider text-blue-800/80 dark:text-blue-300/90">Cash price</p>
+                      <p class="text-2xl font-bold tabular-nums text-blue-600 dark:text-blue-400">{{ formatPrice(vehicle()!.price) }}</p>
                     </div>
-                    @if (vehicle()!.monthlyPrice) {
-                      <div class="text-center bg-green-50 dark:bg-green-950/35 rounded-xl p-4 border border-green-100/80 dark:border-green-800/50">
-                        <p class="text-2xl font-bold text-green-600 dark:text-green-400">{{ formatPrice(vehicle()!.monthlyPrice!) }}/mo</p>
-                        <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">From (subject to credit)</p>
+                    @if (monthlyFinanceQuote(); as tabMo) {
+                      <div class="rounded-xl border border-emerald-100/80 bg-emerald-50 p-4 text-center dark:border-emerald-800/50 dark:bg-emerald-950/35">
+                        <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-800/80 dark:text-emerald-300/90">HP example / month</p>
+                        <p class="text-2xl font-bold tabular-nums text-emerald-600 dark:text-emerald-400">{{ formatPrice(tabMo) }}</p>
+                        <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">
+                          {{ financeParams.depositPercent }}% deposit · {{ financeParams.termMonths }} months · {{ financeParams.representativeApr }}% APR rep.
+                        </p>
                       </div>
                     }
-                    <div class="text-center bg-orange-50 dark:bg-orange-950/30 rounded-xl p-4 border border-orange-100/80 dark:border-orange-900/40">
-                      <p class="text-2xl font-bold text-orange-500 dark:text-orange-400">0%</p>
-                      <p class="text-xs text-gray-600 dark:text-slate-400 mt-1">Deposit Options Available</p>
+                    <div class="rounded-xl border border-violet-100/80 bg-violet-50 p-4 text-center dark:border-violet-800/50 dark:bg-violet-950/30">
+                      <p class="text-[10px] font-semibold uppercase tracking-wider text-violet-800/80 dark:text-violet-300/90">Tailored quote</p>
+                      <p class="text-lg font-bold text-violet-700 dark:text-violet-300">HP &amp; PCP</p>
+                      <p class="mt-1 text-xs text-gray-600 dark:text-slate-400">Different terms, deposits &amp; products available</p>
                     </div>
                   </div>
-                  <a routerLink="/finance" class="btn-primary w-full justify-center">Explore Finance Options</a>
+                  <p class="mb-6 text-xs leading-relaxed text-gray-500 dark:text-slate-400">{{ financeDisclaimerDetail }}</p>
+                  <a routerLink="/finance" class="btn-primary w-full justify-center">Explore finance options</a>
                 </div>
               }
             </div>
@@ -427,10 +434,15 @@
               <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
               <p class="text-gray-600 dark:text-slate-400 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
             </div>
-            <div class="mb-5">
-              <p class="text-3xl font-bold text-gray-900 dark:text-white">{{ formatPrice(vehicle()!.price) }}</p>
-              @if (vehicle()!.monthlyPrice) {
-                <p class="text-sm text-gray-600 dark:text-slate-400 mt-1">or from <span class="font-semibold text-green-600 dark:text-green-400">{{ formatPrice(vehicle()!.monthlyPrice!) }}/month</span></p>
+            <div class="mb-5 rounded-xl border border-stone-200/90 bg-stone-50/80 p-4 dark:border-slate-600 dark:bg-slate-900/60">
+              <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">Cash price</p>
+              <p class="text-3xl font-bold tabular-nums text-gray-900 dark:text-white">{{ formatPrice(vehicle()!.price) }}</p>
+              @if (monthlyFinanceQuote(); as sideMo) {
+                <div class="mt-3 border-t border-stone-200/90 pt-3 dark:border-slate-600">
+                  <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-700/90 dark:text-emerald-400/90">Finance from</p>
+                  <p class="text-xl font-bold tabular-nums text-emerald-600 dark:text-emerald-400">{{ formatPrice(sideMo) }}<span class="text-base font-semibold">/mo</span></p>
+                  <p class="mt-1 text-[11px] leading-snug text-gray-500 dark:text-slate-400">{{ financeDisclaimerShort }}</p>
+                </div>
               }
             </div>
 
@@ -607,6 +619,9 @@
         <div class="flex-1 min-w-0 flex flex-col justify-center pr-1">
           <p class="text-[11px] text-gray-500 dark:text-slate-400 truncate leading-tight">{{ vehicle()!.make }} {{ vehicle()!.model }}</p>
           <p class="text-base font-bold text-gray-900 dark:text-white tabular-nums leading-tight">{{ formatPrice(vehicle()!.price) }}</p>
+          @if (monthlyFinanceQuote(); as stickyMo) {
+            <p class="text-[11px] font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">{{ formatPrice(stickyMo) }}/mo HP</p>
+          }
         </div>
         <a
           [href]="getWhatsAppUrl()"

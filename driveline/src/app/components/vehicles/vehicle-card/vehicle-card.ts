@@ -10,6 +10,10 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Vehicle } from '../../../models/vehicle.model';
+import {
+  monthlyPaymentForVehicle,
+  FINANCE_DISCLAIMER_SHORT,
+} from '../../../utils/finance-display';
 
 @Component({
   selector: 'app-vehicle-card',
@@ -19,6 +23,8 @@ import { Vehicle } from '../../../models/vehicle.model';
 })
 export class VehicleCardComponent implements OnChanges {
   @Input({ required: true }) vehicle!: Vehicle;
+
+  readonly financeDisclaimerShort = FINANCE_DISCLAIMER_SHORT;
 
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
@@ -72,6 +78,11 @@ export class VehicleCardComponent implements OnChanges {
     const t = ev.target as HTMLElement | null;
     if (t?.closest('[data-vehicle-card-cta]')) return;
     void this.router.navigate(['/vehicle', this.vehicle.id]);
+  }
+
+  /** Dealer API monthly if present, else illustrative HP */
+  monthlyFinanceQuote(): number | undefined {
+    return monthlyPaymentForVehicle(this.vehicle);
   }
 
   formatPrice(price: number): string {

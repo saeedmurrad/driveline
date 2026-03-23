@@ -52,6 +52,8 @@ This overwrites [`src/app/data/vehicles.data.ts`](src/app/data/vehicles.data.ts)
 
 Vehicle detail pages use the full `images[]` from the feed (slideshow + thumbnails + hover cycle on listing cards), plus extra technical fields (dimensions, boot space, MPG urban/extra-urban, 0–60, road tax, seats) and a `sourceListingUrl` link to the matching advert on fengatecarsales.co.uk.
 
+**Listing finance figures:** Cards and list views show **cash price** plus an **illustrative monthly HP payment**. If the stock API provides `monthly_price`, that value is used; otherwise the app (and `npm run sync:stock`) derives a **48‑month, 10% deposit, 9.9% APR representative** example using `src/app/utils/finance-display.ts`. Copy makes clear this is **illustrative** and **subject to status** — adjust the constants there (and in `scripts/fetch-fengate-stock.mjs`) if your lender’s marketing rules differ.
+
 ### UK registration lookup (DVLA API)
 
 Part exchange / sell-your-car **Look up** uses the **[Vehicle Enquiry Service](https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/vehicle-enquiry-service-description.html)** from the [DVLA API Developer Portal](https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html). See **[docs/DVLA-API.md](docs/DVLA-API.md)** for links to the OpenAPI spec and how the app calls the API.

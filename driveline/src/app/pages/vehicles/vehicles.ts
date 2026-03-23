@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
+import { Vehicle } from '../../models/vehicle.model';
+import { monthlyPaymentForVehicle } from '../../utils/finance-display';
 import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/vehicle-card';
 import { SearchWidgetComponent } from '../../components/search/search-widget/search-widget';
 
@@ -87,5 +89,18 @@ export class VehiclesComponent implements OnInit {
 
   setViewMode(mode: 'grid' | 'list') {
     this.viewMode.set(mode);
+  }
+
+  formatPriceGBP(value: number): string {
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  }
+
+  monthlyFinanceQuote(v: Vehicle): number | undefined {
+    return monthlyPaymentForVehicle(v);
   }
 }

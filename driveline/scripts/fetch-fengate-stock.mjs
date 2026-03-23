@@ -143,6 +143,9 @@ function mapToVehicle(api) {
 
   if (api.monthly_price != null && !Number.isNaN(Number(api.monthly_price))) {
     v.monthlyPrice = Math.round(Number(api.monthly_price));
+  } else {
+    const ill = illustrativeMonthlyPayment(v.price);
+    if (ill != null) v.monthlyPrice = ill;
   }
   if (typeof api.seats === 'number' && api.seats > 0) v.seats = api.seats;
   if (api.tax_rate_12 != null && !Number.isNaN(Number(api.tax_rate_12))) {
@@ -169,6 +172,24 @@ function mapToVehicle(api) {
 function capitalize(s) {
   if (!s) return '';
   return s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ');
+}
+
+/** Illustrative HP when API omits monthly_price (48mo, 10% dep, 9.9% APR rep.) */
+function illustrativeMonthlyPayment(cashPrice) {
+  const price = Number(cashPrice);
+  if (!Number.isFinite(price) || price < 500) return undefined;
+  const termMonths = 48;
+  const representativeApr = 9.9;
+  const depositPercent = 10;
+  const deposit = price * (depositPercent / 100);
+  const principal = Math.max(0, price - deposit);
+  const monthlyRate = representativeApr / 100 / 12;
+  const n = termMonths;
+  if (monthlyRate <= 0) return Math.round(principal / n);
+  const pow = Math.pow(1 + monthlyRate, n);
+  const payment = (principal * monthlyRate * pow) / (pow - 1);
+  if (!Number.isFinite(payment) || payment <= 0) return undefined;
+  return Math.round(payment);
 }
 
 function decodeEntities(html) {

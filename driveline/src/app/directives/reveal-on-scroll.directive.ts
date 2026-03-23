@@ -41,6 +41,24 @@ export class RevealOnScrollDirective implements OnDestroy {
         { root: null, rootMargin: '0px 0px -6% 0px', threshold: 0.06 },
       );
       this.observer.observe(node);
+
+      /** If the block is already on-screen (e.g. bottom of hero + tall viewport), IO can lag — reveal immediately. */
+      const revealIfAlreadyInView = () => {
+        if (node.classList.contains('reveal-visible')) return;
+        const rect = node.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const vw = window.innerWidth || document.documentElement.clientWidth;
+        const intersects =
+          rect.bottom > 0 && rect.top < vh && rect.right > 0 && rect.left < vw;
+        if (intersects) {
+          node.classList.add('reveal-visible');
+          this.observer?.unobserve(node);
+        }
+      };
+      requestAnimationFrame(() => {
+        revealIfAlreadyInView();
+        requestAnimationFrame(revealIfAlreadyInView);
+      });
     });
   }
 

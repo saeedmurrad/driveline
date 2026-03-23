@@ -16,6 +16,12 @@ import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import {
+  monthlyPaymentForVehicle,
+  FINANCE_ILLUSTRATIVE_PARAMS,
+  FINANCE_DISCLAIMER_SHORT,
+  FINANCE_DISCLAIMER_DETAIL,
+} from '../../utils/finance-display';
 
 @Component({
   selector: 'app-vehicle-detail',
@@ -48,6 +54,18 @@ export class VehicleDetailComponent implements OnDestroy {
     if (i < 0 || i >= imgs.length) i = 0;
     return imgs[i];
   });
+
+  /** Dealer feed monthly when set, else illustrative HP (same rules as listing cards). */
+  monthlyFinanceQuote = computed(() => {
+    const v = this.vehicle();
+    if (!v) return undefined;
+    return monthlyPaymentForVehicle(v);
+  });
+
+  readonly financeParams = FINANCE_ILLUSTRATIVE_PARAMS;
+  readonly financeDisclaimerShort = FINANCE_DISCLAIMER_SHORT;
+  readonly financeDisclaimerDetail = FINANCE_DISCLAIMER_DETAIL;
+
   activeTab = signal<'overview' | 'features' | 'finance'>('overview');
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
