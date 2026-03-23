@@ -52,7 +52,7 @@ This overwrites [`src/app/data/vehicles.data.ts`](src/app/data/vehicles.data.ts)
 
 Vehicle detail pages use the full `images[]` from the feed (slideshow + thumbnails + hover cycle on listing cards), plus extra technical fields (dimensions, boot space, MPG urban/extra-urban, 0–60, road tax, seats) and a `sourceListingUrl` link to the matching advert on fengatecarsales.co.uk.
 
-**Listing finance figures:** Cards and list views show **cash price** plus an illustrative **“from” monthly** payment (**60 months**, **0% deposit**, **9.9% APR** representative — lowest of the three example terms). The vehicle **Finance** tab shows a **calculator for 36, 48 and 60 months** on the same basis. Logic lives in `src/app/utils/finance-display.ts`; `npm run sync:stock` writes `monthlyPrice` in `vehicles.data.ts` using the **60‑month** figure for consistency. Copy states figures are **illustrative** and **subject to status** — change APR/terms there and in `scripts/fetch-fengate-stock.mjs` if your lender rules differ.
+**Listing finance figures:** Cards and list views show **cash price** plus an illustrative **“from” monthly** payment (**60 months**, **0% deposit**, **9.9% APR** representative — lowest of the three **illustrative** terms). The vehicle **Finance** tab shows a **calculator for 36, 48 and 60 months** on the same basis. Logic lives in `src/app/utils/finance-display.ts`; `npm run sync:stock` writes `monthlyPrice` in `vehicles.data.ts` using the **60‑month** figure for consistency. Copy states figures are **illustrative** and **subject to status** — change APR/terms there and in `scripts/fetch-fengate-stock.mjs` if your lender rules differ.
 
 ### UK registration lookup (DVLA API)
 

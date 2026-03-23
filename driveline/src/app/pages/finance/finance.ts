@@ -50,7 +50,7 @@ export class FinanceComponent {
       description:
         'Sometimes just referred to as HP, this is a loan secured against the vehicle itself. This is a great choice for people who want to spread out the cost of their car.',
       features: [
-        'Deposit optional — we show 0% deposit examples on listings',
+        'Deposit optional — listings show illustrative 0% deposit payments',
         'Fixed monthly repayments',
         'You own the car at the end',
         'No mileage restrictions',

@@ -15,11 +15,11 @@ export const FINANCE_ILLUSTRATIVE_PARAMS = {
 
 /** One-line disclaimer for cards / listings */
 export const FINANCE_DISCLAIMER_SHORT =
-  'Illustrative HP: 0% deposit, 9.9% APR representative. Example shown is 60 monthly payments (lowest payment). 36 & 48 month options on vehicle page. Subject to status.';
+  'Illustrative HP: 0% deposit, 9.9% APR representative. Figure shown is 60 monthly payments (lowest payment). 36 & 48 month options on vehicle page. Subject to status.';
 
 /** Longer copy for VDP / finance tab */
 export const FINANCE_DISCLAIMER_DETAIL =
-  'Examples are Hire Purchase (HP) with the full cash price financed over 36, 48 or 60 months at 9.9% APR representative, with no deposit. Actual rate and payment depend on your circumstances. Subject to status and credit check.';
+  'Illustrative Hire Purchase (HP): full cash price financed over 36, 48 or 60 months at 9.9% APR representative, with no deposit. Actual rate and payment depend on your circumstances. Subject to status and credit check.';
 
 export type FinanceTermOption = { termMonths: number; monthly: number };
 
@@ -57,7 +57,7 @@ export function financeTermOptionsForPrice(cashPrice: number): FinanceTermOption
 
 /**
  * Headline “from £X/mo” on listings — longest term (lowest payment), same rules as calculator.
- * Ignores legacy `monthlyPrice` on the vehicle so figures always match 0% deposit / 9.9% APR examples.
+ * Ignores legacy `monthlyPrice` on the vehicle so figures always match 0% deposit / 9.9% APR illustrative quotes.
  */
 export function monthlyPaymentForVehicle(v: Pick<Vehicle, 'price'>): number | undefined {
   return illustrativeMonthlyPayment(
