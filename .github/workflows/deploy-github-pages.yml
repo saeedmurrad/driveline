@@ -68,6 +68,11 @@ jobs:
           if not url:
               print("DVLA_LOOKUP_URL secret not set; build uses dvlaLookupUrl from environment.prod.ts (direct DVLA may fail in browser due to CORS).")
               exit(0)
+          if not (url.startswith("http://") or url.startswith("https://")):
+              raise SystemExit(
+                  "DVLA_LOOKUP_URL must be a full URL (e.g. https://your-worker.xxx.workers.dev), "
+                  "not your DVLA API key. Put the API key in dvlaApiKey in environment.prod.ts only."
+              )
           path = "driveline/src/environments/environment.prod.ts"
           with open(path) as f:
               text = f.read()

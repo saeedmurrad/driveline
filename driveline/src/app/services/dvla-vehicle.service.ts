@@ -35,6 +35,16 @@ export class DvlaVehicleService {
           ),
       );
     }
+    const urlOk =
+      /^https?:\/\//i.test(url) || url.startsWith('/');
+    if (!urlOk) {
+      return throwError(
+        () =>
+          new Error(
+            'Registration lookup URL is invalid. On GitHub Pages, set secret DVLA_LOOKUP_URL to your full worker URL (https://…), not your DVLA API key. For dev/SSR, use a path such as /api/dvla-vehicle.',
+          ),
+      );
+    }
 
     const key = environment.dvlaApiKey?.trim();
     const headers = key

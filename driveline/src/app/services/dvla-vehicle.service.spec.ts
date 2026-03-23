@@ -8,6 +8,9 @@ import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { DvlaVehicleService } from './dvla-vehicle.service';
 
+/** Relative path is valid for dev proxy / SSR same-origin. */
+const TEST_DVLA_URL = '/api/dvla-test';
+
 describe('DvlaVehicleService', () => {
   let service: DvlaVehicleService;
   let httpMock: HttpTestingController;
@@ -18,7 +21,7 @@ describe('DvlaVehicleService', () => {
   };
 
   beforeEach(() => {
-    environment.dvlaLookupUrl = '/api/dvla-test';
+    environment.dvlaLookupUrl = TEST_DVLA_URL;
     environment.dvlaApiKey = '';
 
     TestBed.configureTestingModule({
@@ -64,6 +67,13 @@ describe('DvlaVehicleService', () => {
         firstValueFrom(service.lookupByRegistration('AB12CDE')),
       ).rejects.toThrow(/not configured/);
     });
+
+    it('rejects when dvlaLookupUrl is a bare string (e.g. API key pasted as URL)', async () => {
+      environment.dvlaLookupUrl = 'eYWCJ4jiTm9mkOZKGQkIA7yw6j2LtMJRaKAXc7K5';
+      await expect(
+        firstValueFrom(service.lookupByRegistration('AB12CDE')),
+      ).rejects.toThrow(/DVLA_LOOKUP_URL to your full worker URL/);
+    });
   });
 
   describe('lookupByRegistration — success', () => {
@@ -74,7 +84,7 @@ describe('DvlaVehicleService', () => {
 
       const req = httpMock.expectOne(
         (r) =>
-          r.url === '/api/dvla-test' &&
+          r.url === TEST_DVLA_URL &&
           r.method === 'POST' &&
           (r.body as { registrationNumber: string }).registrationNumber ===
             'AB12CDE',
@@ -97,7 +107,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('LL99ZZZ'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       expect(req.request.headers.get('x-api-key')).toBe('test-key-123');
       req.flush({ registrationNumber: 'LL99ZZZ' });
 
@@ -111,7 +121,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('XX00XXX'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       req.flush(
         {
           errors: [{ status: '400', title: 'Bad', detail: 'Vehicle not taxed' }],
@@ -127,7 +137,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('XX00XXX'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       req.flush(
         { errors: [{ title: 'Unauthorised' }] },
         { status: 401, statusText: 'Unauthorized' },
@@ -141,7 +151,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('ZZ99ZZZ'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       req.flush({}, { status: 404, statusText: 'Not Found' });
 
       await expect(promise).rejects.toThrow(
@@ -154,7 +164,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('AB12CDE'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       req.error(new ProgressEvent('error'));
 
       await expect(promise).rejects.toThrow(
@@ -167,7 +177,7 @@ describe('DvlaVehicleService', () => {
         service.lookupByRegistration('AB12CDE'),
       );
 
-      const req = httpMock.expectOne('/api/dvla-test');
+      const req = httpMock.expectOne(TEST_DVLA_URL);
       req.flush('upstream error', {
         status: 502,
         statusText: 'Bad Gateway',

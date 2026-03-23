@@ -21,7 +21,9 @@ In the GitHub repo → **Settings → Secrets and variables → Actions**, add:
 
 | Name | Value |
 |------|--------|
-| `DVLA_LOOKUP_URL` | Your worker URL (no trailing slash) |
+| `DVLA_LOOKUP_URL` | **Full worker URL** e.g. `https://driveline-dvla-ves-proxy.youraccount.workers.dev` — **not** your DVLA `x-api-key` |
+
+If you paste the API key into `DVLA_LOOKUP_URL`, the site will call `…/driveline/<key>` and you’ll get **405** errors.
 
 The deploy workflow patches `environment.prod.ts` before build so `dvlaLookupUrl` points at the worker.
 
