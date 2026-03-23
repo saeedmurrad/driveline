@@ -20,7 +20,7 @@ DriveLine uses the **Vehicle Enquiry Service** so customers can look up a UK reg
 |-------------|-----------|
 | `ng serve` | [`proxy.conf.cjs`](../proxy.conf.cjs) forwards `/api/dvla-vehicle` → DVLA; `x-api-key` from the incoming request (`dvlaApiKey`) or `DVLA_API_KEY` (also loads repo **`.env`** at proxy startup). |
 | `serve:ssr:driveline` (Node) | [`server.ts`](../src/server.ts) handles `POST /api/dvla-vehicle` the same way: request `x-api-key` or `process.env.DVLA_API_KEY`. |
-| Static GitHub Pages | No Node proxy — set `dvlaLookupUrl` to `''` in `environment.prod.ts` (default). Lookup is disabled unless you add your own backend URL. |
+| Static GitHub Pages | `environment.prod.ts` uses the **direct VES URL** + `dvlaApiKey` from the bundle so lookup works without `/api`. If the browser blocks the request (CORS), use **SSR** + `dvlaLookupUrl: '/api/dvla-vehicle'` or add your own HTTPS proxy. |
 
 ## API key
 

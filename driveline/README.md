@@ -49,7 +49,7 @@ Vehicle detail pages use the full `images[]` from the feed (slideshow + thumbnai
 
 Part exchange / sell-your-car **Look up** uses the **[Vehicle Enquiry Service](https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/vehicle-enquiry-service-description.html)** from the [DVLA API Developer Portal](https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html). See **[docs/DVLA-API.md](docs/DVLA-API.md)** for links to the OpenAPI spec and how the app calls the API.
 
-**Where to put the key (same file as Web3Forms):** set **`dvlaApiKey`** next to **`web3formsAccessKey`** in [`src/environments/environment.ts`](src/environments/environment.ts) (local) and [`environment.prod.ts`](src/environments/environment.prod.ts) when needed. The app sends it as `x-api-key` on `POST /api/dvla-vehicle`; the dev proxy and SSR server forward it to DVLA. **Note:** like the Web3Forms key, a non-empty `dvlaApiKey` is included in the browser bundle — anyone can read it. For a non-public key, leave `dvlaApiKey` empty and use **`DVLA_API_KEY`** in [`.env`](.env.example) / the host only. Rotate the key in the DVLA portal if it is ever leaked.
+**Where to put the key (same file as Web3Forms):** set **`dvlaApiKey`** next to **`web3formsAccessKey`** in [`src/environments/environment.ts`](src/environments/environment.ts) (local) and [`environment.prod.ts`](src/environments/environment.prod.ts) when needed. **`ng serve`** sends `x-api-key` to `/api/dvla-vehicle` (proxy). **Production static** builds post straight to the official VES URL with `x-api-key` from `dvlaApiKey`. **SSR** can use `/api/dvla-vehicle` + `DVLA_API_KEY` on the server instead. **Note:** like Web3Forms, a non-empty `dvlaApiKey` is visible in the browser bundle. Rotate the key in the DVLA portal if it is ever leaked.
 
 **Optional `.env` fallback:** copy [`.env.example`](.env.example) to `.env` and set `DVLA_API_KEY` if you prefer not to use `dvlaApiKey` in environments. The proxy / SSR use the request’s `x-api-key` first, then `DVLA_API_KEY`.
 
@@ -65,7 +65,7 @@ npm start
 
 **Production / SSR (`ng build` + `npm run serve:ssr:driveline`):** [`src/server.ts`](src/server.ts) handles `POST /api/dvla-vehicle` the same way and loads `.env` from the **project root**. Set `dvlaLookupUrl: '/api/dvla-vehicle'` in [`environment.prod.ts`](src/environments/environment.prod.ts) when serving from Node.
 
-**Static GitHub Pages:** leave `dvlaLookupUrl` as `''` in `environment.prod.ts` (default). There is no DVLA proxy on `github.io`; add your own HTTPS backend URL there if you need lookup on static hosting.
+**Static GitHub Pages:** [`environment.prod.ts`](src/environments/environment.prod.ts) sets **`dvlaLookupUrl`** to the official DVLA VES HTTPS URL so **Look up** is configured (with `dvlaApiKey`). If the browser blocks the call (**CORS**), use **SSR** and `dvlaLookupUrl: '/api/dvla-vehicle'`, or add your own proxy — see [docs/DVLA-API.md](docs/DVLA-API.md).
 
 ### Enquiry forms (Web3Forms — free email)
 
