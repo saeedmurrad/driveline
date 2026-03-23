@@ -110,7 +110,15 @@
             </button>
           </div>
           <p class="text-xs text-gray-500 dark:text-slate-400 mt-1.5">
-            Uses the DVLA Vehicle Enquiry API. Model is not provided — please enter make/model below after lookup.
+            <strong>Look up</strong> loads official
+            <a
+              href="https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+            >DVLA</a>
+            data (tax, MOT, make, colour, fuel, engine size, etc.). Anything DVLA does not hold — mileage,
+            model name, gearbox, owners, trim/spec — you enter in the sections below.
           </p>
         </div>
 
@@ -126,8 +134,11 @@
               <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
-              DVLA record (fields below are pre-filled where possible)
+              From DVLA (Vehicle Enquiry)
             </h3>
+            <p class="text-xs text-emerald-800/90 dark:text-emerald-200/80 mb-3">
+              Official record for this registration. Other form sections ask you for what DVLA does not supply.
+            </p>
             <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm">
               <div class="flex flex-col sm:flex-row sm:gap-2">
                 <dt class="text-gray-500 dark:text-slate-400 font-medium shrink-0">Registration</dt>
@@ -191,56 +202,80 @@
           </div>
         }
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="form-label">Mileage*</label>
-            <input [(ngModel)]="vehicle.mileage" name="peMileage" required type="number" placeholder="e.g. 35000" class="form-input" />
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600">
+          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">Your details (not from DVLA)</h3>
+          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">
+            DVLA does not provide mileage, model name, gearbox type, keeper count, or full trim wording — please enter these.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">Mileage (miles)*</label>
+              <input [(ngModel)]="vehicle.mileage" name="peMileage" type="number" min="0" placeholder="e.g. 35000" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">Model*</label>
+              <input [(ngModel)]="vehicle.model" name="peModel" type="text" placeholder="e.g. C4 Picasso" class="form-input" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="form-label">Trim / specification <span class="font-normal text-gray-500 dark:text-slate-400">(optional)</span></label>
+              <input [(ngModel)]="vehicle.derivative" name="peDerivative" type="text" placeholder="e.g. Exclusive, engine badge, pack name" class="form-input" />
+              <p class="text-xs text-gray-500 dark:text-slate-400 mt-1">
+                After Look up, engine size and fuel are in the DVLA summary; use this field for trim, pack, or badge names.
+              </p>
+            </div>
+            <div class="relative">
+              <label class="form-label">Gearbox*</label>
+              <select [(ngModel)]="vehicle.gearbox" name="peGearbox" class="form-select pr-10">
+                <option value="">Select gearbox</option>
+                @for (gb of gearboxOptions; track gb) {
+                  <option [value]="gb">{{ gb }}</option>
+                }
+              </select>
+              <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div>
+              <label class="form-label">Number of previous keepers <span class="font-normal text-gray-500 dark:text-slate-400">(optional)</span></label>
+              <input [(ngModel)]="vehicle.numberOfOwners" name="peOwners" type="number" min="1" placeholder="e.g. 2" class="form-input" />
+            </div>
           </div>
-          <div>
-            <label class="form-label">Make*</label>
-            <input [(ngModel)]="vehicle.make" name="peMake" required type="text" placeholder="e.g. Ford" class="form-input" />
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600">
+          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">From your registration — check or edit</h3>
+          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">
+            These are filled from DVLA after <strong>Look up</strong>, or you can type them if you skip lookup.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">Make*</label>
+              <input [(ngModel)]="vehicle.make" name="peMake" type="text" placeholder="e.g. Citroen" class="form-input" />
+            </div>
+            <div>
+              <label class="form-label">Colour</label>
+              <input [(ngModel)]="vehicle.colour" name="peColour" type="text" placeholder="e.g. Red" class="form-input" />
+            </div>
+            <div class="relative">
+              <label class="form-label">Fuel type*</label>
+              <select [(ngModel)]="vehicle.fuel" name="peFuel" class="form-select pr-10">
+                <option value="">Select fuel</option>
+                @for (fuel of fuelOptions; track fuel) {
+                  <option [value]="fuel">{{ fuel }}</option>
+                }
+              </select>
+              <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div>
+              <label class="form-label">MOT expiry</label>
+              <input [(ngModel)]="vehicle.motExpiry" name="peMot" type="date" class="form-input" />
+            </div>
           </div>
-          <div>
-            <label class="form-label">Model*</label>
-            <input [(ngModel)]="vehicle.model" name="peModel" required type="text" placeholder="e.g. Focus" class="form-input" />
-          </div>
-          <div>
-            <label class="form-label">Derivative</label>
-            <input [(ngModel)]="vehicle.derivative" name="peDerivative" type="text" placeholder="e.g. 1.5T Titanium" class="form-input" />
-          </div>
-          <div>
-            <label class="form-label">Colour</label>
-            <input [(ngModel)]="vehicle.colour" name="peColour" type="text" placeholder="e.g. Midnight Black" class="form-input" />
-          </div>
-          <div class="relative">
-            <label class="form-label">Fuel Type</label>
-            <select [(ngModel)]="vehicle.fuel" name="peFuel" class="form-select pr-10">
-              <option value="">Select</option>
-              @for (fuel of fuelOptions; track fuel) {
-                <option [value]="fuel">{{ fuel }}</option>
-              }
-            </select>
-            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div class="relative">
-            <label class="form-label">Gearbox</label>
-            <select [(ngModel)]="vehicle.gearbox" name="peGearbox" class="form-select pr-10">
-              @for (gb of gearboxOptions; track gb) {
-                <option [value]="gb">{{ gb }}</option>
-              }
-            </select>
-            <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-          </div>
-          <div>
-            <label class="form-label">Number of Owners</label>
-            <input [(ngModel)]="vehicle.numberOfOwners" name="peOwners" type="number" min="1" placeholder="e.g. 2" class="form-input" />
-          </div>
-          <div>
-            <label class="form-label">MOT Expiry</label>
-            <input [(ngModel)]="vehicle.motExpiry" name="peMot" type="date" class="form-input" />
-          </div>
-          <div class="relative sm:col-span-2">
-            <label class="form-label">Service History</label>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600">
+          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">Service history</h3>
+          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Not held by DVLA — tell us what applies.</p>
+          <div class="relative max-w-xl">
+            <label class="form-label">Service history</label>
             <select [(ngModel)]="vehicle.serviceHistory" name="peSh" class="form-select pr-10">
               <option value="">Select</option>
               @for (sh of serviceHistoryOptions; track sh) {
@@ -250,6 +285,12 @@
             <svg class="absolute right-3 top-10 w-4 h-4 text-gray-400 dark:text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
           </div>
         </div>
+
+        @if (step1FieldsError()) {
+          <div class="mt-6 rounded-xl border border-amber-200 dark:border-amber-800/60 bg-amber-50 dark:bg-amber-950/40 px-4 py-3 text-sm text-amber-900 dark:text-amber-100" role="alert">
+            {{ step1FieldsError() }}
+          </div>
+        }
 
         <div class="flex justify-end mt-6">
           <button type="button" (click)="nextStep()" class="btn-primary">

@@ -45,6 +45,8 @@ export class PartExchangeFormComponent {
   dvlaVehicleDetails = signal<DvlaVehicleDetails | null>(null);
   submitSending = signal(false);
   submitError = signal<string | null>(null);
+  /** Step 1: missing required fields when user clicks Next */
+  step1FieldsError = signal<string | null>(null);
 
   vehicle = {
     registration: '',
@@ -54,7 +56,7 @@ export class PartExchangeFormComponent {
     derivative: '',
     colour: '',
     fuel: '',
-    gearbox: 'Manual',
+    gearbox: '',
     numberOfOwners: undefined as number | undefined,
     motExpiry: '',
     serviceHistory: '',
@@ -89,6 +91,7 @@ export class PartExchangeFormComponent {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.registrationLookupError.set(null);
+    this.step1FieldsError.set(null);
     this.dvlaVehicleDetails.set(null);
     this.registrationLookupLoading.set(true);
 
@@ -108,24 +111,19 @@ export class PartExchangeFormComponent {
       });
   }
 
-  /** Maps DVLA response into the part-exchange form (model is not returned by DVLA). */
+  /**
+   * Maps DVLA Vehicle Enquiry fields only. Model, mileage, gearbox, owners, trim/spec
+   * are left for the user — engine size appears on the DVLA summary card, not in derivative.
+   */
   private applyDvlaToForm(d: DvlaVehicleDetails): void {
     if (d.registrationNumber) {
       this.vehicle.registration = d.registrationNumber.toUpperCase();
     }
     this.vehicle.make = this.toTitleCase(d.make);
     this.vehicle.model = '';
+    this.vehicle.derivative = '';
     this.vehicle.colour = d.colour?.trim() || '';
     this.vehicle.fuel = this.mapDvlaFuelToForm(d.fuelType);
-
-    const parts: string[] = [];
-    if (d.engineCapacity != null && d.engineCapacity > 0) {
-      parts.push(`${d.engineCapacity}cc`);
-    }
-    if (d.fuelType) {
-      parts.push(this.toTitleCase(d.fuelType));
-    }
-    this.vehicle.derivative = parts.join(' · ');
 
     if (d.motExpiryDate) {
       this.vehicle.motExpiry = d.motExpiryDate;
@@ -148,20 +146,55 @@ export class PartExchangeFormComponent {
     const u = fuel.toUpperCase();
     if (u.includes('DIESEL')) return 'Diesel';
     if (u.includes('PETROL') || u === 'GAS') return 'Petrol';
-    if (u.includes('ELECTRIC')) return 'Electric';
+    // Before plain "Electric" — DVLA often uses "PLUGIN HYBRID ELECTRIC" etc.
     if (u.includes('HYBRID') && (u.includes('PLUGIN') || u.includes('PHEV')))
       return 'Plug-in Hybrid';
+    if (u.includes('ELECTRIC')) return 'Electric';
     if (u.includes('HYBRID')) return 'Hybrid';
     const t = this.toTitleCase(fuel);
     return this.fuelOptions.includes(t) ? t : '';
   }
 
   nextStep() {
+    const step = this.currentStep();
+    if (step === 1 && !this.validateStep1()) {
+      return;
+    }
+    this.step1FieldsError.set(null);
     this.currentStep.update((s) => Math.min(s + 1, 3));
   }
 
   prevStep() {
+    this.step1FieldsError.set(null);
     this.currentStep.update((s) => Math.max(s - 1, 1));
+  }
+
+  /** DVLA fills some fields; we always require mileage, model, fuel & gearbox from the user. */
+  private validateStep1(): boolean {
+    const v = this.vehicle;
+    const missing: string[] = [];
+    if (v.mileage == null || Number.isNaN(Number(v.mileage)) || Number(v.mileage) < 0) {
+      missing.push('Mileage');
+    }
+    if (!v.make?.trim()) {
+      missing.push('Make');
+    }
+    if (!v.model?.trim()) {
+      missing.push('Model');
+    }
+    if (!v.fuel?.trim()) {
+      missing.push('Fuel type');
+    }
+    if (!v.gearbox?.trim()) {
+      missing.push('Gearbox');
+    }
+    if (missing.length > 0) {
+      this.step1FieldsError.set(
+        `Please complete: ${missing.join(', ')}. Use Look up to pre-fill DVLA data where possible, then add the rest.`,
+      );
+      return false;
+    }
+    return true;
   }
 
   submitForm() {

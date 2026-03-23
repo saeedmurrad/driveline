@@ -9,6 +9,7 @@
     "sync:stock": "node scripts/fetch-fengate-stock.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:dvla-live": "node scripts/test-dvla-ves.mjs",
     "serve:ssr:driveline": "node dist/driveline/server/server.mjs"
   },
   "private": true,

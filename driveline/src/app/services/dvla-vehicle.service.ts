@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -14,7 +18,8 @@ export class DvlaVehicleService {
 
   /**
    * Normalises VRN (no spaces, upper case) and calls DVLA Vehicle Enquiry API
-   * (directly or via dev proxy — see environment.dvlaLookupUrl).
+   * via `environment.dvlaLookupUrl` (dev proxy or SSR `/api/dvla-vehicle`).
+   * @see https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html
    */
   lookupByRegistration(registration: string): Observable<DvlaVehicleDetails> {
     const vrn = registration.replace(/\s+/g, '').toUpperCase();
@@ -26,13 +31,18 @@ export class DvlaVehicleService {
       return throwError(
         () =>
           new Error(
-            'Registration lookup is not configured. Add a DVLA proxy URL in environment or run locally with the dev proxy and DVLA_API_KEY.',
+            'Registration lookup is not configured. Set dvlaLookupUrl in environment (and dvlaApiKey or server DVLA_API_KEY).',
           ),
       );
     }
 
+    const key = environment.dvlaApiKey?.trim();
+    const headers = key
+      ? new HttpHeaders({ 'x-api-key': key })
+      : undefined;
+
     return this.http
-      .post<DvlaVehicleDetails>(url, { registrationNumber: vrn })
+      .post<DvlaVehicleDetails>(url, { registrationNumber: vrn }, { headers })
       .pipe(catchError((err: HttpErrorResponse) => throwError(() => this.mapError(err))));
   }
 
