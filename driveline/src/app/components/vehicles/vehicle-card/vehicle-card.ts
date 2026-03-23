@@ -80,7 +80,7 @@ export class VehicleCardComponent implements OnChanges {
     void this.router.navigate(['/vehicle', this.vehicle.id]);
   }
 
-  /** Dealer API monthly if present, else illustrative HP */
+  /** 60 mo, 0% deposit illustrative (matches site calculator). */
   monthlyFinanceQuote(): number | undefined {
     return monthlyPaymentForVehicle(this.vehicle);
   }

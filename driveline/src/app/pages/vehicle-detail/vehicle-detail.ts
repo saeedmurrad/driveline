@@ -18,6 +18,7 @@ import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.servic
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 import {
   monthlyPaymentForVehicle,
+  financeTermOptionsForPrice,
   FINANCE_ILLUSTRATIVE_PARAMS,
   FINANCE_DISCLAIMER_SHORT,
   FINANCE_DISCLAIMER_DETAIL,
@@ -55,11 +56,18 @@ export class VehicleDetailComponent implements OnDestroy {
     return imgs[i];
   });
 
-  /** Dealer feed monthly when set, else illustrative HP (same rules as listing cards). */
+  /** Lowest illustrative monthly (60 mo, 0% deposit) — matches listing cards. */
   monthlyFinanceQuote = computed(() => {
     const v = this.vehicle();
     if (!v) return undefined;
     return monthlyPaymentForVehicle(v);
+  });
+
+  /** Rows for Finance tab calculator: 36 / 48 / 60 months. */
+  financeTermRows = computed(() => {
+    const v = this.vehicle();
+    if (!v) return [];
+    return financeTermOptionsForPrice(v.price);
   });
 
   readonly financeParams = FINANCE_ILLUSTRATIVE_PARAMS;

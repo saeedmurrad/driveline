@@ -1,8 +1,13 @@
-import { Component, signal, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, inject, PLATFORM_ID, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import {
+  financeTermOptionsForPrice,
+  FINANCE_ILLUSTRATIVE_PARAMS,
+  FINANCE_DISCLAIMER_DETAIL,
+} from '../../utils/finance-display';
 
 @Component({
   selector: 'app-finance',
@@ -16,6 +21,14 @@ export class FinanceComponent {
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
+
+  /** Illustrative HP calculator (36 / 48 / 60 mo, 0% dep, 9.9% APR rep.) */
+  calcCashPrice = signal(12500);
+  financeCalculatorRows = computed(() =>
+    financeTermOptionsForPrice(Math.max(500, this.calcCashPrice())),
+  );
+  readonly financeCalcParams = FINANCE_ILLUSTRATIVE_PARAMS;
+  readonly financeDisclaimerDetail = FINANCE_DISCLAIMER_DETAIL;
 
   enquiry = {
     firstName: '',
@@ -37,7 +50,7 @@ export class FinanceComponent {
       description:
         'Sometimes just referred to as HP, this is a loan secured against the vehicle itself. This is a great choice for people who want to spread out the cost of their car.',
       features: [
-        'Deposit required (typically 10%)',
+        'Deposit optional — we show 0% deposit examples on listings',
         'Fixed monthly repayments',
         'You own the car at the end',
         'No mileage restrictions',
@@ -78,6 +91,20 @@ export class FinanceComponent {
   ];
 
   loanTerms = [12, 24, 36, 48, 60];
+
+  formatCalcMonthly(value: number): string {
+    return new Intl.NumberFormat('en-GB', {
+      style: 'currency',
+      currency: 'GBP',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  }
+
+  onCalcPriceInput(raw: string | number): void {
+    const n = typeof raw === 'string' ? parseFloat(raw) : Number(raw);
+    this.calcCashPrice.set(Number.isFinite(n) && n >= 500 ? Math.round(n) : 500);
+  }
 
   submitEnquiry() {
     const e = this.enquiry;

@@ -30,6 +30,44 @@
     </p>
   </div>
 
+  <!-- Illustrative HP calculator (same basis as vehicle listings: 0% dep, 9.9% APR rep.) -->
+  <div
+    class="max-w-3xl mx-auto mb-16 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-600 dark:bg-slate-800 sm:p-8"
+  >
+    <h2 class="section-title mb-2 text-center">Payment calculator</h2>
+    <p class="mb-6 text-center text-sm text-gray-600 dark:text-slate-400">
+      Illustrative <strong>Hire Purchase</strong> — <strong>no deposit</strong> (full price financed),
+      <strong>{{ financeCalcParams.representativeApr }}% APR</strong> representative. Compare
+      <strong>36</strong>, <strong>48</strong> and <strong>60</strong> month terms.
+    </p>
+    <label class="mb-2 block text-sm font-medium text-gray-700 dark:text-slate-300" for="finance-calc-price">Vehicle price (£)</label>
+    <input
+      id="finance-calc-price"
+      type="number"
+      min="500"
+      step="50"
+      class="form-input mb-6 max-w-xs"
+      [ngModel]="calcCashPrice()"
+      (ngModelChange)="onCalcPriceInput($event)"
+    />
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      @for (row of financeCalculatorRows(); track row.termMonths) {
+        <div
+          class="rounded-xl border border-emerald-100 bg-emerald-50 p-4 text-center dark:border-emerald-800/60 dark:bg-emerald-950/40"
+        >
+          <p class="text-xs font-semibold uppercase tracking-wide text-emerald-800 dark:text-emerald-300">
+            {{ row.termMonths }} months
+          </p>
+          <p class="mt-1 text-2xl font-bold tabular-nums text-emerald-600 dark:text-emerald-400">
+            {{ formatCalcMonthly(row.monthly) }}
+          </p>
+          <p class="text-xs text-gray-500 dark:text-slate-400">per month</p>
+        </div>
+      }
+    </div>
+    <p class="mt-4 text-xs leading-relaxed text-gray-500 dark:text-slate-400">{{ financeDisclaimerDetail }}</p>
+  </div>
+
   <!-- Finance Types -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
     @for (type of financeTypes; track type.title) {

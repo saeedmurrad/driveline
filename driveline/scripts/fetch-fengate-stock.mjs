@@ -141,12 +141,9 @@ function mapToVehicle(api) {
     sourceListingUrl,
   };
 
-  if (api.monthly_price != null && !Number.isNaN(Number(api.monthly_price))) {
-    v.monthlyPrice = Math.round(Number(api.monthly_price));
-  } else {
-    const ill = illustrativeMonthlyPayment(v.price);
-    if (ill != null) v.monthlyPrice = ill;
-  }
+  // Align with site calculator: 60 mo, 0% deposit, 9.9% APR (lowest headline payment)
+  const ill60 = illustrativeMonthlyPayment(v.price, 60);
+  if (ill60 != null) v.monthlyPrice = ill60;
   if (typeof api.seats === 'number' && api.seats > 0) v.seats = api.seats;
   if (api.tax_rate_12 != null && !Number.isNaN(Number(api.tax_rate_12))) {
     v.taxRate12Month = Math.round(Number(api.tax_rate_12));
@@ -174,17 +171,16 @@ function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, ' ');
 }
 
-/** Illustrative HP when API omits monthly_price (48mo, 10% dep, 9.9% APR rep.) */
-function illustrativeMonthlyPayment(cashPrice) {
+/** Illustrative HP: 0% deposit, 9.9% APR representative. */
+function illustrativeMonthlyPayment(cashPrice, termMonths) {
   const price = Number(cashPrice);
-  if (!Number.isFinite(price) || price < 500) return undefined;
-  const termMonths = 48;
+  const n = Math.round(Number(termMonths));
+  if (!Number.isFinite(price) || price < 500 || !Number.isFinite(n) || n < 1) return undefined;
   const representativeApr = 9.9;
-  const depositPercent = 10;
+  const depositPercent = 0;
   const deposit = price * (depositPercent / 100);
   const principal = Math.max(0, price - deposit);
   const monthlyRate = representativeApr / 100 / 12;
-  const n = termMonths;
   if (monthlyRate <= 0) return Math.round(principal / n);
   const pow = Math.pow(1 + monthlyRate, n);
   const payment = (principal * monthlyRate * pow) / (pow - 1);

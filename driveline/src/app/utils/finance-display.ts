@@ -1,33 +1,43 @@
 import type { Vehicle } from '../models/vehicle.model';
 
 /**
- * Illustrative HP quote parameters (UK dealer-style listing).
- * Shown with FCA-friendly “representative / subject to status” copy — not a binding offer.
+ * Illustrative HP quotes — UK dealer-style, FCA-friendly copy.
+ * Zero deposit (full finance on vehicle price), 9.9% APR representative.
  */
 export const FINANCE_ILLUSTRATIVE_PARAMS = {
-  termMonths: 48,
   representativeApr: 9.9,
-  depositPercent: 10,
+  /** Full amount financed (no deposit) */
+  depositPercent: 0,
+  termMonthsOptions: [36, 48, 60] as const,
+  /** Lowest monthly payment — used on cards / “from” lines */
+  listingHeadlineTermMonths: 60,
 } as const;
 
 /** One-line disclaimer for cards / listings */
 export const FINANCE_DISCLAIMER_SHORT =
-  'Illustrative HP: 48 monthly payments, 10% deposit, 9.9% APR representative. Subject to status & credit check.';
+  'Illustrative HP: 0% deposit, 9.9% APR representative. Example shown is 60 monthly payments (lowest payment). 36 & 48 month options on vehicle page. Subject to status.';
 
-/** Slightly longer line for VDP / finance tab */
+/** Longer copy for VDP / finance tab */
 export const FINANCE_DISCLAIMER_DETAIL =
-  'Example Hire Purchase (HP): 10% deposit, balance over 48 months at 9.9% APR representative. Actual rate and payment depend on your circumstances. Subject to status.';
+  'Examples are Hire Purchase (HP) with the full cash price financed over 36, 48 or 60 months at 9.9% APR representative, with no deposit. Actual rate and payment depend on your circumstances. Subject to status and credit check.';
+
+export type FinanceTermOption = { termMonths: number; monthly: number };
 
 /**
- * Standard amortising loan monthly payment (HP), rounded to whole pounds.
+ * Monthly payment for a given term (principal = full cash price when deposit is 0).
  */
-export function illustrativeMonthlyPayment(cashPrice: number): number | undefined {
+export function illustrativeMonthlyPayment(
+  cashPrice: number,
+  termMonths: number,
+): number | undefined {
   if (!Number.isFinite(cashPrice) || cashPrice < 500) return undefined;
-  const { termMonths, representativeApr, depositPercent } = FINANCE_ILLUSTRATIVE_PARAMS;
+  if (!Number.isFinite(termMonths) || termMonths < 1) return undefined;
+
+  const { representativeApr, depositPercent } = FINANCE_ILLUSTRATIVE_PARAMS;
   const deposit = cashPrice * (depositPercent / 100);
   const principal = Math.max(0, cashPrice - deposit);
   const monthlyRate = representativeApr / 100 / 12;
-  const n = termMonths;
+  const n = Math.round(termMonths);
   if (monthlyRate <= 0) return Math.round(principal / n);
   const pow = Math.pow(1 + monthlyRate, n);
   const payment = (principal * monthlyRate * pow) / (pow - 1);
@@ -35,10 +45,23 @@ export function illustrativeMonthlyPayment(cashPrice: number): number | undefine
   return Math.round(payment);
 }
 
-/** Prefer dealer/API monthly when present; otherwise illustrative HP. */
-export function monthlyPaymentForVehicle(v: Pick<Vehicle, 'price' | 'monthlyPrice'>): number | undefined {
-  if (v.monthlyPrice != null && v.monthlyPrice > 0) {
-    return Math.round(v.monthlyPrice);
+/** 36 / 48 / 60 month rows for calculators and VDP. */
+export function financeTermOptionsForPrice(cashPrice: number): FinanceTermOption[] {
+  const out: FinanceTermOption[] = [];
+  for (const termMonths of FINANCE_ILLUSTRATIVE_PARAMS.termMonthsOptions) {
+    const monthly = illustrativeMonthlyPayment(cashPrice, termMonths);
+    if (monthly != null) out.push({ termMonths, monthly });
   }
-  return illustrativeMonthlyPayment(v.price);
+  return out;
+}
+
+/**
+ * Headline “from £X/mo” on listings — longest term (lowest payment), same rules as calculator.
+ * Ignores legacy `monthlyPrice` on the vehicle so figures always match 0% deposit / 9.9% APR examples.
+ */
+export function monthlyPaymentForVehicle(v: Pick<Vehicle, 'price'>): number | undefined {
+  return illustrativeMonthlyPayment(
+    v.price,
+    FINANCE_ILLUSTRATIVE_PARAMS.listingHeadlineTermMonths,
+  );
 }
