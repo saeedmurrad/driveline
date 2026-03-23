@@ -58,6 +58,33 @@ jobs:
               f.write(text)
           PY
 
+      - name: Inject DVLA lookup URL (CORS proxy for static Pages)
+        env:
+          DVLA_LOOKUP_URL: ${{ secrets.DVLA_LOOKUP_URL }}
+        run: |
+          python3 << 'PY'
+          import json, os, re
+          url = os.environ.get("DVLA_LOOKUP_URL", "").strip()
+          if not url:
+              print("DVLA_LOOKUP_URL secret not set; build uses dvlaLookupUrl from environment.prod.ts (direct DVLA may fail in browser due to CORS).")
+              exit(0)
+          path = "driveline/src/environments/environment.prod.ts"
+          with open(path) as f:
+              text = f.read()
+          replacement = f"dvlaLookupUrl: {json.dumps(url)},"
+          text, n = re.subn(
+              r"dvlaLookupUrl:\s*\n\s*'[^']*',",
+              replacement,
+              text,
+              count=1,
+          )
+          if n != 1:
+              raise SystemExit(f"Could not patch dvlaLookupUrl in {path}")
+          with open(path, "w") as f:
+              f.write(text)
+          print("Patched dvlaLookupUrl for GitHub Pages build.")
+          PY
+
       - name: Build (production, GitHub Pages base href)
         run: npm run build:gh-pages
         working-directory: driveline

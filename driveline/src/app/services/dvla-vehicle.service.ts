@@ -59,8 +59,13 @@ export class DvlaVehicleService {
       return new Error('No vehicle found for that registration.');
     }
     if (err.status === 0) {
+      const hint =
+        environment.production &&
+        environment.dvlaLookupUrl?.includes('driver-vehicle-licensing.api.gov.uk')
+          ? ' Browsers usually block direct calls to DVLA from a website (CORS). Deploy the Cloudflare Worker in workers/dvla-ves-proxy/ and set the GitHub secret DVLA_LOOKUP_URL to your worker URL, then redeploy.'
+          : '';
       return new Error(
-        'Could not reach the registration service. Check your connection or server configuration.',
+        `Could not reach the registration service. Check your connection or proxy URL.${hint}`,
       );
     }
     return new Error(err.message || 'Registration lookup failed.');

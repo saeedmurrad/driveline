@@ -65,7 +65,13 @@ npm start
 
 **Production / SSR (`ng build` + `npm run serve:ssr:driveline`):** [`src/server.ts`](src/server.ts) handles `POST /api/dvla-vehicle` the same way and loads `.env` from the **project root**. Set `dvlaLookupUrl: '/api/dvla-vehicle'` in [`environment.prod.ts`](src/environments/environment.prod.ts) when serving from Node.
 
-**Static GitHub Pages:** [`environment.prod.ts`](src/environments/environment.prod.ts) sets **`dvlaLookupUrl`** to the official DVLA VES HTTPS URL so **Look up** is configured (with `dvlaApiKey`). If the browser blocks the call (**CORS**), use **SSR** and `dvlaLookupUrl: '/api/dvla-vehicle'`, or add your own proxy — see [docs/DVLA-API.md](docs/DVLA-API.md).
+**Static GitHub Pages:** Browsers **block** direct requests to DVLA (**CORS**), so you’ll see *“Could not reach the registration service”* unless you use a proxy.
+
+1. Deploy the **[Cloudflare Worker](workers/dvla-ves-proxy/README.md)** (`wrangler deploy` in `workers/dvla-ves-proxy/`).
+2. In the repo → **Settings → Secrets → Actions**, add **`DVLA_LOOKUP_URL`** = your worker URL (no trailing slash).
+3. Push / rerun **Deploy to GitHub Pages** — CI patches `dvlaLookupUrl` before build.
+
+Without the secret, the app still targets the official DVLA URL and lookup fails in the browser. **SSR** with `dvlaLookupUrl: '/api/dvla-vehicle'` also works — see [docs/DVLA-API.md](docs/DVLA-API.md).
 
 ### Enquiry forms (Web3Forms — free email)
 
