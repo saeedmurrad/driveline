@@ -98,5 +98,5 @@ export const BUSINESS_INFO: BusinessInfo = {
     { day: 'Sunday', open: '10:00', close: '16:00' },
   ],
   bankHolidayNote:
-    'We are open on all bank holidays (including Boxing Day, New Year\'s Day & Easter Weekend). Alternative times available by appointment.',
+    'Open bank holidays. Other times by appointment.',
 };
