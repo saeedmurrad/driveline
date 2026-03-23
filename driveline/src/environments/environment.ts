@@ -13,7 +13,7 @@ export const environment = {
    * DVLA Vehicle Enquiry API key — set here (same file as Web3Forms) or via `DVLA_API_KEY` for the dev proxy / SSR only.
    * Like `web3formsAccessKey`, a non-empty value is sent from the app as `x-api-key` on `/api/dvla-vehicle` and is visible in the browser bundle.
    */
-  dvlaApiKey: '',
+  dvlaApiKey: 'eYWCJ4jiTm9mkOZKGQkIA7yw6j2LtMJRaKAXc7K5',
   /**
    * https://web3forms.com — free form emails (key is public in the browser bundle by design).
    */

@@ -11,7 +11,7 @@ export const environment = {
    * Same idea as `web3formsAccessKey`: optional DVLA key in this file for static/SSR builds.
    * Prefer leaving empty for public GitHub Pages; use a backend + env var for a non-exposed key.
    */
-  dvlaApiKey: '',
+  dvlaApiKey: 'eYWCJ4jiTm9mkOZKGQkIA7yw6j2LtMJRaKAXc7K5',
   /**
    * Optional: override via GitHub secret `WEB3FORMS_ACCESS_KEY` before build (see deploy workflow).
    * If empty, forms fall back to mailto.
