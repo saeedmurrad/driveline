@@ -7,7 +7,7 @@ import {
   PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Vehicle } from '../../../models/vehicle.model';
 
@@ -21,6 +21,7 @@ export class VehicleCardComponent implements OnChanges {
   @Input({ required: true }) vehicle!: Vehicle;
 
   private platformId = inject(PLATFORM_ID);
+  private router = inject(Router);
   /** Index into `vehicle.images` while hovering (cycles like dealer listing previews) */
   hoverImageIndex = signal(0);
   private hoverTimer: ReturnType<typeof setInterval> | null = null;
@@ -61,6 +62,16 @@ export class VehicleCardComponent implements OnChanges {
       clearInterval(this.hoverTimer);
       this.hoverTimer = null;
     }
+  }
+
+  /**
+   * Card body navigates to detail; CTAs use data-vehicle-card-cta so taps work on mobile
+   * (nested routerLink + button + anchor was invalid and swallowed tel / inner clicks).
+   */
+  onCardClick(ev: MouseEvent): void {
+    const t = ev.target as HTMLElement | null;
+    if (t?.closest('[data-vehicle-card-cta]')) return;
+    void this.router.navigate(['/vehicle', this.vehicle.id]);
   }
 
   formatPrice(price: number): string {
