@@ -11,15 +11,45 @@ const UPSTREAM =
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, HEAD, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type, Accept, x-api-key',
   'Access-Control-Max-Age': '86400',
 };
+
+/** Browsers (and “open URL”) use GET — DVLA only accepts POST via this proxy. */
+const GET_INFO = JSON.stringify({
+  ok: true,
+  service: 'DVLA Vehicle Enquiry CORS proxy',
+  message:
+    'This endpoint is for POST requests only (same as the DVLA API). Opening it in a tab sends GET, which does not call DVLA.',
+  usage: {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': 'Your DVLA API key (or set DVLA_API_KEY on the worker)',
+    },
+    body: { registrationNumber: 'AB12CDE' },
+  },
+});
 
 export default {
   async fetch(request, env) {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
+    }
+
+    if (request.method === 'GET') {
+      return new Response(GET_INFO, {
+        status: 200,
+        headers: { ...CORS_HEADERS, 'Content-Type': 'application/json; charset=utf-8' },
+      });
+    }
+
+    if (request.method === 'HEAD') {
+      return new Response(null, {
+        status: 200,
+        headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+      });
     }
 
     if (request.method !== 'POST') {

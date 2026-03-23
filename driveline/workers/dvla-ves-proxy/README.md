@@ -28,3 +28,7 @@ If you paste the API key into `DVLA_LOOKUP_URL`, the site will call `…/driveli
 The deploy workflow patches `environment.prod.ts` before build so `dvlaLookupUrl` points at the worker.
 
 Redeploy the site after saving the secret.
+
+### “Method not allowed” when opening the worker URL in a browser
+
+That’s normal if you only **paste the URL in the address bar** — that sends **GET**. DVLA (and this proxy) expect **POST** with JSON `{"registrationNumber":"…"}` and `x-api-key`. Your **Angular app** does that automatically. A **GET** to the worker should return `200` with usage JSON (after you redeploy the latest `worker.js`).
