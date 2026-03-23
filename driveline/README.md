@@ -116,6 +116,8 @@ From the **repository root** (parent of `driveline/`), CI builds with:
 
 Enable **Pages → Source: GitHub Actions** in repo settings. See the root [README](../README.md#github-pages).
 
+**Favicon & link previews:** [`public/favicon.svg`](public/favicon.svg) matches the header car mark. Open Graph / Twitter image is [`public/og-image.svg`](public/og-image.svg); absolute URLs in [`src/index.html`](src/index.html) point at `https://saeedmurrad.github.io/driveline/`. If you use a **custom domain**, update `og:url`, `og:image`, and `twitter:image` there. Facebook/LinkedIn sometimes prefer **PNG** (1200×630) for `og:image` — export `og-image.svg` and switch the meta URLs to `og-image.png` if previews fail.
+
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
