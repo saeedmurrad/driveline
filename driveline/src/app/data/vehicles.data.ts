@@ -102,7 +102,7 @@ export const VEHICLES: Vehicle[] = [
     "model": "Grand C4 Picasso",
     "derivative": "1.6 e-HDi Airdream Exclusive ETG6 Euro 5 (s/s) 5dr",
     "year": 2014,
-    "price": 5750,
+    "price": 5450,
     "mileage": 79000,
     "transmission": "Automatic",
     "fuelType": "Diesel",
@@ -239,7 +239,7 @@ export const VEHICLES: Vehicle[] = [
     "topSpeedMph": 117,
     "dateAdded": "2026-03-16",
     "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/citroen-grand-c4-picasso-16-e-hdi-airdream-exclusive-etg6-euro-5-ss-5dr-10369/",
-    "monthlyPrice": 122,
+    "monthlyPrice": 116,
     "seats": 7,
     "taxRate12Month": 20,
     "mpgUrban": 62,
@@ -1266,7 +1266,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1642,
     "lengthMm": 4519,
     "widthMm": 2067,
-    "bootSpaceSeatsUpLitres": 65
+    "bootSpaceSeatsUpLitres": 65,
+    "bootSpaceSeatsDownLitres": 1715
   },
   {
     "id": "10349",
@@ -1420,7 +1421,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1556,
     "lengthMm": 4159,
     "widthMm": 2004,
-    "bootSpaceSeatsUpLitres": 360
+    "bootSpaceSeatsUpLitres": 360,
+    "bootSpaceSeatsDownLitres": 1172
   },
   {
     "id": "10348",
@@ -1658,7 +1660,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1445,
     "lengthMm": 4419,
     "widthMm": 1992,
-    "bootSpaceSeatsUpLitres": 370
+    "bootSpaceSeatsUpLitres": 370,
+    "bootSpaceSeatsDownLitres": 1210
   },
   {
     "id": "10344",
@@ -1815,6 +1818,7 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4477,
     "widthMm": 2098,
     "bootSpaceSeatsUpLitres": 514,
+    "bootSpaceSeatsDownLitres": 1652,
     "acceleration0To60Seconds": 10.2
   },
   {
@@ -1834,6 +1838,33 @@ export const VEHICLES: Vehicle[] = [
     "category": "car",
     "description": "**ULEZ COMPLIANT**DELIVERY & VIDEO CALL AVAILABL**STAGE 2 REMAP WITH FULL FORGED INTAKE**TOP SPEC**FULL SERVICE HISTORY & JUST BEEN SERVICED + MOT TESTED AT 117K + MAJOR SERVICE INCLUDING COIL PACK & EXTENDED HEAVY DUTY REMAP PLUGS, HEATED LEATHER SEATS, FRONT & REAR PARKING SENSORS WITH RADAR PARK ASSIST, SAT NAVIGATION, MEDIA PLAYER RADIO/USB, BLUETOOTH, CRUISE CONTROL, CLIMATE CONTROL, PRIVACY GLASS, POWER FOLDING MIRRORS, MULTI FUNCTION STEERING WHEEL, REMOTE BOOT RELEASE, 2 KEYS WITH PUSH/START & START/STOP, GREY TWIN M SPORT ALLOYS WITH BLUE M SPORT CALLIPERS, DAY/NIGHT RUNNING LIGHTS WITH ANGEL EYES WITH XENONS, **POPS & BANGS**HPI CHECKED, MILEAGE WARRANTED, FINANCE AVAILABLE",
     "features": [
+      "Navigation System - BMW Professional Multimedia",
+      "Media Package - BMW Professional",
+      "Sport Automatic Transmission",
+      "Speaker System - Harman Kardon",
+      "PDC - Park Distance Control - Front and Rear",
+      "Adaptive M Sport Suspension",
+      "Visibility Pack",
+      "Enhanced Bluetooth Telephone Preparation with USB Audio Interface",
+      "Cruise Control with Brake Function",
+      "Driver Comfort Package",
+      "Sun Protection Package",
+      "Seats - Front Heated",
+      "Adaptive Headlights",
+      "Sun Protection Glazing",
+      "Door Mirrors - Folding - Automatically Dimming",
+      "Concierge Service",
+      "High-Beam Assistant",
+      "Full Black Panel Display",
+      "Windscreen with Grey Shade Band",
+      "BMW ConnectedDrive Online Services",
+      "BMW Emergency Call",
+      "BMW TeleServices",
+      "Interior Trim - Brushed Aluminium",
+      "Interior Trim Finisher - Black High Gloss",
+      "Real Time Traffic Information",
+      "Run Flat Tyres",
+      "Dakota Leather - Black with Black Interior",
       "12V Power Socket - Centre Console",
       "12V Power Socket - Passenger Footwell",
       "18in Alloy Wheels - M Light Double Spoke - 436M",
@@ -1886,34 +1917,7 @@ export const VEHICLES: Vehicle[] = [
       "Floor Mats - Velour",
       "Follow Me Home Headlight Function",
       "Gearshift Lever with M Designation",
-      "Grab Handles - in Roof Lining x4",
-      "Handbrake Lever - Gear Lever Knob and Gaiters in Leather",
-      "Head Restraints - Rear and Folding",
-      "Headlights - Automatic Activation",
-      "Headlights - Washer System",
-      "Headlining - Anthracite",
-      "Heat Protection Glazing with Green Tint",
-      "Heated Windscreen Washer Jets",
-      "High Level Third Brake Light",
-      "Hill Start Assist",
-      "Interior Lighting",
-      "Interior Trim - Aluminium Hexagon",
-      "Kidney Grille - Chrome Extra-Wide High-Gloss Black Vertical Slats",
-      "Lights-On Warning",
-      "Locking Wheel Bolts",
-      "Luggage Compartment - Lashing Eyes x2",
-      "M Aerodynamic Bodystyling",
-      "M Sport Braking System",
-      "M Sport Suspension",
-      "Mobility Tyre Sealing System",
-      "Multifunction Controls for Steering Wheel",
-      "Non Smokers Package",
-      "OBC - On-Board Computer",
-      "Pyrotechnic Belt Tensioners - Front",
-      "Rain Sensor",
-      "Rear Window Wiper",
-      "Remote Services",
-      "Seats - 60-40 Split Folding Rear"
+      "Grab Handles - in Roof Lining x4"
     ],
     "images": [
       "https://www.fengatecarsales.co.uk/photos/12191/cb6ac6bb-8d4b-4bab-9606-f9dafcba77af_i800x600.jpg",
@@ -1975,7 +1979,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1411,
     "lengthMm": 4324,
     "widthMm": 1984,
-    "bootSpaceSeatsUpLitres": 360
+    "bootSpaceSeatsUpLitres": 360,
+    "bootSpaceSeatsDownLitres": 1200
   },
   {
     "id": "10341",
@@ -1994,6 +1999,24 @@ export const VEHICLES: Vehicle[] = [
     "category": "car",
     "description": "**ULEZ COMPLIANT**DELIVERY & VIDEO CALL AVAILABLE** SERVICE HISTORY & JUST BEEN SERVICED + MOT TESTED AT 111K, HALF LEATHER SEATS, SAT NAVIGATION, MEDIA PLAYER WITH RADIO.USB, BLUETOOTH, AIR CONDITIONING, CRUISE CONTROL, REMOTE BOOT RELEASE, AUTO HEADLIGHTS, 2 KEYS WITH OUSH/START & START/STOP, HPI CHECKED, MILEAGE WARRANTED, FINANCE AVAILABLE",
     "features": [
+      "CHILI Pack",
+      "Media Pack XL",
+      "16in Alloy Wheels - Loop Spoke in Silver",
+      "Enhanced Bluetooth with USB Audio",
+      "Air Conditioning - Automatic Dual Zone",
+      "Multifunction Controls for Steering Wheel",
+      "MINI Driving Modes",
+      "3-Spoke Sport Leather Steering Wheel",
+      "MINI Excitement Pack",
+      "Storage Compartment Pack",
+      "Front Centre Armrest",
+      "Interior Light Pack",
+      "Rain Sensor and Automatic Headlight Activation",
+      "Bonnet Stripes - Black",
+      "White Direction Indicators Lights",
+      "Colour Line - Carbon Black",
+      "Roof and Mirror Caps - Black",
+      "Diamond Cloth-Leather - Carbon Black - Carbon Black",
       "15in Alloy Wheels - Heli in Silver",
       "3rd Brake Light",
       "ASC+T - Automatic Stability Control and Traction",
@@ -2055,25 +2078,7 @@ export const VEHICLES: Vehicle[] = [
       "Start-Stop Button with Keyless Start",
       "Steering Column Height and Length Adjustment",
       "Sun Visors with Integrated Vanity Mirrors",
-      "TPWS - Tyre Pressure Warning System",
-      "Tool Kit in Luggage Compartment",
-      "CHILI Pack",
-      "Media Pack XL",
-      "16in Alloy Wheels - Loop Spoke in Silver",
-      "Enhanced Bluetooth with USB Audio",
-      "Air Conditioning - Automatic Dual Zone",
-      "Multifunction Controls for Steering Wheel",
-      "MINI Driving Modes",
-      "3-Spoke Sport Leather Steering Wheel",
-      "MINI Excitement Pack",
-      "Storage Compartment Pack",
-      "Front Centre Armrest",
-      "Interior Light Pack",
-      "Rain Sensor and Automatic Headlight Activation",
-      "Bonnet Stripes - Black",
-      "White Direction Indicators Lights",
-      "Colour Line - Carbon Black",
-      "Roof and Mirror Caps - Black"
+      "TPWS - Tyre Pressure Warning System"
     ],
     "images": [
       "https://www.fengatecarsales.co.uk/photos/12191/79adbbea-7e9a-482b-a552-f6f78a01a165_i800x600.jpg",
@@ -2131,7 +2136,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1414,
     "lengthMm": 3821,
     "widthMm": 1932,
-    "bootSpaceSeatsUpLitres": 211
+    "bootSpaceSeatsUpLitres": 211,
+    "bootSpaceSeatsDownLitres": 731
   },
   {
     "id": "10338",
@@ -2515,7 +2521,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1448,
     "lengthMm": 4090,
     "widthMm": 1945,
-    "bootSpaceSeatsUpLitres": 300
+    "bootSpaceSeatsUpLitres": 300,
+    "bootSpaceSeatsDownLitres": 1146
   },
   {
     "id": "10327",
@@ -2894,7 +2901,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1454,
     "lengthMm": 4378,
     "widthMm": 1979,
-    "bootSpaceSeatsUpLitres": 341
+    "bootSpaceSeatsUpLitres": 341,
+    "bootSpaceSeatsDownLitres": 1320
   },
   {
     "id": "10294",
@@ -3000,7 +3008,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1633,
     "lengthMm": 4017,
     "widthMm": 2057,
-    "bootSpaceSeatsUpLitres": 310
+    "bootSpaceSeatsUpLitres": 310,
+    "bootSpaceSeatsDownLitres": 1238
   },
   {
     "id": "10288",
@@ -3413,7 +3422,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1495,
     "lengthMm": 3969,
     "widthMm": 1978,
-    "bootSpaceSeatsUpLitres": 290
+    "bootSpaceSeatsUpLitres": 290,
+    "bootSpaceSeatsDownLitres": 974
   },
   {
     "id": "10270",
@@ -3586,6 +3596,7 @@ export const VEHICLES: Vehicle[] = [
     "category": "car",
     "description": "**ULEZ COMPIANT**DELIVERY & VIDEO CALL AVAILABLE**FACE-LIFT M SPORT WITH M PERFORMANCE PACK BODYKIT**2 OWNERS FROM EX-DEMO WITH FULL SERVICE HISTORY + JUST BEEN SERVICED & MOT TESTED AT 104K, QUILTED HEATED LEATHER SEATS, SAT NAVIGATION, REVERSE PARKING CAMERA WITH FRONT & REAR PARKING SENSORS WITH RADAR PARK ASSIST, M SPORT ALLOYS M SPORTS CALIPER, CRUISE CONTROL, LANE ASSIST, COLLISION ALERT, BLUETOOTH, PRIVACY GLASS, LARGE SCREEN MEDIA PLAYER WITH USB/DAB, DAY/NIGHT RIUNNING LIGHTS + ANGEL EYES & XENONS, PUSH/START & START/STOP + ECO/SPORT MODE, TWIN EXIT EXHAUST, TWIN SPOKE 19 INCH M SPORT ALLOYS,  **CHEAP TO RUN & INSURE - RETUNS GREAT FUEL ECONOMY - IDEAL CITY/FAMILY CAR**HPi CHECKED, MILEAGE WARRANTED, FINANCE AVAILABLE",
     "features": [
+      "Vernasca Leather - Black with Grey Stitching",
       "12V Power Socket in Front Storage Compartment",
       "18in Alloy Wheels - M Light Double Spoke Style 790M - Bicolour Orbit Grey",
       "Acoustic Glazing",
@@ -3664,8 +3675,7 @@ export const VEHICLES: Vehicle[] = [
       "Roof Mouldings - Black",
       "Seat Belt Security Check for Driver and Front Passenger",
       "Seat Heating for Driver and Front Passenger",
-      "Servotronic Steering",
-      "Shark Fin Aerial"
+      "Servotronic Steering"
     ],
     "images": [
       "https://www.fengatecarsales.co.uk/photos/12191/458ac124-4228-4d4e-a98a-da41af0bfc57_i800x600.jpg",
@@ -3737,7 +3747,7 @@ export const VEHICLES: Vehicle[] = [
     "model": "Alhambra",
     "derivative": "2.0 TDI Ecomotive CR SE Euro 5 (s/s) 5dr",
     "year": 2013,
-    "price": 5450,
+    "price": 4950,
     "mileage": 117000,
     "transmission": "Manual",
     "fuelType": "Diesel",
@@ -3876,7 +3886,7 @@ export const VEHICLES: Vehicle[] = [
     "topSpeedMph": 120,
     "dateAdded": "2025-08-17",
     "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/cars/seat-alhambra-20-tdi-ecomotive-cr-se-euro-5-ss-5dr-10257/",
-    "monthlyPrice": 116,
+    "monthlyPrice": 105,
     "seats": 7,
     "taxRate12Month": 215,
     "mpgUrban": 40,
@@ -5467,7 +5477,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1625,
     "lengthMm": 4428,
     "widthMm": 2117,
-    "bootSpaceSeatsUpLitres": 537
+    "bootSpaceSeatsUpLitres": 537,
+    "bootSpaceSeatsDownLitres": 1851
   },
   {
     "id": "10006",
