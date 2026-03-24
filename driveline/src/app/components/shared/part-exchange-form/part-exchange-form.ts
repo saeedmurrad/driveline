@@ -10,6 +10,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { Web3FormsEnquiryService } from '../../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../../utils/submit-enquiry';
+import { validateEnquiryFields } from '../../../utils/enquiry-validation';
+import { scrollFormAlertIntoView } from '../../../utils/scroll-form-alert';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -158,6 +160,7 @@ export class PartExchangeFormComponent {
   nextStep() {
     const step = this.currentStep();
     if (step === 1 && !this.validateStep1()) {
+      scrollFormAlertIntoView(this.platformId, 'part-exchange-step1-alert');
       return;
     }
     this.step1FieldsError.set(null);
@@ -267,7 +270,10 @@ export class PartExchangeFormComponent {
           this.isSubmitted.set(true);
           this.submitError.set(null);
         },
-        onError: (msg) => this.submitError.set(msg),
+        onError: (msg) => {
+          this.submitError.set(msg);
+          scrollFormAlertIntoView(this.platformId, 'part-exchange-submit-alert');
+        },
         setSubmitting: (v) => this.submitSending.set(v),
       },
     );

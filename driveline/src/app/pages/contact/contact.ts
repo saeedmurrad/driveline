@@ -7,6 +7,7 @@ import { SALES_EMAIL } from '../../constants/sales-contact';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
+import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 
 @Component({
   selector: 'app-contact',
@@ -50,6 +51,7 @@ export class ContactComponent {
     const validationError = validateEnquiryFields(e, { requireMessage: true });
     if (validationError) {
       this.enquiryError.set(validationError);
+      scrollFormAlertIntoView(this.platformId, 'contact-enquiry-alert');
       return;
     }
     const body = [
@@ -80,7 +82,10 @@ export class ContactComponent {
           this.enquirySent.set(true);
           this.enquiryError.set(null);
         },
-        onError: (msg) => this.enquiryError.set(msg),
+        onError: (msg) => {
+          this.enquiryError.set(msg);
+          scrollFormAlertIntoView(this.platformId, 'contact-enquiry-alert');
+        },
         setSubmitting: (v) => this.enquirySubmitting.set(v),
       },
     );

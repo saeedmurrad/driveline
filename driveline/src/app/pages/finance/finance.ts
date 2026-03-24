@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
+import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 import {
   financeTermOptionsForPrice,
   FINANCE_ILLUSTRATIVE_PARAMS,
@@ -112,6 +113,7 @@ export class FinanceComponent {
     const validationError = validateEnquiryFields(e);
     if (validationError) {
       this.enquiryError.set(validationError);
+      scrollFormAlertIntoView(this.platformId, 'finance-enquiry-alert');
       return;
     }
     const body = [
@@ -147,7 +149,10 @@ export class FinanceComponent {
           this.enquirySent.set(true);
           this.enquiryError.set(null);
         },
-        onError: (msg) => this.enquiryError.set(msg),
+        onError: (msg) => {
+          this.enquiryError.set(msg);
+          scrollFormAlertIntoView(this.platformId, 'finance-enquiry-alert');
+        },
         setSubmitting: (v) => this.enquirySubmitting.set(v),
       },
     );

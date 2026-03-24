@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
+import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 
 @Component({
   selector: 'app-warranty',
@@ -60,6 +61,7 @@ export class WarrantyComponent {
     const validationError = validateEnquiryFields(e);
     if (validationError) {
       this.enquiryError.set(validationError);
+      scrollFormAlertIntoView(this.platformId, 'warranty-enquiry-alert');
       return;
     }
     const body = [
@@ -91,7 +93,10 @@ export class WarrantyComponent {
           this.enquirySent.set(true);
           this.enquiryError.set(null);
         },
-        onError: (msg) => this.enquiryError.set(msg),
+        onError: (msg) => {
+          this.enquiryError.set(msg);
+          scrollFormAlertIntoView(this.platformId, 'warranty-enquiry-alert');
+        },
         setSubmitting: (v) => this.enquirySubmitting.set(v),
       },
     );

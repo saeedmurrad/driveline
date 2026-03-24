@@ -17,6 +17,7 @@ import { PartExchangeFormComponent } from '../../components/shared/part-exchange
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
+import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 import {
   monthlyPaymentForVehicle,
   financeTermOptionsForPrice,
@@ -175,6 +176,7 @@ export class VehicleDetailComponent implements OnDestroy {
     const validationError = validateEnquiryFields(e);
     if (validationError) {
       this.enquiryError.set(validationError);
+      scrollFormAlertIntoView(this.platformId, 'vehicle-enquiry-alert');
       return;
     }
     const vehicleLine = v
@@ -212,7 +214,10 @@ export class VehicleDetailComponent implements OnDestroy {
           this.enquirySent.set(true);
           this.enquiryError.set(null);
         },
-        onError: (msg) => this.enquiryError.set(msg),
+        onError: (msg) => {
+          this.enquiryError.set(msg);
+          scrollFormAlertIntoView(this.platformId, 'vehicle-enquiry-alert');
+        },
         setSubmitting: (val) => this.enquirySubmitting.set(val),
       },
     );

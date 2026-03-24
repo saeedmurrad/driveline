@@ -573,11 +573,6 @@
               </div>
             } @else {
               <form (ngSubmit)="submitEnquiry()" class="space-y-3">
-                @if (enquiryError()) {
-                  <div class="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-800" role="alert">
-                    {{ enquiryError() }}
-                  </div>
-                }
                 <div class="grid grid-cols-2 gap-3">
                   <div>
                     <label class="form-label text-xs">First Name*</label>
@@ -604,6 +599,11 @@
                   <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-blue-600">
                   <span class="text-xs text-gray-600 dark:text-slate-400">Keep me updated with latest news and offers</span>
                 </label>
+                @if (enquiryError()) {
+                  <div id="vehicle-enquiry-alert" class="rounded-lg border border-red-200 bg-red-50 dark:bg-red-950/40 dark:border-red-800/50 px-3 py-2 text-xs text-red-800 dark:text-red-200" role="alert">
+                    {{ enquiryError() }}
+                  </div>
+                }
                 <button
                   type="submit"
                   class="w-full btn-primary justify-center py-3 disabled:opacity-60 disabled:cursor-not-allowed"

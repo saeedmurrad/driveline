@@ -90,11 +90,6 @@
         </div>
       } @else {
         <form (ngSubmit)="submitEnquiry()" class="space-y-4">
-          @if (enquiryError()) {
-            <div class="rounded-xl border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/40 px-4 py-3 text-sm text-red-800 dark:text-red-200" role="alert">
-              {{ enquiryError() }}
-            </div>
-          }
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="form-label">First Name*</label>
@@ -111,7 +106,7 @@
           </div>
           <div>
             <label class="form-label">Phone*</label>
-            <input [(ngModel)]="enquiry.phone" name="phone" required type="tel" placeholder="07xxx xxxxxx" class="form-input">
+            <input [(ngModel)]="enquiry.phone" name="phone" required type="tel" maxlength="22" inputmode="tel" autocomplete="tel" placeholder="07xxx xxxxxx" class="form-input">
           </div>
           <div>
             <label class="form-label">Vehicle Details</label>
@@ -125,6 +120,11 @@
             <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-blue-600">
             <span class="text-sm text-gray-500 dark:text-gray-400">Keep me updated with latest news and offers from DriveLine</span>
           </label>
+          @if (enquiryError()) {
+            <div id="warranty-enquiry-alert" class="rounded-xl border border-red-200 dark:border-red-800/60 bg-red-50 dark:bg-red-950/40 px-4 py-3 text-sm text-red-800 dark:text-red-200" role="alert">
+              {{ enquiryError() }}
+            </div>
+          }
           <button
             type="submit"
             class="w-full btn-primary justify-center py-4 text-base disabled:opacity-60 disabled:cursor-not-allowed"
