@@ -67,6 +67,39 @@ html.dark .header-glow-line {
   transform: translateY(-1px);
 }
 
+/* After scroll the bar is brighter; strengthen inactive + active pill contrast */
+.header-is-scrolled .nav-pill-link:not(.router-link-active):not(.active) {
+  color: rgb(28 25 23);
+}
+
+.header-is-scrolled .nav-pill-link:not(.router-link-active):not(.active):hover {
+  color: rgb(29 78 216);
+}
+
+html.dark .header-is-scrolled .nav-pill-link:not(.router-link-active):not(.active) {
+  color: rgb(248 250 252);
+}
+
+html.dark .header-is-scrolled .nav-pill-link:not(.router-link-active):not(.active):hover {
+  color: rgb(125 211 252);
+}
+
+.header-is-scrolled .nav-pill-link.router-link-active,
+.header-is-scrolled .nav-pill-link.active {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  box-shadow:
+    0 1px 4px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(15, 23, 42, 0.08);
+}
+
+html.dark .header-is-scrolled .nav-pill-link.router-link-active,
+html.dark .header-is-scrolled .nav-pill-link.active {
+  background: linear-gradient(135deg, rgb(51 65 85) 0%, rgb(30 41 59) 100%);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
 .nav-pill-link.router-link-active,
 .nav-pill-link.active {
   background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);

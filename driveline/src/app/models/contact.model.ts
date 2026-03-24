@@ -68,6 +68,12 @@ export interface BusinessInfo {
   phone: string;
   mobile: string;
   email: string;
+  /** Public profile URLs; footer hides an icon if a value is missing. */
+  social?: {
+    facebook: string;
+    instagram: string;
+    x: string;
+  };
   openingHours: OpeningHour[];
   bankHolidayNote: string;
 }

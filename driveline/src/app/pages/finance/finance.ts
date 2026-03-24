@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import {
   financeTermOptionsForPrice,
   FINANCE_ILLUSTRATIVE_PARAMS,
@@ -108,6 +109,11 @@ export class FinanceComponent {
 
   submitEnquiry() {
     const e = this.enquiry;
+    const validationError = validateEnquiryFields(e);
+    if (validationError) {
+      this.enquiryError.set(validationError);
+      return;
+    }
     const body = [
       `Name: ${e.firstName} ${e.lastName}`,
       `Email: ${e.email}`,

@@ -3,8 +3,10 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { BUSINESS_INFO } from '../../data/reviews.data';
+import { SALES_EMAIL } from '../../constants/sales-contact';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { validateEnquiryFields } from '../../utils/enquiry-validation';
 
 @Component({
   selector: 'app-contact',
@@ -16,6 +18,7 @@ export class ContactComponent {
   private platformId = inject(PLATFORM_ID);
   private web3 = inject(Web3FormsEnquiryService);
   business = BUSINESS_INFO;
+  readonly salesMailtoHref = `mailto:${SALES_EMAIL}`;
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
@@ -44,6 +47,11 @@ export class ContactComponent {
 
   submitEnquiry() {
     const e = this.enquiry;
+    const validationError = validateEnquiryFields(e, { requireMessage: true });
+    if (validationError) {
+      this.enquiryError.set(validationError);
+      return;
+    }
     const body = [
       `Name: ${e.firstName} ${e.lastName}`,
       `Email: ${e.email}`,

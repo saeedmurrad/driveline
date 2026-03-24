@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BUSINESS_INFO } from '../../../data/reviews.data';
+import { SALES_EMAIL } from '../../../constants/sales-contact';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +11,8 @@ import { BUSINESS_INFO } from '../../../data/reviews.data';
 })
 export class FooterComponent {
   business = BUSINESS_INFO;
+  /** Single source with enquiry mailto so the link always resolves in the client. */
+  readonly salesMailtoHref = `mailto:${SALES_EMAIL}`;
   currentYear = new Date().getFullYear();
 
   quickLinks = [

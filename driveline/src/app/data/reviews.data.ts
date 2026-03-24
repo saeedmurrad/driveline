@@ -88,6 +88,11 @@ export const BUSINESS_INFO: BusinessInfo = {
   phone: '01733 563559',
   mobile: '07423 374244',
   email: SALES_EMAIL,
+  social: {
+    facebook: 'https://www.facebook.com/',
+    x: 'https://x.com/',
+    instagram: 'https://www.instagram.com/',
+  },
   openingHours: [
     { day: 'Monday', open: '09:00', close: '18:00' },
     { day: 'Tuesday', open: '09:00', close: '18:00' },

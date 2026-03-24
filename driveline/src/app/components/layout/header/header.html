@@ -1,5 +1,6 @@
 <header
   class="header-shell fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-2xl transition-all duration-500 ease-out"
+  [class.header-is-scrolled]="headerScrolled()"
   [ngClass]="
     headerScrolled()
       ? 'bg-white/88 border-stone-200/90 shadow-lg shadow-stone-900/[0.06] dark:bg-slate-950/90 dark:border-slate-700/90 dark:shadow-black/40'
@@ -30,7 +31,14 @@
 
       <!-- Desktop: pill navigation -->
       <div class="hidden lg:flex flex-1 justify-center px-2 min-w-0">
-        <div class="nav-pill-track inline-flex flex-wrap items-center justify-center gap-0.5 max-w-[42rem] xl:max-w-none">
+        <div
+          class="nav-pill-track inline-flex flex-wrap items-center justify-center gap-0.5 max-w-[42rem] xl:max-w-none transition-[background-color,box-shadow,padding,border-radius] duration-300"
+          [ngClass]="
+            headerScrolled()
+              ? 'rounded-full bg-stone-100/90 p-0.5 ring-1 ring-stone-200/85 shadow-inner shadow-stone-900/[0.04] dark:bg-slate-800/90 dark:ring-slate-600/75'
+              : ''
+          "
+        >
           @for (item of navItems; track item.route) {
             <a
               [routerLink]="item.route"

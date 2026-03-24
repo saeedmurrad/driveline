@@ -16,6 +16,7 @@ import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
 import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
 import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import {
   monthlyPaymentForVehicle,
   financeTermOptionsForPrice,
@@ -171,6 +172,11 @@ export class VehicleDetailComponent implements OnDestroy {
   submitEnquiry() {
     const v = this.vehicle();
     const e = this.enquiry;
+    const validationError = validateEnquiryFields(e);
+    if (validationError) {
+      this.enquiryError.set(validationError);
+      return;
+    }
     const vehicleLine = v
       ? `${v.year} ${v.make} ${v.model} ${v.derivative} · Stock ref ${v.id} · ${this.formatPrice(v.price)}`
       : 'Vehicle details unavailable';
