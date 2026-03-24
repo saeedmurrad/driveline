@@ -24,8 +24,12 @@
 - [x] Part exchange modal with shared form
 
 ### Forms & contact
-- [x] **`SALES_EMAIL`** single inbox for mailto + `BUSINESS_INFO` (currently **saeedmurrad@gmail.com** for testing)
-- [x] **mailto enquiry flow** for Contact, Finance, Warranty, Vehicle enquiry, Part exchange / sell car submit
+- [x] **`SALES_EMAIL`** in `sales-contact.ts` — mailto + `BUSINESS_INFO.email` + Web3Forms routing
+- [x] **Web3Forms** enquiry POST with **mailto fallback** (`submit-enquiry.ts` + `web3forms-enquiry.service.ts`)
+- [x] **Shared validation** (`enquiry-validation.ts`): required fields, email, UK-style phone (10–15 digits, reject identical digits), optional required message on Contact
+- [x] **Error UX**: summary **above submit** + **`scrollFormAlertIntoView`** on validation/API errors
+- [x] **Footer** mailto via `salesMailtoHref`; **social** links from `BUSINESS_INFO.social`
+- [x] **Header** scrolled-state nav contrast (pill track + `header-is-scrolled` CSS)
 
 ### Part exchange / DVLA
 - [x] **DVLA Vehicle Enquiry API** integration (`DvlaVehicleService`)
@@ -33,7 +37,7 @@
 - [x] Enquiry email includes DVLA snapshot when lookup used
 
 ### Data & Services
-- [x] VehicleService (signals), mock data, interfaces
+- [x] VehicleService (signals), **`vehicles.data.ts`** (built by **`npm run sync:stock`** from Fengate API), interfaces
 - [x] DVLA types + error mapping
 
 ### Styling

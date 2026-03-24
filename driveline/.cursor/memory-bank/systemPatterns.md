@@ -4,7 +4,7 @@
 
 ### Layout Components
 - `HeaderComponent` - Fixed navbar, mobile menu, dark mode toggle (`print:hidden` on host in `app.html` + global CSS backup)
-- `FooterComponent` - Business info from **`BUSINESS_INFO`**, `mailto:` sales email
+- `FooterComponent` - Business info from **`BUSINESS_INFO`**, **`salesMailtoHref`** (`mailto:` + **`SALES_EMAIL`**), optional **`social`** links (external, new tab)
 - `CookieBannerComponent` - GDPR consent
 
 ### Page Components
@@ -13,7 +13,7 @@ Standalone components: Home, Vehicles, VehicleDetail, Finance, Warranty, SellYou
 ### Shared: Part Exchange
 - **`PartExchangeFormComponent`** — `variant: 'page' | 'modal'`, optional **`vehicleOfInterest`** (`Vehicle`) from stock page.
 - Step 1: registration **Look up** → **`DvlaVehicleService.lookupByRegistration()`** → fills form + **`dvlaVehicleDetails` signal** for summary card.
-- Submit → **`openSalesEnquiryEmail()`** with DVLA snapshot + form fields.
+- Submit → **`validateEnquiryFields()`** then **`submitEnquiryWithWeb3Fallback()`** (Web3Forms or mailto) with DVLA snapshot + form fields.
 
 ## State Management
 
@@ -50,7 +50,7 @@ if (isPlatformBrowser(this.platformId)) { /* window, mailto, client-only */ }
 ## Data Models (selected)
 - **`Vehicle`** — includes optional **`topSpeedMph`** for print spec row
 - **`DvlaVehicleDetails`** — DVLA API response subset (`dvla-vehicle.model.ts`)
-- **`BusinessInfo`** — dealership contact block
+- **`BusinessInfo`** — dealership contact block + optional **`social`**
 
 ## Angular config
 - **`app.config.ts`**: `provideHttpClient(withFetch())`, router, hydration

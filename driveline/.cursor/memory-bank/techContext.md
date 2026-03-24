@@ -29,14 +29,16 @@ driveline/
 │   ├── app/
 │   │   ├── components/           # layout, search, vehicles, shared (part-exchange-form)
 │   │   ├── pages/
-│   │   ├── services/             # vehicle.service, dvla-vehicle.service
+│   │   ├── services/             # vehicle, dvla-vehicle, web3forms-enquiry, …
 │   │   ├── models/               # vehicle, contact, dvla-vehicle, …
-│   │   ├── data/                 # mock vehicles, reviews + BUSINESS_INFO
+│   │   ├── data/                 # vehicles.data.ts (sync script), reviews + BUSINESS_INFO
 │   │   ├── constants/            # sales-contact.ts (SALES_EMAIL)
-│   │   └── utils/                # enquiry-mailto.ts
+│   │   └── utils/                # enquiry-mailto, submit-enquiry, enquiry-validation, scroll-form-alert
 │   ├── styles.css
 │   └── index.html
 ├── proxy.conf.cjs                # Dev: /api/dvla-vehicle → DVLA + x-api-key
+├── scripts/
+│   └── fetch-fengate-stock.mjs   # npm run sync:stock → vehicles.data.ts
 ├── tailwind.config.js
 ├── angular.json                  # fileReplacements (prod env), serve proxyConfig
 └── package.json
@@ -48,6 +50,8 @@ cd driveline
 export DVLA_API_KEY="your-dvla-key"   # optional, for registration lookup
 npm start          # http://localhost:4200 (uses proxy.conf.cjs)
 npm run build      # Production build (swaps environment.prod.ts)
+npm run sync:stock # Pull Fengate API → src/app/data/vehicles.data.ts
+npm test           # Vitest (ng test --no-watch)
 ```
 
 ## Environments
@@ -68,5 +72,6 @@ npm run build      # Production build (swaps environment.prod.ts)
 - **Signals**: Reactive state in components + VehicleService
 - **Lazy Loading**: Page routes lazy-loaded
 - **View Transitions**: `withViewTransitions()` on router
-- **Platform checks**: `isPlatformBrowser(PLATFORM_ID)` for `window`, `mailto`, print, DVLA button
+- **Platform checks**: `isPlatformBrowser(PLATFORM_ID)` for `window`, mailto/Web3Forms submit, print, DVLA button
+- **Enquiries**: `validateEnquiryFields` before `submitEnquiryWithWeb3Fallback`; form alerts above submit + optional scroll (`scroll-form-alert.ts`)
 - **Print QR / listing URL**: resolved from browser `origin` + `<base href>` (`getDeployedAppBaseUrl` in vehicle detail) so GitHub Pages and any host work
