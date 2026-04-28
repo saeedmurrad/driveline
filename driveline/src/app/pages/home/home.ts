@@ -41,7 +41,7 @@ export class HomeComponent {
    * Hero backgrounds sourced from user-provided image URLs and stored in `public/hero/*.jpg`.
    */
   readonly heroSlides: readonly { src: string; alt: string }[] = [
-    { src: 'hero/hero-1.jpg', alt: '' },
+    { src: 'hero/hero-bmw-x5.jpg', alt: 'BMW X5 M driving on open road' },
     { src: 'hero/hero-2.jpg', alt: '' },
     { src: 'hero/hero-3.jpg', alt: '' },
     { src: 'hero/hero-4.jpg', alt: '' },
