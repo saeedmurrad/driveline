@@ -1,31 +1,35 @@
 @if (variant === 'hero') {
-  <div class="search-widget--fengate rounded-2xl border border-white/20 bg-slate-950/78 p-2 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.85)] backdrop-blur-sm">
-    <div class="flex items-center gap-2">
-      <div class="flex-1 rounded-xl border border-white/10 bg-slate-900/85 px-4 py-3">
+  <div class="search-widget--fengate w-full max-w-full rounded-2xl border border-white/20 bg-slate-950/78 p-2 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.85)] backdrop-blur-sm">
+    <div class="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch">
+      <div class="min-w-0 flex-1 rounded-xl border border-white/10 bg-slate-900/85 px-3 py-3 sm:px-4">
         <input
           [(ngModel)]="filters.model"
-          type="text"
+          type="search"
+          enterkeyhint="search"
+          autocomplete="off"
           placeholder="Search by make, model, or keyword..."
-          class="w-full bg-transparent text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none"
+          class="w-full min-w-0 bg-transparent text-base text-slate-100 placeholder:text-slate-400 focus:outline-none sm:text-sm"
         />
       </div>
-      <button
-        type="button"
-        (click)="toggleExpanded()"
-        class="inline-flex items-center justify-center rounded-xl border border-white/20 bg-slate-900/75 px-3 py-3 text-xs font-semibold uppercase tracking-wide text-slate-100 transition hover:bg-slate-800"
-      >
-        Filters
-      </button>
-      <button
-        type="button"
-        (click)="onSearch()"
-        class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:from-blue-500 hover:to-indigo-500"
-      >
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        Search
-      </button>
+      <div class="flex min-w-0 gap-2 sm:shrink-0">
+        <button
+          type="button"
+          (click)="toggleExpanded()"
+          class="inline-flex min-h-[44px] flex-1 items-center justify-center rounded-xl border border-white/20 bg-slate-900/75 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-slate-100 transition hover:bg-slate-800 sm:flex-none sm:min-w-[5.5rem]"
+        >
+          Filters
+        </button>
+        <button
+          type="button"
+          (click)="onSearch()"
+          class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:from-blue-500 hover:to-indigo-500 sm:flex-none sm:min-w-[7.5rem]"
+        >
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          Search
+        </button>
+      </div>
     </div>
 
     @if (isExpanded()) {

@@ -16,6 +16,7 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -27,6 +28,9 @@
   body {
     @apply antialiased text-stone-800 bg-stone-50;
     font-feature-settings: 'kern' 1, 'liga' 1;
+    overflow-x: clip;
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
   }
 
   html.dark body {

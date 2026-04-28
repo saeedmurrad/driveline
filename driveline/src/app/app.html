@@ -1,5 +1,5 @@
 <app-header class="print:hidden"></app-header>
-<main class="min-h-screen pt-16 md:pt-20 bg-stone-50 text-stone-900 dark:bg-slate-950 dark:text-slate-100 print:min-h-0 print:h-auto print:pt-0">
+<main class="min-h-[100dvh] pt-16 md:pt-20 bg-stone-50 text-stone-900 dark:bg-slate-950 dark:text-slate-100 print:min-h-0 print:h-auto print:pt-0">
   <router-outlet></router-outlet>
 </main>
 <!-- Partner logos above footer — heading: “Proud to work with” -->
@@ -13,7 +13,9 @@
 <app-cookie-banner class="print:hidden"></app-cookie-banner>
 
 <!-- Floating Action Buttons -->
-<div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3 print:hidden max-lg:bottom-[5.5rem]">
+<div
+  class="fixed z-40 flex flex-col gap-3 print:hidden max-lg:bottom-[5.5rem] bottom-[max(1.25rem,env(safe-area-inset-bottom,0px))] right-[max(1rem,env(safe-area-inset-right,0px))] sm:bottom-6 sm:right-6"
+>
   <!-- WhatsApp Button -->
   <a
     href="https://wa.me/447423374244"

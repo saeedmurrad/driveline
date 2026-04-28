@@ -38,16 +38,19 @@ export class HomeComponent {
   business = BUSINESS_INFO;
 
   /**
-   * Hero backgrounds sourced from user-provided image URLs and stored in `public/hero/*.jpg`.
+   * Hero backgrounds sourced from user-provided image URLs and stored in `public/hero/*`.
    */
   readonly heroSlides: readonly { src: string; alt: string }[] = [
-    { src: 'hero/hero-bmw-x5.jpg', alt: 'BMW X5 M driving on open road' },
-    { src: 'hero/hero-2.jpg', alt: '' },
-    { src: 'hero/hero-3.jpg', alt: '' },
-    { src: 'hero/hero-4.jpg', alt: '' },
-    { src: 'hero/hero-5.jpg', alt: '' },
-    { src: 'hero/hero-6.jpg', alt: '' },
-    { src: 'hero/hero-7.jpg', alt: '' },
+    { src: 'hero/hero-01.jpeg', alt: '' },
+    { src: 'hero/hero-02.jpeg', alt: '' },
+    { src: 'hero/hero-03.jpeg', alt: '' },
+    { src: 'hero/hero-04.jpeg', alt: '' },
+    { src: 'hero/hero-05.jpeg', alt: '' },
+    { src: 'hero/hero-06.jpeg', alt: '' },
+    { src: 'hero/hero-07.jpeg', alt: '' },
+    { src: 'hero/hero-08.jpeg', alt: '' },
+    { src: 'hero/hero-09.jpeg', alt: '' },
+    { src: 'hero/hero-10.jpeg', alt: '' },
   ];
 
   heroActiveIndex = signal(0);
