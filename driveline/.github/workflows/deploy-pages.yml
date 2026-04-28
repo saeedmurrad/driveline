@@ -15,6 +15,11 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+# App lives in repo subfolder `driveline/` (monorepo layout).
+defaults:
+  run:
+    working-directory: driveline
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,6 +32,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: driveline/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -34,10 +40,13 @@ jobs:
       - name: Build app for GitHub Pages
         run: npm run build:github-pages
 
+      - name: SPA fallback (GitHub Pages client routing)
+        run: cp dist/driveline/browser/index.html dist/driveline/browser/404.html
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/driveline/browser
+          path: driveline/dist/driveline/browser
 
   deploy:
     environment:

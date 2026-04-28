@@ -61,7 +61,7 @@
             },
             "github-pages": {
               "outputMode": "static",
-              "baseHref": "/"
+              "baseHref": "/driveline/"
             },
             "development": {
               "optimization": false,
