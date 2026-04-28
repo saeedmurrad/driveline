@@ -38,13 +38,18 @@ export class HomeComponent {
   business = BUSINESS_INFO;
 
   /**
-   * Hero: premium SUV + modern saloons (`public/hero-*.jpg`, 1600w). Crossfade only.
-   * Unsplash-derived; https://unsplash.com/license
+   * Hero backgrounds sourced locally from `public/hero/*.jpg`.
+   * Models: BMW X5/X7/7 Series/5 Series, Volvo XC90, Audi SQ7/A6, Citroen C5 Aircross.
    */
   readonly heroSlides: readonly { src: string; alt: string }[] = [
-    { src: 'hero-1.jpg', alt: '' },
-    { src: 'hero-2.jpg', alt: '' },
-    { src: 'hero-3.jpg', alt: '' },
+    { src: 'hero/hero-bmw-x5.jpg', alt: '' },
+    { src: 'hero/hero-bmw-x7.jpg', alt: '' },
+    { src: 'hero/hero-volvo-xc90.jpg', alt: '' },
+    { src: 'hero/hero-audi-sq7.jpg', alt: '' },
+    { src: 'hero/hero-bmw-7-series.jpg', alt: '' },
+    { src: 'hero/hero-bmw-5-series.jpg', alt: '' },
+    { src: 'hero/hero-citroen-c5-aircross.jpg', alt: '' },
+    { src: 'hero/hero-audi-a6.jpg', alt: '' },
   ];
 
   heroActiveIndex = signal(0);

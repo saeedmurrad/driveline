@@ -36,7 +36,7 @@ Once the server is running, open your browser and navigate to `http://localhost:
 - **Typography:** Plus Jakarta Sans (body) + Poppins (headings), loaded in `src/index.html`.
 - **Tokens & motion:** CSS variables and animations in `src/styles.css`; `prefers-reduced-motion` disables hero drift, scroll reveals, and skeleton shimmer.
 - **Scroll reveal:** Add `appReveal` to a section host (see `src/app/pages/home/home.html`); directive: `src/app/directives/reveal-on-scroll.directive.ts`.
-- **Hero imagery:** Three JPEGs in [`public/hero-1.jpg` … `hero-3.jpg`](public/) (modern SUV/saloon look, ~1600px) crossfading behind a **Fengate-style** white search band at the bottom of the hero. Unsplash-derived; [licence](https://unsplash.com/license). Listing photos are not used in the hero.
+- **Hero imagery:** Eight JPEGs in [`public/hero/`](public/hero/) (BMW X5/X7/7 Series/5 Series, Volvo XC90, Audi SQ7/A6, Citroen C5 Aircross) crossfading behind a **Fengate-style** white search band at the bottom of the hero. Images are sourced from Wikimedia Commons (CC licenses). Listing photos are not used in the hero.
 
 ### Vehicle stock (Fengate Car Sales)
 
