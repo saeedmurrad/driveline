@@ -27,8 +27,6 @@
 .home-hero-lead {
   animation: homeHeroTextIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-delay: 0.22s;
-  /* Panel must not inherit transform blur from parent stacking */
-  transform: translateZ(0);
 }
 
 .home-hero-stats {
@@ -36,11 +34,17 @@
   animation-delay: 0.32s;
 }
 
+.home-hero-cards {
+  animation: homeHeroTextIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.24s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-hero-eyebrow,
   .home-hero-title,
   .home-hero-lead,
-  .home-hero-stats {
+  .home-hero-stats,
+  .home-hero-cards {
     animation: none;
     opacity: 1;
     transform: none;
