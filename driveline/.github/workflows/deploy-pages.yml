@@ -38,7 +38,7 @@ jobs:
         run: npm ci
 
       - name: Build app for GitHub Pages
-        run: npm run build:github-pages
+        run: npm run build:gh-pages
 
       - name: SPA fallback (GitHub Pages client routing)
         run: cp dist/driveline/browser/index.html dist/driveline/browser/404.html

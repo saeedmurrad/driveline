@@ -1,4 +1,6 @@
-# Deploy static Angular browser build to GitHub Pages (project site: /driveline/)
+# Deploy static Angular build to GitHub Pages.
+# Custom domain (CNAME) is served at the site root — base href must be "/" (not "/driveline/").
+# For username.github.io/repo/ without a custom domain, use build:gh-pages-github-io locally.
 name: Deploy to GitHub Pages
 
 on:
