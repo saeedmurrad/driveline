@@ -1,5 +1,6 @@
 import {
   Component,
+  DOCUMENT,
   inject,
   signal,
   computed,
@@ -11,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
+import { Meta, Title } from '@angular/platform-browser';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
@@ -39,6 +41,9 @@ export class VehicleDetailComponent implements OnDestroy {
   private web3 = inject(Web3FormsEnquiryService);
   private destroyRef = inject(DestroyRef);
   private viewportScroller = inject(ViewportScroller);
+  private title = inject(Title);
+  private meta = inject(Meta);
+  private document = inject(DOCUMENT);
 
   vehicle = signal<Vehicle | undefined>(undefined);
   selectedImageIndex = signal(0);
@@ -101,8 +106,10 @@ export class VehicleDetailComponent implements OnDestroy {
       if (id) {
         const v = this.vehicleService.getVehicleById(id);
         this.vehicle.set(v);
+        this.updateVehicleSeo(v);
       } else {
         this.vehicle.set(undefined);
+        this.clearVehicleSchema();
       }
       this.startGalleryAutoplay();
       // Same component can be reused when switching vehicles — ensure we’re at the top
@@ -114,6 +121,109 @@ export class VehicleDetailComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.stopGalleryAutoplay();
+    this.clearVehicleSchema();
+  }
+
+  private updateVehicleSeo(v: Vehicle | undefined): void {
+    if (!v) return;
+    const canonical = this.getCanonicalVehicleListingUrl();
+    const title = `${v.year} ${v.make} ${v.model} ${v.derivative} | DriveLine Car Sales`;
+    const description = `${v.year} ${v.make} ${v.model} ${v.derivative}. ${this.formatMileage(v.mileage)} miles, ${v.fuelType}, ${v.transmission}. ${this.formatPrice(v.price)} at DriveLine Car Sales Peterborough.`;
+
+    this.title.setTitle(title);
+    this.meta.updateTag({ name: 'description', content: description });
+    this.meta.updateTag({ property: 'og:title', content: title });
+    this.meta.updateTag({ property: 'og:description', content: description });
+    this.meta.updateTag({
+      property: 'og:image',
+      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || ''),
+    });
+    this.meta.updateTag({ property: 'og:url', content: canonical });
+    this.meta.updateTag({ name: 'twitter:title', content: title });
+    this.meta.updateTag({ name: 'twitter:description', content: description });
+    this.meta.updateTag({
+      name: 'twitter:image',
+      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || ''),
+    });
+    this.upsertCanonical(canonical);
+    this.upsertVehicleSchema(v, canonical);
+  }
+
+  private toAbsoluteUrl(url: string): string {
+    if (!url) return '';
+    try {
+      if (!isPlatformBrowser(this.platformId)) return url;
+      return new URL(url, window.location.origin).toString();
+    } catch {
+      return url;
+    }
+  }
+
+  private upsertCanonical(url: string): void {
+    const head = this.document.head;
+    let canonical = head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = this.document.createElement('link');
+      canonical.rel = 'canonical';
+      head.appendChild(canonical);
+    }
+    canonical.href = url;
+  }
+
+  private upsertVehicleSchema(v: Vehicle, canonical: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const head = this.document.head;
+    const id = 'vehicle-schema-jsonld';
+    let script = this.document.getElementById(id) as HTMLScriptElement | null;
+    if (!script) {
+      script = this.document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = id;
+      head.appendChild(script);
+    }
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Vehicle',
+      name: `${v.year} ${v.make} ${v.model} ${v.derivative}`.trim(),
+      brand: { '@type': 'Brand', name: v.make },
+      model: `${v.model} ${v.derivative}`.trim(),
+      bodyType: v.bodyType,
+      vehicleTransmission: v.transmission,
+      fuelType: v.fuelType,
+      vehicleModelDate: String(v.year),
+      color: v.colour,
+      numberOfDoors: v.doors,
+      mileageFromOdometer: {
+        '@type': 'QuantitativeValue',
+        value: v.mileage,
+        unitCode: 'SMI',
+      },
+      image: (v.images || [])
+        .slice(0, 8)
+        .map((img) => this.toAbsoluteUrl(img))
+        .filter(Boolean),
+      url: canonical,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'GBP',
+        price: v.price,
+        availability: 'https://schema.org/InStock',
+        itemCondition: 'https://schema.org/UsedCondition',
+        url: canonical,
+        seller: {
+          '@type': 'AutoDealer',
+          name: 'DriveLine Car Sales',
+          url: 'https://drivelinecarsales.co.uk/',
+        },
+      },
+    };
+    script.textContent = JSON.stringify(schema);
+  }
+
+  private clearVehicleSchema(): void {
+    const existing = this.document.getElementById('vehicle-schema-jsonld');
+    if (existing?.parentNode) existing.parentNode.removeChild(existing);
   }
 
   private startGalleryAutoplay(): void {
