@@ -1,4 +1,4 @@
-import { Component, inject, signal, Input, computed } from '@angular/core';
+import { Component, inject, signal, Input, computed, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ import { SearchFilters } from '../../../models/vehicle.model';
   templateUrl: './search-widget.html',
   styleUrl: './search-widget.css',
 })
-export class SearchWidgetComponent {
+export class SearchWidgetComponent implements OnInit {
   @Input() variant: 'hero' | 'page' = 'hero';
   @Input() initialCategory: string = 'car';
 
@@ -31,18 +31,7 @@ export class SearchWidgetComponent {
 
   isExpanded = signal(false);
 
-  filters: SearchFilters = {
-    category: this.initialCategory,
-    make: '',
-    model: '',
-    transmission: '',
-    fuelType: '',
-    minPrice: undefined,
-    maxPrice: undefined,
-    minEngineSize: undefined,
-    maxEngineSize: undefined,
-    doors: undefined,
-  };
+  filters: SearchFilters = this.emptyFilters();
 
   categories = computed(() => {
     const { car, van } = this.vehicleService.inventoryCategoryCounts();
@@ -54,6 +43,16 @@ export class SearchWidgetComponent {
 
   setCategory(cat: string) {
     this.filters.category = cat;
+  }
+
+  ngOnInit(): void {
+    // Keep UI controls in sync with active service filters (used-cars page after route navigation).
+    const current = this.vehicleService.getCurrentFilters();
+    this.filters = {
+      ...this.emptyFilters(),
+      ...current,
+      category: current.category || this.initialCategory,
+    };
   }
 
   toggleExpanded() {
@@ -84,12 +83,36 @@ export class SearchWidgetComponent {
     this.vehicleService.setFilters(cleanFilters);
 
     const route = this.filters.category === 'van' ? '/vans' : '/cars';
-    this.router.navigate([route]);
+    this.router.navigate([route], {
+      queryParams: this.toQueryParams(cleanFilters),
+    });
+  }
+
+  private toQueryParams(filters: SearchFilters): Record<string, string | number> {
+    const qp: Record<string, string | number> = {};
+    if (filters.make) qp['make'] = filters.make;
+    if (filters.model) qp['model'] = filters.model;
+    if (filters.transmission) qp['transmission'] = filters.transmission;
+    if (filters.fuelType) qp['fuelType'] = filters.fuelType;
+    if (filters.doors !== undefined) qp['doors'] = filters.doors;
+    if (filters.minEngineSize !== undefined) qp['minEngineSize'] = filters.minEngineSize;
+    if (filters.maxEngineSize !== undefined) qp['maxEngineSize'] = filters.maxEngineSize;
+    if (filters.minPrice !== undefined) qp['minPrice'] = filters.minPrice;
+    if (filters.maxPrice !== undefined) qp['maxPrice'] = filters.maxPrice;
+    if (filters.minYear !== undefined) qp['minYear'] = filters.minYear;
+    if (filters.maxYear !== undefined) qp['maxYear'] = filters.maxYear;
+    if (filters.maxMileage !== undefined) qp['maxMileage'] = filters.maxMileage;
+    return qp;
   }
 
   resetFilters() {
-    this.filters = {
-      category: 'car',
+    this.filters = this.emptyFilters();
+    this.vehicleService.clearFilters();
+  }
+
+  private emptyFilters(): SearchFilters {
+    return {
+      category: this.initialCategory || 'car',
       make: '',
       model: '',
       transmission: '',
@@ -100,6 +123,5 @@ export class SearchWidgetComponent {
       maxEngineSize: undefined,
       doors: undefined,
     };
-    this.vehicleService.clearFilters();
   }
 }

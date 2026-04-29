@@ -23,9 +23,23 @@ export class VehicleService {
       );
     }
     if (f.model) {
-      result = result.filter((v) =>
-        v.model.toLowerCase().includes(f.model!.toLowerCase())
-      );
+      const q = f.model.toLowerCase().trim();
+      result = result.filter((v) => {
+        const haystack = [
+          v.make,
+          v.model,
+          v.derivative,
+          v.fuelType,
+          v.transmission,
+          v.bodyType,
+          v.colour,
+          v.registration || '',
+          v.description || '',
+        ]
+          .join(' ')
+          .toLowerCase();
+        return haystack.includes(q);
+      });
     }
     if (f.transmission) {
       result = result.filter(

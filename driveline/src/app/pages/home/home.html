@@ -1,6 +1,6 @@
 <!-- Hero: premium dark landing — responsive height + safe areas for mobile -->
 <section
-  class="relative isolate flex min-h-[min(78svh,640px)] sm:min-h-[min(85svh,760px)] lg:min-h-[min(90dvh,920px)] flex-col overflow-hidden"
+  class="relative isolate flex min-h-[100svh] sm:min-h-[min(85svh,760px)] lg:min-h-[min(90dvh,920px)] flex-col overflow-hidden"
 >
   <div class="pointer-events-none absolute inset-0 z-0 bg-slate-900" aria-hidden="true">
     @for (slide of heroSlides; track slide.src; let idx = $index) {
@@ -13,13 +13,26 @@
         decoding="async"
         [attr.loading]="idx === 0 ? 'eager' : 'lazy'"
         [attr.fetchpriority]="idx === 0 ? 'high' : null"
-        class="pointer-events-none absolute inset-0 h-full w-full select-none object-cover transition-opacity duration-[1100ms] ease-in-out motion-reduce:transition-none"
+        class="pointer-events-none absolute inset-0 h-full w-full select-none object-cover object-center opacity-65 blur-[2px] sm:hidden transition-opacity duration-[1100ms] ease-in-out motion-reduce:transition-none"
+        [class.opacity-65]="heroActiveIndex() === idx"
+        [class.opacity-0]="heroActiveIndex() !== idx"
+      />
+      <img
+        [src]="slide.src"
+        [alt]="slide.alt"
+        role="presentation"
+        width="1600"
+        height="1000"
+        decoding="async"
+        [attr.loading]="idx === 0 ? 'eager' : 'lazy'"
+        [attr.fetchpriority]="idx === 0 ? 'high' : null"
+        class="pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-center sm:object-cover sm:object-center transition-opacity duration-[1100ms] ease-in-out motion-reduce:transition-none"
         [class.opacity-100]="heroActiveIndex() === idx"
         [class.opacity-0]="heroActiveIndex() !== idx"
       />
     }
-    <div class="absolute inset-0 bg-slate-950/34"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/56 via-slate-950/28 to-slate-950/70"></div>
+    <div class="absolute inset-0 bg-slate-950/20 sm:bg-slate-950/34"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950/40 via-slate-950/18 to-slate-950/56 sm:from-slate-950/56 sm:via-slate-950/28 sm:to-slate-950/70"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(56,189,248,0.18),transparent_42%)]"></div>
   </div>
 
@@ -53,7 +66,7 @@
         </div>
       </div>
 
-      <div class="mt-4 w-full min-w-0 self-center sm:mt-6">
+      <div class="hero-search-slot mt-4 w-full min-w-0 self-center sm:mt-6">
         <app-search-widget variant="hero"></app-search-widget>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { VehicleService } from '../../services/vehicle.service';
-import { Vehicle } from '../../models/vehicle.model';
+import { Vehicle, SearchFilters } from '../../models/vehicle.model';
 import { monthlyPaymentForVehicle } from '../../utils/finance-display';
 import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/vehicle-card';
 import { SearchWidgetComponent } from '../../components/search/search-widget/search-widget';
@@ -39,7 +39,29 @@ export class VehiclesComponent implements OnInit {
     if (routeCategory) {
       this.category = routeCategory;
     }
-    this.vehicleService.updateFilters({ category: this.category });
+    const params = this.route.snapshot.queryParamMap;
+    const filters: SearchFilters = {
+      category: this.category,
+      make: params.get('make') || undefined,
+      model: params.get('model') || undefined,
+      transmission: params.get('transmission') || undefined,
+      fuelType: params.get('fuelType') || undefined,
+      doors: this.toNumber(params.get('doors')),
+      minEngineSize: this.toNumber(params.get('minEngineSize')),
+      maxEngineSize: this.toNumber(params.get('maxEngineSize')),
+      minPrice: this.toNumber(params.get('minPrice')),
+      maxPrice: this.toNumber(params.get('maxPrice')),
+      minYear: this.toNumber(params.get('minYear')),
+      maxYear: this.toNumber(params.get('maxYear')),
+      maxMileage: this.toNumber(params.get('maxMileage')),
+    };
+    this.vehicleService.setFilters(filters);
+  }
+
+  private toNumber(v: string | null): number | undefined {
+    if (v == null || v === '') return undefined;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : undefined;
   }
 
   get pageTitle(): string {

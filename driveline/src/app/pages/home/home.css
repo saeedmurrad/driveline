@@ -2,6 +2,11 @@
   display: block;
 }
 
+/* Guard against rare duplicate mount in dev/hydration: show only first hero search widget. */
+.hero-search-slot > app-search-widget + app-search-widget {
+  display: none;
+}
+
 /* Hero copy — entrance */
 @keyframes homeHeroTextIn {
   from {
