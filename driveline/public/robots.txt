@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drivelinecarsales.co.uk/sitemap.xml

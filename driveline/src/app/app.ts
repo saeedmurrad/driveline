@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
 import { CookieBannerComponent } from './components/layout/cookie-banner/cookie-banner';
 import { TrustedPartnersComponent } from './components/layout/trusted-partners/trusted-partners';
+import { SeoService } from './services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +32,12 @@ import { TrustedPartnersComponent } from './components/layout/trusted-partners/t
 export class App implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly seo = inject(SeoService);
   showHomeMobileFab = signal(true);
   private scrollCleanup: (() => void) | null = null;
 
   ngOnInit(): void {
+    this.seo.init();
     if (!isPlatformBrowser(this.platformId)) return;
 
     const updateFabVisibility = () => {
