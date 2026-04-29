@@ -46,6 +46,72 @@ html.dark .header-glow-line {
   animation: logoGlow 4s ease-in-out infinite;
 }
 
+.logo-drive-text {
+  color: rgb(28 25 23) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+.logo-line-text {
+  color: rgb(37 99 235) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.14);
+}
+
+/* Keep wordmark box size stable so it does not jump on scroll. */
+.logo-wordmark {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: saturate(130%) blur(4px);
+}
+
+html.dark .logo-drive-text,
+:host-context(.dark) .logo-drive-text {
+  color: rgb(248 250 252) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .logo-line-text,
+:host-context(.dark) .logo-line-text {
+  color: rgb(125 211 252) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+.header-is-scrolled .logo-wordmark {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.header-is-scrolled .logo-drive-text {
+  color: rgb(17 24 39) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.22);
+}
+
+.header-is-scrolled .logo-line-text {
+  color: rgb(29 78 216) !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+html.dark .header-is-scrolled .logo-wordmark,
+:host-context(.dark) .header-is-scrolled .logo-wordmark {
+  background: rgba(2, 6, 23, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+html.dark .header-is-scrolled .logo-drive-text,
+:host-context(.dark) .header-is-scrolled .logo-drive-text {
+  color: rgb(248 250 252) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+html.dark .header-is-scrolled .logo-line-text,
+:host-context(.dark) .header-is-scrolled .logo-line-text {
+  color: rgb(125 211 252) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .logo-mark {
     animation: none;
