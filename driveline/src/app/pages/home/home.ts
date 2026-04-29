@@ -49,8 +49,6 @@ export class HomeComponent {
     { src: 'hero/hero-06.jpeg', alt: '' },
     { src: 'hero/hero-07.jpeg', alt: '' },
     { src: 'hero/hero-08.jpeg', alt: '' },
-    { src: 'hero/hero-09.jpeg', alt: '' },
-    { src: 'hero/hero-10.jpeg', alt: '' },
   ];
 
   heroActiveIndex = signal(0);

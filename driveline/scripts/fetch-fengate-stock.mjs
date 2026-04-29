@@ -4,13 +4,14 @@
  *
  * Usage: npm run sync:stock
  */
-import { writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT = join(ROOT, 'src/app/data/vehicles.data.ts');
+const IMAGE_OUT_DIR = join(ROOT, 'public/stock/fengate');
 
 const ORIGIN = 'https://www.fengatecarsales.co.uk';
 const UA = 'Mozilla/5.0 (compatible; DriveLineStockSync/1.0; +https://fengatecarsales.co.uk)';
@@ -40,6 +41,29 @@ function absImagePath(path) {
   if (!path || typeof path !== 'string') return '';
   if (path.startsWith('http')) return path.replace('https:/www.', 'https://www.');
   return ORIGIN + path;
+}
+
+function imageExtFromUrl(url) {
+  try {
+    const u = new URL(url);
+    const ext = extname(u.pathname).toLowerCase();
+    if (ext === '.jpg' || ext === '.jpeg' || ext === '.png' || ext === '.webp') return ext;
+  } catch {
+    // ignore, fallback below
+  }
+  return '.jpg';
+}
+
+function buildLocalImagePath(stockId, index, remoteUrl) {
+  const ext = imageExtFromUrl(remoteUrl);
+  return `stock/fengate/${stockId}-${String(index + 1).padStart(2, '0')}${ext}`;
+}
+
+async function downloadImageToPublic(remoteUrl, localRelativePath) {
+  const res = await fetch(remoteUrl, { headers: { 'User-Agent': UA, Accept: 'image/*,*/*' } });
+  if (!res.ok) throw new Error(`${remoteUrl} -> ${res.status}`);
+  const bytes = new Uint8Array(await res.arrayBuffer());
+  writeFileSync(join(ROOT, 'public', localRelativePath), bytes);
 }
 
 function mapFuelType(api) {
@@ -91,11 +115,13 @@ function splitFeatures(api) {
   return [];
 }
 
-function mapToVehicle(api) {
+function mapToVehicle(api, localImages) {
   const category = api.vehicle_type === 'van' ? 'van' : 'car';
-  const images = (api.images || [])
-    .map((img) => absImagePath(img.i800x600 || img.i850x638 || img.full))
-    .filter(Boolean);
+  const images = localImages.length
+    ? localImages
+    : (api.images || [])
+        .map((img) => absImagePath(img.i800x600 || img.i850x638 || img.full))
+        .filter(Boolean);
   const thumb = images[0] || '';
 
   const engineL =
@@ -199,6 +225,9 @@ function decodeEntities(html) {
 }
 
 async function main() {
+  rmSync(IMAGE_OUT_DIR, { recursive: true, force: true });
+  mkdirSync(IMAGE_OUT_DIR, { recursive: true });
+
   console.log('Fetching listing pages…');
   const [carsHtml, vansHtml] = await Promise.all([
     fetchText(`${ORIGIN}/used/cars/`),
@@ -221,7 +250,21 @@ async function main() {
         console.log(`\n  Skip ${id} (sold).`);
         continue;
       }
-      vehicles.push(mapToVehicle(api));
+      const remoteImages = (api.images || [])
+        .map((img) => absImagePath(img.i800x600 || img.i850x638 || img.full))
+        .filter(Boolean);
+      const localImages = [];
+      for (let j = 0; j < remoteImages.length; j++) {
+        const remoteUrl = remoteImages[j];
+        const localPath = buildLocalImagePath(id, j, remoteUrl);
+        try {
+          await downloadImageToPublic(remoteUrl, localPath);
+          localImages.push(localPath);
+        } catch (e) {
+          console.error(`\n    Image download failed (${id} #${j + 1}): ${e.message}`);
+        }
+      }
+      vehicles.push(mapToVehicle(api, localImages));
     } catch (e) {
       console.error(`\n  Failed ${id}:`, e.message);
     }
@@ -260,6 +303,7 @@ export const DOOR_OPTIONS = [...new Set(VEHICLES.map((v) => v.doors))].sort((a, 
 
   writeFileSync(OUT, file, 'utf8');
   console.log(`Wrote ${OUT}`);
+  console.log(`Downloaded stock images to ${IMAGE_OUT_DIR}`);
 }
 
 main().catch((e) => {
