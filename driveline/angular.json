@@ -31,7 +31,13 @@
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
-              "allowedHosts": []
+              "allowedHosts": [
+                "drivelinecarsales.co.uk",
+                "www.drivelinecarsales.co.uk",
+                "localhost",
+                "*.hosted.app",
+                "*.run.app"
+              ]
             },
             "ssr": {
               "entry": "src/server.ts"

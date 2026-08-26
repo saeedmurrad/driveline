@@ -6,18 +6,17 @@
   "storage": {
     "rules": "storage.rules"
   },
-  "hosting": {
-    "public": "dist/driveline/browser",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      {
-        "source": "/api/**",
-        "function": "ssr"
-      },
-      {
-        "source": "**",
-        "function": "ssr"
-      }
-    ]
-  }
+  "apphosting": [
+    {
+      "backendId": "driveline",
+      "rootDir": ".",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "data/platform"
+      ]
+    }
+  ]
 }

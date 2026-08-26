@@ -12,6 +12,7 @@
     "sync:stock": "node scripts/fetch-fengate-stock.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
     "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
+    "deploy:firebase": "bash scripts/firebase-deploy-apphosting.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:dvla-live": "node scripts/test-dvla-ves.mjs",
