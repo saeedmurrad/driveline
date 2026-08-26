@@ -70,7 +70,7 @@
               "baseHref": "/",
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.prod.ts",
+                  "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.github-pages.ts"
                 }
               ]
