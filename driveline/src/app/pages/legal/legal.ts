@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
+import { DealerContextService } from '../../services/dealer-context.service';
 
 type LegalPage = 'privacy-policy' | 'cookie-policy' | 'disclaimer' | 'sitemap';
 
@@ -11,19 +12,21 @@ type LegalPage = 'privacy-policy' | 'cookie-policy' | 'disclaimer' | 'sitemap';
 })
 export class LegalComponent implements OnInit {
   private route = inject(ActivatedRoute);
+  private dealerContext = inject(DealerContextService);
+  dealerName = this.dealerContext.dealerName;
   currentPage = signal<LegalPage>('privacy-policy');
 
-  pageContent: Record<LegalPage, { title: string; sections: { heading: string; body: string }[] }> = {
+  private readonly pageContentRaw: Record<LegalPage, { title: string; sections: { heading: string; body: string }[] }> = {
     'privacy-policy': {
       title: 'Privacy Policy',
       sections: [
         {
           heading: 'Introduction',
-          body: 'The purpose of this policy is to outline the steps DriveLine take to ensure the privacy of users of this website. If you have any questions relating to the way in which DriveLine handles data and information of users then please contact us via the details on the contact page.',
+          body: 'The purpose of this policy is to outline the steps we take to ensure the privacy of users of this website. If you have any questions relating to the way in which we handle data and information of users then please contact us via the details on the contact page.',
         },
         {
           heading: 'GDPR Compliance',
-          body: 'DriveLine as a data controller is committed to ensuring the data processed through this website is done so in a manner appropriate to the General Data Protection Regulation (GDPR) which took effect on May 25th 2018.',
+          body: 'We as a data controller are committed to ensuring the data processed through this website is done so in a manner appropriate to the General Data Protection Regulation (GDPR) which took effect on May 25th 2018.',
         },
         {
           heading: 'Type of Data We Collect',
@@ -35,11 +38,11 @@ export class LegalComponent implements OnInit {
         },
         {
           heading: 'Personal Information via Enquiry Forms',
-          body: 'If a user submits an enquiry via a form on this website then details including name, email address, phone number and any additional information provided will be sent to DriveLine and stored for future reference. This information will not be shared with any other parties or used without consent.',
+          body: 'If a user submits an enquiry via a form on this website then details including name, email address, phone number and any additional information provided will be sent to us and stored for future reference. This information will not be shared with any other parties or used without consent.',
         },
         {
           heading: 'Your Rights',
-          body: 'Under the General Data Protection Regulation, data subjects have the right to access, amend and erase information. You can request access, amendments or erasure of your data by contacting DriveLine directly.',
+          body: 'Under the General Data Protection Regulation, data subjects have the right to access, amend and erase information. You can request access, amendments or erasure of your data by contacting us directly.',
         },
       ],
     },
@@ -51,7 +54,7 @@ export class LegalComponent implements OnInit {
           body: 'Cookies are small pieces of data stored on a user\'s device by a website, which help enhance the browsing experience. A cookie file is stored in a browser and allows a third-party to recognise an anonymous user.',
         },
         {
-          heading: 'How DriveLine Uses Cookies',
+          heading: 'How We Use Cookies',
           body: 'When a user accesses this website, it may place a number of cookie files in the user\'s web browser. This website uses cookies to enable certain functions of the service, to provide analytics and store user preferences.',
         },
         {
@@ -69,7 +72,7 @@ export class LegalComponent implements OnInit {
       sections: [
         {
           heading: 'General Information',
-          body: 'The information contained in this website is for general information purposes only. The information is provided by DriveLine and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability.',
+          body: 'The information contained in this website is for general information purposes only. While we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability.',
         },
         {
           heading: 'Limitation of Liability',
@@ -77,11 +80,11 @@ export class LegalComponent implements OnInit {
         },
         {
           heading: 'External Links',
-          body: 'Through this website you are able to link to other websites which are not under the control of DriveLine. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.',
+          body: 'Through this website you are able to link to other websites which are not under our control. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.',
         },
         {
           heading: 'Availability',
-          body: 'Every effort is made to keep the website up and running smoothly. However, DriveLine takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.',
+          body: 'Every effort is made to keep the website up and running smoothly. However, we take no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.',
         },
       ],
     },
@@ -99,14 +102,14 @@ export class LegalComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       const page = params.get('page') as LegalPage;
-      if (page && this.pageContent[page]) {
+      if (page && this.pageContentRaw[page]) {
         this.currentPage.set(page);
       }
     });
   }
 
   get content() {
-    return this.pageContent[this.currentPage()];
+    return this.pageContentRaw[this.currentPage()];
   }
 
   sitemapLinks = [

@@ -4,12 +4,13 @@
     <div class="vehicle-print-sheet hidden print:block">
       <header class="veh-print-bar veh-print-bar--top flex justify-between items-center gap-4 px-4 py-2">
         <div class="flex items-baseline gap-1.5 flex-wrap">
-          <span class="veh-print-logo text-xl font-bold">DriveLine</span>
+          <span class="veh-print-logo text-xl font-bold">{{ dealerName() }}</span>
           <span class="veh-print-logo-sub text-sm font-semibold tracking-wide">Car Sales</span>
         </div>
         <div class="veh-print-phones text-right text-xs sm:text-sm font-medium leading-tight">
-          <div class="veh-print-phone-line">01733 563559</div>
-          <div class="veh-print-phone-line">07423 374244</div>
+          @for (phone of getPrintPhoneLines(); track phone) {
+            <div class="veh-print-phone-line">{{ phone }}</div>
+          }
         </div>
       </header>
 
@@ -98,7 +99,7 @@
 
       <footer class="veh-print-bar veh-print-bar--bottom flex flex-wrap justify-between items-center gap-2 px-4 py-2 text-[9px] leading-tight">
         <span class="veh-print-footer-text font-medium">{{ getPrintWebsiteDisplay() }}</span>
-        <span class="veh-print-footer-text text-right">Vision House, 193 Fengate, Peterborough, Cambridgeshire, PE1 5BH</span>
+        <span class="veh-print-footer-text text-right">{{ getPrintAddress() }}</span>
       </footer>
       <p class="text-[7px] text-gray-500 text-center m-0 py-1 print-only-ref">Stock ref: {{ vehicle()!.id }}</p>
     </div>
@@ -368,8 +369,8 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         class="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
-                      >View full advert on Fengate Car Sales</a>
-                      <span class="text-gray-500 dark:text-slate-500"> — same photos &amp; specification as the dealer site.</span>
+                      >View full advert</a>
+                      <span class="text-gray-500 dark:text-slate-500"> — same photos &amp; specification as the source listing.</span>
                     </p>
                   }
                 </div>
@@ -526,7 +527,7 @@
                 class="mb-4 w-full justify-center py-2.5 text-sm inline-flex items-center gap-2 rounded-xl border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-700 font-medium transition-colors print:hidden"
               >
                 <svg class="w-4 h-4 shrink-0 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                Full advert on Fengate site
+                Full advert (external listing)
               </a>
             }
 
@@ -554,7 +555,7 @@
               <svg class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
-              <p class="text-sm text-green-800 dark:text-green-300 font-medium">Includes DriveLine Warranty</p>
+              <p class="text-sm text-green-800 dark:text-green-300 font-medium">Includes {{ dealerName() }} Warranty</p>
             </div>
           </div>
 

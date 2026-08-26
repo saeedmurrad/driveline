@@ -1,11 +1,9 @@
-import { Component, signal, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, inject, PLATFORM_ID, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
-import { BUSINESS_INFO } from '../../data/reviews.data';
-import { SALES_EMAIL } from '../../constants/sales-contact';
-import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
-import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { DealerContextService } from '../../services/dealer-context.service';
+import { EnquirySubmitService } from '../../services/enquiry-submit.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 
@@ -17,9 +15,33 @@ import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 })
 export class ContactComponent {
   private platformId = inject(PLATFORM_ID);
-  private web3 = inject(Web3FormsEnquiryService);
-  business = BUSINESS_INFO;
-  readonly salesMailtoHref = `mailto:${SALES_EMAIL}`;
+  private enquirySubmit = inject(EnquirySubmitService);
+  private dealerContext = inject(DealerContextService);
+
+  business = this.dealerContext.businessInfo;
+  dealerName = this.dealerContext.dealerName;
+  salesMailtoHref = computed(
+    () => `mailto:${this.dealerContext.salesEmail()}`,
+  );
+  mapsQuery = computed(() => {
+    const b = this.business();
+    if (!b) return '';
+    return [
+      b.address.line1,
+      b.address.line2,
+      b.address.town,
+      b.address.postcode,
+    ]
+      .filter(Boolean)
+      .join(', ');
+  });
+  mapsDirectionsUrl = computed(
+    () => `https://maps.google.com/?q=${encodeURIComponent(this.mapsQuery())}`,
+  );
+  mapsEmbedUrl = computed(
+    () =>
+      `https://www.google.com/maps?q=${encodeURIComponent(this.mapsQuery())}&output=embed`,
+  );
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
@@ -64,19 +86,21 @@ export class ContactComponent {
       e.message,
     ].join('\n');
     const subject = 'Website enquiry — Contact page';
-    const fromName =
-      `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
-    submitEnquiryWithWeb3Fallback(
-      this.web3,
-      this.platformId,
+    void this.enquirySubmit.submit(
       {
+        type: 'contact',
         subject,
-        message: body,
-        replyEmail: e.email,
-        fromName,
+        payload: {
+          firstName: e.firstName,
+          lastName: e.lastName,
+          email: e.email,
+          phone: e.phone,
+          message: e.message,
+          newsletterOptIn: e.newsletterOptIn,
+        },
+        mailtoSubject: subject,
+        mailtoBody: body,
       },
-      subject,
-      body,
       {
         onSuccess: () => {
           this.enquirySent.set(true);

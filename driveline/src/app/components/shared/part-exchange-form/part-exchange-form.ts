@@ -8,8 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Web3FormsEnquiryService } from '../../../services/web3forms-enquiry.service';
-import { submitEnquiryWithWeb3Fallback } from '../../../utils/submit-enquiry';
+import { EnquirySubmitService } from '../../../services/enquiry-submit.service';
 import { validateEnquiryFields } from '../../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../../utils/scroll-form-alert';
 import { RouterLink } from '@angular/router';
@@ -29,7 +28,7 @@ import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
 export class PartExchangeFormComponent {
   private platformId = inject(PLATFORM_ID);
   private dvlaVehicle = inject(DvlaVehicleService);
-  private web3 = inject(Web3FormsEnquiryService);
+  private enquirySubmit = inject(EnquirySubmitService);
 
   /** Full sell-your-car page vs compact modal on vehicle detail */
   @Input() variant: 'page' | 'modal' = 'page';
@@ -254,17 +253,15 @@ export class PartExchangeFormComponent {
       .join('\n');
     const fromName =
       `${c.firstName} ${c.lastName}`.trim() || 'Website visitor';
-    submitEnquiryWithWeb3Fallback(
-      this.web3,
-      this.platformId,
+    void this.enquirySubmit.submit(
       {
+        type: 'part_exchange',
         subject,
-        message: body,
-        replyEmail: c.email,
-        fromName,
+        payload: { vehicle: v, contact: c, dvla: this.dvlaVehicleDetails(), body },
+        vehicleId: this.vehicleOfInterest?.id,
+        mailtoSubject: subject,
+        mailtoBody: body,
       },
-      subject,
-      body,
       {
         onSuccess: () => {
           this.isSubmitted.set(true);

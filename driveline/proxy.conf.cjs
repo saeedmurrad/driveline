@@ -1,19 +1,9 @@
 /**
- * Dev-only proxy: keeps your DVLA `x-api-key` off the browser bundle.
- *
- * Usage:
- *   Set `dvlaApiKey` in `src/environments/environment.ts` (sent as `x-api-key` on `/api/dvla-vehicle`), and/or
- *   put `DVLA_API_KEY=...` in repo-root `.env` (loaded below), and/or:
- *   export DVLA_API_KEY="your-key-from-dvla-developer-portal"
- *   npm start
- *
- * @see https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html
- * @see https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/vehicle-enquiry-service-description.html
+ * Dev-only proxy: DVLA + DivineBytes platform API.
  */
 const { existsSync, readFileSync } = require('node:fs');
 const { join } = require('node:path');
 
-/** Same idea as `server.ts`: `ng serve` does not load `.env` unless we do (avoids 403 from DVLA with no key). */
 function loadRepoDotEnv() {
   try {
     const envPath = join(__dirname, '.env');
@@ -44,8 +34,21 @@ function loadRepoDotEnv() {
 loadRepoDotEnv();
 
 const DVLA_API_KEY = process.env.DVLA_API_KEY || '';
+const PLATFORM_API = `http://localhost:${process.env.PLATFORM_API_PORT || 4001}`;
 
 module.exports = {
+  '/api/public': {
+    target: PLATFORM_API,
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'warn',
+  },
+  '/api/hub': {
+    target: PLATFORM_API,
+    secure: false,
+    changeOrigin: true,
+    logLevel: 'warn',
+  },
   '/api/dvla-vehicle': {
     target: 'https://driver-vehicle-licensing.api.gov.uk',
     secure: true,

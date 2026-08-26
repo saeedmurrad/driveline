@@ -12,6 +12,7 @@
 </div>
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  @if (business(); as business) {
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
     <!-- Left: Contact Info -->
     <div>
@@ -87,7 +88,7 @@
           </div>
           <div>
             <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-1">Email Us</h3>
-            <a [href]="salesMailtoHref" class="text-gray-600 dark:text-gray-300 text-sm hover:text-blue-600 transition-colors">
+            <a [href]="salesMailtoHref()" class="text-gray-600 dark:text-gray-300 text-sm hover:text-blue-600 transition-colors">
               {{ business.email }}
             </a>
           </div>
@@ -164,7 +165,7 @@
             </div>
             <label class="flex items-start gap-2.5 cursor-pointer">
               <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-blue-600">
-              <span class="text-sm text-gray-500 dark:text-gray-400">Keep me updated with latest news and offers from DriveLine</span>
+              <span class="text-sm text-gray-500 dark:text-gray-400">Keep me updated with latest news and offers from {{ dealerName() }}</span>
             </label>
             @if (enquiryError()) {
               <div id="contact-enquiry-alert" class="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
@@ -189,20 +190,20 @@
       <!-- Map Embed -->
       <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.4!2d-0.2344!3d52.5659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4877f7a6a6a6a6a6%3A0x0!2s193+Fengate%2C+Peterborough+PE1+5BH!5e0!3m2!1sen!2suk!4v1234567890"
+          [src]="mapsEmbedUrl()"
           width="100%"
           height="280"
           style="border:0;"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="DriveLine Location"
+          [title]="dealerName() + ' location'"
           class="block"
         ></iframe>
         <div class="p-4 bg-gray-50 dark:bg-slate-900 flex items-center justify-between">
           <p class="text-sm text-gray-600 dark:text-gray-300">{{ business.address.line1 }}, {{ business.address.line2 }}, {{ business.address.postcode }}</p>
           <a
-            href="https://maps.google.com/?q=193+Fengate+Peterborough+PE1+5BH"
+            [href]="mapsDirectionsUrl()"
             target="_blank"
             rel="noopener noreferrer"
             class="text-blue-600 text-sm font-medium hover:underline flex items-center gap-1"
@@ -214,4 +215,5 @@
       </div>
     </div>
   </div>
+  }
 </div>

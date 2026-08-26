@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { REVIEWS } from '../../data/reviews.data';
+import { DealerContextService } from '../../services/dealer-context.service';
 import { TestimonialCardComponent } from '../../components/shared/testimonial-card/testimonial-card';
 
 @Component({
@@ -10,9 +10,12 @@ import { TestimonialCardComponent } from '../../components/shared/testimonial-ca
   styleUrl: './reviews.css',
 })
 export class ReviewsComponent {
-  reviews = REVIEWS;
+  private readonly dealerContext = inject(DealerContextService);
+  reviews = this.dealerContext.reviews;
 
-  get averageRating(): number {
-    return this.reviews.reduce((sum, r) => sum + r.rating, 0) / this.reviews.length;
-  }
+  averageRating = computed(() => {
+    const list = this.reviews();
+    if (!list.length) return 5;
+    return list.reduce((sum, r) => sum + r.rating, 0) / list.length;
+  });
 }

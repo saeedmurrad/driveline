@@ -7,8 +7,8 @@ import {
   signal,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { Router } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { filter, Subscription } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
@@ -35,18 +35,28 @@ export class App implements OnInit, OnDestroy {
   private readonly seo = inject(SeoService);
   showHomeMobileFab = signal(true);
   private scrollCleanup: (() => void) | null = null;
+  private navSub: Subscription | null = null;
+  readonly isHubRoute = signal(false);
+
+  constructor() {
+    this.updateHubRouteFlag();
+  }
 
   ngOnInit(): void {
     this.seo.init();
+    this.updateHubRouteFlag();
+    this.navSub = this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => this.updateHubRouteFlag());
+
     if (!isPlatformBrowser(this.platformId)) return;
 
     const updateFabVisibility = () => {
       const isMobile = window.matchMedia('(max-width: 1023px)').matches;
-      if (!isMobile || !this.isHomeRoute()) {
+      if (!isMobile || !this.isHomeRoute() || this.isHubRoute()) {
         this.showHomeMobileFab.set(true);
         return;
       }
-      // Keep hero controls unobstructed; show FAB once user scrolls past hero region.
       const threshold = Math.min(560, Math.round(window.innerHeight * 0.72));
       this.showHomeMobileFab.set(window.scrollY > threshold);
     };
@@ -63,6 +73,13 @@ export class App implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.scrollCleanup?.();
     this.scrollCleanup = null;
+    this.navSub?.unsubscribe();
+    this.navSub = null;
+  }
+
+  private updateHubRouteFlag(): void {
+    const path = this.router.url.split('?')[0].split('#')[0];
+    this.isHubRoute.set(path.startsWith('/hub'));
   }
 
   isHomeRoute(): boolean {

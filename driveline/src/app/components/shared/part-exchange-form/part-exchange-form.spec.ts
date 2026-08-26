@@ -5,7 +5,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
-import { Web3FormsEnquiryService } from '../../../services/web3forms-enquiry.service';
+import { EnquirySubmitService } from '../../../services/enquiry-submit.service';
 import { PartExchangeFormComponent } from './part-exchange-form';
 
 describe('PartExchangeFormComponent — DVLA lookup', () => {
@@ -28,10 +28,9 @@ describe('PartExchangeFormComponent — DVLA lookup', () => {
           useValue: { lookupByRegistration: lookupSpy },
         },
         {
-          provide: Web3FormsEnquiryService,
+          provide: EnquirySubmitService,
           useValue: {
-            isConfigured: () => false,
-            send: () => throwError(() => new Error('skip')),
+            submit: () => Promise.resolve(),
           },
         },
       ],
@@ -137,8 +136,10 @@ describe('PartExchangeFormComponent — DVLA lookup', () => {
           useValue: { lookupByRegistration: lookupSpy },
         },
         {
-          provide: Web3FormsEnquiryService,
-          useValue: { isConfigured: () => false, send: vi.fn() },
+          provide: EnquirySubmitService,
+          useValue: {
+            submit: () => Promise.resolve(),
+          },
         },
       ],
     });

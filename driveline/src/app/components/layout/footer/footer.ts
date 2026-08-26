@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BUSINESS_INFO } from '../../../data/reviews.data';
-import { SALES_EMAIL } from '../../../constants/sales-contact';
+import { DealerContextService } from '../../../services/dealer-context.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,9 +9,13 @@ import { SALES_EMAIL } from '../../../constants/sales-contact';
   styleUrl: './footer.css',
 })
 export class FooterComponent {
-  business = BUSINESS_INFO;
-  /** Single source with enquiry mailto so the link always resolves in the client. */
-  readonly salesMailtoHref = `mailto:${SALES_EMAIL}`;
+  private readonly dealerContext = inject(DealerContextService);
+
+  business = computed(() => this.dealerContext.businessInfo());
+  salesMailtoHref = computed(
+    () => `mailto:${this.dealerContext.salesEmail()}`,
+  );
+  dealerName = computed(() => this.dealerContext.dealerName());
   currentYear = new Date().getFullYear();
 
   quickLinks = [
@@ -24,7 +27,6 @@ export class FooterComponent {
     { label: 'Customer Reviews', route: '/reviews' },
   ];
 
-  /** Same order as Fengate footer */
   legalLinks = [
     { label: 'Cookie Policy', route: '/legal/cookie-policy' },
     { label: 'Disclaimer', route: '/legal/disclaimer' },

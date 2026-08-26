@@ -5,9 +5,11 @@ import {
   OnInit,
   OnDestroy,
   PLATFORM_ID,
+  computed,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { DealerContextService } from '../../../services/dealer-context.service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,9 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
+  private dealerContext = inject(DealerContextService);
+
+  dealerName = computed(() => this.dealerContext.dealerName());
 
   isMobileMenuOpen = signal(false);
   isDarkMode = signal(false);

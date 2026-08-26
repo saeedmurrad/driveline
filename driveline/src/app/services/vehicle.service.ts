@@ -1,12 +1,18 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, inject, signal, computed, effect } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Vehicle, SearchFilters } from '../models/vehicle.model';
-import { VEHICLES } from '../data/vehicles.data';
+import { PlatformApiService } from './platform-api.service';
+import { DealerContextService } from './dealer-context.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VehicleService {
-  private allVehicles = signal<Vehicle[]>(VEHICLES);
+  private readonly api = inject(PlatformApiService);
+  private readonly dealerContext = inject(DealerContextService);
+
+  readonly stockLoading = signal(false);
+  private allVehicles = signal<Vehicle[]>([]);
   private filters = signal<SearchFilters>({});
   private sortBy = signal<string>('dateAdded-desc');
 
@@ -19,7 +25,7 @@ export class VehicleService {
     }
     if (f.make) {
       result = result.filter(
-        (v) => v.make.toLowerCase() === f.make!.toLowerCase()
+        (v) => v.make.toLowerCase() === f.make!.toLowerCase(),
       );
     }
     if (f.model) {
@@ -43,12 +49,12 @@ export class VehicleService {
     }
     if (f.transmission) {
       result = result.filter(
-        (v) => v.transmission.toLowerCase() === f.transmission!.toLowerCase()
+        (v) => v.transmission.toLowerCase() === f.transmission!.toLowerCase(),
       );
     }
     if (f.fuelType) {
       result = result.filter(
-        (v) => v.fuelType.toLowerCase() === f.fuelType!.toLowerCase()
+        (v) => v.fuelType.toLowerCase() === f.fuelType!.toLowerCase(),
       );
     }
     if (f.doors) {
@@ -94,7 +100,7 @@ export class VehicleService {
       default:
         result.sort(
           (a, b) =>
-            new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime()
+            new Date(b.dateAdded).getTime() - new Date(a.dateAdded).getTime(),
         );
     }
 
@@ -104,10 +110,9 @@ export class VehicleService {
   featuredVehicles = computed(() =>
     this.allVehicles()
       .filter((v) => v.isFeatured)
-      .slice(0, 6)
+      .slice(0, 6),
   );
 
-  /** Per-category listing counts (for search tabs, e.g. Cars (40), Vans (4)) */
   inventoryCategoryCounts = computed(() => {
     const all = this.allVehicles();
     let car = 0;
@@ -118,6 +123,25 @@ export class VehicleService {
     }
     return { car, van };
   });
+
+  constructor() {
+    effect(() => {
+      const dealer = this.dealerContext.dealer();
+      if (dealer) void this.reloadFromPlatform();
+    });
+  }
+
+  async reloadFromPlatform(): Promise<void> {
+    this.stockLoading.set(true);
+    try {
+      const res = await firstValueFrom(this.api.fetchPublicVehicles());
+      this.allVehicles.set(res.vehicles);
+    } catch {
+      this.allVehicles.set([]);
+    } finally {
+      this.stockLoading.set(false);
+    }
+  }
 
   setFilters(filters: SearchFilters) {
     this.filters.set(filters);

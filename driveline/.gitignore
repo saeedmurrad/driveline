@@ -1,4 +1,4 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files
 
 # Compiled output
 /dist
@@ -26,7 +26,6 @@ yarn-error.log
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
 .history/*
 
 # Miscellaneous
@@ -39,11 +38,14 @@ testem.log
 /typings
 __screenshots__/
 
-# Secrets (DVLA key, etc.) — use .env.example only in repo
+# System files
+.DS_Store
+Thumbs.db
+
+# Secrets
 .env
 .env.local
 .env.*.local
 
-# System files
-.DS_Store
-Thumbs.db
+# DivineBytes platform file store (local dev DB)
+data/platform/platform.json

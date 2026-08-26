@@ -16,7 +16,7 @@
   <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm dark:shadow-lg dark:shadow-black/30 border border-gray-100 dark:border-slate-600 p-8 mb-12 ring-1 ring-black/5 dark:ring-white/10">
     <div class="flex flex-col sm:flex-row items-center gap-8">
       <div class="text-center">
-        <div class="text-6xl font-bold font-display text-gray-900 dark:text-white mb-1">{{ averageRating.toFixed(1) }}</div>
+        <div class="text-6xl font-bold font-display text-gray-900 dark:text-white mb-1">{{ averageRating().toFixed(1) }}</div>
         <div class="flex items-center gap-0.5 justify-center mb-1">
           @for (s of [1,2,3,4,5]; track s) {
             <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
@@ -24,7 +24,7 @@
             </svg>
           }
         </div>
-        <p class="text-gray-500 dark:text-slate-300 text-sm">{{ reviews.length }} reviews</p>
+        <p class="text-gray-500 dark:text-slate-300 text-sm">{{ reviews().length }} reviews</p>
       </div>
 
       <div class="flex-1 w-full">
@@ -35,10 +35,10 @@
             <div class="flex-1 bg-gray-100 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
               <div
                 class="bg-yellow-400 h-2 rounded-full"
-                [style.width.%]="(reviews.filter(r => r.rating === rating).length / reviews.length) * 100"
+                [style.width.%]="(reviews().filter(r => r.rating === rating).length / reviews().length) * 100"
               ></div>
             </div>
-            <span class="text-xs text-gray-500 dark:text-slate-300 w-4 text-right tabular-nums">{{ reviews.filter(r => r.rating === rating).length }}</span>
+            <span class="text-xs text-gray-500 dark:text-slate-300 w-4 text-right tabular-nums">{{ reviews().filter(r => r.rating === rating).length }}</span>
           </div>
         }
       </div>
@@ -62,7 +62,7 @@
 
   <!-- Reviews Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-    @for (review of reviews; track review.id) {
+    @for (review of reviews(); track review.id) {
       <app-testimonial-card [review]="review"></app-testimonial-card>
     }
   </div>

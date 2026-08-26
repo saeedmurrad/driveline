@@ -1,15 +1,66 @@
 import { Routes } from '@angular/router';
+import { hubAuthGuard, hubGuestGuard } from './guards/hub-auth.guard';
 
 export const routes: Routes = [
+  {
+    path: 'hub',
+    children: [
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/hub/hub-login/hub-login').then((m) => m.HubLoginComponent),
+        canActivate: [hubGuestGuard],
+      },
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/hub/hub-shell/hub-shell').then((m) => m.HubShellComponent),
+        canActivate: [hubAuthGuard],
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          {
+            path: 'dashboard',
+            loadComponent: () =>
+              import('./pages/hub/hub-dashboard/hub-dashboard').then(
+                (m) => m.HubDashboardComponent,
+              ),
+          },
+          {
+            path: 'site',
+            loadComponent: () =>
+              import('./pages/hub/hub-site/hub-site').then((m) => m.HubSiteComponent),
+          },
+          {
+            path: 'stock',
+            loadComponent: () =>
+              import('./pages/hub/hub-stock/hub-stock').then((m) => m.HubStockComponent),
+          },
+          {
+            path: 'enquiries',
+            loadComponent: () =>
+              import('./pages/hub/hub-enquiries/hub-enquiries').then(
+                (m) => m.HubEnquiriesComponent,
+              ),
+          },
+          {
+            path: 'dealers',
+            loadComponent: () =>
+              import('./pages/hub/hub-dealers/hub-dealers').then(
+                (m) => m.HubDealersComponent,
+              ),
+          },
+        ],
+      },
+    ],
+  },
   {
     path: '',
     loadComponent: () =>
       import('./pages/home/home').then((m) => m.HomeComponent),
     data: {
       seo: {
-        title: 'Used Cars & Vans in Peterborough | DriveLine Car Sales',
-        description:
-          'Browse quality used cars and vans in Peterborough. DriveLine offers finance, part exchange, warranties, and nationwide delivery.',
+        titleKey: 'home',
+        descriptionKey: 'home',
       },
     },
   },
@@ -19,11 +70,7 @@ export const routes: Routes = [
       import('./pages/vehicles/vehicles').then((m) => m.VehiclesComponent),
     data: {
       category: 'car',
-      seo: {
-        title: 'Used Cars for Sale in Peterborough | DriveLine',
-        description:
-          'View inspected used cars for sale in Peterborough at DriveLine. Competitive prices, finance options, and warranty included.',
-      },
+      seo: { titleKey: 'cars', descriptionKey: 'cars' },
     },
   },
   {
@@ -32,25 +79,17 @@ export const routes: Routes = [
       import('./pages/vehicles/vehicles').then((m) => m.VehiclesComponent),
     data: {
       category: 'van',
-      seo: {
-        title: 'Used Vans for Sale in Peterborough | DriveLine',
-        description:
-          'Explore quality used vans in Peterborough from DriveLine. Business-ready stock with finance and warranty options.',
-      },
+      seo: { titleKey: 'vans', descriptionKey: 'vans' },
     },
   },
   {
     path: 'vehicle/:id',
     loadComponent: () =>
       import('./pages/vehicle-detail/vehicle-detail').then(
-        (m) => m.VehicleDetailComponent
+        (m) => m.VehicleDetailComponent,
       ),
     data: {
-      seo: {
-        title: 'Used Vehicle Details | DriveLine Car Sales',
-        description:
-          'View full used vehicle specifications, images, finance examples, and enquiry options at DriveLine Car Sales.',
-      },
+      seo: { titleKey: 'vehicle', descriptionKey: 'vehicle' },
     },
   },
   {
@@ -58,11 +97,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/finance/finance').then((m) => m.FinanceComponent),
     data: {
-      seo: {
-        title: 'Car Finance in Peterborough | DriveLine Car Sales',
-        description:
-          'Apply for used car and van finance in Peterborough with DriveLine. Flexible finance packages and quick decisions.',
-      },
+      seo: { titleKey: 'finance', descriptionKey: 'finance' },
     },
   },
   {
@@ -70,25 +105,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/warranty/warranty').then((m) => m.WarrantyComponent),
     data: {
-      seo: {
-        title: 'Used Car Warranty | DriveLine Car Sales',
-        description:
-          'Learn about DriveLine warranty cover for used cars and vans. Buy with confidence and after-sales support.',
-      },
+      seo: { titleKey: 'warranty', descriptionKey: 'warranty' },
     },
   },
   {
     path: 'sell-your-car',
     loadComponent: () =>
       import('./pages/sell-your-car/sell-your-car').then(
-        (m) => m.SellYourCarComponent
+        (m) => m.SellYourCarComponent,
       ),
     data: {
-      seo: {
-        title: 'Sell Your Car in Peterborough | DriveLine',
-        description:
-          'Get a competitive valuation to sell or part-exchange your car in Peterborough with DriveLine Car Sales.',
-      },
+      seo: { titleKey: 'sell', descriptionKey: 'sell' },
     },
   },
   {
@@ -96,11 +123,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/reviews/reviews').then((m) => m.ReviewsComponent),
     data: {
-      seo: {
-        title: 'Customer Reviews | DriveLine Car Sales',
-        description:
-          'Read verified customer reviews for DriveLine Car Sales in Peterborough and see why buyers recommend us.',
-      },
+      seo: { titleKey: 'reviews', descriptionKey: 'reviews' },
     },
   },
   {
@@ -108,11 +131,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/contact/contact').then((m) => m.ContactComponent),
     data: {
-      seo: {
-        title: 'Contact DriveLine Car Sales Peterborough',
-        description:
-          'Contact DriveLine Car Sales in Peterborough for used car and van enquiries, finance help, and test drives.',
-      },
+      seo: { titleKey: 'contact', descriptionKey: 'contact' },
     },
   },
   {
@@ -120,11 +139,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/legal/legal').then((m) => m.LegalComponent),
     data: {
-      seo: {
-        title: 'Legal Information | DriveLine Car Sales',
-        description:
-          'Read DriveLine Car Sales legal pages including privacy policy, cookies, disclaimer, and site information.',
-      },
+      seo: { titleKey: 'legal', descriptionKey: 'legal' },
     },
   },
   {

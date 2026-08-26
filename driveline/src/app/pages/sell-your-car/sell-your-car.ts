@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
+import { DealerContextService } from '../../services/dealer-context.service';
 
 @Component({
   selector: 'app-sell-your-car',
@@ -8,4 +9,7 @@ import { PartExchangeFormComponent } from '../../components/shared/part-exchange
   templateUrl: './sell-your-car.html',
   styleUrl: './sell-your-car.css',
 })
-export class SellYourCarComponent {}
+export class SellYourCarComponent {
+  private dealerContext = inject(DealerContextService);
+  dealerName = this.dealerContext.dealerName;
+}

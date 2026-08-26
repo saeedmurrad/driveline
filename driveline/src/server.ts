@@ -6,6 +6,7 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { existsSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { join } from 'node:path';
 
 /** Load repo-root `.env` when running SSR (`node dist/.../server.mjs` from project root). */
@@ -46,7 +47,14 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.use(express.json({ limit: '24kb' }));
+app.use(express.json({ limit: '512kb' }));
+
+const platformRoutesFile = join(import.meta.dirname, '../platform/routes.mjs');
+if (existsSync(platformRoutesFile)) {
+  const require = createRequire(import.meta.url);
+  const { registerPlatformRoutes } = require(platformRoutesFile);
+  registerPlatformRoutes(app);
+}
 
 /**
  * Server-side proxy for [DVLA Vehicle Enquiry Service](https://developer-portal.driver-vehicle-licensing.api.gov.uk/apis/vehicle-enquiry-service/vehicle-enquiry-service-description.html).
@@ -54,12 +62,7 @@ app.use(express.json({ limit: '24kb' }));
  * `DVLA_API_KEY` in `.env` / the environment.
  */
 app.post('/api/dvla-vehicle', async (req, res) => {
-  const headerKey = req.headers['x-api-key'];
-  const fromClient =
-    (typeof headerKey === 'string' && headerKey.trim()) ||
-    (Array.isArray(headerKey) && headerKey[0]?.trim()) ||
-    '';
-  const apiKey = fromClient || process.env['DVLA_API_KEY']?.trim();
+  const apiKey = process.env['DVLA_API_KEY']?.trim();
   if (!apiKey) {
     res.status(503).json({
       errors: [

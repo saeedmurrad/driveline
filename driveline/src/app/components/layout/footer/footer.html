@@ -1,5 +1,6 @@
 <footer class="bg-gray-900 text-gray-300 border-t border-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+    @if (business(); as business) {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6">
       <!-- Brand -->
       <div class="lg:col-span-3">
@@ -9,10 +10,10 @@
               <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             </svg>
           </div>
-          <span class="text-lg font-bold font-display text-white">Drive<span class="text-blue-400">Line</span></span>
+          <span class="text-lg font-bold font-display text-white">{{ dealerName() }}</span>
         </a>
         <p class="text-gray-400 text-xs leading-relaxed mb-4">
-          {{ business.tagline }} Family-owned since 2006, Peterborough &amp; beyond.
+          {{ business.tagline }}
         </p>
         @if (business.social) {
           <div class="flex items-center gap-2">
@@ -55,7 +56,7 @@
             <a [href]="'tel:' + business.mobile" class="text-gray-400 hover:text-white transition-colors">{{ business.mobile }}</a>
           </li>
           <li>
-            <a [href]="salesMailtoHref" class="text-gray-400 hover:text-white transition-colors break-all">{{ business.email }}</a>
+            <a [href]="salesMailtoHref()" class="text-gray-400 hover:text-white transition-colors break-all">{{ business.email }}</a>
           </li>
         </ul>
       </div>
@@ -75,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Single slim bar: copyright, legal, cards (no duplicate address) -->
     <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4">
       <p class="text-gray-500 text-[11px]">
         &copy; {{ currentYear }} {{ business.name }}. All rights reserved.
@@ -91,5 +91,6 @@
         <img src="payment/amex.svg" alt="American Express" class="h-6 w-auto rounded object-contain" width="40" height="26" loading="lazy" decoding="async" />
       </div>
     </div>
+    }
   </div>
 </footer>

@@ -1,8 +1,8 @@
 import { Component, signal, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
-import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { EnquirySubmitService } from '../../services/enquiry-submit.service';
+import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 
@@ -14,7 +14,9 @@ import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 })
 export class WarrantyComponent {
   private platformId = inject(PLATFORM_ID);
-  private web3 = inject(Web3FormsEnquiryService);
+  private enquirySubmit = inject(EnquirySubmitService);
+  private dealerContext = inject(DealerContextService);
+  dealerName = this.dealerContext.dealerName;
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
@@ -77,17 +79,14 @@ export class WarrantyComponent {
     const subject = 'Website enquiry — Warranty';
     const fromName =
       `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
-    submitEnquiryWithWeb3Fallback(
-      this.web3,
-      this.platformId,
+    void this.enquirySubmit.submit(
       {
+        type: 'warranty',
         subject,
-        message: body,
-        replyEmail: e.email,
-        fromName,
+        payload: { ...e, body },
+        mailtoSubject: subject,
+        mailtoBody: body,
       },
-      subject,
-      body,
       {
         onSuccess: () => {
           this.enquirySent.set(true);

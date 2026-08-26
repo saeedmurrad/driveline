@@ -16,8 +16,8 @@ import { Meta, Title } from '@angular/platform-browser';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
-import { Web3FormsEnquiryService } from '../../services/web3forms-enquiry.service';
-import { submitEnquiryWithWeb3Fallback } from '../../utils/submit-enquiry';
+import { EnquirySubmitService } from '../../services/enquiry-submit.service';
+import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
 import {
@@ -38,7 +38,8 @@ export class VehicleDetailComponent implements OnDestroy {
   private route = inject(ActivatedRoute);
   private vehicleService = inject(VehicleService);
   private platformId = inject(PLATFORM_ID);
-  private web3 = inject(Web3FormsEnquiryService);
+  private enquirySubmit = inject(EnquirySubmitService);
+  private dealerContext = inject(DealerContextService);
   private destroyRef = inject(DestroyRef);
   private viewportScroller = inject(ViewportScroller);
   private title = inject(Title);
@@ -46,6 +47,8 @@ export class VehicleDetailComponent implements OnDestroy {
   private document = inject(DOCUMENT);
 
   vehicle = signal<Vehicle | undefined>(undefined);
+  dealerName = this.dealerContext.dealerName;
+  businessInfo = this.dealerContext.businessInfo;
   selectedImageIndex = signal(0);
   /** Pauses autoplay while user hovers the main image */
   galleryHoverPaused = signal(false);
@@ -127,8 +130,10 @@ export class VehicleDetailComponent implements OnDestroy {
   private updateVehicleSeo(v: Vehicle | undefined): void {
     if (!v) return;
     const canonical = this.getCanonicalVehicleListingUrl();
-    const title = `${v.year} ${v.make} ${v.model} ${v.derivative} | DriveLine Car Sales`;
-    const description = `${v.year} ${v.make} ${v.model} ${v.derivative}. ${this.formatMileage(v.mileage)} miles, ${v.fuelType}, ${v.transmission}. ${this.formatPrice(v.price)} at DriveLine Car Sales Peterborough.`;
+    const dealerName = this.dealerContext.dealerName();
+    const loc = this.dealerContext.locationLabel();
+    const title = `${v.year} ${v.make} ${v.model} ${v.derivative} | ${dealerName}`;
+    const description = `${v.year} ${v.make} ${v.model} ${v.derivative}. ${this.formatMileage(v.mileage)} miles, ${v.fuelType}, ${v.transmission}. ${this.formatPrice(v.price)} at ${dealerName} ${loc}.`;
 
     this.title.setTitle(title);
     this.meta.updateTag({ name: 'description', content: description });
@@ -213,8 +218,8 @@ export class VehicleDetailComponent implements OnDestroy {
         url: canonical,
         seller: {
           '@type': 'AutoDealer',
-          name: 'DriveLine Car Sales',
-          url: 'https://drivelinecarsales.co.uk/',
+          name: this.dealerContext.dealerName(),
+          url: this.getDeployedAppBaseUrl() || canonical,
         },
       },
     };
@@ -308,17 +313,15 @@ export class VehicleDetailComponent implements OnDestroy {
       : 'Vehicle enquiry';
     const fromName =
       `${e.firstName} ${e.lastName}`.trim() || 'Website visitor';
-    submitEnquiryWithWeb3Fallback(
-      this.web3,
-      this.platformId,
+    void this.enquirySubmit.submit(
       {
+        type: 'vehicle',
         subject,
-        message: body,
-        replyEmail: e.email,
-        fromName,
+        payload: { ...e, body, vehicleLine },
+        vehicleId: v?.id,
+        mailtoSubject: subject,
+        mailtoBody: body,
       },
-      subject,
-      body,
       {
         onSuccess: () => {
           this.enquirySent.set(true);
@@ -409,7 +412,6 @@ export class VehicleDetailComponent implements OnDestroy {
     return `https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(url)}`;
   }
 
-  /** Website line on the print sheet footer (host + base path, e.g. saeedmurrad.github.io/driveline). */
   getPrintWebsiteDisplay(): string {
     const base = this.getDeployedAppBaseUrl();
     if (!base) return '';
@@ -479,7 +481,7 @@ export class VehicleDetailComponent implements OnDestroy {
 
     const url = window.location.href;
     const title = `${v.year} ${v.make} ${v.model}`;
-    const text = `Check out this ${title} at DriveLine`;
+    const text = `Check out this ${title} at ${this.dealerContext.dealerName()}`;
 
     this.shareFeedback.set('idle');
 
@@ -518,5 +520,25 @@ export class VehicleDetailComponent implements OnDestroy {
 
   onPartExchangeDismiss(): void {
     this.closePartExchange();
+  }
+
+  getPrintAddress(): string {
+    const b = this.businessInfo();
+    if (!b) return '';
+    return [
+      b.address.line1,
+      b.address.line2,
+      b.address.town,
+      b.address.county,
+      b.address.postcode,
+    ]
+      .filter(Boolean)
+      .join(', ');
+  }
+
+  getPrintPhoneLines(): string[] {
+    const b = this.businessInfo();
+    if (!b) return [];
+    return [b.phone, b.mobile].filter(Boolean);
   }
 }

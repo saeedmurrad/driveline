@@ -13,7 +13,8 @@ import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/veh
 import { SearchWidgetComponent } from '../../components/search/search-widget/search-widget';
 import { TestimonialCardComponent } from '../../components/shared/testimonial-card/testimonial-card';
 import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
-import { REVIEWS, BUSINESS_INFO } from '../../data/reviews.data';
+import { computed } from '@angular/core';
+import { DealerContextService } from '../../services/dealer-context.service';
 
 @Component({
   selector: 'app-home',
@@ -33,9 +34,12 @@ export class HomeComponent {
   private destroyRef = inject(DestroyRef);
   private platformId = inject(PLATFORM_ID);
 
+  private dealerContext = inject(DealerContextService);
+
   featuredVehicles = this.vehicleService.featuredVehicles;
-  reviews = REVIEWS.slice(0, 3);
-  business = BUSINESS_INFO;
+  reviews = computed(() => this.dealerContext.reviews().slice(0, 3));
+  business = this.dealerContext.businessInfo;
+  dealerName = this.dealerContext.dealerName;
 
   /**
    * Hero backgrounds sourced from user-provided image URLs and stored in `public/hero/*`.

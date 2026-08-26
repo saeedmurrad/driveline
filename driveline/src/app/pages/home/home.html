@@ -78,7 +78,7 @@
 <section appReveal class="home-bento-section py-20 bg-white dark:bg-slate-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
-      <h2 class="section-title">Why Choose DriveLine?</h2>
+      <h2 class="section-title">Why Choose {{ dealerName() }}?</h2>
       <p class="section-subtitle">We go above and beyond to make your car buying experience exceptional</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-5">
@@ -247,7 +247,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      @for (review of reviews; track review.id) {
+      @for (review of reviews(); track review.id) {
         <app-testimonial-card [review]="review"></app-testimonial-card>
       }
     </div>
@@ -267,8 +267,9 @@
 <section appReveal class="py-20 bg-white dark:bg-slate-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      @if (business(); as business) {
       <div>
-        <h2 class="section-title">Visit DriveLine</h2>
+        <h2 class="section-title">Visit {{ dealerName() }}</h2>
         <p class="section-subtitle mb-6">{{ business.tagline }}</p>
         <div class="space-y-4 text-gray-600 dark:text-gray-300">
           <div class="flex items-start gap-3">
@@ -307,6 +308,7 @@
         </ul>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-4">{{ business.bankHolidayNote }}</p>
       </div>
+      }
     </div>
   </div>
 </section>
