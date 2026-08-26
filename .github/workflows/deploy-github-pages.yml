@@ -80,7 +80,7 @@ jobs:
               text = f.read()
           replacement = f"dvlaLookupUrl: {json.dumps(url)},"
           text, n = re.subn(
-              r"dvlaLookupUrl:\s*\n\s*'[^']*',",
+              r"dvlaLookupUrl:\s*(?:\n\s*)?'[^']*',",
               replacement,
               text,
               count=1,
