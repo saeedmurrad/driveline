@@ -13,6 +13,7 @@ import type { Review } from '../models/review.model';
 import type { BusinessInfo } from '../models/contact.model';
 import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { DRIVELINE_DEALER, DRIVELINE_REVIEWS } from '../data/driveline-dealer.data';
 
 @Injectable({ providedIn: 'root' })
 export class DealerContextService {
@@ -43,7 +44,11 @@ export class DealerContextService {
   );
 
   constructor() {
-    if (isPlatformBrowser(this.platformId)) {
+    if (environment.useStaticData) {
+      this.dealer.set(DRIVELINE_DEALER);
+      this.reviews.set(DRIVELINE_REVIEWS);
+      this.loading.set(false);
+    } else if (isPlatformBrowser(this.platformId)) {
       void this.load();
     } else {
       this.loading.set(false);

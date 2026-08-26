@@ -5,16 +5,17 @@ import {
   OnInit,
   PLATFORM_ID,
   signal,
+  computed,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
 import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
 import { CookieBannerComponent } from './components/layout/cookie-banner/cookie-banner';
 import { TrustedPartnersComponent } from './components/layout/trusted-partners/trusted-partners';
 import { SeoService } from './services/seo.service';
+import { DealerContextService } from './services/dealer-context.service';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,20 @@ export class App implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly seo = inject(SeoService);
+  private readonly dealerContext = inject(DealerContextService);
+
+  readonly phoneTel = computed(() => {
+    const phone = this.dealerContext.businessInfo()?.phone?.replace(/\D/g, '');
+    return phone ? `tel:${phone}` : '';
+  });
+
+  readonly whatsappUrl = computed(() => {
+    const mobile = this.dealerContext.businessInfo()?.mobile?.replace(/\D/g, '');
+    if (!mobile) return '';
+    const intl = mobile.startsWith('0') ? `44${mobile.slice(1)}` : mobile;
+    return `https://wa.me/${intl}`;
+  });
+
   showHomeMobileFab = signal(true);
   private scrollCleanup: (() => void) | null = null;
   private navSub: Subscription | null = null;

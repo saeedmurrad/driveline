@@ -3,6 +3,8 @@ import { firstValueFrom } from 'rxjs';
 import { Vehicle, SearchFilters } from '../models/vehicle.model';
 import { PlatformApiService } from './platform-api.service';
 import { DealerContextService } from './dealer-context.service';
+import { environment } from '../../environments/environment';
+import { VEHICLES } from '../data/vehicles.data';
 
 @Injectable({
   providedIn: 'root',
@@ -125,6 +127,11 @@ export class VehicleService {
   });
 
   constructor() {
+    if (environment.useStaticData) {
+      this.allVehicles.set(VEHICLES);
+      return;
+    }
+
     effect(() => {
       const dealer = this.dealerContext.dealer();
       if (dealer) void this.reloadFromPlatform();

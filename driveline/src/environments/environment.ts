@@ -3,6 +3,7 @@
  */
 export const environment = {
   production: false,
+  useStaticData: false,
   /** Proxied to platform API (see proxy.conf.cjs) */
   platformApiUrl: '/api',
   /** Default tenant when host is localhost */

@@ -67,7 +67,13 @@
             },
             "github-pages": {
               "outputMode": "static",
-              "baseHref": "/"
+              "baseHref": "/",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.github-pages.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
