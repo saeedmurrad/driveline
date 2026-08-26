@@ -1,6 +1,7 @@
 /**
  * Reset platform JSON store to seed data (includes DriveLine / drivelinecarsales.co.uk).
  * Usage: npm run seed:platform
+ * Refresh committed snapshot after stock sync: npm run export:platform-snapshot
  */
 import { resetToSeed } from '../platform/store.mjs';
 

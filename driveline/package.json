@@ -11,6 +11,7 @@
     "build:gh-pages-github-io": "ng build --configuration production,github-pages --base-href /driveline/",
     "sync:stock": "node scripts/fetch-fengate-stock.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
+    "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:dvla-live": "node scripts/test-dvla-ves.mjs",

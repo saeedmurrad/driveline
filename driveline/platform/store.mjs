@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { buildSeedSnapshot } from './seed-data.mjs';
 
@@ -18,6 +19,20 @@ const DATA_DIR =
 
 const DB_FILE = join(DATA_DIR, 'platform.json');
 
+const SNAPSHOT_FILE = join(
+  dirname(fileURLToPath(import.meta.url)),
+  'seed',
+  'platform.snapshot.json',
+);
+
+/** @returns {PlatformSnapshot} */
+function loadInitialSnapshot() {
+  if (existsSync(SNAPSHOT_FILE)) {
+    return JSON.parse(readFileSync(SNAPSHOT_FILE, 'utf8'));
+  }
+  return buildSeedSnapshot();
+}
+
 /** @type {PlatformSnapshot | null} */
 let cache = null;
 
@@ -32,7 +47,7 @@ export function loadSnapshot() {
   if (cache) return cache;
   ensureDir();
   if (!existsSync(DB_FILE)) {
-    cache = buildSeedSnapshot();
+    cache = loadInitialSnapshot();
     writeSnapshot(cache);
     return cache;
   }
@@ -40,7 +55,7 @@ export function loadSnapshot() {
     cache = JSON.parse(readFileSync(DB_FILE, 'utf8'));
     return cache;
   } catch {
-    cache = buildSeedSnapshot();
+    cache = loadInitialSnapshot();
     writeSnapshot(cache);
     return cache;
   }
