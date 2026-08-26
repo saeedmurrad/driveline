@@ -1,5 +1,5 @@
 @if (variant === 'hero') {
-  <div class="search-widget--fengate w-full max-w-full rounded-2xl border border-white/20 bg-slate-950/78 p-2 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.85)] backdrop-blur-sm">
+  <div class="search-widget--fengate w-full max-w-full rounded-2xl border border-rose-200/25 bg-stone-950/78 p-2 shadow-[0_18px_40px_-18px_rgba(127,29,29,0.65)] backdrop-blur-sm">
     <div class="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-stretch">
       <div class="min-w-0 flex-1 rounded-xl border border-white/10 bg-slate-900/85 px-3 py-3 sm:px-4">
         <input
@@ -22,7 +22,7 @@
         <button
           type="button"
           (click)="onSearch()"
-          class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:from-blue-500 hover:to-indigo-500 sm:flex-none sm:min-w-[7.5rem]"
+          class="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition hover:from-rose-400 hover:to-orange-400 sm:flex-none sm:min-w-[7.5rem]"
         >
           <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -174,7 +174,7 @@
             (click)="setCategory(cat.value)"
             [ngClass]="
               filters.category === cat.value
-                ? 'rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/25 transition-all duration-200 dark:bg-blue-600'
+                ? 'rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-rose-500/25 transition-all duration-200 dark:from-rose-500 dark:to-rose-600'
                 : 'rounded-xl bg-gray-100 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-200 dark:bg-slate-700 dark:text-gray-200 dark:hover:bg-slate-600'
             "
           >
@@ -263,7 +263,7 @@
       <!-- Advanced Filters Toggle -->
       <button
         (click)="toggleExpanded()"
-        class="mb-4 flex items-center gap-2 text-sm font-medium text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+        class="mb-4 flex items-center gap-2 text-sm font-medium text-rose-600 transition-colors hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300"
       >
         <svg
           class="h-4 w-4 transition-transform duration-200"

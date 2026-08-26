@@ -1,7 +1,7 @@
 <!-- Page Header -->
 <div class="page-header">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-blue-300 text-sm mb-3">
+    <div class="flex items-center gap-2 text-rose-200 text-sm mb-3">
       <a href="/" class="hover:text-white transition-colors">Home</a>
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -9,7 +9,7 @@
       <span class="text-white">{{ pageTitle }}</span>
     </div>
     <h1 class="text-3xl md:text-4xl font-bold font-display text-white mb-2">{{ pageTitle }}</h1>
-    <p class="text-blue-200">{{ pageSubtitle }}</p>
+    <p class="text-rose-100/90">{{ pageSubtitle }}</p>
   </div>
 </div>
 
@@ -49,7 +49,7 @@
           (click)="setViewMode('grid')"
           [ngClass]="
             viewMode() === 'grid'
-              ? 'px-3 py-2 transition-colors bg-blue-600 text-white dark:bg-blue-600'
+              ? 'px-3 py-2 transition-colors bg-rose-500 text-white dark:bg-rose-500'
               : 'px-3 py-2 transition-colors bg-white text-gray-500 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-400 dark:hover:bg-slate-700'
           "
           title="Grid view"
@@ -62,7 +62,7 @@
           (click)="setViewMode('list')"
           [ngClass]="
             viewMode() === 'list'
-              ? 'px-3 py-2 transition-colors bg-blue-600 text-white dark:bg-blue-600'
+              ? 'px-3 py-2 transition-colors bg-rose-500 text-white dark:bg-rose-500'
               : 'px-3 py-2 transition-colors bg-white text-gray-500 hover:bg-gray-50 dark:bg-slate-800 dark:text-gray-400 dark:hover:bg-slate-700'
           "
           title="List view"
@@ -157,7 +157,7 @@
         <button
           (click)="setPage(currentPage() - 1)"
           [disabled]="currentPage() === 1"
-          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 dark:hover:bg-slate-700 dark:hover:text-blue-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -168,8 +168,8 @@
             (click)="setPage(page)"
             [ngClass]="
               currentPage() === page
-                ? 'w-10 h-10 rounded-xl border text-sm font-medium transition-all bg-blue-600 text-white border-blue-600 dark:bg-blue-600'
-                : 'w-10 h-10 rounded-xl border text-sm font-medium transition-all border-gray-200 text-gray-600 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 dark:hover:text-blue-400'
+                ? 'w-10 h-10 rounded-xl border text-sm font-medium transition-all bg-rose-500 text-white border-rose-500 dark:bg-rose-500'
+                : 'w-10 h-10 rounded-xl border text-sm font-medium transition-all border-gray-200 text-gray-600 hover:bg-rose-50 hover:text-rose-600 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 dark:hover:text-rose-400'
             "
           >
             {{ page }}
@@ -178,7 +178,7 @@
         <button
           (click)="setPage(currentPage() + 1)"
           [disabled]="currentPage() === totalPages"
-          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 dark:hover:bg-slate-700 dark:hover:text-blue-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>

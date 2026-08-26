@@ -8,7 +8,7 @@ export const DRIVELINE_DEALER: DealerRecord = {
   name: BUSINESS_INFO.name,
   tagline: BUSINESS_INFO.tagline,
   theme: 'driveline',
-  colors: { primary: '#2563eb', accent: '#f97316' },
+  colors: { primary: '#f43f5e', accent: '#fb923c' },
   customDomains: ['drivelinecarsales.co.uk', 'www.drivelinecarsales.co.uk'],
   subdomain: 'driveline',
   plan: 'pro',

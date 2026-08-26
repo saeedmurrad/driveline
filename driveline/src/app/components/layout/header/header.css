@@ -14,9 +14,9 @@
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(14, 165, 233, 0.45),
-    rgba(139, 92, 246, 0.35),
-    rgba(14, 165, 233, 0.45),
+    rgba(244, 63, 94, 0.45),
+    rgba(251, 146, 60, 0.35),
+    rgba(244, 63, 94, 0.45),
     transparent
   );
   pointer-events: none;
@@ -32,12 +32,12 @@ html.dark .header-glow-line {
   0%,
   100% {
     box-shadow:
-      0 10px 30px -8px rgba(37, 99, 235, 0.45),
+      0 10px 30px -8px rgba(244, 63, 94, 0.45),
       0 0 0 1px rgba(255, 255, 255, 0.12) inset;
   }
   50% {
     box-shadow:
-      0 14px 36px -6px rgba(56, 189, 248, 0.55),
+      0 14px 36px -6px rgba(251, 113, 133, 0.55),
       0 0 0 1px rgba(255, 255, 255, 0.18) inset;
   }
 }
@@ -52,7 +52,7 @@ html.dark .header-glow-line {
 }
 
 .logo-line-text {
-  color: rgb(37 99 235) !important;
+  color: rgb(225 29 72) !important;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.14);
 }
 
@@ -75,7 +75,7 @@ html.dark .logo-drive-text,
 
 html.dark .logo-line-text,
 :host-context(.dark) .logo-line-text {
-  color: rgb(125 211 252) !important;
+  color: rgb(251 113 133) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.28);
 }
 
@@ -108,7 +108,7 @@ html.dark .header-is-scrolled .logo-drive-text,
 
 html.dark .header-is-scrolled .logo-line-text,
 :host-context(.dark) .header-is-scrolled .logo-line-text {
-  color: rgb(125 211 252) !important;
+  color: rgb(251 113 133) !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -142,7 +142,7 @@ html:not(.dark) .header-is-scrolled .header-desktop-nav .nav-pill-link:not(.rout
 }
 
 html:not(.dark) .header-is-scrolled .header-desktop-nav .nav-pill-link:not(.router-link-active):not(.active):hover {
-  color: rgb(29 78 216);
+  color: rgb(225 29 72);
 }
 
 html.dark .header-is-scrolled .header-desktop-nav .nav-pill-link:not(.router-link-active):not(.active),
@@ -155,7 +155,7 @@ html.dark .header-is-scrolled .header-desktop-nav .nav-pill-link:not(.router-lin
   .header-is-scrolled
   .header-desktop-nav
   .nav-pill-link:not(.router-link-active):not(.active):hover {
-  color: rgb(125 211 252);
+  color: rgb(251 113 133);
 }
 
 .header-is-scrolled .header-desktop-nav .nav-pill-link.router-link-active,
@@ -185,16 +185,16 @@ html.dark .header-is-scrolled .header-desktop-nav .nav-pill-link.active {
 .nav-pill-link.router-link-active,
 .nav-pill-link.active {
   background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-  color: rgb(37 99 235);
+  color: rgb(225 29 72);
   box-shadow:
-    0 2px 8px rgba(37, 99, 235, 0.12),
+    0 2px 8px rgba(244, 63, 94, 0.15),
     0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
 html.dark .nav-pill-link.router-link-active,
 html.dark .nav-pill-link.active {
   background: linear-gradient(135deg, rgb(51 65 85) 0%, rgb(30 41 59) 100%);
-  color: rgb(186 230 253);
+  color: rgb(254 205 211);
   box-shadow:
     0 2px 12px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);

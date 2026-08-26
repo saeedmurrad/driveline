@@ -1,3 +1,15 @@
 :host {
   display: block;
 }
+
+.footer-shell {
+  background: linear-gradient(180deg, #292524 0%, #1c1917 100%);
+  border-top: 1px solid rgba(251, 113, 133, 0.15);
+}
+
+.footer-shell::before {
+  content: '';
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.5), rgba(251, 146, 60, 0.5), transparent);
+}

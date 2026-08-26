@@ -44,6 +44,13 @@
   animation-delay: 0.24s;
 }
 
+.home-hero-title .gradient-text {
+  background: linear-gradient(120deg, #fecdd3 0%, #fda4af 45%, #fdba74 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-hero-eyebrow,
   .home-hero-title,

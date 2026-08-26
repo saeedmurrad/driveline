@@ -1,5 +1,5 @@
 <article
-  class="card group cursor-pointer rounded-2xl ring-1 ring-stone-200/60 dark:ring-slate-600/50"
+  class="card group cursor-pointer rounded-2xl ring-1 ring-rose-100/80 dark:ring-slate-600/50 hover:ring-rose-200/90"
   (click)="onCardClick($event)"
   (mouseenter)="onCardEnter()"
   (mouseleave)="onCardLeave()"
@@ -18,7 +18,7 @@
         <span class="badge bg-green-500 text-white text-xs font-bold shadow-lg">NEW IN</span>
       }
       @if (vehicle.isFeatured) {
-        <span class="badge bg-blue-600 text-white text-xs font-bold shadow-lg">FEATURED</span>
+        <span class="badge bg-rose-500 text-white text-xs font-bold shadow-lg">FEATURED</span>
       }
     </div>
     <!-- Price + illustrative finance (60 mo, 0% dep — matches site calculator) -->
@@ -51,7 +51,7 @@
   <div class="p-5">
     <!-- Title -->
     <div class="mb-3">
-      <h3 class="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+      <h3 class="font-bold text-gray-900 dark:text-gray-100 text-lg leading-tight group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
         {{ vehicle.make }} {{ vehicle.model }}
       </h3>
       <p class="text-gray-500 dark:text-gray-400 text-sm mt-0.5">{{ vehicle.derivative }}</p>
@@ -111,7 +111,7 @@
       <a
         data-vehicle-card-cta
         [routerLink]="['/vehicle', vehicle.id]"
-        class="flex flex-1 min-w-0 items-center justify-center py-2.5 px-2 bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-600 dark:hover:text-white font-semibold text-sm rounded-xl transition-all duration-200"
+        class="flex flex-1 min-w-0 items-center justify-center py-2.5 px-2 bg-rose-50 hover:bg-rose-500 text-rose-600 hover:text-white dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-white font-semibold text-sm rounded-xl transition-all duration-200"
       >
         View Details
       </a>

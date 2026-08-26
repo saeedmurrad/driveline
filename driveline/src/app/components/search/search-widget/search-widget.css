@@ -22,7 +22,7 @@
 
 .search-widget--fengate .search-widget-field.form-input:focus,
 .search-widget--fengate .search-widget-field.form-select:focus {
-  @apply border-blue-400 ring-2 ring-blue-400/25;
+  @apply border-rose-400 ring-2 ring-rose-400/25;
 }
 
 :host-context(html.dark) .search-widget--fengate .search-widget-field.form-input,
