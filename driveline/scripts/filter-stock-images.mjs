@@ -8,10 +8,13 @@
  * Vehicles left without photos get `photosPending: true` and show a branded
  * "photos coming soon" panel instead. Featured slots go to the newest cars with photos.
  *
+ * Files in public/stock/fengate that no vehicle uses any more (the dropped banners)
+ * are deleted, so they are not published with the site.
+ *
  * Usage: node scripts/filter-stock-images.mjs   (runs after `npm run sync:stock`)
  */
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -72,3 +75,17 @@ for (const v of vehicles) {
 writeFileSync(DATA, src.slice(0, a) + JSON.stringify(vehicles, null, 2) + src.slice(b), 'utf8');
 const pending = vehicles.filter((v) => v.photosPending).map((v) => v.id);
 console.log(`Removed ${dropped} non-photo images. ${pending.length} vehicles awaiting photos: ${pending.join(', ') || 'none'}`);
+
+// Delete stock image files that no vehicle references.
+const STOCK_DIR = join(PUBLIC, 'stock/fengate');
+const used = new Set(vehicles.flatMap((v) => v.images ?? []).filter((p) => !/^https?:/.test(p)));
+let removed = 0;
+if (existsSync(STOCK_DIR)) {
+  for (const f of readdirSync(STOCK_DIR)) {
+    if (!used.has(`stock/fengate/${f}`)) {
+      unlinkSync(join(STOCK_DIR, f));
+      removed++;
+    }
+  }
+}
+console.log(`Deleted ${removed} unused image files from public/stock/fengate.`);
