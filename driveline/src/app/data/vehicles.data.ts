@@ -279,7 +279,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4110,
     "widthMm": 1789,
     "bootSpaceSeatsUpLitres": 350,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiieddiedeeee"
   },
   {
     "id": "10540",
@@ -416,7 +417,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4365,
     "widthMm": 2113,
     "bootSpaceSeatsUpLitres": 512,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeiiiiiiiiiieieiidieddeiee"
   },
   {
     "id": "10539",
@@ -603,7 +605,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2077,
     "bootSpaceSeatsUpLitres": 555,
     "bootSpaceSeatsDownLitres": 1637,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeiiiiiiiee"
   },
   {
     "id": "10536",
@@ -757,7 +760,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4634,
     "widthMm": 2128,
     "bootSpaceSeatsUpLitres": 233,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiidiideddeeeee"
   },
   {
     "id": "10537",
@@ -896,7 +900,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2043,
     "bootSpaceSeatsUpLitres": 660,
     "bootSpaceSeatsDownLitres": 1775,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiie"
   },
   {
     "id": "10534",
@@ -1047,7 +1052,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 490,
     "bootSpaceSeatsDownLitres": 1450,
     "acceleration0To60Seconds": 11.1,
-    "isFeatured": true
+    "isFeatured": true,
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiiieide"
   },
   {
     "id": "10531",
@@ -1203,7 +1209,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 362,
     "bootSpaceSeatsDownLitres": 1372,
     "acceleration0To60Seconds": 10.1,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiideedeee"
   },
   {
     "id": "10532",
@@ -1356,7 +1363,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2058,
     "bootSpaceSeatsUpLitres": 580,
     "bootSpaceSeatsDownLitres": 1504,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiididdee"
   },
   {
     "id": "10526",
@@ -1515,7 +1523,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4913,
     "widthMm": 2084,
     "bootSpaceSeatsUpLitres": 540,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiieiiiiiiiiiiiiiiiiededdeeeee"
   },
   {
     "id": "10527",
@@ -1635,7 +1644,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 540,
     "bootSpaceSeatsDownLitres": 1530,
     "acceleration0To60Seconds": 9.5,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeiiiiiiiiiiiidddeeeee"
   },
   {
     "id": "10525",
@@ -1777,7 +1787,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2113,
     "bootSpaceSeatsUpLitres": 512,
     "bootSpaceSeatsDownLitres": 1604,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiieeiiiidiieeiddeeeee"
   },
   {
     "id": "10523",
@@ -1881,7 +1892,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1627,
     "bootSpaceSeatsUpLitres": 185,
     "bootSpaceSeatsDownLitres": 550,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiieideddeddieee"
   },
   {
     "id": "10522",
@@ -2023,7 +2035,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2004,
     "bootSpaceSeatsUpLitres": 360,
     "bootSpaceSeatsDownLitres": 1172,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiddiiiiiiiiiiiiddddeeee"
   },
   {
     "id": "10521",
@@ -2170,7 +2183,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1978,
     "bootSpaceSeatsUpLitres": 290,
     "bootSpaceSeatsDownLitres": 974,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeidiiiiiiiiddddeee"
   },
   {
     "id": "10520",
@@ -2327,7 +2341,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2110,
     "bootSpaceSeatsUpLitres": 565,
     "bootSpaceSeatsDownLitres": 1680,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiiddididdddeeeee"
   },
   {
     "id": "10519",
@@ -2487,7 +2502,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 575,
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeidiiidiiiiiiddideieddeeeeeee"
   },
   {
     "id": "10517",
@@ -2645,7 +2661,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 575,
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiddiiiiiiiiiddiiieieddee"
   },
   {
     "id": "10516",
@@ -2805,7 +2822,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 540,
     "bootSpaceSeatsDownLitres": 1530,
     "acceleration0To60Seconds": 9.5,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiieiiiiiiiiiiiiiidededeeeee"
   },
   {
     "id": "10515",
@@ -2913,7 +2931,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 2522,
     "lengthMm": 5998,
     "widthMm": 2050,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eiieedeiiiiiiidedddeeee"
   },
   {
     "id": "10514",
@@ -3075,7 +3094,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 575,
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiddiiiiiiiidiiiddiidddddeeieeee"
   },
   {
     "id": "10513",
@@ -3242,7 +3262,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 575,
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiiidiiddiiiiiiidddeideeeeeeeee"
   },
   {
     "id": "10511",
@@ -3495,7 +3516,8 @@ export const VEHICLES: Vehicle[] = [
     "monthlyPrice": 211,
     "seats": 7,
     "taxRate12Month": 200,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiiiiiidedddee"
   },
   {
     "id": "10501",
@@ -3643,7 +3665,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2175,
     "bootSpaceSeatsUpLitres": 650,
     "acceleration0To60Seconds": 8.4,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiidiidedeeee"
   },
   {
     "id": "10498",
@@ -3791,7 +3814,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1978,
     "bootSpaceSeatsUpLitres": 290,
     "bootSpaceSeatsDownLitres": 974,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiiiiiddddeee"
   },
   {
     "id": "10500",
@@ -3918,7 +3942,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1690,
     "bootSpaceSeatsUpLitres": 437,
     "bootSpaceSeatsDownLitres": 1332,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiiiideee"
   },
   {
     "id": "10499",
@@ -3992,7 +4017,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 337,
     "bootSpaceSeatsDownLitres": 1175,
     "acceleration0To60Seconds": 13.7,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eeieeieieii"
   },
   {
     "id": "10492",
@@ -4123,7 +4149,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4282,
     "widthMm": 1816,
     "bootSpaceSeatsUpLitres": 380,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeidiiiiiiiddddee"
   },
   {
     "id": "10485",
@@ -4267,7 +4294,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2175,
     "bootSpaceSeatsUpLitres": 650,
     "acceleration0To60Seconds": 8.4,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiideeeee"
   },
   {
     "id": "10475",
@@ -4403,7 +4431,10 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4939,
     "widthMm": 2110,
     "bootSpaceSeatsUpLitres": 565,
-    "isFeatured": false
+    "previousPrice": 11950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeieeiiiddiidiidddeeeei"
   },
   {
     "id": "10470",
@@ -4554,7 +4585,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1976,
     "bootSpaceSeatsUpLitres": 410,
     "bootSpaceSeatsDownLitres": 1255,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiiiiddeeddeeeee"
   },
   {
     "id": "10468",
@@ -4677,6 +4709,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 490,
     "bootSpaceSeatsDownLitres": 1450,
     "acceleration0To60Seconds": 10.2,
+    "previousPrice": 6750,
+    "priceReducedAt": "2026-11-09",
     "photosPending": true,
     "isFeatured": false
   },
@@ -4800,8 +4834,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2041,
     "bootSpaceSeatsUpLitres": 470,
     "bootSpaceSeatsDownLitres": 1510,
-    "isFeatured": false,
-    "photosPending": true
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10455",
@@ -4954,7 +4988,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1992,
     "bootSpaceSeatsUpLitres": 360,
     "bootSpaceSeatsDownLitres": 1200,
-    "isFeatured": false
+    "previousPrice": 11750,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiiiididiiddddeeee"
   },
   {
     "id": "10457",
@@ -5104,7 +5141,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2084,
     "bootSpaceSeatsUpLitres": 530,
     "bootSpaceSeatsDownLitres": 1470,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiidiiiiiieddeee"
   },
   {
     "id": "10454",
@@ -5256,7 +5294,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2038,
     "bootSpaceSeatsUpLitres": 560,
     "bootSpaceSeatsDownLitres": 1820,
-    "isFeatured": false
+    "previousPrice": 5950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiidiiiiiiiiiiiddddeee"
   },
   {
     "id": "10451",
@@ -5408,7 +5449,10 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4907,
     "widthMm": 2102,
     "bootSpaceSeatsUpLitres": 520,
-    "isFeatured": false
+    "previousPrice": 4950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiidiiiddiiiiddddedee"
   },
   {
     "id": "10449",
@@ -5508,7 +5552,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiideee"
   },
   {
     "id": "10444",
@@ -5584,7 +5629,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2120,
     "bootSpaceSeatsUpLitres": 410,
     "bootSpaceSeatsDownLitres": 660,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiidiiiidedddddeeeee"
   },
   {
     "id": "10441",
@@ -5756,7 +5802,10 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 235,
     "bootSpaceSeatsDownLitres": 1890,
     "acceleration0To60Seconds": 4.7,
-    "isFeatured": false
+    "previousPrice": 23950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiidediddiiiiiiiiddiidedddeeeddeddiidddeee"
   },
   {
     "id": "10433",
@@ -5866,7 +5915,10 @@ export const VEHICLES: Vehicle[] = [
     "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/toyota-proace-20d-family-mpv-5dr-lwb-euro-6-9-seat-10433/",
     "monthlyPrice": 190,
     "seats": 9,
-    "isFeatured": false
+    "previousPrice": 9950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiiiiiedeee"
   },
   {
     "id": "10428",
@@ -5950,7 +6002,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4169,
     "widthMm": 1698,
     "acceleration0To60Seconds": 11.2,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiideeee"
   },
   {
     "id": "10427",
@@ -6072,7 +6125,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1794,
     "bootSpaceSeatsUpLitres": 121,
     "bootSpaceSeatsDownLitres": 1913,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiidiiiiiiddeeeee"
   },
   {
     "id": "10421",
@@ -6215,7 +6269,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 165,
     "bootSpaceSeatsDownLitres": 2181,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiidiiiiiiiddeeee"
   },
   {
     "id": "10419",
@@ -6364,7 +6419,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiidiiiiiiiiddddeeee"
   },
   {
     "id": "10416",
@@ -6507,7 +6563,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2070,
     "bootSpaceSeatsUpLitres": 430,
     "bootSpaceSeatsDownLitres": 1598,
-    "isFeatured": false
+    "previousPrice": 7950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiiiiddedeeee"
   },
   {
     "id": "10414",
@@ -6658,7 +6717,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2070,
     "bootSpaceSeatsUpLitres": 430,
     "bootSpaceSeatsDownLitres": 1585,
-    "isFeatured": false
+    "previousPrice": 6950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiddiiiiiiiidiiddeeee"
   },
   {
     "id": "10415",
@@ -6785,7 +6847,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1941,
     "bootSpaceSeatsUpLitres": 292,
     "bootSpaceSeatsDownLitres": 1093,
-    "isFeatured": false
+    "previousPrice": 4750,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiieiideeddedee"
   },
   {
     "id": "10410",
@@ -6928,7 +6993,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1932,
     "bootSpaceSeatsUpLitres": 211,
     "bootSpaceSeatsDownLitres": 731,
-    "isFeatured": false
+    "previousPrice": 3950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiidddeeeee"
   },
   {
     "id": "10404",
@@ -7084,7 +7152,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 540,
     "bootSpaceSeatsDownLitres": 1560,
     "acceleration0To60Seconds": 8.1,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiiiiiiidiiiiiieiiiddddee"
   },
   {
     "id": "10280",
@@ -7225,7 +7294,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2070,
     "bootSpaceSeatsUpLitres": 430,
     "bootSpaceSeatsDownLitres": 1585,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiieiidiiiiddddeeee"
   },
   {
     "id": "10232",
@@ -7390,7 +7460,10 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 5108,
     "widthMm": 2169,
     "bootSpaceSeatsUpLitres": 515,
-    "isFeatured": false
+    "previousPrice": 16950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeeeiiiiiiiieiiieiiiidiiiiedeeeiidddee"
   },
   {
     "id": "10221",
@@ -7532,7 +7605,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2037,
     "bootSpaceSeatsUpLitres": 372,
     "bootSpaceSeatsDownLitres": 1162,
-    "isFeatured": false
+    "previousPrice": 2950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiddddeeee"
   },
   {
     "id": "10198",
@@ -7651,7 +7727,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1766,
     "bootSpaceSeatsUpLitres": 385,
     "bootSpaceSeatsDownLitres": 1506,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eeeeeee"
   },
   {
     "id": "10165",
@@ -7782,7 +7859,10 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 530,
     "bootSpaceSeatsDownLitres": 995,
     "acceleration0To60Seconds": 7.9,
-    "isFeatured": false
+    "previousPrice": 5450,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiieiiiiiiiiiiidddddidiiiieeee"
   },
   {
     "id": "10125",
@@ -7868,7 +7948,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2124,
     "bootSpaceSeatsUpLitres": 551,
     "bootSpaceSeatsDownLitres": 2050,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiieeee"
   },
   {
     "id": "10002",
@@ -7993,7 +8074,8 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 784,
     "bootSpaceSeatsDownLitres": 1761,
     "acceleration0To60Seconds": 6.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiiiidiieideiiddddddddeeeee"
   },
   {
     "id": "10021",
@@ -8107,6 +8189,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2177,
     "bootSpaceSeatsUpLitres": 330,
     "bootSpaceSeatsDownLitres": 2035,
+    "previousPrice": 13450,
+    "priceReducedAt": "2026-11-09",
     "photosPending": true,
     "isFeatured": false
   },
@@ -8191,7 +8275,10 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2177,
     "bootSpaceSeatsUpLitres": 775,
     "bootSpaceSeatsDownLitres": 2035,
-    "isFeatured": false
+    "previousPrice": 6450,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeeeidiiiiiiiiiedeee"
   },
   {
     "id": "10081",
@@ -8320,7 +8407,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeeiididiiididddidiiiiideededee"
   },
   {
     "id": "10004",
@@ -8439,7 +8527,10 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 590,
     "bootSpaceSeatsDownLitres": 1580,
     "acceleration0To60Seconds": 10.4,
-    "isFeatured": false
+    "previousPrice": 1950,
+    "priceReducedAt": "2026-11-09",
+    "isFeatured": false,
+    "imageTags": "eieeeeidiiiiiiieddeeee"
   },
   {
     "id": "10006",
@@ -8522,7 +8613,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4829,
     "widthMm": 2200,
     "acceleration0To60Seconds": 8.8,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeiiiiiiiiideddeee"
   },
   {
     "id": "10007",
@@ -8644,7 +8736,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1804,
     "lengthMm": 5359,
     "widthMm": 1850,
-    "isFeatured": false
+    "isFeatured": false,
+    "imageTags": "eieeeeeiiiiiideeeee"
   }
 ];
 

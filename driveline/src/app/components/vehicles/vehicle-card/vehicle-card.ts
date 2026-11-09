@@ -15,7 +15,7 @@ import {
   FINANCE_DISCLAIMER_SHORT,
 } from '../../../utils/finance-display';
 import { GarageService } from '../../../services/garage.service';
-import { euroStandard, meetsUlezStandard } from '../../../utils/vehicle-insights';
+import { euroStandard, meetsUlezStandard, priceReduction } from '../../../utils/vehicle-insights';
 import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
 
 @Component({
@@ -56,6 +56,19 @@ export class VehicleCardComponent implements OnChanges {
     const rect = el.getBoundingClientRect();
     const i = Math.min(n - 1, Math.max(0, Math.floor(((ev.clientX - rect.left) / rect.width) * n)));
     if (i !== this.hoverImageIndex()) this.hoverImageIndex.set(i);
+  }
+
+  /** £ cut from the previous published price (0 when none). */
+  reduction(): number {
+    return priceReduction(this.vehicle);
+  }
+
+  sold(): boolean {
+    return this.vehicle.status === 'sold';
+  }
+
+  reserved(): boolean {
+    return this.vehicle.status === 'reserved';
   }
 
   ulez(): boolean {

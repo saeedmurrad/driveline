@@ -349,6 +349,9 @@
               <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
               <p class="text-gray-600 dark:text-slate-400 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
               <div class="mt-3 flex flex-wrap gap-1.5">
+                @if (sold()) { <span class="badge badge-sold">Sold</span> }
+                @else if (reserved()) { <span class="badge badge-reserved">Reserved</span> }
+                @else if (reduction()) { <span class="badge badge-reduced">Reduced {{ formatPrice(reduction()) }}</span> }
                 @if (vehicle()!.isNew) { <span class="badge bg-green-500 text-white">New in</span> }
                 @if (ulez()) { <span class="badge-ulez">ULEZ standard</span> }
                 @if (vehicle()!.serviceHistory === 'Full') { <span class="badge-green">Full service history</span> }
@@ -356,9 +359,15 @@
               </div>
             </div>
             <div class="mb-5 rounded-xl border border-stone-200/90 bg-stone-50/80 p-4 dark:border-slate-600 dark:bg-slate-900/60">
-              <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">Cash price</p>
-              <p class="text-3xl font-bold tabular-nums text-gray-900 dark:text-white">{{ formatPrice(vehicle()!.price) }}</p>
-              @if (monthlyFinanceQuote(); as sideMo) {
+              <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">{{ sold() ? 'Last advertised at' : 'Cash price' }}</p>
+              <p class="text-3xl font-bold tabular-nums" [class]="reduction() ? 'text-state-reduced' : 'text-gray-900 dark:text-white'">{{ formatPrice(vehicle()!.price) }}</p>
+              @if (reduction()) {
+                <p class="mt-1 text-sm text-gray-600 dark:text-slate-300">
+                  Was <s class="tabular-nums">{{ formatPrice(vehicle()!.previousPrice!) }}</s>
+                  <span class="ml-1 font-semibold text-state-reduced">· you save {{ formatPrice(reduction()) }}</span>
+                </p>
+              }
+              @if (!sold() && monthlyFinanceQuote(); as sideMo) {
                 <div class="mt-3 border-t border-stone-200/90 pt-3 dark:border-slate-600">
                   <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-700/90 dark:text-emerald-400/90">Finance from</p>
                   <p class="text-xl font-bold tabular-nums text-emerald-600 dark:text-emerald-400">{{ formatPrice(sideMo) }}<span class="text-base font-semibold">/mo</span></p>
@@ -392,6 +401,22 @@
               </div>
             </div>
 
+            @if (sold()) {
+              <div class="mb-4 rounded-xl border border-stone-300 bg-stone-100 p-4 dark:border-slate-600 dark:bg-slate-900/70 print:hidden" role="status">
+                <p class="font-bold text-gray-900 dark:text-white">This {{ vehicle()!.make }} has been sold</p>
+                <p class="mt-1 text-sm text-gray-600 dark:text-slate-300">It found a new owner{{ soldAgo() }}. Similar cars are below, or tell us what you want and we'll find it.</p>
+                <div class="mt-3 grid grid-cols-2 gap-2">
+                  <a [routerLink]="vehicle()!.category === 'van' ? '/vans' : '/cars'" [queryParams]="{ bodyType: vehicle()!.bodyType }" class="btn-primary w-full justify-center !px-2 py-3 text-sm">Similar {{ vehicle()!.bodyType }}s</a>
+                  <a routerLink="/cars" fragment="find-me-a-car" class="btn-outline w-full justify-center !px-2 py-3 text-sm">Find me one</a>
+                </div>
+              </div>
+            } @else {
+            @if (reserved()) {
+              <div class="mb-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950 dark:border-amber-500/40 dark:bg-amber-950/30 dark:text-amber-100 print:hidden" role="status">
+                <p class="font-bold">Reserved</p>
+                <p class="mt-1">A buyer has placed a deposit on this {{ vehicle()!.make }}. Sales sometimes fall through: send an enquiry and we'll call you first if it comes back.</p>
+              </div>
+            }
             <!-- Book / reserve / video -->
             <div class="mb-3 grid grid-cols-1 gap-2 print:hidden">
               <button type="button" (click)="openVisit('test-drive')" class="btn-primary w-full justify-center py-3.5">
@@ -399,8 +424,10 @@
                 Book a test drive
               </button>
               <div class="grid grid-cols-2 gap-2">
-                <button type="button" (click)="openVisit('reserve')" class="btn-outline w-full justify-center !px-2 py-3 text-sm">Reserve it</button>
-                <button type="button" (click)="openVisit('video')" class="btn-outline w-full justify-center !px-2 py-3 text-sm">Video viewing</button>
+                @if (!reserved()) {
+                  <button type="button" (click)="openVisit('reserve')" class="btn-outline w-full justify-center !px-2 py-3 text-sm">Reserve it</button>
+                }
+                <button type="button" (click)="openVisit('video')" class="btn-outline w-full justify-center !px-2 py-3 text-sm" [class.col-span-2]="reserved()">Video viewing</button>
               </div>
             </div>
             <div class="mb-4 grid grid-cols-2 gap-2 print:hidden">
@@ -413,6 +440,7 @@
                 {{ garage.isCompared(vehicle()!.id) ? 'Comparing' : 'Compare' }}
               </button>
             </div>
+            }
 
             <!-- Print / Share / Part exchange — stacked full width (no cramped 3-col layout) -->
             <div class="flex flex-col gap-2 mb-4 print:hidden">

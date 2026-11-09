@@ -33,24 +33,41 @@
     }
     <div class="absolute inset-0 bg-gradient-to-b from-rose-950/25 via-rose-950/10 to-stone-950/30 sm:from-rose-950/30 sm:via-rose-950/12 sm:to-stone-950/35"></div>
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(251,113,133,0.12),transparent_46%)]"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-stone-950/40 to-transparent sm:from-stone-950/75 sm:via-stone-950/30"></div>
   </div>
 
   <div
     class="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pb-6 sm:pt-7 lg:px-8"
   >
     <div class="pointer-events-auto relative flex flex-1 flex-col justify-between">
-      <div class="w-full max-w-3xl">
-        <p class="home-hero-eyebrow mb-3 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/25 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-rose-100 backdrop-blur-sm">
-          Family-run since 2006 · Peterborough
+      <div class="w-full max-w-2xl">
+        <p class="home-hero-eyebrow mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-rose-100 backdrop-blur-sm">
+          <span class="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>
+          Family-run since 2006 · Fengate, Peterborough
         </p>
-        <h1 class="home-hero-title text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold font-display text-white leading-tight drop-shadow-lg">
-          Welcome to <span class="gradient-text">{{ dealerName() }}</span>
+        <h1 class="home-hero-title text-[2rem] leading-[1.1] sm:text-5xl lg:text-[3.6rem] font-bold font-display text-white tracking-tight drop-shadow-lg">
+          Quality used cars in Peterborough, <span class="gradient-text">honestly priced.</span>
         </h1>
-        @if (business(); as b) {
-          <p class="home-hero-lead mt-4 max-w-xl text-base sm:text-lg text-rose-50/95 leading-relaxed drop-shadow-md">
-            {{ b.tagline }}
-          </p>
-        }
+        <p class="home-hero-lead mt-4 max-w-xl text-base sm:text-lg text-rose-50/95 leading-relaxed drop-shadow-md">
+          {{ stockCounts().car }} cars and {{ stockCounts().van }} vans in stock at {{ dealerName() }}. Every one inspected, with warranty and finance available.
+        </p>
+        <div class="home-hero-stats mt-6 flex flex-wrap items-center gap-3">
+          <a routerLink="/cars" class="btn-primary !px-5 !py-3.5 text-[15px]">
+            Browse {{ stockCounts().car }} cars
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+          <a routerLink="/sell-your-car" class="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-5 py-3.5 text-[15px] font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/20">
+            Value my car
+          </a>
+        </div>
+        <ul class="home-hero-stats mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-white/90" aria-label="Why buy here">
+          <li class="flex items-center gap-1.5"><svg class="h-4 w-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Warranty included</li>
+          <li class="flex items-center gap-1.5"><svg class="h-4 w-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Finance available</li>
+          <li class="flex items-center gap-1.5"><svg class="h-4 w-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>Part exchange welcome</li>
+          @if (reducedVehicles().length) {
+            <li><a href="#price-drops" class="inline-flex items-center gap-1.5 rounded-full bg-state-reduced px-3 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-lg transition-transform hover:-translate-y-0.5">{{ reducedVehicles().length }} price drops</a></li>
+          }
+        </ul>
       </div>
 
       <div class="w-full flex items-start justify-end mt-6 sm:mt-0 sm:absolute sm:top-4 sm:right-0">
@@ -264,6 +281,41 @@
     </div>
   </div>
 </section>
+
+@if (reducedVehicles().length) {
+  <section id="price-drops" appReveal class="scroll-mt-20 py-20 surface-warm dark:bg-slate-950" aria-labelledby="price-drops-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 flex items-end justify-between gap-4">
+        <div>
+          <h2 id="price-drops-heading" class="section-title">Price drops</h2>
+          <p class="section-subtitle">Reduced in the last 30 days. The old price is what we advertised it at before.</p>
+        </div>
+        <p class="hidden shrink-0 rounded-full bg-state-reduced/10 px-4 py-2 text-sm font-bold text-state-reduced sm:block">{{ reducedVehicles().length }} reduced</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @for (vehicle of reducedVehicles().slice(0, 6); track vehicle.id) {
+          <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+@if (recentlySold().length) {
+  <section appReveal class="py-16 bg-[#fffbf7] dark:bg-slate-900" aria-labelledby="sold-heading">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <h2 id="sold-heading" class="section-title">Recently sold</h2>
+        <p class="section-subtitle">Good cars go quickly. Missed one? Tell us what you want and we'll look out for it.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (vehicle of recentlySold().slice(0, 4); track vehicle.id) {
+          <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
+        }
+      </div>
+    </div>
+  </section>
+}
 
 <!-- Finance Banner -->
 <section appReveal class="py-16 bg-gradient-to-r from-rose-600 via-rose-600 to-orange-600 relative overflow-hidden">

@@ -25,13 +25,7 @@ import { DeliveryCheckComponent } from '../../components/shared/ownership-tools/
 import { VehicleGalleryComponent } from '../../components/vehicles/vehicle-gallery/vehicle-gallery';
 import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
 import { GarageService } from '../../services/garage.service';
-import {
-  GOV_MOT_CHECK,
-  TFL_VEHICLE_CHECKER,
-  euroStandard,
-  meetsUlezStandard,
-  similarVehicles,
-} from '../../utils/vehicle-insights';
+import { GOV_MOT_CHECK, TFL_VEHICLE_CHECKER, euroStandard, meetsUlezStandard, similarVehicles, priceReduction } from '../../utils/vehicle-insights';
 import { EnquirySubmitService } from '../../services/enquiry-submit.service';
 import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
@@ -90,6 +84,18 @@ export class VehicleDetailComponent implements OnDestroy {
   readonly ulez = computed(() => {
     const v = this.vehicle();
     return v ? meetsUlezStandard(v) : false;
+  });
+  readonly sold = computed(() => this.vehicle()?.status === 'sold');
+  readonly reserved = computed(() => this.vehicle()?.status === 'reserved');
+  readonly reduction = computed(() => {
+    const v = this.vehicle();
+    return v ? priceReduction(v) : 0;
+  });
+  /** " on 12 November" for sold cars (empty when unknown). */
+  readonly soldAgo = computed(() => {
+    const at = this.vehicle()?.soldAt;
+    if (!at) return '';
+    return ' on ' + new Date(at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
   });
   readonly euro = computed(() => {
     const v = this.vehicle();

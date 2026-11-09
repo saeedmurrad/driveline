@@ -44,14 +44,26 @@
       </svg>
     </button>
 
-    <!-- At most two badges -->
-    <div class="absolute left-3 top-3 flex flex-col gap-1.5">
-      @if (vehicle.isNew) {
+    @if (sold()) {
+      <div class="pointer-events-none absolute inset-0 z-[2] flex items-center justify-center bg-stone-900/45" aria-hidden="true">
+        <span class="rotate-[-8deg] rounded-lg border-2 border-white/90 px-5 py-1.5 text-2xl font-black uppercase tracking-[0.2em] text-white shadow-2xl">Sold</span>
+      </div>
+    }
+
+    <!-- At most two badges: status or deal first, then ULEZ -->
+    <div class="absolute left-3 top-3 z-[3] flex flex-col items-start gap-1.5">
+      @if (sold()) {
+        <span class="badge badge-sold text-[11px] font-bold uppercase tracking-wide shadow-lg">Sold</span>
+      } @else if (reserved()) {
+        <span class="badge badge-reserved text-[11px] font-bold uppercase tracking-wide shadow-lg" title="A buyer has placed a deposit on this vehicle">Reserved</span>
+      } @else if (reduction()) {
+        <span class="badge badge-reduced text-[11px] font-bold uppercase tracking-wide shadow-lg" [title]="'Was ' + formatPrice(vehicle.previousPrice!)">Reduced {{ formatPrice(reduction()) }}</span>
+      } @else if (vehicle.isNew) {
         <span class="badge bg-emerald-500 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Just arrived</span>
       } @else if (vehicle.isFeatured) {
         <span class="badge bg-rose-500 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Featured</span>
       }
-      @if (ulez()) {
+      @if (ulez() && !sold()) {
         <span class="badge bg-white/90 text-[11px] font-bold text-sky-800 shadow-lg backdrop-blur" title="Meets the ULEZ / Clean Air Zone emissions standard (Euro {{ euro() }}). Always confirm with the TfL vehicle checker.">ULEZ</span>
       }
     </div>
@@ -66,11 +78,15 @@
 
     <div class="mt-4 flex items-end justify-between gap-3">
       <div>
-        <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-slate-500">Cash price</p>
-        <p class="text-[26px] font-bold leading-none tabular-nums tracking-tight text-gray-900 dark:text-white">{{ formatPrice(vehicle.price) }}</p>
+        @if (reduction()) {
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-slate-500">Was <s class="tabular-nums">{{ formatPrice(vehicle.previousPrice!) }}</s></p>
+        } @else {
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-slate-500">{{ sold() ? 'Last advertised' : 'Cash price' }}</p>
+        }
+        <p class="text-[26px] font-bold leading-none tabular-nums tracking-tight" [class]="reduction() ? 'text-state-reduced' : 'text-gray-900 dark:text-white'">{{ formatPrice(vehicle.price) }}</p>
       </div>
       @let monthlyFin = monthlyFinanceQuote();
-      @if (monthlyFin) {
+      @if (monthlyFin && !sold()) {
         <div class="text-right">
           <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-700/80 dark:text-emerald-400/80">Finance from</p>
           <p class="text-[17px] font-bold leading-none tabular-nums text-emerald-600 dark:text-emerald-400" [title]="financeDisclaimerShort">{{ formatPrice(monthlyFin) }}<span class="text-xs font-semibold">/mo*</span></p>
@@ -102,8 +118,9 @@
         [routerLink]="['/vehicle', vehicle.id]"
         class="flex min-w-0 flex-1 items-center justify-center rounded-xl bg-rose-50 px-2 py-2.5 text-sm font-semibold text-rose-600 transition-all duration-200 hover:bg-rose-500 hover:text-white dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-white"
       >
-        View details
+        {{ sold() ? 'See this car' : 'View details' }}
       </a>
+      @if (!sold()) {
       <button
         type="button"
         data-vehicle-card-cta
@@ -119,6 +136,7 @@
         </svg>
         <span class="hidden sm:inline">Compare</span>
       </button>
+      }
       <a
         data-vehicle-card-cta
         href="tel:01733563559"

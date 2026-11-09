@@ -4,7 +4,7 @@
  *
  * Usage: npm run sync:stock
  */
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -166,6 +166,7 @@ function mapToVehicle(api, localImages) {
     dateAdded: formatDateAdded(api),
     sourceListingUrl,
   };
+  if (api.reserved === true) v.status = 'reserved';
 
   // Align with site calculator: 60 mo, 0% deposit, 9.9% APR (lowest headline payment)
   const ill60 = illustrativeMonthlyPayment(v.price, 60);
@@ -225,7 +226,8 @@ function decodeEntities(html) {
 }
 
 async function main() {
-  rmSync(IMAGE_OUT_DIR, { recursive: true, force: true });
+  // Files are overwritten in place, not wiped first: recently sold cars keep their
+  // photos (stock-history.mjs), and filter-stock-images.mjs deletes files nothing uses.
   mkdirSync(IMAGE_OUT_DIR, { recursive: true });
 
   console.log('Fetching listing pages…');

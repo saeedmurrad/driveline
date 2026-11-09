@@ -47,7 +47,29 @@ export interface Vehicle {
   photosPending?: boolean;
   /** 0–60 mph time in seconds */
   acceleration0To60Seconds?: number;
+
+  /**
+   * Not set (or 'live') = on sale. Reserved comes from the stock feed; sold cars stay
+   * ~7 days. 'draft' is only used by the platform admin.
+   */
+  status?: 'live' | 'reserved' | 'sold' | 'draft';
+  /** ISO date the car left stock (status 'sold'). */
+  soldAt?: string;
+  /** Published price before the latest reduction (only for real, recent reductions). */
+  previousPrice?: number;
+  /** ISO date the reduction was first published. */
+  priceReducedAt?: string;
+  /**
+   * Per-photo category, one letter per entry in `images` (e = exterior, i = interior,
+   * d = detail), written by scripts/tag-stock-photos.mjs. Kept as a string to keep the
+   * baked-in stock data small.
+   */
+  imageTags?: string;
 }
+
+export type PhotoTag = 'exterior' | 'interior' | 'detail';
+
+export const PHOTO_TAG_CODES: Record<string, PhotoTag> = { e: 'exterior', i: 'interior', d: 'detail' };
 
 export interface SearchFilters {
   category?: string;

@@ -18,8 +18,29 @@ export class VehicleService {
   private filters = signal<SearchFilters>({});
   private sortBy = signal<string>('dateAdded-desc');
 
+  /** Vehicles still for sale (reserved included); sold cars only appear in `recentlySold`. */
+  private readonly onSale = computed(() => this.allVehicles().filter((v) => v.status !== 'sold'));
+
+  /** Cars that left stock in the last few days, newest first (social proof on home). */
+  readonly recentlySold = computed(() =>
+    this.allVehicles()
+      .filter((v) => v.status === 'sold' && v.images?.length)
+      .sort((a, b) => (b.soldAt ?? '').localeCompare(a.soldAt ?? '')),
+  );
+
+  /** On-sale vehicles with a recent genuine price reduction: with photos first, then biggest saving. */
+  readonly reducedVehicles = computed(() =>
+    this.onSale()
+      .filter((v) => v.previousPrice && v.previousPrice > v.price)
+      .sort(
+        (a, b) =>
+          Number(!!a.photosPending) - Number(!!b.photosPending) ||
+          b.previousPrice! - b.price - (a.previousPrice! - a.price),
+      ),
+  );
+
   filteredVehicles = computed(() => {
-    let result = [...this.allVehicles()];
+    let result = [...this.onSale()];
     const f = this.filters();
 
     if (f.category) {
@@ -113,17 +134,17 @@ export class VehicleService {
     return [...result.filter((v) => !v.photosPending), ...result.filter((v) => v.photosPending)];
   });
 
-  /** Every vehicle in stock, unfiltered (for "similar" and garage lookups). */
-  readonly allStock = computed(() => this.allVehicles());
+  /** Every vehicle still for sale, unfiltered (for "similar" cars and home counts). */
+  readonly allStock = computed(() => this.onSale());
 
   featuredVehicles = computed(() =>
-    this.allVehicles()
+    this.onSale()
       .filter((v) => v.isFeatured)
       .slice(0, 6),
   );
 
   inventoryCategoryCounts = computed(() => {
-    const all = this.allVehicles();
+    const all = this.onSale();
     let car = 0;
     let van = 0;
     for (const v of all) {

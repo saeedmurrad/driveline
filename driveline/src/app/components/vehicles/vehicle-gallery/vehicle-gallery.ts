@@ -14,7 +14,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import type { Vehicle } from '../../../models/vehicle.model';
+import { PHOTO_TAG_CODES, type PhotoTag, type Vehicle } from '../../../models/vehicle.model';
 import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
 
 const RESUME_KEY = 'dl.photo.';
@@ -33,6 +33,7 @@ const MAX_ZOOM = 3;
 export class VehicleGalleryComponent {
   @Input({ required: true }) set vehicleInput(v: Vehicle) {
     this.vehicle.set(v);
+    this.category.set('all');
     this.index.set(0);
     this.stripIndex.set(0);
     this.closeViewer(false);
@@ -48,14 +49,45 @@ export class VehicleGalleryComponent {
   private readonly strip = viewChild<ElementRef<HTMLElement>>('strip');
 
   readonly vehicle = signal<Vehicle | null>(null);
-  readonly images = computed(() => this.vehicle()?.images ?? []);
+  private readonly allImages = computed(() => this.vehicle()?.images ?? []);
+
+  /** Category of each photo (same order as images), decoded from the sync's e/i/d string. */
+  private readonly tags = computed(() => {
+    const raw = this.vehicle()?.imageTags;
+    return raw ? [...raw].map((c) => PHOTO_TAG_CODES[c] ?? 'detail') : null;
+  });
+
+  /** Photo category tabs (Exterior / Interior / Details), from the stock sync's photo tags. */
+  readonly category = signal<'all' | PhotoTag>('all');
+  readonly categories = computed(() => {
+    const tags = this.tags();
+    const all = this.allImages();
+    if (!tags || tags.length !== all.length) return [];
+    const labels: [PhotoTag, string][] = [['exterior', 'Exterior'], ['interior', 'Interior'], ['detail', 'Details']];
+    const tabs = labels
+      .map(([key, label]) => ({ key, label, count: tags.filter((t) => t === key).length }))
+      .filter((t) => t.count > 0);
+    // Tabs only help when there are at least two real groups to choose between.
+    if (tabs.filter((t) => t.count >= 2).length < 2) return [];
+    return [{ key: 'all' as const, label: 'All', count: all.length }, ...tabs];
+  });
+  readonly images = computed(() => {
+    const all = this.allImages();
+    const cat = this.category();
+    const tags = this.tags();
+    if (cat === 'all' || !tags || !this.categories().length) return all;
+    return all.filter((_, i) => tags[i] === cat);
+  });
+  readonly categoryLabel = computed(() => this.categories().find((c) => c.key === this.category())?.label ?? '');
   readonly count = computed(() => this.images().length);
   readonly title = computed(() => {
     const v = this.vehicle();
     return v ? `${v.year} ${v.make} ${v.model}` : '';
   });
-  readonly tiles = computed(() => this.images().slice(1, 5));
-  readonly moreCount = computed(() => Math.max(0, this.count() - 5));
+  /** Side tiles: four in a 2×2 block, or a single column of up to two for small groups. */
+  readonly tiles = computed(() => this.images().slice(1, this.count() < 5 ? 3 : 5));
+  readonly moreCount = computed(() => Math.max(0, this.count() - 1 - this.tiles().length));
+  readonly mosaicRows = computed(() => (this.count() < 5 ? Math.max(1, this.tiles().length) : 2));
 
   readonly open = signal(false);
   readonly gridMode = signal(false);
@@ -86,10 +118,20 @@ export class VehicleGalleryComponent {
       const strip = this.thumbs()?.nativeElement;
       strip?.querySelector<HTMLElement>(`[data-thumb="${i}"]`)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
       const id = this.vehicle()?.id;
-      if (id) this.writeResume(id, i);
+      if (id && this.category() === 'all') this.writeResume(id, i);
       this.preload(i + 1);
       this.preload(i - 1);
     });
+  }
+
+  /** Switch photo tab; in the viewer this jumps to the first photo of that group. */
+  setCategory(key: 'all' | PhotoTag): void {
+    if (key === this.category()) return;
+    this.category.set(key);
+    this.resetZoom();
+    this.index.set(0);
+    this.stripIndex.set(0);
+    this.strip()?.nativeElement.scrollTo({ left: 0 });
   }
 
   // ---------- viewer ----------

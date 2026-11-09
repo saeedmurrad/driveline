@@ -131,3 +131,17 @@ export function similarVehicles(target: Vehicle, all: Vehicle[], limit = 4): Veh
     .slice(0, limit)
     .map((x) => x.v);
 }
+
+/** Amount of a real, recent price reduction (set by the stock sync), else 0. */
+export function priceReduction(v: Pick<Vehicle, 'price' | 'previousPrice' | 'status'>): number {
+  if (v.status === 'sold' || !v.previousPrice) return 0;
+  return Math.max(0, v.previousPrice - v.price);
+}
+
+export function isSold(v: Pick<Vehicle, 'status'>): boolean {
+  return v.status === 'sold';
+}
+
+export function isReserved(v: Pick<Vehicle, 'status'>): boolean {
+  return v.status === 'reserved';
+}

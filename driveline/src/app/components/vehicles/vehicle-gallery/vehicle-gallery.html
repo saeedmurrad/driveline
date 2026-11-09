@@ -7,9 +7,19 @@
     </button>
   </div>
 } @else {
+  @if (categories().length) {
+    <div class="photo-tabs mb-3" role="tablist" aria-label="Photo groups">
+      @for (c of categories(); track c.key) {
+        <button type="button" role="tab" class="photo-tab" [class.active]="category() === c.key" [attr.aria-selected]="category() === c.key" (click)="setCategory(c.key)">
+          {{ c.label }} <span class="photo-tab-count">{{ c.count }}</span>
+        </button>
+      }
+    </div>
+  }
+
   <!-- Desktop: cinematic mosaic -->
-  <div class="gallery-mosaic hidden md:grid" [class.single]="count() === 1">
-    <button type="button" class="tile tile-main group" (click)="openViewer(0)" [attr.aria-label]="'Open photo 1 of ' + count()">
+  <div class="gallery-mosaic hidden md:grid" [class.single]="count() === 1" [class.few]="count() > 1 && count() < 5" [style.grid-template-rows]="'repeat(' + mosaicRows() + ', 1fr)'">
+    <button type="button" class="tile tile-main group" [style.grid-row]="'span ' + mosaicRows()" (click)="openViewer(0)" [attr.aria-label]="'Open photo 1 of ' + count()">
       <img [src]="images()[0]" [alt]="title() + ' — main photo'" fetchpriority="high" />
       <span class="tile-shade" aria-hidden="true"></span>
     </button>
@@ -28,7 +38,7 @@
       }
       <button type="button" class="pill pill-solid" (click)="openViewer(0, true)">
         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-        All {{ count() }} photos
+        {{ category() === 'all' ? 'All ' + count() + ' photos' : 'View ' + count() + ' ' + categoryLabel().toLowerCase() }}
       </button>
     </div>
   </div>
@@ -53,8 +63,15 @@
     <header class="viewer-bar">
       <div class="min-w-0">
         <p class="truncate text-sm font-semibold text-white">{{ title() }}</p>
-        <p class="text-xs tabular-nums text-white/60">{{ gridMode() ? count() + ' photos' : (index() + 1) + ' / ' + count() }}</p>
+        <p class="text-xs tabular-nums text-white/60">{{ category() !== 'all' ? categoryLabel() + ' · ' : '' }}{{ gridMode() ? count() + ' photos' : (index() + 1) + ' / ' + count() }}</p>
       </div>
+      @if (categories().length) {
+        <div class="viewer-tabs" role="tablist" aria-label="Photo groups">
+          @for (c of categories(); track c.key) {
+            <button type="button" role="tab" class="viewer-tab" [class.active]="category() === c.key" [attr.aria-selected]="category() === c.key" (click)="setCategory(c.key)">{{ c.label }}</button>
+          }
+        </div>
+      }
       <div class="flex items-center gap-2">
         @if (!gridMode()) {
           <button type="button" class="vbtn" (click)="zoomIn()" [attr.aria-label]="scale() > 1 ? 'Zoom out' : 'Zoom in'">

@@ -64,11 +64,11 @@ for (const v of vehicles) {
   else v.photosPending = true;
 }
 
-// Featured: newest six that have real photos
+// Featured: newest six on sale that have real photos
 vehicles.sort((x, y) => new Date(y.dateAdded).getTime() - new Date(x.dateAdded).getTime());
 let featured = 0;
 for (const v of vehicles) {
-  v.isFeatured = !v.photosPending && featured < 6;
+  v.isFeatured = !v.photosPending && v.status !== 'sold' && featured < 6;
   if (v.isFeatured) featured++;
 }
 

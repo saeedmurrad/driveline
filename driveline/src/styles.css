@@ -4,18 +4,56 @@
 /* Fonts: Plus Jakarta Sans (body) + Poppins (display) — index.html */
 
 /* ===================== DESIGN TOKENS & BASE ===================== */
+/*
+ * One source of truth for DriveLine's look. Colours are stored as "R G B" so Tailwind
+ * can add opacity (tailwind.config.js maps them: bg-brand, text-ink-muted, border-line,
+ * bg-state-reserved/20 …). html.dark swaps the values, so token classes need no dark: twin.
+ *
+ *   surface / surface-raised / surface-sunken   page, cards, wells
+ *   ink / ink-muted / ink-faint                 text
+ *   line                                        borders and dividers
+ *   brand / brand-deep / brand-soft             rose: primary actions, links, focus
+ *   accent                                      orange: secondary highlight
+ *   state-reduced / state-reserved / state-sold / state-ok   stock badges, finance
+ *   --dl-radius-*  --dl-shadow-*  --dl-ease-*   shape, depth and motion
+ */
 @layer base {
   :root {
+    --dl-surface-rgb: 255 251 247;
+    --dl-surface-raised-rgb: 255 255 255;
+    --dl-surface-sunken-rgb: 250 245 240;
+    --dl-ink-rgb: 41 37 36;
+    --dl-ink-muted-rgb: 87 83 78;
+    --dl-ink-faint-rgb: 168 162 158;
+    --dl-line-rgb: 231 229 228;
+    --dl-brand-rgb: 244 63 94;
+    --dl-brand-deep-rgb: 225 29 72;
+    --dl-brand-soft-rgb: 255 241 242;
+    --dl-accent-rgb: 251 146 60;
+    --dl-state-reduced-rgb: 225 29 72;
+    --dl-state-reserved-rgb: 251 191 36;
+    --dl-state-sold-rgb: 28 25 23;
+    --dl-state-ok-rgb: 5 150 105;
+
+    --dl-radius-sm: 0.75rem;
+    --dl-radius-md: 1rem;
+    --dl-radius-lg: 1.25rem;
+    --dl-radius-pill: 999px;
+    --dl-shadow-card: 0 1px 2px rgb(28 25 23 / 0.04), 0 1px 3px rgb(28 25 23 / 0.06);
+    --dl-shadow-pop: 0 20px 40px -12px rgb(76 5 25 / 0.18);
     --dl-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --dl-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --dl-surface: #fffbf7;
+
+    /* Named colours kept for existing rules */
+    --dl-surface: rgb(var(--dl-surface-rgb));
     --dl-surface-warm: #fef3ec;
-    --dl-ink: #292524;
-    --dl-primary: #f43f5e;
-    --dl-primary-deep: #e11d48;
-    --dl-accent: #fb923c;
+    --dl-ink: rgb(var(--dl-ink-rgb));
+    --dl-primary: rgb(var(--dl-brand-rgb));
+    --dl-primary-deep: rgb(var(--dl-brand-deep-rgb));
+    --dl-accent: rgb(var(--dl-accent-rgb));
     --dl-accent-deep: #ea580c;
-    --dl-glow-rose: rgba(244, 63, 94, 0.18);
+    --dl-glow-rose: rgb(var(--dl-brand-rgb) / 0.18);
+    --dl-gradient-brand: linear-gradient(135deg, rgb(var(--dl-brand-rgb)) 0%, rgb(var(--dl-brand-deep-rgb)) 100%);
     --dl-gradient-hero: linear-gradient(
       125deg,
       #451a1a 0%,
@@ -29,6 +67,23 @@
       #f97316 45%,
       #b45309 100%
     );
+  }
+
+  html.dark {
+    --dl-surface-rgb: 2 6 23;
+    --dl-surface-raised-rgb: 30 41 59;
+    --dl-surface-sunken-rgb: 15 23 42;
+    --dl-ink-rgb: 241 245 249;
+    --dl-ink-muted-rgb: 203 213 225;
+    --dl-ink-faint-rgb: 148 163 184;
+    --dl-line-rgb: 51 65 85;
+    --dl-brand-rgb: 251 113 133;
+    --dl-brand-deep-rgb: 244 63 94;
+    --dl-brand-soft-rgb: 76 5 25;
+    --dl-state-sold-rgb: 248 250 252;
+    --dl-state-ok-rgb: 52 211 153;
+    --dl-shadow-card: 0 1px 3px rgb(0 0 0 / 0.4);
+    --dl-shadow-pop: 0 20px 40px -12px rgb(0 0 0 / 0.6);
   }
 
   html {
@@ -219,7 +274,7 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-stone-200/80 overflow-hidden transition-all duration-300;
+    @apply bg-surface-raised rounded-2xl shadow-card border border-line/80 overflow-hidden transition-all duration-300;
     transition-timing-function: var(--dl-ease-out);
   }
 
@@ -234,7 +289,7 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900 tracking-tight;
+    @apply text-3xl md:text-4xl font-bold text-ink tracking-tight;
     font-family: 'Poppins', system-ui, sans-serif;
   }
 
@@ -255,7 +310,7 @@
   }
 
   .section-subtitle {
-    @apply text-lg text-gray-500 mt-3;
+    @apply text-lg text-ink-muted mt-3;
   }
 
   .page-header {
@@ -282,7 +337,7 @@
   /* Buttons */
   .btn-primary {
     @apply inline-flex items-center gap-2 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0;
-    background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+    background: var(--dl-gradient-brand);
     box-shadow: 0 10px 25px -8px rgba(244, 63, 94, 0.45);
   }
 
@@ -372,6 +427,11 @@
   .badge-orange { @apply bg-orange-100 text-orange-700; }
   .badge-gray { @apply bg-gray-100 text-gray-600; }
 
+  /* Stock status badges (cards, vehicle page) */
+  .badge-reduced { @apply bg-state-reduced text-white; }
+  .badge-reserved { @apply bg-state-reserved text-amber-950; }
+  .badge-sold { @apply bg-state-sold text-surface; }
+
   /* Skeleton loader */
   .skeleton {
     background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
@@ -394,16 +454,8 @@
     @apply bg-slate-800/95 border-slate-600/40;
   }
 
-  html.dark .card {
-    @apply bg-slate-800 border-slate-600/80;
-  }
-
   html.dark .card:hover {
     @apply border-slate-500 shadow-xl shadow-black/30;
-  }
-
-  html.dark .section-title {
-    @apply text-gray-100;
   }
 
   html.dark .section-title::after {
@@ -418,10 +470,6 @@
 
   html.dark .surface-warm {
     @apply bg-stone-950;
-  }
-
-  html.dark .section-subtitle {
-    @apply text-gray-400;
   }
 
   html.dark .form-input {

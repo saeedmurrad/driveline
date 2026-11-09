@@ -4,6 +4,7 @@ import {
   financeIllustration,
   meetsUlezStandard,
   milesBetween,
+  priceReduction,
   runningCosts,
   similarVehicles,
 } from './vehicle-insights';
@@ -82,5 +83,12 @@ describe('vehicle insights', () => {
     ];
     const out = similarVehicles(base, [base, ...others], 2);
     expect(out.map((v) => v.id)).toEqual(['2', '3']);
+  });
+
+  it('reports a genuine price reduction only for cars still on sale', () => {
+    expect(priceReduction({ ...base, previousPrice: 8450 })).toBe(500);
+    expect(priceReduction(base)).toBe(0);
+    expect(priceReduction({ ...base, previousPrice: 7000 })).toBe(0);
+    expect(priceReduction({ ...base, previousPrice: 8450, status: 'sold' })).toBe(0);
   });
 });

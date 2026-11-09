@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
       routes,
       withViewTransitions(),
       // Open vehicle detail (and any route) from scroll position on listings → start at top
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withInMemoryScrolling({ scrollPositionRestoration: 'top', anchorScrolling: 'enabled' }),
     ),
     provideClientHydration(withEventReplay()),
   ]

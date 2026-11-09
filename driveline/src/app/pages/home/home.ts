@@ -42,6 +42,9 @@ export class HomeComponent {
   private dealerContext = inject(DealerContextService);
 
   featuredVehicles = this.vehicleService.featuredVehicles;
+  readonly reducedVehicles = this.vehicleService.reducedVehicles;
+  readonly recentlySold = this.vehicleService.recentlySold;
+  readonly stockCounts = this.vehicleService.inventoryCategoryCounts;
   protected readonly garage = inject(GarageService);
   readonly financeNote = FINANCE_DISCLAIMER_SHORT;
 

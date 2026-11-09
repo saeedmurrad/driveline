@@ -27,7 +27,12 @@ const pages = [
 ];
 
 const data = readFileSync(join(ROOT, 'src/app/data/vehicles.data.ts'), 'utf8');
-const ids = [...data.matchAll(/^\s{4}"id": "([^"]+)"/gm)].map((m) => m[1]);
+const START = 'export const VEHICLES: Vehicle[] = ';
+const from = data.indexOf(START) + START.length;
+// Sold cars keep their page for a few days but are not offered to search engines.
+const ids = JSON.parse(data.slice(from, data.indexOf('];', from) + 1))
+  .filter((v) => v.status !== 'sold')
+  .map((v) => v.id);
 
 const entry = (path, freq, priority) =>
   `  <url>\n    <loc>${SITE}${path}</loc>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
