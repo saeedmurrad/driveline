@@ -103,11 +103,8 @@ export const VEHICLES: Vehicle[] = [
       "Interior Mood Lighting",
       "Jaguar Sequential Shift"
     ],
-    "images": [
-      "stock/fengate/10484-01.jpg",
-      "stock/fengate/10484-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10484-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "KM66NBK",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -128,7 +125,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2175,
     "bootSpaceSeatsUpLitres": 650,
     "acceleration0To60Seconds": 8.4,
-    "isFeatured": true
+    "isFeatured": false,
+    "photosPending": true
   },
   {
     "id": "10483",
@@ -205,11 +203,8 @@ export const VEHICLES: Vehicle[] = [
       "Traction Control",
       "USB Port"
     ],
-    "images": [
-      "stock/fengate/10483-01.jpg",
-      "stock/fengate/10483-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10483-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "RK18OOD",
     "previousOwners": 2,
     "motExpiry": "TBC",
@@ -229,7 +224,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4135,
     "widthMm": 1765,
     "bootSpaceSeatsUpLitres": 354,
-    "isFeatured": true
+    "isFeatured": false,
+    "photosPending": true
   },
   {
     "id": "10482",
@@ -340,7 +336,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10482-08.jpg",
       "stock/fengate/10482-09.jpg",
       "stock/fengate/10482-10.jpg",
-      "stock/fengate/10482-11.jpg",
       "stock/fengate/10482-12.jpg",
       "stock/fengate/10482-13.jpg",
       "stock/fengate/10482-14.jpg",
@@ -509,7 +504,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10478-07.jpg",
       "stock/fengate/10478-08.jpg",
       "stock/fengate/10478-09.jpg",
-      "stock/fengate/10478-10.jpg",
       "stock/fengate/10478-11.jpg",
       "stock/fengate/10478-12.jpg",
       "stock/fengate/10478-13.jpg",
@@ -534,11 +528,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10478-32.jpg",
       "stock/fengate/10478-33.jpg",
       "stock/fengate/10478-34.jpg",
-      "stock/fengate/10478-35.jpg",
-      "stock/fengate/10478-36.jpg",
-      "stock/fengate/10478-37.jpg",
-      "stock/fengate/10478-38.jpg",
-      "stock/fengate/10478-39.jpg",
       "stock/fengate/10478-40.jpg"
     ],
     "thumbnailImage": "stock/fengate/10478-01.jpg",
@@ -659,7 +648,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10475-06.jpg",
       "stock/fengate/10475-07.jpg",
       "stock/fengate/10475-08.jpg",
-      "stock/fengate/10475-09.jpg",
       "stock/fengate/10475-10.jpg",
       "stock/fengate/10475-11.jpg",
       "stock/fengate/10475-12.jpg",
@@ -679,11 +667,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10475-26.jpg",
       "stock/fengate/10475-27.jpg",
       "stock/fengate/10475-28.jpg",
-      "stock/fengate/10475-29.jpg",
-      "stock/fengate/10475-30.jpg",
-      "stock/fengate/10475-31.jpg",
-      "stock/fengate/10475-32.jpg",
-      "stock/fengate/10475-33.jpg",
       "stock/fengate/10475-34.jpg"
     ],
     "thumbnailImage": "stock/fengate/10475-01.jpg",
@@ -810,7 +793,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10474-02.jpg",
       "stock/fengate/10474-03.jpg",
       "stock/fengate/10474-04.jpg",
-      "stock/fengate/10474-05.jpg",
       "stock/fengate/10474-06.jpg",
       "stock/fengate/10474-07.jpg",
       "stock/fengate/10474-08.jpg",
@@ -841,12 +823,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10474-33.jpg",
       "stock/fengate/10474-34.jpg",
       "stock/fengate/10474-35.jpg",
-      "stock/fengate/10474-36.jpg",
-      "stock/fengate/10474-37.jpg",
-      "stock/fengate/10474-38.jpg",
-      "stock/fengate/10474-39.jpg",
-      "stock/fengate/10474-40.jpg",
-      "stock/fengate/10474-41.jpg"
+      "stock/fengate/10474-36.jpg"
     ],
     "thumbnailImage": "stock/fengate/10474-01.jpg",
     "registration": "KU64FYW",
@@ -955,11 +932,8 @@ export const VEHICLES: Vehicle[] = [
       "Tyre Pressure Indicator",
       "Variable Boot Floor"
     ],
-    "images": [
-      "stock/fengate/10473-01.jpg",
-      "stock/fengate/10473-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10473-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "NX63YRE",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -979,7 +953,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3970,
     "widthMm": 1901,
     "bootSpaceSeatsUpLitres": 280,
-    "bootSpaceSeatsDownLitres": 952
+    "bootSpaceSeatsDownLitres": 952,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10472",
@@ -1081,7 +1057,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10472-01.jpg",
-      "stock/fengate/10472-02.jpg",
       "stock/fengate/10472-03.jpg",
       "stock/fengate/10472-04.jpg",
       "stock/fengate/10472-05.jpg",
@@ -1118,11 +1093,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10472-36.jpg",
       "stock/fengate/10472-37.jpg",
       "stock/fengate/10472-38.jpg",
-      "stock/fengate/10472-39.jpg",
-      "stock/fengate/10472-40.jpg",
-      "stock/fengate/10472-41.jpg",
-      "stock/fengate/10472-42.jpg",
-      "stock/fengate/10472-43.jpg",
       "stock/fengate/10472-44.jpg"
     ],
     "thumbnailImage": "stock/fengate/10472-01.jpg",
@@ -1145,7 +1115,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4746,
     "widthMm": 2175,
     "bootSpaceSeatsUpLitres": 650,
-    "acceleration0To60Seconds": 8.4
+    "acceleration0To60Seconds": 8.4,
+    "isFeatured": true
   },
   {
     "id": "10471",
@@ -1254,7 +1225,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10471-06.jpg",
       "stock/fengate/10471-07.jpg",
       "stock/fengate/10471-08.jpg",
-      "stock/fengate/10471-09.jpg",
       "stock/fengate/10471-10.jpg",
       "stock/fengate/10471-11.jpg",
       "stock/fengate/10471-12.jpg",
@@ -1267,12 +1237,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10471-19.jpg",
       "stock/fengate/10471-20.jpg",
       "stock/fengate/10471-21.jpg",
-      "stock/fengate/10471-22.jpg",
-      "stock/fengate/10471-23.jpg",
-      "stock/fengate/10471-24.jpg",
-      "stock/fengate/10471-25.jpg",
-      "stock/fengate/10471-26.jpg",
-      "stock/fengate/10471-27.jpg"
+      "stock/fengate/10471-22.jpg"
     ],
     "thumbnailImage": "stock/fengate/10471-01.jpg",
     "registration": "HK65KHB",
@@ -1294,7 +1259,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4157,
     "widthMm": 1946,
     "bootSpaceSeatsUpLitres": 358,
-    "bootSpaceSeatsDownLitres": 1170
+    "bootSpaceSeatsDownLitres": 1170,
+    "isFeatured": true
   },
   {
     "id": "10470",
@@ -1396,7 +1362,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10470-01.jpg",
-      "stock/fengate/10470-02.jpg",
       "stock/fengate/10470-03.jpg",
       "stock/fengate/10470-04.jpg",
       "stock/fengate/10470-05.jpg",
@@ -1423,11 +1388,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10470-26.jpg",
       "stock/fengate/10470-27.jpg",
       "stock/fengate/10470-28.jpg",
-      "stock/fengate/10470-29.jpg",
-      "stock/fengate/10470-30.jpg",
-      "stock/fengate/10470-31.jpg",
-      "stock/fengate/10470-32.jpg",
-      "stock/fengate/10470-33.jpg"
+      "stock/fengate/10470-29.jpg"
     ],
     "thumbnailImage": "stock/fengate/10470-01.jpg",
     "registration": "LN67GVU",
@@ -1449,7 +1410,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4212,
     "widthMm": 1976,
     "bootSpaceSeatsUpLitres": 410,
-    "bootSpaceSeatsDownLitres": 1255
+    "bootSpaceSeatsDownLitres": 1255,
+    "isFeatured": false
   },
   {
     "id": "10468",
@@ -1549,11 +1511,8 @@ export const VEHICLES: Vehicle[] = [
       "Locking Wheel Bolts for Alloy Wheels",
       "Luggage Compartment Cover"
     ],
-    "images": [
-      "stock/fengate/10468-01.jpg",
-      "stock/fengate/10468-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10468-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "FN67GVA",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -1574,7 +1533,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2093,
     "bootSpaceSeatsUpLitres": 490,
     "bootSpaceSeatsDownLitres": 1450,
-    "acceleration0To60Seconds": 10.2
+    "acceleration0To60Seconds": 10.2,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10463",
@@ -1676,7 +1637,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10463-01.jpg",
-      "stock/fengate/10463-02.jpg",
       "stock/fengate/10463-03.jpg",
       "stock/fengate/10463-04.jpg",
       "stock/fengate/10463-05.jpg",
@@ -1728,7 +1688,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 505,
     "bootSpaceSeatsDownLitres": 1432,
-    "acceleration0To60Seconds": 7.9
+    "acceleration0To60Seconds": 7.9,
+    "isFeatured": false
   },
   {
     "id": "10461",
@@ -1828,16 +1789,8 @@ export const VEHICLES: Vehicle[] = [
       "Parking Sensors - Rear",
       "Power Assisted Steering - Speed Sensitive"
     ],
-    "images": [
-      "stock/fengate/10461-01.jpg",
-      "stock/fengate/10461-02.jpg",
-      "stock/fengate/10461-03.jpg",
-      "stock/fengate/10461-04.jpg",
-      "stock/fengate/10461-05.jpg",
-      "stock/fengate/10461-06.jpg",
-      "stock/fengate/10461-07.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10461-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "MM16BCV",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -1857,7 +1810,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4426,
     "widthMm": 2041,
     "bootSpaceSeatsUpLitres": 470,
-    "bootSpaceSeatsDownLitres": 1510
+    "bootSpaceSeatsDownLitres": 1510,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10455",
@@ -1959,7 +1914,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10455-01.jpg",
-      "stock/fengate/10455-02.jpg",
       "stock/fengate/10455-03.jpg",
       "stock/fengate/10455-04.jpg",
       "stock/fengate/10455-05.jpg",
@@ -2011,7 +1965,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4419,
     "widthMm": 1992,
     "bootSpaceSeatsUpLitres": 360,
-    "bootSpaceSeatsDownLitres": 1200
+    "bootSpaceSeatsDownLitres": 1200,
+    "isFeatured": false
   },
   {
     "id": "10458",
@@ -2113,7 +2068,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10458-01.jpg",
-      "stock/fengate/10458-02.jpg",
       "stock/fengate/10458-03.jpg",
       "stock/fengate/10458-04.jpg",
       "stock/fengate/10458-05.jpg",
@@ -2143,12 +2097,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10458-29.jpg",
       "stock/fengate/10458-30.jpg",
       "stock/fengate/10458-31.jpg",
-      "stock/fengate/10458-32.jpg",
-      "stock/fengate/10458-33.jpg",
-      "stock/fengate/10458-34.jpg",
-      "stock/fengate/10458-35.jpg",
-      "stock/fengate/10458-36.jpg",
-      "stock/fengate/10458-37.jpg"
+      "stock/fengate/10458-32.jpg"
     ],
     "thumbnailImage": "stock/fengate/10458-01.jpg",
     "registration": "AJ68XAR",
@@ -2168,7 +2117,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4470,
     "widthMm": 1820,
     "bootSpaceSeatsUpLitres": 443,
-    "bootSpaceSeatsDownLitres": 1505
+    "bootSpaceSeatsDownLitres": 1505,
+    "isFeatured": false
   },
   {
     "id": "10456",
@@ -2268,16 +2218,8 @@ export const VEHICLES: Vehicle[] = [
       "Luggage Compartment - Hooks",
       "Luggage Compartment - Load Cover"
     ],
-    "images": [
-      "stock/fengate/10456-01.jpg",
-      "stock/fengate/10456-02.jpg",
-      "stock/fengate/10456-03.jpg",
-      "stock/fengate/10456-04.jpg",
-      "stock/fengate/10456-05.jpg",
-      "stock/fengate/10456-06.jpg",
-      "stock/fengate/10456-07.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10456-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "KM16AYD",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -2298,7 +2240,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1855,
     "bootSpaceSeatsUpLitres": 491,
     "bootSpaceSeatsDownLitres": 1480,
-    "acceleration0To60Seconds": 11.1
+    "acceleration0To60Seconds": 11.1,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10457",
@@ -2400,7 +2344,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10457-01.jpg",
-      "stock/fengate/10457-02.jpg",
       "stock/fengate/10457-03.jpg",
       "stock/fengate/10457-04.jpg",
       "stock/fengate/10457-05.jpg",
@@ -2426,12 +2369,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10457-25.jpg",
       "stock/fengate/10457-26.jpg",
       "stock/fengate/10457-27.jpg",
-      "stock/fengate/10457-28.jpg",
-      "stock/fengate/10457-29.jpg",
-      "stock/fengate/10457-30.jpg",
-      "stock/fengate/10457-31.jpg",
-      "stock/fengate/10457-32.jpg",
-      "stock/fengate/10457-33.jpg"
+      "stock/fengate/10457-28.jpg"
     ],
     "thumbnailImage": "stock/fengate/10457-01.jpg",
     "registration": "SA17BEJ",
@@ -2453,7 +2391,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4842,
     "widthMm": 2084,
     "bootSpaceSeatsUpLitres": 530,
-    "bootSpaceSeatsDownLitres": 1470
+    "bootSpaceSeatsDownLitres": 1470,
+    "isFeatured": false
   },
   {
     "id": "10452",
@@ -2555,7 +2494,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10452-01.jpg",
-      "stock/fengate/10452-02.jpg",
       "stock/fengate/10452-03.jpg",
       "stock/fengate/10452-04.jpg",
       "stock/fengate/10452-05.jpg",
@@ -2576,12 +2514,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10452-20.jpg",
       "stock/fengate/10452-21.jpg",
       "stock/fengate/10452-22.jpg",
-      "stock/fengate/10452-23.jpg",
-      "stock/fengate/10452-24.jpg",
-      "stock/fengate/10452-25.jpg",
-      "stock/fengate/10452-26.jpg",
-      "stock/fengate/10452-27.jpg",
-      "stock/fengate/10452-28.jpg"
+      "stock/fengate/10452-23.jpg"
     ],
     "thumbnailImage": "stock/fengate/10452-01.jpg",
     "registration": "VU16OPJ",
@@ -2603,7 +2536,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3969,
     "widthMm": 1978,
     "bootSpaceSeatsUpLitres": 290,
-    "bootSpaceSeatsDownLitres": 974
+    "bootSpaceSeatsDownLitres": 974,
+    "isFeatured": false
   },
   {
     "id": "10454",
@@ -2712,7 +2646,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10454-06.jpg",
       "stock/fengate/10454-07.jpg",
       "stock/fengate/10454-08.jpg",
-      "stock/fengate/10454-09.jpg",
       "stock/fengate/10454-10.jpg",
       "stock/fengate/10454-11.jpg",
       "stock/fengate/10454-12.jpg",
@@ -2755,7 +2688,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4556,
     "widthMm": 2038,
     "bootSpaceSeatsUpLitres": 560,
-    "bootSpaceSeatsDownLitres": 1820
+    "bootSpaceSeatsDownLitres": 1820,
+    "isFeatured": false
   },
   {
     "id": "10453",
@@ -2850,7 +2784,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10453-06.jpg",
       "stock/fengate/10453-07.jpg",
       "stock/fengate/10453-08.jpg",
-      "stock/fengate/10453-09.jpg",
       "stock/fengate/10453-10.jpg",
       "stock/fengate/10453-11.jpg",
       "stock/fengate/10453-12.jpg",
@@ -2866,12 +2799,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10453-22.jpg",
       "stock/fengate/10453-23.jpg",
       "stock/fengate/10453-24.jpg",
-      "stock/fengate/10453-25.jpg",
-      "stock/fengate/10453-26.jpg",
-      "stock/fengate/10453-27.jpg",
-      "stock/fengate/10453-28.jpg",
-      "stock/fengate/10453-29.jpg",
-      "stock/fengate/10453-30.jpg"
+      "stock/fengate/10453-25.jpg"
     ],
     "thumbnailImage": "stock/fengate/10453-01.jpg",
     "registration": "YY15FDF",
@@ -2892,7 +2820,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1538,
     "lengthMm": 3941,
     "widthMm": 1728,
-    "bootSpaceSeatsUpLitres": 300
+    "bootSpaceSeatsUpLitres": 300,
+    "isFeatured": false
   },
   {
     "id": "10451",
@@ -3000,7 +2929,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10451-05.jpg",
       "stock/fengate/10451-06.jpg",
       "stock/fengate/10451-07.jpg",
-      "stock/fengate/10451-08.jpg",
       "stock/fengate/10451-09.jpg",
       "stock/fengate/10451-10.jpg",
       "stock/fengate/10451-11.jpg",
@@ -3044,7 +2972,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1475,
     "lengthMm": 4907,
     "widthMm": 2102,
-    "bootSpaceSeatsUpLitres": 520
+    "bootSpaceSeatsUpLitres": 520,
+    "isFeatured": false
   },
   {
     "id": "10449",
@@ -3106,7 +3035,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10449-01.jpg",
-      "stock/fengate/10449-02.jpg",
       "stock/fengate/10449-03.jpg",
       "stock/fengate/10449-04.jpg",
       "stock/fengate/10449-05.jpg",
@@ -3122,12 +3050,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10449-15.jpg",
       "stock/fengate/10449-16.jpg",
       "stock/fengate/10449-17.jpg",
-      "stock/fengate/10449-18.jpg",
-      "stock/fengate/10449-19.jpg",
-      "stock/fengate/10449-20.jpg",
-      "stock/fengate/10449-21.jpg",
-      "stock/fengate/10449-22.jpg",
-      "stock/fengate/10449-23.jpg"
+      "stock/fengate/10449-18.jpg"
     ],
     "thumbnailImage": "stock/fengate/10449-01.jpg",
     "registration": "KO15UEN",
@@ -3149,7 +3072,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4428,
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
-    "bootSpaceSeatsDownLitres": 1851
+    "bootSpaceSeatsDownLitres": 1851,
+    "isFeatured": false
   },
   {
     "id": "10450",
@@ -3210,11 +3134,8 @@ export const VEHICLES: Vehicle[] = [
       "Voice Control System when with Bluetooth",
       "White roof & mirror caps"
     ],
-    "images": [
-      "stock/fengate/10450-01.jpg",
-      "stock/fengate/10450-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10450-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "YG57CKX",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -3234,7 +3155,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3699,
     "widthMm": 1913,
     "bootSpaceSeatsUpLitres": 160,
-    "bootSpaceSeatsDownLitres": 680
+    "bootSpaceSeatsDownLitres": 680,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10448",
@@ -3336,7 +3259,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10448-01.jpg",
-      "stock/fengate/10448-02.jpg",
       "stock/fengate/10448-03.jpg",
       "stock/fengate/10448-04.jpg",
       "stock/fengate/10448-05.jpg",
@@ -3366,12 +3288,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10448-29.jpg",
       "stock/fengate/10448-30.jpg",
       "stock/fengate/10448-31.jpg",
-      "stock/fengate/10448-32.jpg",
-      "stock/fengate/10448-33.jpg",
-      "stock/fengate/10448-34.jpg",
-      "stock/fengate/10448-35.jpg",
-      "stock/fengate/10448-36.jpg",
-      "stock/fengate/10448-37.jpg"
+      "stock/fengate/10448-32.jpg"
     ],
     "thumbnailImage": "stock/fengate/10448-01.jpg",
     "registration": "YK18EXZ",
@@ -3393,7 +3310,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4602,
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 165,
-    "bootSpaceSeatsDownLitres": 2181
+    "bootSpaceSeatsDownLitres": 2181,
+    "isFeatured": false
   },
   {
     "id": "10444",
@@ -3421,7 +3339,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10444-04.jpg",
       "stock/fengate/10444-05.jpg",
       "stock/fengate/10444-06.jpg",
-      "stock/fengate/10444-07.jpg",
       "stock/fengate/10444-08.jpg",
       "stock/fengate/10444-09.jpg",
       "stock/fengate/10444-10.jpg",
@@ -3447,12 +3364,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10444-30.jpg",
       "stock/fengate/10444-31.jpg",
       "stock/fengate/10444-32.jpg",
-      "stock/fengate/10444-33.jpg",
-      "stock/fengate/10444-34.jpg",
-      "stock/fengate/10444-35.jpg",
-      "stock/fengate/10444-36.jpg",
-      "stock/fengate/10444-37.jpg",
-      "stock/fengate/10444-38.jpg"
+      "stock/fengate/10444-33.jpg"
     ],
     "thumbnailImage": "stock/fengate/10444-01.jpg",
     "registration": "PK60DYG",
@@ -3474,7 +3386,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4332,
     "widthMm": 2120,
     "bootSpaceSeatsUpLitres": 410,
-    "bootSpaceSeatsDownLitres": 660
+    "bootSpaceSeatsDownLitres": 660,
+    "isFeatured": false
   },
   {
     "id": "10442",
@@ -3576,7 +3489,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10442-01.jpg",
-      "stock/fengate/10442-02.jpg",
       "stock/fengate/10442-03.jpg",
       "stock/fengate/10442-04.jpg",
       "stock/fengate/10442-05.jpg",
@@ -3613,12 +3525,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10442-36.jpg",
       "stock/fengate/10442-37.jpg",
       "stock/fengate/10442-38.jpg",
-      "stock/fengate/10442-39.jpg",
-      "stock/fengate/10442-40.jpg",
-      "stock/fengate/10442-41.jpg",
-      "stock/fengate/10442-42.jpg",
-      "stock/fengate/10442-43.jpg",
-      "stock/fengate/10442-44.jpg"
+      "stock/fengate/10442-39.jpg"
     ],
     "thumbnailImage": "stock/fengate/10442-01.jpg",
     "registration": "SX16KCZ",
@@ -3641,7 +3548,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2090,
     "bootSpaceSeatsUpLitres": 575,
     "bootSpaceSeatsDownLitres": 1445,
-    "acceleration0To60Seconds": 9.1
+    "acceleration0To60Seconds": 9.1,
+    "isFeatured": false
   },
   {
     "id": "10441",
@@ -3746,7 +3654,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10441-06.jpg",
       "stock/fengate/10441-07.jpg",
       "stock/fengate/10441-08.jpg",
-      "stock/fengate/10441-09.jpg",
       "stock/fengate/10441-10.jpg",
       "stock/fengate/10441-11.jpg",
       "stock/fengate/10441-12.jpg",
@@ -3790,12 +3697,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10441-50.jpg",
       "stock/fengate/10441-51.jpg",
       "stock/fengate/10441-52.jpg",
-      "stock/fengate/10441-53.jpg",
-      "stock/fengate/10441-54.jpg",
-      "stock/fengate/10441-55.jpg",
-      "stock/fengate/10441-56.jpg",
-      "stock/fengate/10441-57.jpg",
-      "stock/fengate/10441-58.jpg"
+      "stock/fengate/10441-53.jpg"
     ],
     "thumbnailImage": "stock/fengate/10441-01.jpg",
     "registration": "BW66XEO",
@@ -3818,7 +3720,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2212,
     "bootSpaceSeatsUpLitres": 235,
     "bootSpaceSeatsDownLitres": 1890,
-    "acceleration0To60Seconds": 4.7
+    "acceleration0To60Seconds": 4.7,
+    "isFeatured": false
   },
   {
     "id": "10439",
@@ -3886,7 +3789,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4427,
     "widthMm": 1809,
     "bootSpaceSeatsUpLitres": 430,
-    "bootSpaceSeatsDownLitres": 1510
+    "bootSpaceSeatsDownLitres": 1510,
+    "isFeatured": false
   },
   {
     "id": "10433",
@@ -3960,16 +3864,8 @@ export const VEHICLES: Vehicle[] = [
       "VSC - Vehicle Stability Control",
       "White and Monochrome Screen Display"
     ],
-    "images": [
-      "stock/fengate/10433-01.jpg",
-      "stock/fengate/10433-02.jpg",
-      "stock/fengate/10433-03.jpg",
-      "stock/fengate/10433-04.jpg",
-      "stock/fengate/10433-05.jpg",
-      "stock/fengate/10433-06.jpg",
-      "stock/fengate/10433-07.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10433-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "EJ71RXL",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -3979,7 +3875,9 @@ export const VEHICLES: Vehicle[] = [
     "dateAdded": "2026-06-02",
     "sourceListingUrl": "https://www.fengatecarsales.co.uk/used/vans/toyota-proace-20d-family-mpv-5dr-lwb-euro-6-9-seat-10433/",
     "monthlyPrice": 211,
-    "seats": 9
+    "seats": 9,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10428",
@@ -4029,7 +3927,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10428-01.jpg",
-      "stock/fengate/10428-02.jpg",
       "stock/fengate/10428-03.jpg",
       "stock/fengate/10428-04.jpg",
       "stock/fengate/10428-05.jpg",
@@ -4063,7 +3960,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1675,
     "lengthMm": 4169,
     "widthMm": 1698,
-    "acceleration0To60Seconds": 11.2
+    "acceleration0To60Seconds": 11.2,
+    "isFeatured": false
   },
   {
     "id": "10427",
@@ -4140,7 +4038,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10427-01.jpg",
-      "stock/fengate/10427-02.jpg",
       "stock/fengate/10427-03.jpg",
       "stock/fengate/10427-04.jpg",
       "stock/fengate/10427-05.jpg",
@@ -4185,7 +4082,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4397,
     "widthMm": 1794,
     "bootSpaceSeatsUpLitres": 121,
-    "bootSpaceSeatsDownLitres": 1913
+    "bootSpaceSeatsDownLitres": 1913,
+    "isFeatured": false
   },
   {
     "id": "10421",
@@ -4284,7 +4182,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10421-01.jpg",
-      "stock/fengate/10421-02.jpg",
       "stock/fengate/10421-03.jpg",
       "stock/fengate/10421-04.jpg",
       "stock/fengate/10421-05.jpg",
@@ -4328,7 +4225,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4602,
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 165,
-    "bootSpaceSeatsDownLitres": 2181
+    "bootSpaceSeatsDownLitres": 2181,
+    "isFeatured": false
   },
   {
     "id": "10423",
@@ -4430,7 +4328,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10423-01.jpg",
-      "stock/fengate/10423-02.jpg",
       "stock/fengate/10423-03.jpg",
       "stock/fengate/10423-04.jpg",
       "stock/fengate/10423-05.jpg",
@@ -4481,7 +4378,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4122,
     "widthMm": 1778,
     "bootSpaceSeatsUpLitres": 377,
-    "bootSpaceSeatsDownLitres": 1235
+    "bootSpaceSeatsDownLitres": 1235,
+    "isFeatured": false
   },
   {
     "id": "10419",
@@ -4588,7 +4486,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10419-04.jpg",
       "stock/fengate/10419-05.jpg",
       "stock/fengate/10419-06.jpg",
-      "stock/fengate/10419-07.jpg",
       "stock/fengate/10419-08.jpg",
       "stock/fengate/10419-09.jpg",
       "stock/fengate/10419-10.jpg",
@@ -4608,12 +4505,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10419-24.jpg",
       "stock/fengate/10419-25.jpg",
       "stock/fengate/10419-26.jpg",
-      "stock/fengate/10419-27.jpg",
-      "stock/fengate/10419-28.jpg",
-      "stock/fengate/10419-29.jpg",
-      "stock/fengate/10419-30.jpg",
-      "stock/fengate/10419-31.jpg",
-      "stock/fengate/10419-32.jpg"
+      "stock/fengate/10419-27.jpg"
     ],
     "thumbnailImage": "stock/fengate/10419-01.jpg",
     "registration": "KW63XGV",
@@ -4635,7 +4527,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4428,
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
-    "bootSpaceSeatsDownLitres": 1851
+    "bootSpaceSeatsDownLitres": 1851,
+    "isFeatured": false
   },
   {
     "id": "10416",
@@ -4725,11 +4618,8 @@ export const VEHICLES: Vehicle[] = [
       "USB Port",
       "Underbody Vortex Generators"
     ],
-    "images": [
-      "stock/fengate/10416-01.jpg",
-      "stock/fengate/10416-02.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10416-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "SL19YCC",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -4747,7 +4637,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4394,
     "widthMm": 2070,
     "bootSpaceSeatsUpLitres": 430,
-    "bootSpaceSeatsDownLitres": 1598
+    "bootSpaceSeatsDownLitres": 1598,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10414",
@@ -4849,7 +4741,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10414-01.jpg",
-      "stock/fengate/10414-02.jpg",
       "stock/fengate/10414-03.jpg",
       "stock/fengate/10414-04.jpg",
       "stock/fengate/10414-05.jpg",
@@ -4876,12 +4767,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10414-26.jpg",
       "stock/fengate/10414-27.jpg",
       "stock/fengate/10414-28.jpg",
-      "stock/fengate/10414-29.jpg",
-      "stock/fengate/10414-30.jpg",
-      "stock/fengate/10414-31.jpg",
-      "stock/fengate/10414-32.jpg",
-      "stock/fengate/10414-33.jpg",
-      "stock/fengate/10414-34.jpg"
+      "stock/fengate/10414-29.jpg"
     ],
     "thumbnailImage": "stock/fengate/10414-01.jpg",
     "registration": "PF14HYB",
@@ -4903,7 +4789,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4377,
     "widthMm": 2070,
     "bootSpaceSeatsUpLitres": 430,
-    "bootSpaceSeatsDownLitres": 1585
+    "bootSpaceSeatsDownLitres": 1585,
+    "isFeatured": false
   },
   {
     "id": "10415",
@@ -4982,7 +4869,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10415-01.jpg",
-      "stock/fengate/10415-02.jpg",
       "stock/fengate/10415-03.jpg",
       "stock/fengate/10415-04.jpg",
       "stock/fengate/10415-05.jpg",
@@ -5008,12 +4894,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10415-25.jpg",
       "stock/fengate/10415-26.jpg",
       "stock/fengate/10415-27.jpg",
-      "stock/fengate/10415-28.jpg",
-      "stock/fengate/10415-29.jpg",
-      "stock/fengate/10415-30.jpg",
-      "stock/fengate/10415-31.jpg",
-      "stock/fengate/10415-32.jpg",
-      "stock/fengate/10415-33.jpg"
+      "stock/fengate/10415-28.jpg"
     ],
     "thumbnailImage": "stock/fengate/10415-01.jpg",
     "registration": "MM67JJF",
@@ -5035,7 +4916,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4065,
     "widthMm": 1941,
     "bootSpaceSeatsUpLitres": 292,
-    "bootSpaceSeatsDownLitres": 1093
+    "bootSpaceSeatsDownLitres": 1093,
+    "isFeatured": false
   },
   {
     "id": "10411",
@@ -5118,7 +5000,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10411-01.jpg",
-      "stock/fengate/10411-02.jpg",
       "stock/fengate/10411-03.jpg",
       "stock/fengate/10411-04.jpg",
       "stock/fengate/10411-05.jpg",
@@ -5147,12 +5028,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10411-28.jpg",
       "stock/fengate/10411-29.jpg",
       "stock/fengate/10411-30.jpg",
-      "stock/fengate/10411-31.jpg",
-      "stock/fengate/10411-32.jpg",
-      "stock/fengate/10411-33.jpg",
-      "stock/fengate/10411-34.jpg",
-      "stock/fengate/10411-35.jpg",
-      "stock/fengate/10411-36.jpg"
+      "stock/fengate/10411-31.jpg"
     ],
     "thumbnailImage": "stock/fengate/10411-01.jpg",
     "registration": "BV69YBO",
@@ -5172,7 +5048,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3973,
     "widthMm": 2004,
     "bootSpaceSeatsUpLitres": 311,
-    "bootSpaceSeatsDownLitres": 1152
+    "bootSpaceSeatsDownLitres": 1152,
+    "isFeatured": false
   },
   {
     "id": "10410",
@@ -5271,7 +5148,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10410-01.jpg",
-      "stock/fengate/10410-02.jpg",
       "stock/fengate/10410-03.jpg",
       "stock/fengate/10410-04.jpg",
       "stock/fengate/10410-05.jpg",
@@ -5315,7 +5191,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3821,
     "widthMm": 1932,
     "bootSpaceSeatsUpLitres": 211,
-    "bootSpaceSeatsDownLitres": 731
+    "bootSpaceSeatsDownLitres": 731,
+    "isFeatured": false
   },
   {
     "id": "10404",
@@ -5424,7 +5301,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10404-06.jpg",
       "stock/fengate/10404-07.jpg",
       "stock/fengate/10404-08.jpg",
-      "stock/fengate/10404-09.jpg",
       "stock/fengate/10404-10.jpg",
       "stock/fengate/10404-11.jpg",
       "stock/fengate/10404-12.jpg",
@@ -5448,12 +5324,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10404-30.jpg",
       "stock/fengate/10404-31.jpg",
       "stock/fengate/10404-32.jpg",
-      "stock/fengate/10404-33.jpg",
-      "stock/fengate/10404-34.jpg",
-      "stock/fengate/10404-35.jpg",
-      "stock/fengate/10404-36.jpg",
-      "stock/fengate/10404-37.jpg",
-      "stock/fengate/10404-38.jpg"
+      "stock/fengate/10404-33.jpg"
     ],
     "thumbnailImage": "stock/fengate/10404-01.jpg",
     "registration": "SV65VLH",
@@ -5475,7 +5346,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4629,
     "widthMm": 2089,
     "bootSpaceSeatsUpLitres": 540,
-    "acceleration0To60Seconds": 8.1
+    "acceleration0To60Seconds": 8.1,
+    "isFeatured": false
   },
   {
     "id": "10401",
@@ -5570,7 +5442,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10401-01.jpg",
-      "stock/fengate/10401-02.jpg",
       "stock/fengate/10401-03.jpg",
       "stock/fengate/10401-04.jpg",
       "stock/fengate/10401-05.jpg",
@@ -5628,7 +5499,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4541,
     "widthMm": 2086,
     "bootSpaceSeatsUpLitres": 456,
-    "bootSpaceSeatsDownLitres": 1653
+    "bootSpaceSeatsDownLitres": 1653,
+    "isFeatured": false
   },
   {
     "id": "10393",
@@ -5730,7 +5602,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10393-01.jpg",
-      "stock/fengate/10393-02.jpg",
       "stock/fengate/10393-03.jpg",
       "stock/fengate/10393-04.jpg",
       "stock/fengate/10393-05.jpg",
@@ -5780,7 +5651,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4359,
     "widthMm": 2058,
     "bootSpaceSeatsUpLitres": 434,
-    "bootSpaceSeatsDownLitres": 1247
+    "bootSpaceSeatsDownLitres": 1247,
+    "isFeatured": false
   },
   {
     "id": "10387",
@@ -5862,7 +5734,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10387-01.jpg",
-      "stock/fengate/10387-02.jpg",
       "stock/fengate/10387-03.jpg",
       "stock/fengate/10387-04.jpg",
       "stock/fengate/10387-05.jpg",
@@ -5886,11 +5757,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10387-23.jpg",
       "stock/fengate/10387-24.jpg",
       "stock/fengate/10387-25.jpg",
-      "stock/fengate/10387-26.jpg",
-      "stock/fengate/10387-27.jpg",
-      "stock/fengate/10387-28.jpg",
-      "stock/fengate/10387-29.jpg",
-      "stock/fengate/10387-30.jpg"
+      "stock/fengate/10387-26.jpg"
     ],
     "thumbnailImage": "stock/fengate/10387-01.jpg",
     "registration": "CU67YSP",
@@ -5911,7 +5778,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1604,
     "lengthMm": 4077,
     "widthMm": 2067,
-    "bootSpaceSeatsUpLitres": 318
+    "bootSpaceSeatsUpLitres": 318,
+    "isFeatured": false
   },
   {
     "id": "10375",
@@ -5984,7 +5852,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10375-01.jpg",
-      "stock/fengate/10375-02.jpg",
       "stock/fengate/10375-03.jpg",
       "stock/fengate/10375-04.jpg",
       "stock/fengate/10375-05.jpg",
@@ -6037,7 +5904,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4040,
     "widthMm": 1941,
     "bootSpaceSeatsUpLitres": 292,
-    "bootSpaceSeatsDownLitres": 1093
+    "bootSpaceSeatsDownLitres": 1093,
+    "isFeatured": false
   },
   {
     "id": "10344",
@@ -6139,7 +6007,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10344-01.jpg",
-      "stock/fengate/10344-02.jpg",
       "stock/fengate/10344-03.jpg",
       "stock/fengate/10344-04.jpg",
       "stock/fengate/10344-05.jpg",
@@ -6167,12 +6034,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10344-27.jpg",
       "stock/fengate/10344-28.jpg",
       "stock/fengate/10344-29.jpg",
-      "stock/fengate/10344-30.jpg",
-      "stock/fengate/10344-31.jpg",
-      "stock/fengate/10344-32.jpg",
-      "stock/fengate/10344-33.jpg",
-      "stock/fengate/10344-34.jpg",
-      "stock/fengate/10344-35.jpg"
+      "stock/fengate/10344-30.jpg"
     ],
     "thumbnailImage": "stock/fengate/10344-01.jpg",
     "registration": "EX19RXO",
@@ -6195,7 +6057,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2098,
     "bootSpaceSeatsUpLitres": 514,
     "bootSpaceSeatsDownLitres": 1652,
-    "acceleration0To60Seconds": 10.2
+    "acceleration0To60Seconds": 10.2,
+    "isFeatured": false
   },
   {
     "id": "10280",
@@ -6290,7 +6153,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10280-01.jpg",
-      "stock/fengate/10280-02.jpg",
       "stock/fengate/10280-03.jpg",
       "stock/fengate/10280-04.jpg",
       "stock/fengate/10280-05.jpg",
@@ -6335,7 +6197,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1590,
     "lengthMm": 4377,
     "widthMm": 2070,
-    "bootSpaceSeatsUpLitres": 430
+    "bootSpaceSeatsUpLitres": 430,
+    "isFeatured": false
   },
   {
     "id": "10270",
@@ -6435,7 +6298,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10270-01.jpg",
-      "stock/fengate/10270-02.jpg",
       "stock/fengate/10270-03.jpg",
       "stock/fengate/10270-04.jpg",
       "stock/fengate/10270-05.jpg",
@@ -6467,10 +6329,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10270-31.jpg",
       "stock/fengate/10270-32.jpg",
       "stock/fengate/10270-33.jpg",
-      "stock/fengate/10270-34.jpg",
-      "stock/fengate/10270-35.jpg",
-      "stock/fengate/10270-36.jpg",
-      "stock/fengate/10270-37.jpg"
+      "stock/fengate/10270-34.jpg"
     ],
     "thumbnailImage": "stock/fengate/10270-01.jpg",
     "registration": "LJ24DFM",
@@ -6489,7 +6348,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4060,
     "widthMm": 1960,
     "bootSpaceSeatsUpLitres": 267,
-    "bootSpaceSeatsDownLitres": 1081
+    "bootSpaceSeatsDownLitres": 1081,
+    "isFeatured": false
   },
   {
     "id": "10261",
@@ -6584,14 +6444,8 @@ export const VEHICLES: Vehicle[] = [
       "USB Port",
       "Warning Triangle"
     ],
-    "images": [
-      "stock/fengate/10261-01.jpg",
-      "stock/fengate/10261-02.jpg",
-      "stock/fengate/10261-03.jpg",
-      "stock/fengate/10261-04.jpg",
-      "stock/fengate/10261-05.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10261-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "ND65TMZ",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -6611,7 +6465,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4135,
     "widthMm": 1765,
     "bootSpaceSeatsUpLitres": 354,
-    "bootSpaceSeatsDownLitres": 1189
+    "bootSpaceSeatsDownLitres": 1189,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10236",
@@ -6699,7 +6555,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10236-01.jpg",
-      "stock/fengate/10236-02.jpg",
       "stock/fengate/10236-03.jpg",
       "stock/fengate/10236-04.jpg",
       "stock/fengate/10236-05.jpg",
@@ -6722,12 +6577,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10236-22.jpg",
       "stock/fengate/10236-23.jpg",
       "stock/fengate/10236-24.jpg",
-      "stock/fengate/10236-25.jpg",
-      "stock/fengate/10236-26.jpg",
-      "stock/fengate/10236-27.jpg",
-      "stock/fengate/10236-28.jpg",
-      "stock/fengate/10236-29.jpg",
-      "stock/fengate/10236-30.jpg"
+      "stock/fengate/10236-25.jpg"
     ],
     "thumbnailImage": "stock/fengate/10236-01.jpg",
     "registration": "CK63OZB",
@@ -6749,7 +6599,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3970,
     "widthMm": 1901,
     "bootSpaceSeatsUpLitres": 280,
-    "bootSpaceSeatsDownLitres": 952
+    "bootSpaceSeatsDownLitres": 952,
+    "isFeatured": false
   },
   {
     "id": "10232",
@@ -6859,7 +6710,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10232-07.jpg",
       "stock/fengate/10232-08.jpg",
       "stock/fengate/10232-09.jpg",
-      "stock/fengate/10232-10.jpg",
       "stock/fengate/10232-11.jpg",
       "stock/fengate/10232-12.jpg",
       "stock/fengate/10232-13.jpg",
@@ -6893,12 +6743,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10232-41.jpg",
       "stock/fengate/10232-42.jpg",
       "stock/fengate/10232-43.jpg",
-      "stock/fengate/10232-44.jpg",
-      "stock/fengate/10232-45.jpg",
-      "stock/fengate/10232-46.jpg",
-      "stock/fengate/10232-47.jpg",
-      "stock/fengate/10232-48.jpg",
-      "stock/fengate/10232-49.jpg"
+      "stock/fengate/10232-44.jpg"
     ],
     "thumbnailImage": "stock/fengate/10232-01.jpg",
     "registration": "WK18HHT",
@@ -6919,7 +6764,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1478,
     "lengthMm": 5108,
     "widthMm": 2169,
-    "bootSpaceSeatsUpLitres": 515
+    "bootSpaceSeatsUpLitres": 515,
+    "isFeatured": false
   },
   {
     "id": "10221",
@@ -7021,7 +6867,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10221-01.jpg",
-      "stock/fengate/10221-02.jpg",
       "stock/fengate/10221-03.jpg",
       "stock/fengate/10221-04.jpg",
       "stock/fengate/10221-05.jpg",
@@ -7039,12 +6884,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10221-17.jpg",
       "stock/fengate/10221-18.jpg",
       "stock/fengate/10221-19.jpg",
-      "stock/fengate/10221-20.jpg",
-      "stock/fengate/10221-21.jpg",
-      "stock/fengate/10221-22.jpg",
-      "stock/fengate/10221-23.jpg",
-      "stock/fengate/10221-24.jpg",
-      "stock/fengate/10221-25.jpg"
+      "stock/fengate/10221-20.jpg"
     ],
     "thumbnailImage": "stock/fengate/10221-01.jpg",
     "registration": "DY64UAN",
@@ -7066,7 +6906,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4302,
     "widthMm": 2037,
     "bootSpaceSeatsUpLitres": 372,
-    "bootSpaceSeatsDownLitres": 1162
+    "bootSpaceSeatsDownLitres": 1162,
+    "isFeatured": false
   },
   {
     "id": "10198",
@@ -7157,8 +6998,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10198-01.jpg",
-      "stock/fengate/10198-02.jpg",
-      "stock/fengate/10198-03.jpg",
       "stock/fengate/10198-04.jpg",
       "stock/fengate/10198-05.jpg",
       "stock/fengate/10198-06.jpg",
@@ -7185,7 +7024,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1631,
     "lengthMm": 4078,
     "widthMm": 1766,
-    "bootSpaceSeatsUpLitres": 385
+    "bootSpaceSeatsUpLitres": 385,
+    "isFeatured": false
   },
   {
     "id": "10191",
@@ -7243,7 +7083,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10191-01.jpg",
-      "stock/fengate/10191-02.jpg",
       "stock/fengate/10191-03.jpg",
       "stock/fengate/10191-04.jpg",
       "stock/fengate/10191-05.jpg",
@@ -7265,11 +7104,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10191-21.jpg",
       "stock/fengate/10191-22.jpg",
       "stock/fengate/10191-23.jpg",
-      "stock/fengate/10191-24.jpg",
-      "stock/fengate/10191-25.jpg",
-      "stock/fengate/10191-26.jpg",
-      "stock/fengate/10191-27.jpg",
-      "stock/fengate/10191-28.jpg"
+      "stock/fengate/10191-24.jpg"
     ],
     "thumbnailImage": "stock/fengate/10191-01.jpg",
     "registration": "FR11VYH",
@@ -7291,7 +7126,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 3990,
     "widthMm": 1695,
     "bootSpaceSeatsUpLitres": 270,
-    "acceleration0To60Seconds": 14.4
+    "acceleration0To60Seconds": 14.4,
+    "isFeatured": false
   },
   {
     "id": "10165",
@@ -7371,7 +7207,6 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10165-07.jpg",
       "stock/fengate/10165-08.jpg",
       "stock/fengate/10165-09.jpg",
-      "stock/fengate/10165-10.jpg",
       "stock/fengate/10165-11.jpg",
       "stock/fengate/10165-12.jpg",
       "stock/fengate/10165-13.jpg",
@@ -7392,11 +7227,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10165-28.jpg",
       "stock/fengate/10165-29.jpg",
       "stock/fengate/10165-30.jpg",
-      "stock/fengate/10165-31.jpg",
-      "stock/fengate/10165-32.jpg",
-      "stock/fengate/10165-33.jpg",
-      "stock/fengate/10165-34.jpg",
-      "stock/fengate/10165-35.jpg"
+      "stock/fengate/10165-31.jpg"
     ],
     "thumbnailImage": "stock/fengate/10165-01.jpg",
     "registration": "VN67AHV",
@@ -7419,7 +7250,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2086,
     "bootSpaceSeatsUpLitres": 530,
     "bootSpaceSeatsDownLitres": 995,
-    "acceleration0To60Seconds": 7.9
+    "acceleration0To60Seconds": 7.9,
+    "isFeatured": false
   },
   {
     "id": "10125",
@@ -7467,7 +7299,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10125-01.jpg",
-      "stock/fengate/10125-02.jpg",
       "stock/fengate/10125-03.jpg",
       "stock/fengate/10125-04.jpg",
       "stock/fengate/10125-05.jpg",
@@ -7483,12 +7314,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10125-15.jpg",
       "stock/fengate/10125-16.jpg",
       "stock/fengate/10125-17.jpg",
-      "stock/fengate/10125-18.jpg",
-      "stock/fengate/10125-19.jpg",
-      "stock/fengate/10125-20.jpg",
-      "stock/fengate/10125-21.jpg",
-      "stock/fengate/10125-22.jpg",
-      "stock/fengate/10125-23.jpg"
+      "stock/fengate/10125-18.jpg"
     ],
     "thumbnailImage": "stock/fengate/10125-01.jpg",
     "registration": "KP11LVN",
@@ -7510,7 +7336,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4781,
     "widthMm": 2124,
     "bootSpaceSeatsUpLitres": 551,
-    "bootSpaceSeatsDownLitres": 2050
+    "bootSpaceSeatsDownLitres": 2050,
+    "isFeatured": false
   },
   {
     "id": "10002",
@@ -7574,7 +7401,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10002-01.jpg",
-      "stock/fengate/10002-02.jpg",
       "stock/fengate/10002-03.jpg",
       "stock/fengate/10002-04.jpg",
       "stock/fengate/10002-05.jpg",
@@ -7612,12 +7438,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10002-37.jpg",
       "stock/fengate/10002-38.jpg",
       "stock/fengate/10002-39.jpg",
-      "stock/fengate/10002-40.jpg",
-      "stock/fengate/10002-41.jpg",
-      "stock/fengate/10002-42.jpg",
-      "stock/fengate/10002-43.jpg",
-      "stock/fengate/10002-44.jpg",
-      "stock/fengate/10002-45.jpg"
+      "stock/fengate/10002-40.jpg"
     ],
     "thumbnailImage": "stock/fengate/10002-01.jpg",
     "registration": "PE17KNB",
@@ -7640,7 +7461,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2220,
     "bootSpaceSeatsUpLitres": 784,
     "bootSpaceSeatsDownLitres": 1761,
-    "acceleration0To60Seconds": 6.8
+    "acceleration0To60Seconds": 6.8,
+    "isFeatured": false
   },
   {
     "id": "10021",
@@ -7732,16 +7554,8 @@ export const VEHICLES: Vehicle[] = [
       "Warning Triangle",
       "Window Surrounds - Aluminium"
     ],
-    "images": [
-      "stock/fengate/10021-01.jpg",
-      "stock/fengate/10021-02.jpg",
-      "stock/fengate/10021-03.jpg",
-      "stock/fengate/10021-04.jpg",
-      "stock/fengate/10021-05.jpg",
-      "stock/fengate/10021-06.jpg",
-      "stock/fengate/10021-07.jpg"
-    ],
-    "thumbnailImage": "stock/fengate/10021-01.jpg",
+    "images": [],
+    "thumbnailImage": "",
     "registration": "YR14XZE",
     "previousOwners": 0,
     "motExpiry": "TBC",
@@ -7761,7 +7575,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 5089,
     "widthMm": 2177,
     "bootSpaceSeatsUpLitres": 330,
-    "bootSpaceSeatsDownLitres": 2035
+    "bootSpaceSeatsDownLitres": 2035,
+    "photosPending": true,
+    "isFeatured": false
   },
   {
     "id": "10010",
@@ -7799,7 +7615,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10010-01.jpg",
-      "stock/fengate/10010-02.jpg",
       "stock/fengate/10010-03.jpg",
       "stock/fengate/10010-04.jpg",
       "stock/fengate/10010-05.jpg",
@@ -7822,13 +7637,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10010-22.jpg",
       "stock/fengate/10010-23.jpg",
       "stock/fengate/10010-24.jpg",
-      "stock/fengate/10010-25.jpg",
-      "stock/fengate/10010-26.jpg",
-      "stock/fengate/10010-27.jpg",
-      "stock/fengate/10010-28.jpg",
-      "stock/fengate/10010-29.jpg",
-      "stock/fengate/10010-30.jpg",
-      "stock/fengate/10010-31.jpg"
+      "stock/fengate/10010-25.jpg"
     ],
     "thumbnailImage": "stock/fengate/10010-01.jpg",
     "registration": "PL10BXV",
@@ -7850,7 +7659,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 5089,
     "widthMm": 2177,
     "bootSpaceSeatsUpLitres": 775,
-    "bootSpaceSeatsDownLitres": 2035
+    "bootSpaceSeatsDownLitres": 2035,
+    "isFeatured": false
   },
   {
     "id": "10015",
@@ -7909,7 +7719,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10015-01.jpg",
-      "stock/fengate/10015-02.jpg",
       "stock/fengate/10015-03.jpg",
       "stock/fengate/10015-04.jpg",
       "stock/fengate/10015-05.jpg",
@@ -7929,12 +7738,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10015-19.jpg",
       "stock/fengate/10015-20.jpg",
       "stock/fengate/10015-21.jpg",
-      "stock/fengate/10015-22.jpg",
-      "stock/fengate/10015-23.jpg",
-      "stock/fengate/10015-24.jpg",
-      "stock/fengate/10015-25.jpg",
-      "stock/fengate/10015-26.jpg",
-      "stock/fengate/10015-27.jpg"
+      "stock/fengate/10015-22.jpg"
     ],
     "thumbnailImage": "stock/fengate/10015-01.jpg",
     "registration": "SH16XPK",
@@ -7956,7 +7760,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4560,
     "widthMm": 2010,
     "bootSpaceSeatsUpLitres": 476,
-    "bootSpaceSeatsDownLitres": 1502
+    "bootSpaceSeatsDownLitres": 1502,
+    "isFeatured": false
   },
   {
     "id": "10081",
@@ -8028,7 +7833,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10081-01.jpg",
-      "stock/fengate/10081-02.jpg",
       "stock/fengate/10081-03.jpg",
       "stock/fengate/10081-04.jpg",
       "stock/fengate/10081-05.jpg",
@@ -8063,12 +7867,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10081-34.jpg",
       "stock/fengate/10081-35.jpg",
       "stock/fengate/10081-36.jpg",
-      "stock/fengate/10081-37.jpg",
-      "stock/fengate/10081-38.jpg",
-      "stock/fengate/10081-39.jpg",
-      "stock/fengate/10081-40.jpg",
-      "stock/fengate/10081-41.jpg",
-      "stock/fengate/10081-42.jpg"
+      "stock/fengate/10081-37.jpg"
     ],
     "thumbnailImage": "stock/fengate/10081-01.jpg",
     "registration": "CN65VXJ",
@@ -8090,7 +7889,8 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 4428,
     "widthMm": 2117,
     "bootSpaceSeatsUpLitres": 537,
-    "bootSpaceSeatsDownLitres": 1851
+    "bootSpaceSeatsDownLitres": 1851,
+    "isFeatured": false
   },
   {
     "id": "10004",
@@ -8165,7 +7965,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10004-01.jpg",
-      "stock/fengate/10004-02.jpg",
       "stock/fengate/10004-03.jpg",
       "stock/fengate/10004-04.jpg",
       "stock/fengate/10004-05.jpg",
@@ -8186,11 +7985,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10004-20.jpg",
       "stock/fengate/10004-21.jpg",
       "stock/fengate/10004-22.jpg",
-      "stock/fengate/10004-23.jpg",
-      "stock/fengate/10004-24.jpg",
-      "stock/fengate/10004-25.jpg",
-      "stock/fengate/10004-26.jpg",
-      "stock/fengate/10004-27.jpg"
+      "stock/fengate/10004-23.jpg"
     ],
     "thumbnailImage": "stock/fengate/10004-01.jpg",
     "registration": "ND15MWW",
@@ -8213,7 +8008,8 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2017,
     "bootSpaceSeatsUpLitres": 590,
     "bootSpaceSeatsDownLitres": 1580,
-    "acceleration0To60Seconds": 10.4
+    "acceleration0To60Seconds": 10.4,
+    "isFeatured": false
   },
   {
     "id": "10006",
@@ -8255,7 +8051,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10006-01.jpg",
-      "stock/fengate/10006-02.jpg",
       "stock/fengate/10006-03.jpg",
       "stock/fengate/10006-04.jpg",
       "stock/fengate/10006-05.jpg",
@@ -8276,13 +8071,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10006-20.jpg",
       "stock/fengate/10006-21.jpg",
       "stock/fengate/10006-22.jpg",
-      "stock/fengate/10006-23.jpg",
-      "stock/fengate/10006-24.jpg",
-      "stock/fengate/10006-25.jpg",
-      "stock/fengate/10006-26.jpg",
-      "stock/fengate/10006-27.jpg",
-      "stock/fengate/10006-28.jpg",
-      "stock/fengate/10006-29.jpg"
+      "stock/fengate/10006-23.jpg"
     ],
     "thumbnailImage": "stock/fengate/10006-01.jpg",
     "registration": "TW04ELL",
@@ -8302,7 +8091,8 @@ export const VEHICLES: Vehicle[] = [
     "heightMm": 1891,
     "lengthMm": 4829,
     "widthMm": 2200,
-    "acceleration0To60Seconds": 8.8
+    "acceleration0To60Seconds": 8.8,
+    "isFeatured": false
   },
   {
     "id": "10007",
@@ -8387,7 +8177,6 @@ export const VEHICLES: Vehicle[] = [
     ],
     "images": [
       "stock/fengate/10007-01.jpg",
-      "stock/fengate/10007-02.jpg",
       "stock/fengate/10007-03.jpg",
       "stock/fengate/10007-04.jpg",
       "stock/fengate/10007-05.jpg",
@@ -8405,12 +8194,7 @@ export const VEHICLES: Vehicle[] = [
       "stock/fengate/10007-17.jpg",
       "stock/fengate/10007-18.jpg",
       "stock/fengate/10007-19.jpg",
-      "stock/fengate/10007-20.jpg",
-      "stock/fengate/10007-21.jpg",
-      "stock/fengate/10007-22.jpg",
-      "stock/fengate/10007-23.jpg",
-      "stock/fengate/10007-24.jpg",
-      "stock/fengate/10007-25.jpg"
+      "stock/fengate/10007-20.jpg"
     ],
     "thumbnailImage": "stock/fengate/10007-01.jpg",
     "registration": "YR62EBV",
@@ -8429,7 +8213,8 @@ export const VEHICLES: Vehicle[] = [
     "mpgExtraUrban": 40,
     "heightMm": 1804,
     "lengthMm": 5359,
-    "widthMm": 1850
+    "widthMm": 1850,
+    "isFeatured": false
   }
 ];
 

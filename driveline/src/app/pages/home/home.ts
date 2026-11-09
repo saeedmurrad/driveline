@@ -18,6 +18,7 @@ import { DealerContextService } from '../../services/dealer-context.service';
 import { FindMeACarComponent } from '../../components/shared/find-me-a-car/find-me-a-car';
 import { GarageService } from '../../services/garage.service';
 import { meetsUlezStandard } from '../../utils/vehicle-insights';
+import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
 
 @Component({
   selector: 'app-home',
@@ -42,6 +43,7 @@ export class HomeComponent {
 
   featuredVehicles = this.vehicleService.featuredVehicles;
   protected readonly garage = inject(GarageService);
+  readonly financeNote = FINANCE_DISCLAIMER_SHORT;
 
   /** Quick ways in: by body type (with live counts) and by budget. */
   readonly bodyTypes = computed(() => {

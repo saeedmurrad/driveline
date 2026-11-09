@@ -1,0 +1,109 @@
+@if (count() === 0) {
+  <div class="relative aspect-[4/3] overflow-hidden rounded-[20px] sm:aspect-[21/9]">
+    <app-photo-pending [title]="title()" />
+    <button type="button" (click)="requestPhotos.emit()"
+      class="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-stone-900 shadow-xl transition-transform hover:-translate-y-0.5">
+      Request photos or a video walkaround
+    </button>
+  </div>
+} @else {
+  <!-- Desktop: cinematic mosaic -->
+  <div class="gallery-mosaic hidden md:grid" [class.single]="count() === 1">
+    <button type="button" class="tile tile-main group" (click)="openViewer(0)" [attr.aria-label]="'Open photo 1 of ' + count()">
+      <img [src]="images()[0]" [alt]="title() + ' — main photo'" fetchpriority="high" />
+      <span class="tile-shade" aria-hidden="true"></span>
+    </button>
+    @for (src of tiles(); track src; let i = $index) {
+      <button type="button" class="tile group" (click)="openViewer(i + 1)" [attr.aria-label]="'Open photo ' + (i + 2) + ' of ' + count()">
+        <img [src]="src" [alt]="title() + ' — photo ' + (i + 2)" loading="lazy" decoding="async" />
+        <span class="tile-shade" aria-hidden="true"></span>
+        @if (i === tiles().length - 1 && moreCount() > 0) {
+          <span class="tile-more">+{{ moreCount() }} photos</span>
+        }
+      </button>
+    }
+    <div class="mosaic-actions">
+      @if (resumeAt() > 0 && resumeAt() < count()) {
+        <button type="button" class="pill" (click)="openViewer(resumeAt())">Continue from photo {{ resumeAt() + 1 }}</button>
+      }
+      <button type="button" class="pill pill-solid" (click)="openViewer(0, true)">
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        All {{ count() }} photos
+      </button>
+    </div>
+  </div>
+
+  <!-- Phone: native swipe strip -->
+  <div class="relative md:hidden">
+    <div #strip class="gallery-strip" (scroll)="onStripScroll()" tabindex="0" aria-label="Vehicle photos, swipe to browse">
+      @for (src of images(); track $index) {
+        <button type="button" class="strip-item" (click)="openViewer($index)" [attr.aria-label]="'Open photo ' + ($index + 1) + ' of ' + count()">
+          <img [src]="src" [alt]="title() + ' — photo ' + ($index + 1)" [attr.loading]="$index < 2 ? 'eager' : 'lazy'" decoding="async" />
+        </button>
+      }
+    </div>
+    <span class="absolute bottom-3 right-3 rounded-full bg-black/60 px-2.5 py-1 text-xs font-semibold tabular-nums text-white backdrop-blur-md">{{ stripIndex() + 1 }} / {{ count() }}</span>
+    <button type="button" class="absolute bottom-3 left-3 rounded-full bg-white/95 px-3 py-1.5 text-xs font-bold text-stone-900 shadow-lg" (click)="openViewer(0, true)">View all</button>
+  </div>
+}
+
+<!-- Full-screen viewer -->
+@if (open()) {
+  <div #viewer class="viewer" role="dialog" aria-modal="true" [attr.aria-label]="title() + ' photos'" tabindex="-1" (keydown)="onKey($event)">
+    <header class="viewer-bar">
+      <div class="min-w-0">
+        <p class="truncate text-sm font-semibold text-white">{{ title() }}</p>
+        <p class="text-xs tabular-nums text-white/60">{{ gridMode() ? count() + ' photos' : (index() + 1) + ' / ' + count() }}</p>
+      </div>
+      <div class="flex items-center gap-2">
+        @if (!gridMode()) {
+          <button type="button" class="vbtn" (click)="zoomIn()" [attr.aria-label]="scale() > 1 ? 'Zoom out' : 'Zoom in'">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" [attr.d]="scale() > 1 ? 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM7 10h6' : 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m-3-3h6'"/></svg>
+          </button>
+        }
+        <button type="button" class="vbtn" (click)="gridMode.set(!gridMode())" [attr.aria-label]="gridMode() ? 'Back to single photo' : 'Show all photos'" [attr.aria-pressed]="gridMode()">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        </button>
+        <button type="button" class="vbtn" (click)="closeViewer()" aria-label="Close photos">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    @if (gridMode()) {
+      <div class="viewer-grid">
+        @for (src of images(); track $index) {
+          <button type="button" class="grid-item" (click)="goTo($index)" [attr.aria-label]="'Photo ' + ($index + 1)">
+            <img [src]="src" alt="" loading="lazy" decoding="async" />
+          </button>
+        }
+      </div>
+    } @else {
+      <div #stage class="viewer-stage" [class.zoomed]="scale() > 1"
+        (pointerdown)="onPointerDown($event)" (pointermove)="onPointerMove($event)"
+        (pointerup)="onPointerUp($event)" (pointercancel)="onPointerUp($event)" (wheel)="onWheel($event)">
+        @for (i of [index()]; track i) {
+          <img class="viewer-img" [src]="images()[i]" [alt]="title() + ' — photo ' + (i + 1)" [style.transform]="transform()" draggable="false" />
+        }
+        @if (count() > 1) {
+          <button type="button" class="vnav left-3" (click)="go(-1)" (pointerdown)="$event.stopPropagation()" aria-label="Previous photo">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button type="button" class="vnav right-3" (click)="go(1)" (pointerdown)="$event.stopPropagation()" aria-label="Next photo">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        }
+        <p class="viewer-hint">{{ scale() > 1 ? 'Drag to look around · double-tap to reset' : 'Swipe or use ← → · double-tap to zoom' }}</p>
+      </div>
+      @if (count() > 1) {
+        <div #thumbs class="viewer-thumbs">
+          @for (src of images(); track $index) {
+            <button type="button" class="thumb" [attr.data-thumb]="$index" [class.active]="$index === index()" (click)="goTo($index)" [attr.aria-label]="'Photo ' + ($index + 1)" [attr.aria-current]="$index === index()">
+              <img [src]="src" alt="" loading="lazy" decoding="async" />
+            </button>
+          }
+        </div>
+      }
+    }
+  </div>
+}

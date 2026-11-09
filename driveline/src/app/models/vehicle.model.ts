@@ -43,6 +43,8 @@ export interface Vehicle {
   widthMm?: number;
   bootSpaceSeatsUpLitres?: number;
   bootSpaceSeatsDownLitres?: number;
+  /** No real photos yet (dealer placeholders were filtered out). */
+  photosPending?: boolean;
   /** 0–60 mph time in seconds */
   acceleration0To60Seconds?: number;
 }

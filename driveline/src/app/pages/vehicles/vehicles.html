@@ -89,12 +89,16 @@
           <div class="card">
             <div class="flex flex-col sm:flex-row">
               <div class="sm:w-64 lg:w-72 flex-shrink-0 aspect-[16/10] sm:aspect-auto sm:h-48 overflow-hidden">
-                <img
-                  [src]="vehicle.thumbnailImage"
-                  [alt]="vehicle.make + ' ' + vehicle.model"
-                  class="w-full h-full object-cover"
-                  loading="lazy"
-                >
+                @if (vehicle.thumbnailImage) {
+                  <img
+                    [src]="vehicle.thumbnailImage"
+                    [alt]="vehicle.make + ' ' + vehicle.model"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  >
+                } @else {
+                  <app-photo-pending [title]="vehicle.make + ' ' + vehicle.model" />
+                }
               </div>
               <div class="flex-1 p-5 flex flex-col justify-between">
                 <div>
@@ -150,6 +154,8 @@
         }
       </div>
     }
+
+    <p class="mt-6 text-xs leading-relaxed text-gray-500 dark:text-slate-400">* {{ financeNote }}</p>
 
     <!-- Pagination -->
     @if (totalPages > 1) {

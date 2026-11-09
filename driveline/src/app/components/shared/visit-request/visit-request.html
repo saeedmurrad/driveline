@@ -10,7 +10,11 @@
 } @else {
   <form (ngSubmit)="submit()" class="space-y-4 p-4 sm:p-5" novalidate>
     <div class="flex items-center gap-3 rounded-xl bg-stone-50 p-3 ring-1 ring-stone-200/80 dark:bg-slate-900/70 dark:ring-slate-700">
-      <img [src]="vehicle.thumbnailImage" alt="" class="h-14 w-20 shrink-0 rounded-lg object-cover" />
+      @if (vehicle.thumbnailImage) {
+        <img [src]="vehicle.thumbnailImage" alt="" class="h-14 w-20 shrink-0 rounded-lg object-cover" />
+      } @else {
+        <span class="block h-14 w-20 shrink-0 overflow-hidden rounded-lg"><app-photo-pending [compact]="true" /></span>
+      }
       <div class="min-w-0">
         <p class="truncate font-bold text-stone-900 dark:text-white">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</p>
         <p class="truncate text-xs text-stone-500 dark:text-slate-400">{{ vehicle.derivative }}</p>

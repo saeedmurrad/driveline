@@ -1,4 +1,6 @@
 import { FindMeACarComponent } from '../../components/shared/find-me-a-car/find-me-a-car';
+import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
+import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
 import { Component, inject, signal, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -11,7 +13,7 @@ import { SearchWidgetComponent } from '../../components/search/search-widget/sea
 
 @Component({
   selector: 'app-vehicles',
-  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent, FindMeACarComponent],
+  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent, FindMeACarComponent, PhotoPendingComponent],
   templateUrl: './vehicles.html',
   styleUrl: './vehicles.css',
 })
@@ -19,6 +21,7 @@ export class VehiclesComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private platformId = inject(PLATFORM_ID);
   vehicleService = inject(VehicleService);
+  readonly financeNote = FINANCE_DISCLAIMER_SHORT;
 
   category: 'car' | 'van' = 'car';
   viewMode = signal<'grid' | 'list'>('grid');

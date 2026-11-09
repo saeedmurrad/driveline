@@ -109,7 +109,8 @@ export class VehicleService {
         );
     }
 
-    return result;
+    // Cars with real photos first; those still awaiting photos keep their order at the end.
+    return [...result.filter((v) => !v.photosPending), ...result.filter((v) => v.photosPending)];
   });
 
   /** Every vehicle in stock, unfiltered (for "similar" and garage lookups). */

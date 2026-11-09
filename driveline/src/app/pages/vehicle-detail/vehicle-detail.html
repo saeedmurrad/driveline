@@ -17,7 +17,7 @@
       <div class="veh-print-hero flex gap-2 border-x border-b border-gray-200">
         <div class="veh-print-hero-main min-w-0 flex-1 bg-gray-100">
           <img
-            [src]="getPrintMainImage()"
+            [src]="getPrintMainImage() || 'hero/hero-01.jpeg'"
             [alt]="vehicle()!.make + ' ' + vehicle()!.model"
             class="veh-print-hero-img w-full h-full object-cover"
             width="800"
@@ -33,7 +33,7 @@
           </div>
           <div class="veh-print-hero-thumb flex-1 min-h-[72px] bg-gray-100 overflow-hidden">
             <img
-              [src]="getPrintSecondaryImage()"
+              [src]="getPrintSecondaryImage() || 'hero/hero-01.jpeg'"
               [alt]="vehicle()!.make + ' interior'"
               class="w-full h-full object-cover"
               width="400"
@@ -116,100 +116,11 @@
     </div>
 
     <div class="print:hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:py-8 lg:pb-8">
+      <app-vehicle-gallery class="mb-6 lg:mb-8" [vehicleInput]="vehicle()!" (requestPhotos)="openVisit('video')" />
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Left Column: Gallery + Details -->
         <div class="lg:col-span-2">
-          <!-- Image Gallery -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 mb-6 print:shadow-none print:border-gray-300">
-            <!-- Main Image (autoplay + swipe; pauses on hover) -->
-            <div
-              class="relative aspect-[16/10] overflow-hidden bg-gray-100 dark:bg-slate-900 touch-pan-y"
-              (mouseenter)="galleryHoverPaused.set(true)"
-              (mouseleave)="galleryHoverPaused.set(false)"
-              (touchstart)="onGalleryTouchStart($event)"
-              (touchend)="onGalleryTouchEnd($event)"
-            >
-              <img
-                [src]="mainGallerySrc()"
-                [alt]="vehicle()!.make + ' ' + vehicle()!.model"
-                class="w-full h-full object-cover transition-opacity duration-300 cursor-zoom-in"
-                (click)="openLightbox()"
-              >
-              <!-- Navigation Arrows -->
-              @if (vehicle()!.images.length > 1) {
-                <button
-                  (click)="prevImage()"
-                  type="button"
-                  class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-black/60 text-white rounded-xl flex items-center justify-center transition-all print:hidden"
-                >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-                  </svg>
-                </button>
-                <button
-                  (click)="nextImage()"
-                  type="button"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/40 hover:bg-black/60 text-white rounded-xl flex items-center justify-center transition-all print:hidden"
-                >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                  </svg>
-                </button>
-              }
-              <!-- Save + fullscreen -->
-              <div class="absolute top-3 right-3 flex gap-2 print:hidden">
-                <button type="button" (click)="garage.toggleSaved(vehicle()!)"
-                  class="save-heart flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-stone-700 shadow-lg ring-1 ring-black/5 backdrop-blur transition-transform hover:scale-110 dark:bg-slate-900/80 dark:text-slate-200"
-                  [class.is-saved]="garage.isSaved(vehicle()!.id)" [attr.aria-pressed]="garage.isSaved(vehicle()!.id)"
-                  [attr.aria-label]="garage.isSaved(vehicle()!.id) ? 'Remove from saved' : 'Save this vehicle'">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" [attr.fill]="garage.isSaved(vehicle()!.id) ? 'currentColor' : 'none'" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                </button>
-                <button type="button" (click)="openLightbox()"
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-stone-700 shadow-lg ring-1 ring-black/5 backdrop-blur transition-transform hover:scale-110 dark:bg-slate-900/80 dark:text-slate-200"
-                  aria-label="View photos full screen">
-                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
-                </button>
-              </div>
-              <!-- Image Counter -->
-              <div class="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full print:hidden">
-                {{ selectedImageIndex() + 1 }} / {{ vehicle()!.images.length || 1 }}
-              </div>
-              @if (vehicle()!.images.length > 1) {
-                <div class="absolute bottom-3 left-3 bg-black/40 text-white text-[10px] px-2 py-1 rounded-full print:hidden hidden sm:block max-w-[11rem] leading-tight">
-                  Slideshow · hover to pause
-                </div>
-              }
-              <!-- Badges -->
-              <div class="absolute top-3 left-3 flex flex-col gap-1.5">
-                @if (vehicle()!.isNew) {
-                  <span class="badge bg-green-500 text-white text-xs font-bold">NEW IN</span>
-                }
-                @if (vehicle()!.isFeatured) {
-                  <span class="badge bg-rose-500 text-white text-xs font-bold">FEATURED</span>
-                }
-                @if (ulez()) {
-                  <span class="badge bg-sky-500 text-white text-xs font-bold">ULEZ STANDARD</span>
-                }
-              </div>
-            </div>
-            <!-- Thumbnails -->
-            @if (vehicle()!.images.length > 1) {
-              <div class="flex gap-2 p-3 overflow-x-auto print:hidden">
-                @for (img of vehicle()!.images; track $index) {
-                  <button
-                    (click)="selectImage($index)"
-                    class="flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all"
-                    [class.border-rose-500]="selectedImageIndex() === $index"
-                    [class.border-transparent]="selectedImageIndex() !== $index"
-                  >
-                    <img [src]="img" [alt]="'Image ' + ($index + 1)" class="w-full h-full object-cover">
-                  </button>
-                }
-              </div>
-            }
-          </div>
-
           <!-- Tabs -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden print:shadow-none print:border-gray-300 print:hidden">
             <div class="flex border-b border-gray-200 dark:border-slate-600">
@@ -437,6 +348,12 @@
             <div class="mb-5">
               <h1 class="text-xl font-bold text-gray-900 dark:text-white mb-0.5">{{ vehicle()!.make }} {{ vehicle()!.model }}</h1>
               <p class="text-gray-600 dark:text-slate-400 text-sm">{{ vehicle()!.derivative }} · {{ vehicle()!.year }}</p>
+              <div class="mt-3 flex flex-wrap gap-1.5">
+                @if (vehicle()!.isNew) { <span class="badge bg-green-500 text-white">New in</span> }
+                @if (ulez()) { <span class="badge-ulez">ULEZ standard</span> }
+                @if (vehicle()!.serviceHistory === 'Full') { <span class="badge-green">Full service history</span> }
+                @if (vehicle()!.photosPending) { <span class="badge-gray">Photos coming soon</span> }
+              </div>
             </div>
             <div class="mb-5 rounded-xl border border-stone-200/90 bg-stone-50/80 p-4 dark:border-slate-600 dark:bg-slate-900/60">
               <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">Cash price</p>
@@ -692,7 +609,11 @@
         <div class="flex gap-4 overflow-x-auto pb-2">
           @for (v of recent(); track v.id) {
             <a [routerLink]="['/vehicle', v.id]" class="group w-56 shrink-0 overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-sm transition-shadow hover:shadow-lg dark:border-slate-700 dark:bg-slate-800">
-              <img [src]="v.thumbnailImage" [alt]="v.year + ' ' + v.make + ' ' + v.model" class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              @if (v.thumbnailImage) {
+                <img [src]="v.thumbnailImage" [alt]="v.year + ' ' + v.make + ' ' + v.model" class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              } @else {
+                <div class="aspect-[16/10] w-full"><app-photo-pending [compact]="true" /></div>
+              }
               <div class="p-3">
                 <p class="truncate text-sm font-bold text-gray-900 dark:text-white">{{ v.year }} {{ v.make }} {{ v.model }}</p>
                 <p class="text-sm font-semibold tabular-nums text-rose-600 dark:text-rose-300">{{ formatPrice(v.price) }}</p>
@@ -756,40 +677,6 @@
           </div>
           <app-visit-request [vehicle]="vehicle()!" [kind]="kind" (dismiss)="closeVisit()" />
         </div>
-      </div>
-    }
-
-    <!-- Full-screen photo viewer -->
-    @if (lightboxOpen()) {
-      <div class="fixed inset-0 z-[80] flex flex-col bg-black/95 print:hidden" role="dialog" aria-modal="true" aria-label="Photo viewer" (keydown)="onLightboxKey($event)" tabindex="-1" #lightbox>
-        <div class="flex items-center justify-between px-4 py-3 text-white">
-          <p class="text-sm font-semibold tabular-nums">{{ selectedImageIndex() + 1 }} / {{ vehicle()!.images.length || 1 }} · {{ vehicle()!.year }} {{ vehicle()!.make }} {{ vehicle()!.model }}</p>
-          <button type="button" (click)="closeLightbox()" class="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 hover:bg-white/20" aria-label="Close photo viewer">
-            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-          </button>
-        </div>
-        <div class="relative flex min-h-0 flex-1 items-center justify-center px-2" (touchstart)="onGalleryTouchStart($event)" (touchend)="onGalleryTouchEnd($event)">
-          <img [src]="mainGallerySrc()" [alt]="vehicle()!.make + ' ' + vehicle()!.model" class="max-h-full max-w-full select-none object-contain" />
-          @if (vehicle()!.images.length > 1) {
-            <button type="button" (click)="prevImage()" class="absolute left-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25" aria-label="Previous photo">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button type="button" (click)="nextImage()" class="absolute right-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25" aria-label="Next photo">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </button>
-          }
-        </div>
-        @if (vehicle()!.images.length > 1) {
-          <div class="flex gap-2 overflow-x-auto px-4 py-3">
-            @for (img of vehicle()!.images; track $index) {
-              <button type="button" (click)="selectImage($index)" class="h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all"
-                [class.border-white]="selectedImageIndex() === $index" [class.border-transparent]="selectedImageIndex() !== $index" [class.opacity-60]="selectedImageIndex() !== $index"
-                [attr.aria-label]="'Photo ' + ($index + 1)">
-                <img [src]="img" alt="" class="h-full w-full object-cover" loading="lazy" />
-              </button>
-            }
-          </div>
-        }
       </div>
     }
 

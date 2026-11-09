@@ -7,9 +7,7 @@ import {
   OnDestroy,
   PLATFORM_ID,
   DestroyRef,
-  ElementRef,
   HostListener,
-  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -24,6 +22,8 @@ import { VisitRequestComponent, type VisitRequestKind } from '../../components/s
 import { FinanceCalculatorComponent } from '../../components/shared/ownership-tools/finance-calculator';
 import { RunningCostsComponent } from '../../components/shared/ownership-tools/running-costs';
 import { DeliveryCheckComponent } from '../../components/shared/ownership-tools/delivery-check';
+import { VehicleGalleryComponent } from '../../components/vehicles/vehicle-gallery/vehicle-gallery';
+import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
 import { GarageService } from '../../services/garage.service';
 import {
   GOV_MOT_CHECK,
@@ -56,6 +56,8 @@ import {
     FinanceCalculatorComponent,
     RunningCostsComponent,
     DeliveryCheckComponent,
+    VehicleGalleryComponent,
+    PhotoPendingComponent,
   ],
   templateUrl: './vehicle-detail.html',
   styleUrl: './vehicle-detail.css',
@@ -84,8 +86,6 @@ export class VehicleDetailComponent implements OnDestroy {
     reserve: 'Reserve this vehicle',
     video: 'Live video viewing',
   };
-  readonly lightboxOpen = signal(false);
-  private readonly lightboxEl = viewChild<ElementRef<HTMLElement>>('lightbox');
 
   readonly ulez = computed(() => {
     const v = this.vehicle();
@@ -170,12 +170,10 @@ export class VehicleDetailComponent implements OnDestroy {
         this.updateVehicleSeo(v);
         if (v) this.garage.markViewed(v.id);
         this.visitKind.set(null);
-        this.lightboxOpen.set(false);
       } else {
         this.vehicle.set(undefined);
         this.clearVehicleSchema();
       }
-      this.startGalleryAutoplay();
       // Same component can be reused when switching vehicles — ensure we’re at the top
       if (isPlatformBrowser(this.platformId)) {
         requestAnimationFrame(() => this.viewportScroller.scrollToPosition([0, 0]));
@@ -191,30 +189,9 @@ export class VehicleDetailComponent implements OnDestroy {
     this.visitKind.set(null);
   }
 
-  openLightbox(): void {
-    this.lightboxOpen.set(true);
-    this.stopGalleryAutoplay();
-    if (isPlatformBrowser(this.platformId)) {
-      this.document.body.style.overflow = 'hidden';
-      setTimeout(() => this.lightboxEl()?.nativeElement.focus(), 0);
-    }
-  }
-
-  closeLightbox(): void {
-    this.lightboxOpen.set(false);
-    if (isPlatformBrowser(this.platformId)) this.document.body.style.overflow = '';
-    this.startGalleryAutoplay();
-  }
-
-  onLightboxKey(e: KeyboardEvent): void {
-    if (e.key === 'ArrowRight') this.nextImage();
-    else if (e.key === 'ArrowLeft') this.prevImage();
-  }
-
   @HostListener('document:keydown.escape')
   onEscape(): void {
-    if (this.lightboxOpen()) this.closeLightbox();
-    else if (this.visitKind()) this.closeVisit();
+    if (this.visitKind()) this.closeVisit();
   }
 
   ngOnDestroy(): void {
@@ -237,14 +214,14 @@ export class VehicleDetailComponent implements OnDestroy {
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({
       property: 'og:image',
-      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || ''),
+      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || 'hero/hero-01.jpeg'),
     });
     this.meta.updateTag({ property: 'og:url', content: canonical });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
     this.meta.updateTag({
       name: 'twitter:image',
-      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || ''),
+      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || 'hero/hero-01.jpeg'),
     });
     this.upsertCanonical(canonical);
     this.upsertVehicleSchema(v, canonical);

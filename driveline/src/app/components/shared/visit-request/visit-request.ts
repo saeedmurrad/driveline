@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, PLATFORM_ID, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PhotoPendingComponent } from '../photo-pending/photo-pending';
 import type { Vehicle } from '../../../models/vehicle.model';
 import { EnquirySubmitService } from '../../../services/enquiry-submit.service';
 import { validateEnquiryFields } from '../../../utils/enquiry-validation';
@@ -31,7 +32,7 @@ const COPY: Record<VisitRequestKind, { title: string; lead: string; button: stri
 
 @Component({
   selector: 'app-visit-request',
-  imports: [FormsModule],
+  imports: [FormsModule, PhotoPendingComponent],
   templateUrl: './visit-request.html',
 })
 export class VisitRequestComponent implements OnInit {

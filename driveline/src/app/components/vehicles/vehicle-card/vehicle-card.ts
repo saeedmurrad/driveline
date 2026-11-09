@@ -16,10 +16,11 @@ import {
 } from '../../../utils/finance-display';
 import { GarageService } from '../../../services/garage.service';
 import { euroStandard, meetsUlezStandard } from '../../../utils/vehicle-insights';
+import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
 
 @Component({
   selector: 'app-vehicle-card',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, PhotoPendingComponent],
   templateUrl: './vehicle-card.html',
   styleUrl: './vehicle-card.css',
 })
@@ -31,6 +32,31 @@ export class VehicleCardComponent implements OnChanges {
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   protected readonly garage = inject(GarageService);
+
+  private static readonly SCRUB_MAX = 6;
+
+  hasPhotos(): boolean {
+    return (this.vehicle.images?.length ?? 0) > 0 && !!this.vehicle.thumbnailImage;
+  }
+
+  scrubCount(): number {
+    return Math.min(VehicleCardComponent.SCRUB_MAX, this.vehicle.images?.length ?? 0);
+  }
+
+  scrubSlots(): number[] {
+    return Array.from({ length: this.scrubCount() }, (_, i) => i);
+  }
+
+  /** Move across the photo to flick through the first few images (mouse only). */
+  onScrub(ev: PointerEvent): void {
+    if (ev.pointerType !== 'mouse') return;
+    const n = this.scrubCount();
+    if (n <= 1) return;
+    const el = ev.currentTarget as HTMLElement;
+    const rect = el.getBoundingClientRect();
+    const i = Math.min(n - 1, Math.max(0, Math.floor(((ev.clientX - rect.left) / rect.width) * n)));
+    if (i !== this.hoverImageIndex()) this.hoverImageIndex.set(i);
+  }
 
   ulez(): boolean {
     return meetsUlezStandard(this.vehicle);
@@ -70,13 +96,7 @@ export class VehicleCardComponent implements OnChanges {
   }
 
   onCardEnter(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    const imgs = this.vehicle.images ?? [];
-    if (imgs.length <= 1) return;
-    this.stopHoverSlideshow();
-    this.hoverTimer = setInterval(() => {
-      this.hoverImageIndex.update((n) => (n + 1) % imgs.length);
-    }, 2400);
+    // Photos change with pointer position (onScrub), not on a timer.
   }
 
   onCardLeave(): void {

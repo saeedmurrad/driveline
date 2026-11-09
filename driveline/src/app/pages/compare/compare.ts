@@ -1,5 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
 import { COMPARE_LIMIT, GarageService } from '../../services/garage.service';
 import type { Vehicle } from '../../models/vehicle.model';
 import { monthlyPaymentForVehicle, FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
@@ -20,7 +21,7 @@ const num = (n: number | undefined, suffix = '') =>
 
 @Component({
   selector: 'app-compare',
-  imports: [RouterLink],
+  imports: [RouterLink, PhotoPendingComponent],
   templateUrl: './compare.html',
 })
 export class CompareComponent {
