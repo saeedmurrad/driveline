@@ -25,6 +25,9 @@ export const serverRoutes: ServerRoute[] = [
       { page: 'sitemap' },
     ],
   },
+  // Staff area: rendered in the browser only (sign-in state, live data).
+  { path: 'hub', renderMode: RenderMode.Client },
+  { path: 'hub/**', renderMode: RenderMode.Client },
   {
     path: '**',
     renderMode: RenderMode.Prerender,

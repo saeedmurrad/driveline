@@ -9,6 +9,8 @@
     "build": "ng build && cp -r platform dist/driveline/platform",
     "build:gh-pages": "node scripts/generate-sitemap.mjs && ng build --configuration production,github-pages --base-href /",
     "build:gh-pages-github-io": "ng build --configuration production,github-pages --base-href /driveline/",
+    "test:rules": "firebase emulators:exec --only auth,firestore --project driveline-car-sales \"node scripts/test-firestore-rules.mjs\"",
+    "deploy:rules": "firebase deploy --only firestore:rules --project driveline-car-sales",
     "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/stock-history.mjs && node scripts/filter-stock-images.mjs && node scripts/tag-stock-photos.mjs && node scripts/generate-sitemap.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
     "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
@@ -33,6 +35,7 @@
     "@angular/router": "^21.2.0",
     "@angular/ssr": "^21.2.2",
     "express": "^5.1.0",
+    "firebase": "^12.19.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

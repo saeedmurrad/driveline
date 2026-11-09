@@ -1,3 +1,4 @@
+import type { FirebaseWebConfig } from './firebase-config';
 /**
  * Development / local defaults (`ng serve`).
  */
@@ -13,4 +14,6 @@ export const environment = {
   /** Keys are server-only in production; empty in browser builds when using platform API */
   dvlaApiKey: '',
   web3formsAccessKey: '',
+  /** Platform builds store enquiries through the platform API instead. */
+  firebase: null as FirebaseWebConfig | null,
 };

@@ -1,8 +1,23 @@
 import { Routes } from '@angular/router';
 import { hubAuthGuard, hubGuestGuard } from './guards/hub-auth.guard';
+import { environment } from '../environments/environment';
+
+/** Static (GitHub Pages) site: /hub is the DriveLine enquiries inbox on Firebase. */
+const leadsHub: Routes[number] = {
+  path: 'hub',
+  children: [
+    {
+      path: '',
+      loadComponent: () =>
+        import('./pages/hub/hub-leads/hub-leads').then((m) => m.HubLeadsComponent),
+      data: { seo: { title: 'Hub | DriveLine', description: 'DriveLine staff area.' } },
+    },
+    { path: '**', redirectTo: '' },
+  ],
+};
 
 export const routes: Routes = [
-  {
+  environment.firebase ? leadsHub : {
     path: 'hub',
     children: [
       {

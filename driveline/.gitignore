@@ -49,3 +49,6 @@ Thumbs.db
 
 # DivineBytes platform file store (local dev DB)
 data/platform/platform.json
+
+# Firebase emulator logs
+*-debug.log

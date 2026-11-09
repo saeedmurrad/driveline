@@ -1,0 +1,218 @@
+<div class="min-h-screen bg-stone-100 text-stone-900">
+  @if (staff() === undefined) {
+    <div class="flex min-h-screen items-center justify-center text-sm text-stone-500" role="status">Loading…</div>
+  } @else if (!staff()) {
+    <!-- Sign in -->
+    <div class="flex min-h-screen items-center justify-center p-4">
+      <div class="w-full max-w-sm rounded-2xl bg-white p-7 shadow-xl ring-1 ring-stone-200">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500 text-white">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-widest text-rose-600">DriveLine Hub</p>
+            <h1 class="text-xl font-bold">Enquiries</h1>
+          </div>
+        </div>
+
+        @if (leadsService.notStaff()) {
+          <p class="mb-4 rounded-lg bg-amber-50 p-3 text-sm text-amber-900 ring-1 ring-amber-200">
+            You are signed in, but this account is not on the DriveLine staff list. Ask SNA Tech to add it.
+            <button type="button" class="ml-1 font-semibold underline" (click)="signOut()">Sign out</button>
+          </p>
+        }
+
+        <form (ngSubmit)="signIn()" class="space-y-4">
+          <div>
+            <label for="hub-email" class="mb-1 block text-sm font-medium text-stone-700">Email</label>
+            <input id="hub-email" type="email" name="email" autocomplete="username" required [(ngModel)]="email"
+              class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
+          </div>
+          <div>
+            <label for="hub-password" class="mb-1 block text-sm font-medium text-stone-700">Password</label>
+            <input id="hub-password" type="password" name="password" autocomplete="current-password" required [(ngModel)]="password"
+              class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
+          </div>
+          @if (signInError()) {
+            <p class="text-sm text-rose-700" role="alert">{{ signInError() }}</p>
+          }
+          @if (resetSent()) {
+            <p class="text-sm text-emerald-700" role="status">If that email has an account, a reset link is on its way.</p>
+          }
+          <button type="submit" [disabled]="signingIn()"
+            class="w-full rounded-xl bg-rose-500 py-3 font-semibold text-white transition-colors hover:bg-rose-600 disabled:opacity-60">
+            {{ signingIn() ? 'Signing in…' : 'Sign in' }}
+          </button>
+          <button type="button" (click)="resetPassword()" class="w-full text-center text-sm text-stone-500 hover:text-stone-800">Forgot password?</button>
+        </form>
+        <a routerLink="/" class="mt-6 block text-center text-sm text-stone-400 hover:text-stone-700">← Back to the website</a>
+      </div>
+    </div>
+  } @else {
+    <!-- Signed in -->
+    <header class="sticky top-0 z-20 border-b border-stone-200 bg-white/95 backdrop-blur">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
+        <div class="min-w-0">
+          <p class="text-xs font-semibold uppercase tracking-widest text-rose-600">DriveLine Hub</p>
+          <p class="truncate text-sm text-stone-500">{{ staff()!.email }}</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a routerLink="/" class="hidden rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 sm:block">Website</a>
+          <button type="button" (click)="exportCsv()" class="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100">Export CSV</button>
+          <button type="button" (click)="signOut()" class="rounded-lg bg-stone-900 px-3 py-2 text-sm font-semibold text-white hover:bg-stone-700">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-4 py-5">
+      <!-- Summary -->
+      <div class="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
+          <p class="text-xs font-medium text-stone-500">New, not yet contacted</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums text-rose-600">{{ counts()['new'] }}</p>
+        </div>
+        <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
+          <p class="text-xs font-medium text-stone-500">Received this week</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums">{{ thisWeek() }}</p>
+        </div>
+        <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
+          <p class="text-xs font-medium text-stone-500">Booked in</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums">{{ counts()['booked'] }}</p>
+        </div>
+        <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
+          <p class="text-xs font-medium text-stone-500">Sold</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums text-emerald-700">{{ counts()['won'] }}</p>
+        </div>
+      </div>
+
+      @if (leadsService.leadsError()) {
+        <p class="mb-4 rounded-lg bg-rose-50 p-3 text-sm text-rose-800 ring-1 ring-rose-200" role="alert">{{ leadsService.leadsError() }}</p>
+      }
+
+      <!-- Filters -->
+      <div class="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex gap-1.5 overflow-x-auto pb-1" role="tablist" aria-label="Filter by status">
+          <button type="button" role="tab" [attr.aria-selected]="filter() === 'all'" (click)="filter.set('all')"
+            class="shrink-0 rounded-full px-3.5 py-2 text-sm font-semibold" [class]="filter() === 'all' ? 'bg-stone-900 text-white' : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-50'">
+            All <span class="tabular-nums opacity-60">{{ counts()['all'] }}</span>
+          </button>
+          @for (s of statuses; track s.key) {
+            <button type="button" role="tab" [attr.aria-selected]="filter() === s.key" (click)="filter.set(s.key)"
+              class="shrink-0 rounded-full px-3.5 py-2 text-sm font-semibold" [class]="filter() === s.key ? 'bg-stone-900 text-white' : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-50'">
+              {{ s.label }} <span class="tabular-nums opacity-60">{{ counts()[s.key] }}</span>
+            </button>
+          }
+        </div>
+        <input type="search" placeholder="Search name, phone, car…" aria-label="Search enquiries"
+          [ngModel]="search()" (ngModelChange)="search.set($event)"
+          class="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-base outline-none focus:border-rose-400 lg:w-72" />
+      </div>
+
+      <div class="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <!-- List -->
+        <ul class="space-y-2" [class.hidden]="selected()" [class.lg:block]="selected()" aria-label="Enquiries">
+          @for (l of visible(); track l.id) {
+            <li>
+              <button type="button" (click)="select(l)"
+                class="w-full rounded-2xl bg-white p-4 text-left ring-1 transition-shadow hover:shadow-md"
+                [class]="l.id === selectedId() ? 'ring-2 ring-rose-400' : 'ring-stone-200'">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="truncate font-semibold">{{ l.name || l.email || l.phone || 'No name' }}</p>
+                    <p class="truncate text-sm text-stone-500">{{ typeLabel(l.type) }}@if (l.vehicleLabel) { · {{ l.vehicleLabel }} }</p>
+                  </div>
+                  <span class="shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold" [class]="statusClass(l.status)">{{ statusLabel(l.status) }}</span>
+                </div>
+                <p class="mt-2 text-xs text-stone-400">{{ l.createdAt | date: 'EEE d MMM, HH:mm' }}@if (l.notes.length) { · {{ l.notes.length }} note{{ l.notes.length === 1 ? '' : 's' }} }</p>
+              </button>
+            </li>
+          } @empty {
+            <li class="rounded-2xl bg-white p-8 text-center text-sm text-stone-500 ring-1 ring-stone-200">
+              {{ leads().length ? 'No enquiries match.' : 'No enquiries yet. They appear here as soon as someone sends a form on the website.' }}
+            </li>
+          }
+        </ul>
+
+        <!-- Detail -->
+        @if (selected(); as l) {
+          <section class="h-fit rounded-2xl bg-white p-5 ring-1 ring-stone-200 lg:sticky lg:top-20" aria-label="Enquiry details">
+            <button type="button" (click)="selectedId.set(null)" class="mb-3 text-sm font-medium text-stone-500 hover:text-stone-900 lg:hidden">← All enquiries</button>
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h2 class="text-xl font-bold">{{ l.name || 'No name given' }}</h2>
+                <p class="text-sm text-stone-500">{{ typeLabel(l.type) }} · {{ l.createdAt | date: 'EEEE d MMMM y, HH:mm' }}</p>
+              </div>
+              <span class="rounded-full px-3 py-1 text-sm font-semibold" [class]="statusClass(l.status)">{{ statusLabel(l.status) }}</span>
+            </div>
+
+            <!-- Contact -->
+            <div class="mt-4 flex flex-wrap gap-2">
+              @if (l.phone) {
+                <a [href]="telHref(l.phone)" class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700">Call {{ l.phone }}</a>
+                @if (whatsappHref(l.phone); as wa) {
+                  <a [href]="wa" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-50">WhatsApp</a>
+                }
+              }
+              @if (l.email) {
+                <a [href]="mailHref(l)" class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-stone-800 ring-1 ring-stone-300 hover:bg-stone-50">Email {{ l.email }}</a>
+              }
+            </div>
+
+            @if (l.vehicleLabel) {
+              <p class="mt-4 text-sm">
+                <span class="text-stone-500">Vehicle:</span>
+                @if (vehicleLink(l); as link) {
+                  <a [routerLink]="link" target="_blank" class="font-semibold text-rose-600 hover:underline">{{ l.vehicleLabel }}</a>
+                } @else {
+                  <span class="font-semibold">{{ l.vehicleLabel }}</span> <span class="text-stone-400">(no longer listed)</span>
+                }
+              </p>
+            }
+
+            <!-- Status -->
+            <div class="mt-5">
+              <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-stone-500">Status</p>
+              <div class="flex flex-wrap gap-1.5">
+                @for (s of statuses; track s.key) {
+                  <button type="button" (click)="setStatus(l, s.key)" [disabled]="busy()" [attr.aria-pressed]="l.status === s.key"
+                    class="rounded-full px-3.5 py-2 text-sm font-semibold transition-colors disabled:opacity-60"
+                    [class]="l.status === s.key ? 'bg-stone-900 text-white' : 'bg-stone-100 text-stone-700 hover:bg-stone-200'">{{ s.label }}</button>
+                }
+              </div>
+              @if (l.updatedBy) {
+                <p class="mt-2 text-xs text-stone-400">Last updated by {{ l.updatedBy }} · {{ l.updatedAt | date: 'd MMM, HH:mm' }}</p>
+              }
+            </div>
+
+            <!-- Message -->
+            <div class="mt-5">
+              <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-stone-500">What they sent</p>
+              <p class="whitespace-pre-wrap rounded-xl bg-stone-50 p-4 text-sm leading-relaxed text-stone-800 ring-1 ring-stone-200">{{ l.message }}</p>
+            </div>
+
+            <!-- Notes -->
+            <div class="mt-5">
+              <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-stone-500">Notes</p>
+              @for (n of l.notes; track n.at) {
+                <div class="mb-2 rounded-xl bg-amber-50 p-3 text-sm ring-1 ring-amber-100">
+                  <p class="whitespace-pre-wrap text-stone-800">{{ n.text }}</p>
+                  <p class="mt-1 text-xs text-stone-500">{{ n.by }} · {{ n.at | date: 'd MMM, HH:mm' }}</p>
+                </div>
+              }
+              <form (ngSubmit)="addNote(l)" class="mt-2 flex flex-col gap-2 sm:flex-row">
+                <textarea name="note" rows="2" [(ngModel)]="noteText" placeholder="Add a note, e.g. called, no answer, try again Friday"
+                  class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400"></textarea>
+                <button type="submit" [disabled]="busy() || !noteText.trim()" class="shrink-0 rounded-xl bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-600 disabled:opacity-50">Add note</button>
+              </form>
+              @if (actionError()) {
+                <p class="mt-2 text-sm text-rose-700" role="alert">{{ actionError() }}</p>
+              }
+            </div>
+          </section>
+        } @else {
+          <div class="hidden rounded-2xl border-2 border-dashed border-stone-300 p-10 text-center text-sm text-stone-500 lg:block">Pick an enquiry to see the details.</div>
+        }
+      </div>
+    </main>
+  }
+</div>

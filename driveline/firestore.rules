@@ -1,7 +1,65 @@
 rules_version = '2';
+
+// DriveLine Car Sales (project driveline-car-sales)
+//
+// leads/{id}   Website enquiries. Anyone may create one (the public forms), with
+//              strict shape and size checks. Only staff can read them or change
+//              status / notes. Nobody can delete a lead from the website or /hub.
+// staff/{uid}  Who counts as staff. Managed in the Firebase console or by SNA Tech
+//              (never writable from the website). A member may read only their own entry.
+//
+// The platform server (Admin SDK) bypasses these rules.
 service cloud.firestore {
   match /databases/{database}/documents {
-    // All client access denied — DivineBytes Hub uses Express Admin SDK only.
+
+    function isStaff() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/staff/$(request.auth.uid));
+    }
+
+    function optionalString(data, key, max) {
+      return !(key in data) || (data[key] is string && data[key].size() <= max);
+    }
+
+    function validNewLead(d) {
+      return d.keys().hasAll(['type', 'subject', 'name', 'email', 'phone', 'message', 'page', 'status', 'notes', 'createdAt'])
+        && d.keys().hasOnly(['type', 'subject', 'name', 'email', 'phone', 'message', 'page', 'status', 'notes', 'createdAt', 'vehicleId', 'vehicleLabel'])
+        && d.type is string && d.type.size() > 0 && d.type.size() <= 40
+        && d.subject is string && d.subject.size() <= 200
+        && d.name is string && d.name.size() <= 120
+        && d.email is string && d.email.size() <= 200
+        && d.phone is string && d.phone.size() <= 40
+        && (d.email.size() > 0 || d.phone.size() > 0)
+        && d.message is string && d.message.size() <= 5000
+        && d.page is string && d.page.size() <= 200
+        && optionalString(d, 'vehicleId', 40)
+        && optionalString(d, 'vehicleLabel', 200)
+        && d.status == 'new'
+        && d.notes == []
+        && d.createdAt == request.time;
+    }
+
+    function validStaffUpdate() {
+      let d = request.resource.data;
+      return d.diff(resource.data).affectedKeys().hasOnly(['status', 'notes', 'updatedAt', 'updatedBy'])
+        && d.status in ['new', 'contacted', 'booked', 'won', 'lost']
+        && d.notes is list && d.notes.size() <= 200
+        && d.updatedAt == request.time
+        && d.updatedBy == request.auth.token.email;
+    }
+
+    match /leads/{leadId} {
+      allow create: if validNewLead(request.resource.data);
+      allow read: if isStaff();
+      allow update: if isStaff() && validStaffUpdate();
+      allow delete: if false;
+    }
+
+    match /staff/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }
