@@ -80,6 +80,9 @@ export class VehicleService {
     if (f.maxYear !== undefined) {
       result = result.filter((v) => v.year <= f.maxYear!);
     }
+    if (f.bodyType) {
+      result = result.filter((v) => v.bodyType.toLowerCase() === f.bodyType!.toLowerCase());
+    }
     if (f.maxMileage !== undefined) {
       result = result.filter((v) => v.mileage <= f.maxMileage!);
     }
@@ -108,6 +111,9 @@ export class VehicleService {
 
     return result;
   });
+
+  /** Every vehicle in stock, unfiltered (for "similar" and garage lookups). */
+  readonly allStock = computed(() => this.allVehicles());
 
   featuredVehicles = computed(() =>
     this.allVehicles()

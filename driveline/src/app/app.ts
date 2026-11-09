@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
 import { CookieBannerComponent } from './components/layout/cookie-banner/cookie-banner';
 import { TrustedPartnersComponent } from './components/layout/trusted-partners/trusted-partners';
+import { CompareTrayComponent } from './components/shared/compare-tray/compare-tray';
 import { SeoService } from './services/seo.service';
 import { DealerContextService } from './services/dealer-context.service';
 
@@ -26,6 +27,7 @@ import { DealerContextService } from './services/dealer-context.service';
     TrustedPartnersComponent,
     FooterComponent,
     CookieBannerComponent,
+    CompareTrayComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
@@ -67,7 +69,7 @@ export class App implements OnInit, OnDestroy {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const updateFabVisibility = () => {
-      const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+      const isMobile = window.matchMedia?.('(max-width: 1023px)').matches ?? false;
       if (!isMobile || !this.isHomeRoute() || this.isHubRoute()) {
         this.showHomeMobileFab.set(true);
         return;

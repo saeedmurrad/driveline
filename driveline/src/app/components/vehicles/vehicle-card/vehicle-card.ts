@@ -14,6 +14,8 @@ import {
   monthlyPaymentForVehicle,
   FINANCE_DISCLAIMER_SHORT,
 } from '../../../utils/finance-display';
+import { GarageService } from '../../../services/garage.service';
+import { euroStandard, meetsUlezStandard } from '../../../utils/vehicle-insights';
 
 @Component({
   selector: 'app-vehicle-card',
@@ -28,6 +30,25 @@ export class VehicleCardComponent implements OnChanges {
 
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
+  protected readonly garage = inject(GarageService);
+
+  ulez(): boolean {
+    return meetsUlezStandard(this.vehicle);
+  }
+
+  euro(): number | undefined {
+    return euroStandard(this.vehicle);
+  }
+
+  toggleSaved(ev: Event): void {
+    ev.stopPropagation();
+    this.garage.toggleSaved(this.vehicle);
+  }
+
+  toggleCompare(ev: Event): void {
+    ev.stopPropagation();
+    this.garage.toggleCompare(this.vehicle);
+  }
   /** Index into `vehicle.images` while hovering (cycles like dealer listing previews) */
   hoverImageIndex = signal(0);
   private hoverTimer: ReturnType<typeof setInterval> | null = null;

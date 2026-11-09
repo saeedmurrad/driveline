@@ -7,9 +7,9 @@
     "start:api": "node scripts/platform-api-dev.mjs",
     "start:web": "ng serve",
     "build": "ng build && cp -r platform dist/driveline/platform",
-    "build:gh-pages": "ng build --configuration production,github-pages --base-href /",
+    "build:gh-pages": "node scripts/generate-sitemap.mjs && ng build --configuration production,github-pages --base-href /",
     "build:gh-pages-github-io": "ng build --configuration production,github-pages --base-href /driveline/",
-    "sync:stock": "node scripts/fetch-fengate-stock.mjs",
+    "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/generate-sitemap.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
     "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
     "deploy:firebase": "bash scripts/firebase-deploy-apphosting.sh",
@@ -17,7 +17,8 @@
     "test": "ng test",
     "test:dvla-live": "node scripts/test-dvla-ves.mjs",
     "serve:ssr:driveline": "node dist/driveline/server/server.mjs",
-    "screenshots:client": "node scripts/capture-client-screenshots.mjs"
+    "screenshots:client": "node scripts/capture-client-screenshots.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "private": true,
   "packageManager": "npm@11.11.0",

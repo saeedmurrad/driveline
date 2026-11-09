@@ -15,6 +15,9 @@ import { TestimonialCardComponent } from '../../components/shared/testimonial-ca
 import { RevealOnScrollDirective } from '../../directives/reveal-on-scroll.directive';
 import { computed } from '@angular/core';
 import { DealerContextService } from '../../services/dealer-context.service';
+import { FindMeACarComponent } from '../../components/shared/find-me-a-car/find-me-a-car';
+import { GarageService } from '../../services/garage.service';
+import { meetsUlezStandard } from '../../utils/vehicle-insights';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +28,7 @@ import { DealerContextService } from '../../services/dealer-context.service';
     SearchWidgetComponent,
     TestimonialCardComponent,
     RevealOnScrollDirective,
+    FindMeACarComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -37,6 +41,41 @@ export class HomeComponent {
   private dealerContext = inject(DealerContextService);
 
   featuredVehicles = this.vehicleService.featuredVehicles;
+  protected readonly garage = inject(GarageService);
+
+  /** Quick ways in: by body type (with live counts) and by budget. */
+  readonly bodyTypes = computed(() => {
+    const counts = new Map<string, number>();
+    for (const v of this.vehicleService.allStock()) {
+      if (v.category === 'van') continue;
+      counts.set(v.bodyType, (counts.get(v.bodyType) ?? 0) + 1);
+    }
+    return [...counts.entries()]
+      .filter(([, n]) => n > 0)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([name, count]) => ({ name, count }));
+  });
+
+  readonly budgets = computed(() => {
+    const stock = this.vehicleService.allStock().filter((v) => v.category !== 'van');
+    const bands = [
+      { label: 'Under £5,000', max: 5000 },
+      { label: 'Under £8,000', max: 8000 },
+      { label: 'Under £12,000', max: 12000 },
+      { label: 'Under £20,000', max: 20000 },
+    ];
+    return bands
+      .map((b) => ({ ...b, count: stock.filter((v) => v.price <= b.max).length }))
+      .filter((b) => b.count > 0);
+  });
+
+  readonly ulezCount = computed(
+    () => this.vehicleService.allStock().filter((v) => meetsUlezStandard(v)).length,
+  );
+  readonly automaticCount = computed(
+    () => this.vehicleService.allStock().filter((v) => v.transmission === 'Automatic').length,
+  );
   reviews = computed(() => this.dealerContext.reviews().slice(0, 3));
   business = this.dealerContext.businessInfo;
   dealerName = this.dealerContext.dealerName;

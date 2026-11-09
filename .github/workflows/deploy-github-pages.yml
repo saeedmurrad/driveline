@@ -98,7 +98,9 @@ jobs:
 
       - name: SPA fallback + disable Jekyll
         run: |
-          cp driveline/dist/driveline/browser/index.html driveline/dist/driveline/browser/404.html
+          # Unknown URLs must boot the app with an empty shell (index.csr.html), not the
+          # prerendered home page, or the router shows home markup on other routes.
+          cp driveline/dist/driveline/browser/index.csr.html driveline/dist/driveline/browser/404.html
           touch driveline/dist/driveline/browser/.nojekyll
 
       - name: Upload artifact

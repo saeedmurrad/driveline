@@ -1,0 +1,44 @@
+@if (garage.compareCount() > 0 && !onComparePage()) {
+  <div
+    class="fixed inset-x-3 z-[45] mx-auto max-w-xl animate-slide-up print:hidden sm:inset-x-auto sm:left-6 sm:right-auto"
+    [class.bottom-28]="onVehiclePage()"
+    [class.lg:bottom-6]="onVehiclePage()"
+    [class.bottom-4]="!onVehiclePage()"
+    [class.sm:bottom-6]="!onVehiclePage()"
+    role="region"
+    aria-label="Compare vehicles"
+  >
+    <div class="flex items-center gap-3 rounded-2xl border border-stone-200/90 bg-white/95 p-2.5 pr-3 shadow-2xl shadow-stone-900/15 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/95">
+      <div class="flex -space-x-2 pl-1">
+        @for (v of slots(); track $index) {
+          @if (v) {
+            <img [src]="v.thumbnailImage" [alt]="v.make + ' ' + v.model" class="h-10 w-14 rounded-lg object-cover ring-2 ring-white dark:ring-slate-900" />
+          } @else {
+            <span class="flex h-10 w-14 items-center justify-center rounded-lg border-2 border-dashed border-stone-300 bg-stone-50 text-xs font-bold text-stone-400 ring-2 ring-white dark:border-slate-600 dark:bg-slate-800 dark:ring-slate-900">+</span>
+          }
+        }
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="text-sm font-bold text-stone-900 dark:text-white">{{ garage.compareCount() }} of {{ limit }} selected</p>
+        <button type="button" (click)="garage.clearCompare()" class="text-xs font-medium text-stone-500 underline-offset-2 hover:text-rose-600 hover:underline dark:text-slate-400">Clear</button>
+      </div>
+      <a
+        routerLink="/compare"
+        class="inline-flex h-11 items-center gap-2 rounded-xl bg-gradient-to-r from-rose-500 to-orange-500 px-4 text-sm font-bold text-white shadow-lg shadow-rose-500/30 transition-transform hover:-translate-y-0.5"
+        [class.opacity-60]="garage.compareCount() < 2"
+        [attr.aria-disabled]="garage.compareCount() < 2"
+      >
+        Compare
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+    </div>
+  </div>
+}
+
+@if (garage.notice(); as message) {
+  <div class="pointer-events-none fixed inset-x-0 top-20 z-[70] flex justify-center px-4 print:hidden md:top-24" role="status" aria-live="polite">
+    <p class="pointer-events-auto animate-slide-down rounded-full bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white shadow-xl dark:bg-white dark:text-stone-900">
+      {{ message }}
+    </p>
+  </div>
+}

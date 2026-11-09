@@ -559,3 +559,54 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     display: none !important;
   }
 }
+
+/* ===================== GARAGE: save / compare / ULEZ ===================== */
+@layer components {
+  .badge-ulez {
+    @apply inline-flex items-center gap-1 rounded-full bg-sky-100 px-2.5 py-1 text-xs font-semibold text-sky-800;
+  }
+  html.dark .badge-ulez {
+    @apply bg-sky-900/40 text-sky-200;
+  }
+
+  .save-heart.is-saved {
+    @apply text-rose-600;
+    animation: dl-heart-pop 0.35s var(--dl-ease-spring);
+  }
+
+  .compare-toggle {
+    @apply border-stone-200 bg-white text-stone-700 hover:border-rose-300 hover:text-rose-600;
+  }
+  html.dark .compare-toggle {
+    @apply border-slate-600 bg-slate-800 text-slate-200 hover:border-rose-400 hover:text-rose-300;
+  }
+  .compare-toggle.is-on {
+    @apply border-rose-500 bg-rose-500 text-white hover:text-white;
+  }
+  html.dark .compare-toggle.is-on {
+    @apply border-rose-500 bg-rose-500 text-white;
+  }
+
+  .tool-card {
+    @apply rounded-2xl border border-stone-200/90 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-800;
+  }
+  .tool-kicker {
+    @apply text-[10px] font-semibold uppercase tracking-wider text-stone-500 dark:text-slate-400;
+  }
+  .range-input {
+    @apply w-full cursor-pointer accent-rose-500;
+  }
+  .stat-chip {
+    @apply rounded-xl bg-stone-50 px-3 py-2.5 ring-1 ring-stone-200/80 dark:bg-slate-900/70 dark:ring-slate-700;
+  }
+}
+
+@keyframes dl-heart-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .save-heart.is-saved { animation: none; }
+}

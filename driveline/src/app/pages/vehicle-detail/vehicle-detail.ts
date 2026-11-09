@@ -7,6 +7,9 @@ import {
   OnDestroy,
   PLATFORM_ID,
   DestroyRef,
+  ElementRef,
+  HostListener,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -16,6 +19,19 @@ import { Meta, Title } from '@angular/platform-browser';
 import { VehicleService } from '../../services/vehicle.service';
 import { Vehicle } from '../../models/vehicle.model';
 import { PartExchangeFormComponent } from '../../components/shared/part-exchange-form/part-exchange-form';
+import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/vehicle-card';
+import { VisitRequestComponent, type VisitRequestKind } from '../../components/shared/visit-request/visit-request';
+import { FinanceCalculatorComponent } from '../../components/shared/ownership-tools/finance-calculator';
+import { RunningCostsComponent } from '../../components/shared/ownership-tools/running-costs';
+import { DeliveryCheckComponent } from '../../components/shared/ownership-tools/delivery-check';
+import { GarageService } from '../../services/garage.service';
+import {
+  GOV_MOT_CHECK,
+  TFL_VEHICLE_CHECKER,
+  euroStandard,
+  meetsUlezStandard,
+  similarVehicles,
+} from '../../utils/vehicle-insights';
 import { EnquirySubmitService } from '../../services/enquiry-submit.service';
 import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
@@ -30,9 +46,22 @@ import {
 
 @Component({
   selector: 'app-vehicle-detail',
-  imports: [RouterLink, FormsModule, CommonModule, PartExchangeFormComponent],
+  imports: [
+    RouterLink,
+    FormsModule,
+    CommonModule,
+    PartExchangeFormComponent,
+    VehicleCardComponent,
+    VisitRequestComponent,
+    FinanceCalculatorComponent,
+    RunningCostsComponent,
+    DeliveryCheckComponent,
+  ],
   templateUrl: './vehicle-detail.html',
   styleUrl: './vehicle-detail.css',
+  // Prerendered for search engines and link previews; the browser re-renders it on load
+  // (the gallery, print sheet and garage state differ between server and browser).
+  host: { ngSkipHydration: 'true' },
 })
 export class VehicleDetailComponent implements OnDestroy {
   private route = inject(ActivatedRoute);
@@ -45,6 +74,35 @@ export class VehicleDetailComponent implements OnDestroy {
   private title = inject(Title);
   private meta = inject(Meta);
   private document = inject(DOCUMENT);
+  protected readonly garage = inject(GarageService);
+
+  readonly tflChecker = TFL_VEHICLE_CHECKER;
+  readonly motCheck = GOV_MOT_CHECK;
+  readonly visitKind = signal<VisitRequestKind | null>(null);
+  readonly visitTitles: Record<VisitRequestKind, string> = {
+    'test-drive': 'Book a test drive',
+    reserve: 'Reserve this vehicle',
+    video: 'Live video viewing',
+  };
+  readonly lightboxOpen = signal(false);
+  private readonly lightboxEl = viewChild<ElementRef<HTMLElement>>('lightbox');
+
+  readonly ulez = computed(() => {
+    const v = this.vehicle();
+    return v ? meetsUlezStandard(v) : false;
+  });
+  readonly euro = computed(() => {
+    const v = this.vehicle();
+    return v ? euroStandard(v) : undefined;
+  });
+  readonly similar = computed(() => {
+    const v = this.vehicle();
+    return v ? similarVehicles(v, this.vehicleService.allStock()) : [];
+  });
+  readonly recent = computed(() => {
+    const id = this.vehicle()?.id;
+    return this.garage.recentVehicles().filter((v) => v.id !== id).slice(0, 6);
+  });
 
   vehicle = signal<Vehicle | undefined>(undefined);
   dealerName = this.dealerContext.dealerName;
@@ -84,7 +142,7 @@ export class VehicleDetailComponent implements OnDestroy {
   readonly financeDisclaimerShort = FINANCE_DISCLAIMER_SHORT;
   readonly financeDisclaimerDetail = FINANCE_DISCLAIMER_DETAIL;
 
-  activeTab = signal<'overview' | 'features' | 'finance'>('overview');
+  activeTab = signal<'overview' | 'features' | 'finance' | 'costs'>('overview');
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
@@ -110,6 +168,9 @@ export class VehicleDetailComponent implements OnDestroy {
         const v = this.vehicleService.getVehicleById(id);
         this.vehicle.set(v);
         this.updateVehicleSeo(v);
+        if (v) this.garage.markViewed(v.id);
+        this.visitKind.set(null);
+        this.lightboxOpen.set(false);
       } else {
         this.vehicle.set(undefined);
         this.clearVehicleSchema();
@@ -122,7 +183,42 @@ export class VehicleDetailComponent implements OnDestroy {
     });
   }
 
+  openVisit(kind: VisitRequestKind): void {
+    this.visitKind.set(kind);
+  }
+
+  closeVisit(): void {
+    this.visitKind.set(null);
+  }
+
+  openLightbox(): void {
+    this.lightboxOpen.set(true);
+    this.stopGalleryAutoplay();
+    if (isPlatformBrowser(this.platformId)) {
+      this.document.body.style.overflow = 'hidden';
+      setTimeout(() => this.lightboxEl()?.nativeElement.focus(), 0);
+    }
+  }
+
+  closeLightbox(): void {
+    this.lightboxOpen.set(false);
+    if (isPlatformBrowser(this.platformId)) this.document.body.style.overflow = '';
+    this.startGalleryAutoplay();
+  }
+
+  onLightboxKey(e: KeyboardEvent): void {
+    if (e.key === 'ArrowRight') this.nextImage();
+    else if (e.key === 'ArrowLeft') this.prevImage();
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.lightboxOpen()) this.closeLightbox();
+    else if (this.visitKind()) this.closeVisit();
+  }
+
   ngOnDestroy(): void {
+    if (isPlatformBrowser(this.platformId)) this.document.body.style.overflow = '';
     this.stopGalleryAutoplay();
     this.clearVehicleSchema();
   }
@@ -157,7 +253,10 @@ export class VehicleDetailComponent implements OnDestroy {
   private toAbsoluteUrl(url: string): string {
     if (!url) return '';
     try {
-      if (!isPlatformBrowser(this.platformId)) return url;
+      if (!isPlatformBrowser(this.platformId)) {
+        const base = this.getDeployedAppBaseUrl();
+        return base ? new URL(url, `${base}/`).toString() : url;
+      }
       return new URL(url, window.location.origin).toString();
     } catch {
       return url;
@@ -281,7 +380,7 @@ export class VehicleDetailComponent implements OnDestroy {
     );
   }
 
-  setTab(tab: 'overview' | 'features' | 'finance') {
+  setTab(tab: 'overview' | 'features' | 'finance' | 'costs') {
     this.activeTab.set(tab);
   }
 
@@ -373,7 +472,7 @@ export class VehicleDetailComponent implements OnDestroy {
     const v = this.vehicle();
     if (!v) return 'https://wa.me/447423374244';
 
-    const message = `Hello, I'm interested in the ${v.year} ${v.make} ${v.model} ${v.derivative}.`;
+    const message = `Hello, I'm interested in the ${v.year} ${v.make} ${v.model} ${v.derivative} (${this.formatPrice(v.price)}, stock ref ${v.id}). Is it still available?`;
     return `https://wa.me/447423374244?text=${encodeURIComponent(message)}`;
   }
 
@@ -388,7 +487,11 @@ export class VehicleDetailComponent implements OnDestroy {
    * Works on GitHub Pages (`/driveline/`), localhost, and production domains.
    */
   private getDeployedAppBaseUrl(): string {
-    if (!isPlatformBrowser(this.platformId)) return '';
+    if (!isPlatformBrowser(this.platformId)) {
+      // Prerendering: use the dealer's public domain so canonical and share links are absolute.
+      const domain = this.dealerContext.dealer()?.customDomains?.[0];
+      return domain ? `https://${domain}` : '';
+    }
     const raw = document.querySelector('base')?.getAttribute('href')?.trim() || '/';
     const resolved = new URL(raw, `${window.location.origin}/`);
     let out = resolved.href.replace(/\/$/, '');

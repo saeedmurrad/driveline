@@ -1,3 +1,4 @@
+import { FindMeACarComponent } from '../../components/shared/find-me-a-car/find-me-a-car';
 import { Component, inject, signal, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -10,7 +11,7 @@ import { SearchWidgetComponent } from '../../components/search/search-widget/sea
 
 @Component({
   selector: 'app-vehicles',
-  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent],
+  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent, FindMeACarComponent],
   templateUrl: './vehicles.html',
   styleUrl: './vehicles.css',
 })
@@ -54,6 +55,7 @@ export class VehiclesComponent implements OnInit {
       minYear: this.toNumber(params.get('minYear')),
       maxYear: this.toNumber(params.get('maxYear')),
       maxMileage: this.toNumber(params.get('maxMileage')),
+      bodyType: params.get('bodyType') || undefined,
     };
     this.vehicleService.setFilters(filters);
   }

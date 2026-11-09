@@ -61,6 +61,7 @@ export interface SearchFilters {
   minYear?: number;
   maxYear?: number;
   maxMileage?: number;
+  bodyType?: string;
 }
 
 export interface SortOption {

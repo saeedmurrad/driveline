@@ -1,10 +1,20 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
+import { environment } from '../environments/environment';
+import { VEHICLES } from './data/vehicles.data';
 
 export const serverRoutes: ServerRoute[] = [
-  {
-    path: 'vehicle/:id',
-    renderMode: RenderMode.Client,
-  },
+  // Static (GitHub Pages) builds bake stock into the app, so every vehicle gets a real,
+  // crawlable page. Platform builds load stock from the API at runtime instead.
+  environment.useStaticData
+    ? {
+        path: 'vehicle/:id',
+        renderMode: RenderMode.Prerender,
+        getPrerenderParams: async () => VEHICLES.map((v) => ({ id: v.id })),
+      }
+    : {
+        path: 'vehicle/:id',
+        renderMode: RenderMode.Client,
+      },
   {
     path: 'legal/:page',
     renderMode: RenderMode.Prerender,

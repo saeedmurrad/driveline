@@ -10,6 +10,8 @@ interface SeoRouteData {
   description?: string;
   titleKey?: string;
   descriptionKey?: string;
+  /** The page sets its own title and meta tags (e.g. vehicle detail). */
+  managed?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -89,6 +91,7 @@ export class SeoService {
 
   private applyForRoute(root: ActivatedRouteSnapshot): void {
     const seo = this.getSeoData(root);
+    if (seo?.managed) return;
     const title =
       seo?.title ||
       this.resolveFromKey(seo?.titleKey, 'title') ||

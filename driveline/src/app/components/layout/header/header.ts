@@ -10,6 +10,7 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { DealerContextService } from '../../../services/dealer-context.service';
+import { GarageService } from '../../../services/garage.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ import { DealerContextService } from '../../../services/dealer-context.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private dealerContext = inject(DealerContextService);
+  protected readonly garage = inject(GarageService);
 
   dealerName = computed(() => this.dealerContext.dealerName());
 

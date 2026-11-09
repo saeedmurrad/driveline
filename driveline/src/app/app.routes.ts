@@ -89,7 +89,7 @@ export const routes: Routes = [
         (m) => m.VehicleDetailComponent,
       ),
     data: {
-      seo: { titleKey: 'vehicle', descriptionKey: 'vehicle' },
+      seo: { titleKey: 'vehicle', descriptionKey: 'vehicle', managed: true },
     },
   },
   {
@@ -132,6 +132,26 @@ export const routes: Routes = [
       import('./pages/contact/contact').then((m) => m.ContactComponent),
     data: {
       seo: { titleKey: 'contact', descriptionKey: 'contact' },
+    },
+  },
+  {
+    path: 'saved',
+    loadComponent: () => import('./pages/saved/saved').then((m) => m.SavedComponent),
+    data: {
+      seo: {
+        title: 'Saved vehicles | DriveLine',
+        description: 'The vehicles you have saved at DriveLine Car Sales, Peterborough.',
+      },
+    },
+  },
+  {
+    path: 'compare',
+    loadComponent: () => import('./pages/compare/compare').then((m) => m.CompareComponent),
+    data: {
+      seo: {
+        title: 'Compare vehicles | DriveLine',
+        description: 'Compare used cars and vans from DriveLine side by side: price, mileage, economy, tax and more.',
+      },
     },
   },
   {

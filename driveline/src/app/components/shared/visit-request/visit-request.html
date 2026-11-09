@@ -1,0 +1,89 @@
+@if (sent()) {
+  <div class="px-4 py-10 text-center">
+    <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/40">
+      <svg class="h-7 w-7 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <p class="text-lg font-bold text-stone-900 dark:text-white">{{ copy.done }}</p>
+    <p class="mt-1 text-sm text-stone-500 dark:text-slate-400">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</p>
+    <button type="button" class="btn-primary mt-6" (click)="dismiss.emit()">Done</button>
+  </div>
+} @else {
+  <form (ngSubmit)="submit()" class="space-y-4 p-4 sm:p-5" novalidate>
+    <div class="flex items-center gap-3 rounded-xl bg-stone-50 p-3 ring-1 ring-stone-200/80 dark:bg-slate-900/70 dark:ring-slate-700">
+      <img [src]="vehicle.thumbnailImage" alt="" class="h-14 w-20 shrink-0 rounded-lg object-cover" />
+      <div class="min-w-0">
+        <p class="truncate font-bold text-stone-900 dark:text-white">{{ vehicle.year }} {{ vehicle.make }} {{ vehicle.model }}</p>
+        <p class="truncate text-xs text-stone-500 dark:text-slate-400">{{ vehicle.derivative }}</p>
+      </div>
+    </div>
+    <p class="text-sm text-stone-600 dark:text-slate-300">{{ copy.lead }}</p>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label class="form-label text-xs" for="vr-first">First name*</label>
+        <input id="vr-first" [(ngModel)]="form.firstName" name="firstName" autocomplete="given-name" class="form-input py-2.5 text-sm" />
+      </div>
+      <div>
+        <label class="form-label text-xs" for="vr-last">Last name*</label>
+        <input id="vr-last" [(ngModel)]="form.lastName" name="lastName" autocomplete="family-name" class="form-input py-2.5 text-sm" />
+      </div>
+      <div>
+        <label class="form-label text-xs" for="vr-phone">Phone*</label>
+        <input id="vr-phone" [(ngModel)]="form.phone" name="phone" type="tel" autocomplete="tel" class="form-input py-2.5 text-sm" />
+      </div>
+      <div>
+        <label class="form-label text-xs" for="vr-email">Email*</label>
+        <input id="vr-email" [(ngModel)]="form.email" name="email" type="email" autocomplete="email" class="form-input py-2.5 text-sm" />
+      </div>
+      <div>
+        <label class="form-label text-xs" for="vr-date">{{ kind === 'reserve' ? 'Planning to visit' : 'Preferred day' }}</label>
+        <input id="vr-date" [(ngModel)]="form.date" name="date" type="date" [min]="minDate" class="form-input py-2.5 text-sm" />
+      </div>
+      <div>
+        <label class="form-label text-xs" for="vr-time">Time</label>
+        <select id="vr-time" [(ngModel)]="form.time" name="time" class="form-input py-2.5 text-sm">
+          @for (slot of timeSlots; track slot) {
+            <option [value]="slot">{{ slot }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend class="form-label text-xs">Best way to reach you</legend>
+      <div class="flex flex-wrap gap-2">
+        @for (pref of contactPrefs; track pref) {
+          <label class="cursor-pointer">
+            <input type="radio" class="peer sr-only" name="contact" [value]="pref" [(ngModel)]="form.contact" />
+            <span class="inline-flex rounded-full border border-stone-200 px-3 py-1.5 text-xs font-semibold text-stone-600 transition-colors peer-checked:border-rose-500 peer-checked:bg-rose-500 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-rose-400 dark:border-slate-600 dark:text-slate-300">{{ pref }}</span>
+          </label>
+        }
+      </div>
+    </fieldset>
+
+    <div class="flex flex-wrap gap-x-5 gap-y-2">
+      <label class="flex cursor-pointer items-center gap-2 text-sm text-stone-700 dark:text-slate-300">
+        <input type="checkbox" [(ngModel)]="form.partExchange" name="partExchange" class="rounded text-rose-600" />
+        I have a part exchange
+      </label>
+      <label class="flex cursor-pointer items-center gap-2 text-sm text-stone-700 dark:text-slate-300">
+        <input type="checkbox" [(ngModel)]="form.finance" name="finance" class="rounded text-rose-600" />
+        I’m interested in finance
+      </label>
+    </div>
+
+    <div>
+      <label class="form-label text-xs" for="vr-msg">Anything else?</label>
+      <textarea id="vr-msg" [(ngModel)]="form.message" name="message" rows="2" class="form-input resize-none py-2.5 text-sm"></textarea>
+    </div>
+
+    @if (error()) {
+      <div id="visit-request-alert" class="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-800 dark:border-red-800/50 dark:bg-red-950/40 dark:text-red-200" role="alert">{{ error() }}</div>
+    }
+
+    <button type="submit" class="btn-primary w-full justify-center py-3 disabled:cursor-not-allowed disabled:opacity-60" [disabled]="submitting()">
+      {{ submitting() ? 'Sending…' : copy.button }}
+    </button>
+    <p class="text-center text-[11px] text-stone-500 dark:text-slate-400">We use your details only to arrange this. See our <a href="/legal/privacy-policy" class="underline">privacy policy</a>.</p>
+  </form>
+}
