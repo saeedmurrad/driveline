@@ -75,6 +75,23 @@ jobs:
                   "DVLA_LOOKUP_URL must be a full URL (e.g. https://your-worker.xxx.workers.dev), "
                   "not your DVLA API key. Store the DVLA API key on the worker (wrangler secret put DVLA_API_KEY)."
               )
+          # Only switch the Look up button on when the worker really answers a lookup
+          # (it needs DVLA_API_KEY set on the worker). Otherwise customers would get a broken button.
+          import urllib.request, urllib.error
+          req = urllib.request.Request(url, data=json.dumps({"registrationNumber": "LB15WMA"}).encode(),
+                                       headers={"Content-Type": "application/json", "Origin": "https://drivelinecarsales.co.uk", "User-Agent": "Mozilla/5.0 (DriveLine deploy check)"}, method="POST")
+          try:
+              with urllib.request.urlopen(req, timeout=20) as r:
+                  ok = r.status == 200 and b"make" in r.read().lower()
+          except urllib.error.HTTPError as e:
+              print(f"DVLA worker test lookup failed (HTTP {e.code}): {e.read()[:200]!r}")
+              ok = False
+          except Exception as e:
+              print(f"DVLA worker not reachable: {e}")
+              ok = False
+          if not ok:
+              print("Registration lookup stays hidden until the worker answers (set DVLA_API_KEY on the worker, then redeploy).")
+              exit(0)
           path = "driveline/src/environments/environment.github-pages.ts"
           with open(path) as f:
               text = f.read()
