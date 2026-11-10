@@ -33,12 +33,12 @@ export class LegalComponent implements OnInit {
           body: 'This section outlines the type of data and information collected through this website and the steps available to users to request access, amendment and removal of data.',
         },
         {
-          heading: 'Google Analytics',
-          body: 'This website uses Google Analytics to collect information about visitor behaviour to inform business decisions. This information is anonymous and does not allow identification of individual users.',
+          heading: 'Visitor Statistics',
+          body: 'We count visits to this website so we know which pages and vehicles people look at and how they found us (for example Google or Facebook). We do this without cookies and without storing anything on your device: each page view only adds one to an anonymous daily total (page, vehicle viewed, the website you came from, and whether you use a phone, tablet or computer). No IP address, name or other information that could identify you is kept. We do not use Google Analytics or advertising trackers.',
         },
         {
           heading: 'Personal Information via Enquiry Forms',
-          body: 'If a user submits an enquiry via a form on this website then details including name, email address, phone number and any additional information provided will be sent to us and stored for future reference. This information will not be shared with any other parties or used without consent.',
+          body: 'If you send an enquiry through a form on this website, the details you give (such as your name, email address, phone number, the vehicle you are interested in and your message) are stored securely in our enquiry system so our sales team can reply and keep track of it. The system runs on Google Firebase, with data held in London, UK; only DriveLine staff can read it. We use these details only to deal with your enquiry and will not share them with anyone else or use them for marketing without your consent.',
         },
         {
           heading: 'Your Rights',
@@ -55,11 +55,11 @@ export class LegalComponent implements OnInit {
         },
         {
           heading: 'How We Use Cookies',
-          body: 'When a user accesses this website, it may place a number of cookie files in the user\'s web browser. This website uses cookies to enable certain functions of the service, to provide analytics and store user preferences.',
+          body: 'This website does not use advertising or tracking cookies, and our visitor statistics work without cookies. We only store a few small settings in your own browser so features work: vehicles you save or add to compare, recently viewed vehicles, the last photo you looked at, your light or dark mode choice and your cookie notice choice. Staff who sign in to our admin area also get a sign-in record from Google Firebase. These never leave your device, and you can clear them at any time in your browser settings.',
         },
         {
           heading: 'Third-Party Cookies',
-          body: 'In addition to our own cookies, we may also use various third-party cookies to report usage statistics of the service, including Google Analytics.',
+          body: 'Our contact page shows a Google map, which may set their own cookies under their own policies. We do not use Google Analytics.',
         },
         {
           heading: 'Managing Cookies',

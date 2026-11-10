@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { NgClass, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { VisitStatsService } from './services/visit-stats.service';
 import { filter, Subscription } from 'rxjs';
 import { HeaderComponent } from './components/layout/header/header';
 import { FooterComponent } from './components/layout/footer/footer';
@@ -54,6 +55,7 @@ export class App implements OnInit, OnDestroy {
   private scrollCleanup: (() => void) | null = null;
   private navSub: Subscription | null = null;
   readonly isHubRoute = signal(false);
+  private readonly visitStats = inject(VisitStatsService);
 
   constructor() {
     this.updateHubRouteFlag();
@@ -61,6 +63,7 @@ export class App implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.seo.init();
+    this.visitStats.start();
     this.updateHubRouteFlag();
     this.navSub = this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))

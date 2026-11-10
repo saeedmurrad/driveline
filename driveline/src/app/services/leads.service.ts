@@ -3,6 +3,18 @@ import { isPlatformBrowser } from '@angular/common';
 import type { Unsubscribe } from 'firebase/firestore';
 import type { Lead, LeadNote, LeadStatus, NewLead } from '../models/lead.model';
 import { firebaseAuth, firestore } from './firebase-client';
+import { STAFF_BROWSER_KEY } from './visit-stats.service';
+
+/** One London day of visit counts (Firestore stats/{day}). */
+export interface DayStats {
+  day: string;
+  views: number;
+  visits: number;
+  pages: Record<string, number>;
+  cars: Record<string, number>;
+  sources: Record<string, number>;
+  devices: Record<string, number>;
+}
 
 export interface StaffUser {
   uid: string;
@@ -73,6 +85,12 @@ export class LeadsService {
       const snap = await getDoc(doc(db, 'staff', user.uid));
       if (!snap.exists()) throw new Error('not staff');
       this.staff.set({ uid: user.uid, email: user.email ?? '' });
+      // Do not count staff's own browsing in the visitor numbers.
+      try {
+        localStorage.setItem(STAFF_BROWSER_KEY, '1');
+      } catch {
+        // storage blocked
+      }
     } catch {
       this.notStaff.set(true);
       this.staff.set(null);
@@ -139,6 +157,25 @@ export class LeadsService {
     this.unsubscribeLeads?.();
     this.unsubscribeLeads = null;
     this.leads.set([]);
+  }
+
+  /** Visit counts for every London day from `fromDay` (YYYY-MM-DD) onwards. */
+  async loadStats(fromDay: string): Promise<DayStats[]> {
+    const db = await firestore();
+    const { collection, documentId, getDocs, query, where } = await import('firebase/firestore');
+    const snap = await getDocs(query(collection(db, 'stats'), where(documentId(), '>=', fromDay)));
+    return snap.docs.map((d) => {
+      const x = d.data();
+      return {
+        day: d.id,
+        views: x['views'] ?? 0,
+        visits: x['visits'] ?? 0,
+        pages: x['pages'] ?? {},
+        cars: x['cars'] ?? {},
+        sources: x['sources'] ?? {},
+        devices: x['devices'] ?? {},
+      };
+    });
   }
 
   async setStatus(id: string, status: LeadStatus): Promise<void> {

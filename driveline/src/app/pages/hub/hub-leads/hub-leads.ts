@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, computed, effect, inject, signal } from '
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { HubVisitorsComponent } from './hub-visitors';
 import { Meta, Title } from '@angular/platform-browser';
 import { LeadsService } from '../../../services/leads.service';
 import { VehicleService } from '../../../services/vehicle.service';
@@ -18,7 +19,7 @@ import {
  */
 @Component({
   selector: 'app-hub-leads',
-  imports: [FormsModule, DatePipe, RouterLink],
+  imports: [FormsModule, DatePipe, RouterLink, HubVisitorsComponent],
   templateUrl: './hub-leads.html',
 })
 export class HubLeadsComponent implements OnInit, OnDestroy {
@@ -35,6 +36,8 @@ export class HubLeadsComponent implements OnInit, OnDestroy {
   readonly signingIn = signal(false);
   readonly signInError = signal<string | null>(null);
   readonly resetSent = signal(false);
+
+  readonly view = signal<'leads' | 'visitors'>('leads');
 
   // Lead list
   readonly filter = signal<'all' | LeadStatus>('new');

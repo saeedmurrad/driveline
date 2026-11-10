@@ -5,6 +5,8 @@ rules_version = '2';
 // leads/{id}   Website enquiries. Anyone may create one (the public forms), with
 //              strict shape and size checks. Only staff can read them or change
 //              status / notes. Nobody can delete a lead from the website or /hub.
+// stats/{day}  Cookie-free visit counts, one document per London day (YYYY-MM-DD).
+//              Anyone may add exactly one page view at a time; only staff can read.
 // staff/{uid}  Who counts as staff. Managed in the Firebase console or by SNA Tech
 //              (never writable from the website). A member may read only their own entry.
 //
@@ -52,6 +54,42 @@ service cloud.firestore {
       allow create: if validNewLead(request.resource.data);
       allow read: if isStaff();
       allow update: if isStaff() && validStaffUpdate();
+      allow delete: if false;
+    }
+
+    function mapOf(d, key) {
+      return d.get(key, {});
+    }
+
+    function validStats(d) {
+      return d.keys().hasOnly(['views', 'visits', 'pages', 'cars', 'sources', 'devices'])
+        && d.views is int
+        && d.get('visits', 0) is int
+        && mapOf(d, 'pages') is map && mapOf(d, 'pages').size() <= 20
+        && mapOf(d, 'cars') is map && mapOf(d, 'cars').size() <= 400
+        && mapOf(d, 'sources') is map && mapOf(d, 'sources').size() <= 20
+        && mapOf(d, 'devices') is map && mapOf(d, 'devices').size() <= 5;
+    }
+
+    // At most one key changed in a counter map in a single write.
+    function oneKey(key) {
+      return mapOf(request.resource.data, key).diff(mapOf(resource.data, key)).affectedKeys().size() <= 1;
+    }
+
+    match /stats/{day} {
+      allow read: if isStaff();
+      allow create: if day.matches('^20[2-9][0-9]-[01][0-9]-[0-3][0-9]$')
+        && validStats(request.resource.data)
+        && request.resource.data.views == 1
+        && request.resource.data.get('visits', 0) <= 1
+        && mapOf(request.resource.data, 'pages').size() <= 1
+        && mapOf(request.resource.data, 'cars').size() <= 1
+        && mapOf(request.resource.data, 'sources').size() <= 1
+        && mapOf(request.resource.data, 'devices').size() <= 1;
+      allow update: if validStats(request.resource.data)
+        && request.resource.data.views == resource.data.views + 1
+        && request.resource.data.get('visits', 0) - resource.data.get('visits', 0) in [0, 1]
+        && oneKey('pages') && oneKey('cars') && oneKey('sources') && oneKey('devices');
       allow delete: if false;
     }
 

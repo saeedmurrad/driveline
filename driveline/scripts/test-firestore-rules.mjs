@@ -113,6 +113,31 @@ await expect('staff signs a change as someone else', false, () =>
 await expect('staff deletes a lead', false, () => deleteDoc(doc(db, 'leads', leadId)));
 await signOut(auth);
 
+// Visit counter (same REST call the website makes)
+const commit = (fieldTransforms, day = '2026-11-10') =>
+  fetch(`http://${FS}/v1/projects/${PROJECT}/databases/(default)/documents:commit`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ writes: [{ transform: { document: `projects/${PROJECT}/databases/(default)/documents/stats/${day}`, fieldTransforms } }] }),
+  }).then(async (r) => { if (!r.ok) throw Object.assign(new Error(await r.text()), { code: r.status === 403 ? 'permission-denied' : r.status }); });
+const inc = (fieldPath, n = 1) => ({ fieldPath, increment: { integerValue: String(n) } });
+await expect('visitor counts a first page view (new day)', true, () =>
+  commit([inc('views'), inc('visits'), inc('pages.`home`'), inc('sources.`google`'), inc('devices.`mobile`')]));
+await expect('visitor counts a car page view', true, () => commit([inc('views'), inc('pages.`vehicle`'), inc('cars.`10475`')]));
+await expect('visitor adds 1000 views at once', false, () => commit([inc('views', 1000)]));
+await expect('visitor bumps two pages in one go', false, () => commit([inc('views'), inc('pages.`home`'), inc('pages.`cars`')]));
+await expect('visitor lowers the count', false, () => commit([inc('views', -1)]));
+await expect('visitor writes a made-up day id', false, () => commit([inc('views')], 'hello'));
+await expect('visitor reads the stats', false, () => getDoc(doc(db, 'stats', '2026-11-10')));
+await expect('visitor deletes the stats', false, () => deleteDoc(doc(db, 'stats', '2026-11-10')));
+await signInWithEmailAndPassword(auth, 'staff@example.test', 'test-only-pw');
+await expect('staff reads the stats', true, async () => {
+  const snap = await getDoc(doc(db, 'stats', '2026-11-10'));
+  const d = snap.data();
+  if (d.views !== 2 || d.visits !== 1 || d.cars['10475'] !== 1) throw new Error('unexpected counts ' + JSON.stringify(d));
+});
+await signOut(auth);
+
 await deleteApp(app);
 console.log(failed ? `\n${failed} rule check(s) failed.` : '\nAll rule checks passed.');
 process.exit(failed ? 1 : 0);
