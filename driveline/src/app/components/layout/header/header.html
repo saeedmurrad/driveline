@@ -17,15 +17,10 @@
         class="group flex items-center gap-3 flex-shrink-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/70 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
         (click)="closeMobileMenu()"
       >
-        <div
-          class="logo-mark relative w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 flex items-center justify-center ring-1 ring-rose-200/50 dark:ring-white/15 shadow-md shadow-rose-500/30"
-        >
-          <svg class="w-5 h-5 md:w-[1.35rem] md:h-[1.35rem] text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-          </svg>
-        </div>
-        <span class="logo-wordmark text-base sm:text-lg md:text-xl font-bold font-display tracking-tight">
-          {{ dealerName() }}
+        <img src="brand/driveline-mark.svg" alt="" width="44" height="44" class="logo-mark h-10 w-10 shrink-0 rounded-xl shadow-md shadow-rose-950/25 transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 md:h-11 md:w-11" />
+        <span class="logo-wordmark flex flex-col leading-none">
+          <span class="text-base sm:text-lg md:text-xl font-bold font-display tracking-tight">{{ dealerName() }}</span>
+          <span class="logo-tagline mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-rose-600/80 sm:block dark:text-rose-300/80">Car Sales</span>
         </span>
       </a>
 

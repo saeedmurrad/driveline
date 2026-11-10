@@ -59,9 +59,10 @@ html.dark .header-glow-line {
 /* Keep wordmark box size stable so it does not jump on scroll. */
 .logo-wordmark {
   display: inline-flex;
-  align-items: center;
-  border-radius: 9999px;
-  padding: 2px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 12px;
+  padding: 3px 8px;
   border: 1px solid transparent;
   background: transparent;
   backdrop-filter: saturate(130%) blur(4px);
