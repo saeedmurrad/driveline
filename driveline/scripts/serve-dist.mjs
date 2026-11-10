@@ -9,7 +9,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = join(fileURLToPath(new URL('..', import.meta.url)), 'dist/driveline/browser');
+const ROOT = join(fileURLToPath(new URL('..', import.meta.url)), process.env.DIST || 'dist/driveline/browser');
 const PORT = Number(process.env.PORT || 4310);
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',

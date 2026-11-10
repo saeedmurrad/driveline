@@ -14,7 +14,9 @@ import { scrollFormAlertIntoView } from '../../../utils/scroll-form-alert';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs/operators';
+import { finalize, catchError } from 'rxjs/operators';
+import { forkJoin, of } from 'rxjs';
+import { summariseMot, type MotHistory, type MotSummary } from '../../../models/mot-history.model';
 import { Vehicle } from '../../../models/vehicle.model';
 import type { DvlaVehicleDetails } from '../../../models/dvla-vehicle.model';
 import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
@@ -90,28 +92,53 @@ export class PartExchangeFormComponent {
   fuelOptions = ['Petrol', 'Diesel', 'Hybrid', 'Electric', 'Plug-in Hybrid'];
   gearboxOptions = ['Manual', 'Automatic'];
 
+  /** DVSA MOT history for the looked-up registration (null until found). */
+  readonly motHistory = signal<MotHistory | null>(null);
+  readonly motSummary = signal<MotSummary | null>(null);
+
   lookupVehicle(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.registrationLookupError.set(null);
     this.step1FieldsError.set(null);
     this.dvlaVehicleDetails.set(null);
+    this.motHistory.set(null);
+    this.motSummary.set(null);
     this.registrationLookupLoading.set(true);
 
-    this.dvlaVehicle
-      .lookupByRegistration(this.vehicle.registration)
+    // Ask DVLA and DVSA at the same time; use whatever answers.
+    const reg = this.vehicle.registration;
+    forkJoin({
+      dvla: this.dvlaVehicle.lookupByRegistration(reg).pipe(catchError((e: unknown) => of(e instanceof Error ? e : new Error(String(e))))),
+      mot: (this.dvlaVehicle.motHistory?.(reg) ?? of(null)).pipe(catchError(() => of(null))),
+    })
       .pipe(finalize(() => this.registrationLookupLoading.set(false)))
-      .subscribe({
-        next: (data) => {
-          this.dvlaVehicleDetails.set(data);
-          this.applyDvlaToForm(data);
-        },
-        error: (err: unknown) => {
-          const message =
-            err instanceof Error ? err.message : 'Registration lookup failed.';
-          this.registrationLookupError.set(message);
-        },
+      .subscribe(({ dvla, mot }) => {
+        const dvlaOk = dvla && !(dvla instanceof Error) ? (dvla as DvlaVehicleDetails) : null;
+        if (dvlaOk) {
+          this.dvlaVehicleDetails.set(dvlaOk);
+          this.applyDvlaToForm(dvlaOk);
+        }
+        if (mot) {
+          this.motHistory.set(mot);
+          this.motSummary.set(summariseMot(mot));
+          this.applyMotToForm(mot);
+        }
+        if (!dvlaOk && !mot) {
+          this.registrationLookupError.set(dvla instanceof Error ? dvla.message : 'Registration lookup failed.');
+        }
       });
+  }
+
+  /** DVSA knows the model (DVLA does not); only fill what is still empty. */
+  private applyMotToForm(m: MotHistory): void {
+    if (m.registration) this.vehicle.registration = m.registration.toUpperCase();
+    if (!this.vehicle.make && m.make) this.vehicle.make = this.toTitleCase(m.make);
+    if (!this.vehicle.model && m.model) this.vehicle.model = this.toTitleCase(m.model);
+    if (!this.vehicle.colour && m.colour) this.vehicle.colour = this.toTitleCase(m.colour);
+    if (!this.vehicle.fuel && m.fuelType) this.vehicle.fuel = this.mapDvlaFuelToForm(m.fuelType);
+    const s = summariseMot(m);
+    if (!this.vehicle.motExpiry && s.validUntil) this.vehicle.motExpiry = s.validUntil;
   }
 
   /**
@@ -125,12 +152,33 @@ export class PartExchangeFormComponent {
     this.vehicle.make = this.toTitleCase(d.make);
     this.vehicle.model = '';
     this.vehicle.derivative = '';
-    this.vehicle.colour = d.colour?.trim() || '';
+    this.vehicle.colour = this.toTitleCase(d.colour);
     this.vehicle.fuel = this.mapDvlaFuelToForm(d.fuelType);
 
     if (d.motExpiryDate) {
       this.vehicle.motExpiry = d.motExpiryDate;
     }
+  }
+
+  /** MOT summary for the dealer's copy of the enquiry. */
+  private motSummaryText(): string {
+    const m = this.motHistory();
+    const s = this.motSummary();
+    if (!m || !s) return '';
+    const latest = s.latest;
+    return [
+      '--- DVSA MOT history (at time of enquiry) ---',
+      `Model: ${m.model || '—'}`,
+      `Tests: ${s.tests}${s.firstTimePassRate != null ? `, passed first time ${s.firstTimePassRate}%` : ''}`,
+      `MOT valid until: ${s.validUntil || '—'}`,
+      s.lastMiles ? `Mileage at last MOT: ${s.lastMiles.miles.toLocaleString('en-GB')} (${s.lastMiles.date})` : '',
+      s.mileageConsistent === false ? 'WARNING: recorded mileage went DOWN between MOTs' : '',
+      latest?.advisories.length ? `Latest advisories: ${latest.advisories.map((a) => a.text).join('; ')}` : '',
+      m.hasOutstandingRecall === 'Yes' ? 'Outstanding safety recall: YES' : '',
+      '',
+    ]
+      .filter(Boolean)
+      .join('\n');
   }
 
   private toTitleCase(value?: string): string {
@@ -194,7 +242,9 @@ export class PartExchangeFormComponent {
     }
     if (missing.length > 0) {
       this.step1FieldsError.set(
-        `Please complete: ${missing.join(', ')}. Use Look up to pre-fill DVLA data where possible, then add the rest.`,
+        this.lookupAvailable
+          ? `Please complete: ${missing.join(', ')}. Use Look up to pre-fill what DVLA and DVSA hold, then add the rest.`
+          : `Please complete: ${missing.join(', ')}.`,
       );
       return false;
     }
@@ -228,6 +278,7 @@ export class PartExchangeFormComponent {
             '',
           ].join('\n')
         : '',
+      this.motSummaryText(),
       '--- Vehicle offered (form) ---',
       `Registration: ${v.registration || '—'}`,
       `Mileage: ${v.mileage?.toLocaleString('en-GB') ?? '—'}`,

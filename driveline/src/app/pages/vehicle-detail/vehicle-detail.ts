@@ -11,6 +11,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MotHistoryComponent } from '../../components/vehicles/mot-history/mot-history';
+import { DvlaVehicleService } from '../../services/dvla-vehicle.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
@@ -52,6 +54,7 @@ import {
     DeliveryCheckComponent,
     VehicleGalleryComponent,
     PhotoPendingComponent,
+    MotHistoryComponent,
   ],
   templateUrl: './vehicle-detail.html',
   styleUrl: './vehicle-detail.css',
@@ -148,7 +151,16 @@ export class VehicleDetailComponent implements OnDestroy {
   readonly financeDisclaimerShort = FINANCE_DISCLAIMER_SHORT;
   readonly financeDisclaimerDetail = FINANCE_DISCLAIMER_DETAIL;
 
-  activeTab = signal<'overview' | 'features' | 'finance' | 'costs'>('overview');
+  activeTab = signal<'overview' | 'features' | 'finance' | 'costs' | 'mot'>('overview');
+  /** MOT history tab only when the vehicle check service is set up and we know the reg. */
+  private readonly motAvailable = inject(DvlaVehicleService).isAvailable();
+  readonly tabs = computed(() => [
+    { key: 'overview', label: 'Overview' },
+    { key: 'features', label: 'Features & Equipment' },
+    { key: 'finance', label: 'Finance' },
+    { key: 'costs', label: 'Running costs' },
+    ...(this.motAvailable && this.vehicle()?.registration ? [{ key: 'mot', label: 'MOT history' }] : []),
+  ]);
   enquirySent = signal(false);
   enquirySubmitting = signal(false);
   enquiryError = signal<string | null>(null);
@@ -363,7 +375,7 @@ export class VehicleDetailComponent implements OnDestroy {
     );
   }
 
-  setTab(tab: 'overview' | 'features' | 'finance' | 'costs') {
+  setTab(tab: 'overview' | 'features' | 'finance' | 'costs' | 'mot') {
     this.activeTab.set(tab);
   }
 

@@ -78,11 +78,22 @@ jobs:
           # Only switch the Look up button on when the worker really answers a lookup
           # (it needs DVLA_API_KEY set on the worker). Otherwise customers would get a broken button.
           import urllib.request, urllib.error
+          hdrs = {"Origin": "https://drivelinecarsales.co.uk", "User-Agent": "Mozilla/5.0 (DriveLine deploy check)"}
+          health = {}
+          try:
+              with urllib.request.urlopen(urllib.request.Request(url.rstrip("/") + "/health", headers=hdrs), timeout=20) as r:
+                  health = json.loads(r.read() or b"{}")
+          except Exception as e:
+              print(f"Worker /health not available ({e}); trying a test lookup instead.")
+          if health.get("dvla") or health.get("mot"):
+              print(f"Vehicle check worker ready: {health}")
           req = urllib.request.Request(url, data=json.dumps({"registrationNumber": "LB15WMA"}).encode(),
                                        headers={"Content-Type": "application/json", "Origin": "https://drivelinecarsales.co.uk", "User-Agent": "Mozilla/5.0 (DriveLine deploy check)"}, method="POST")
+          ok = bool(health.get("dvla") or health.get("mot"))
           try:
-              with urllib.request.urlopen(req, timeout=20) as r:
-                  ok = r.status == 200 and b"make" in r.read().lower()
+              if not ok:
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      ok = r.status == 200 and b"make" in r.read().lower()
           except urllib.error.HTTPError as e:
               print(f"DVLA worker test lookup failed (HTTP {e.code}): {e.read()[:200]!r}")
               ok = False

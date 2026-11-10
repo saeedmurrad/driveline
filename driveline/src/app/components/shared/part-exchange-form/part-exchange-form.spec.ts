@@ -61,7 +61,7 @@ describe('PartExchangeFormComponent — DVLA lookup', () => {
     expect(component.dvlaVehicleDetails()?.registrationNumber).toBe('AB12CDE');
     expect(component.vehicle.registration).toBe('AB12CDE');
     expect(component.vehicle.make).toBe('Ford');
-    expect(component.vehicle.colour).toBe('blue');
+    expect(component.vehicle.colour).toBe('Blue');
     expect(component.vehicle.fuel).toBe('Petrol');
     expect(component.vehicle.derivative).toBe('');
     expect(component.vehicle.motExpiry).toBe('2026-01-15');

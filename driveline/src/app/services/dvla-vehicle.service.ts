@@ -1,3 +1,4 @@
+import type { MotHistory } from '../models/mot-history.model';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -51,6 +52,22 @@ export class DvlaVehicleService {
   }
 
   /** Messages a customer can act on; technical detail goes to the console only. */
+  /**
+   * Full DVSA MOT history (tests, mileage, advisories) through the vehicle check worker:
+   * GET {dvlaLookupUrl}/mot/{registration}. Errors use the same plain messages as lookups.
+   */
+  motHistory(registration: string): Observable<MotHistory> {
+    const vrm = registration.replace(/[^a-z0-9]/gi, '').toUpperCase();
+    if (!vrm || vrm.length < 2) {
+      return throwError(() => new Error('Please enter a valid UK registration.'));
+    }
+    if (!this.isAvailable()) return throwError(() => new Error(LOOKUP_UNAVAILABLE));
+    const base = environment.dvlaLookupUrl!.trim().replace(/\/+$/, '');
+    return this.http
+      .get<MotHistory>(`${base}/mot/${encodeURIComponent(vrm)}`)
+      .pipe(catchError((err: HttpErrorResponse) => throwError(() => this.mapError(err))));
+  }
+
   private mapError(err: HttpErrorResponse): Error {
     const body = err.error as DvlaErrorBody | undefined;
     console.warn('Registration lookup failed', err.status, body?.errors?.[0] ?? err.message);
