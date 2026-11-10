@@ -28,6 +28,14 @@ export class RevealOnScrollDirective implements OnDestroy {
         return;
       }
       const node = this.el.nativeElement;
+      // Already on screen (or scrolled past) when the page loads: leave it visible.
+      // Hiding it and fading it back in is what made sections flash on load.
+      const top = node.getBoundingClientRect().top;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (top < vh * 0.94) {
+        node.classList.add('reveal-visible');
+        return;
+      }
       node.classList.add('reveal-init');
       this.observer = new IntersectionObserver(
         (entries) => {

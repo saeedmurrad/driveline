@@ -186,8 +186,10 @@ export class VehicleService {
     this.filters.update((prev) => ({ ...prev, ...partial }));
   }
 
+  /** Clears every filter but keeps the page's category (cars stay cars, vans stay vans). */
   clearFilters() {
-    this.filters.set({});
+    const category = this.filters().category;
+    this.filters.set(category ? { category } : {});
   }
 
   setSortBy(sort: string) {

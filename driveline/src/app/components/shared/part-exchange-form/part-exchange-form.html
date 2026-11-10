@@ -92,6 +92,7 @@
               class="form-input flex-1 uppercase"
               style="text-transform: uppercase;"
             />
+            @if (lookupAvailable) {
             <button
               type="button"
               (click)="lookupVehicle()"
@@ -108,7 +109,9 @@
                 <span>Look up</span>
               }
             </button>
+            }
           </div>
+          @if (lookupAvailable) {
           <p class="text-xs text-gray-500 dark:text-slate-400 mt-1.5">
             <strong>Look up</strong> loads official
             <a
@@ -120,6 +123,9 @@
             data (tax, MOT, make, colour, fuel, engine size, etc.). Anything DVLA does not hold — mileage,
             model name, gearbox, owners, trim/spec — you enter in the sections below.
           </p>
+          } @else {
+          <p class="text-xs text-gray-500 dark:text-slate-400 mt-1.5">Your registration helps us check the car. Please fill in the details below; your logbook (V5C) has most of them.</p>
+          }
         </div>
 
         @if (registrationLookupError()) {
@@ -203,10 +209,14 @@
         }
 
         <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600">
-          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">Your details (not from DVLA)</h3>
+          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">{{ lookupAvailable ? 'Your details (not from DVLA)' : 'Mileage and model' }}</h3>
+          @if (lookupAvailable) {
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">
             DVLA does not provide mileage, model name, gearbox type, keeper count, or full trim wording — please enter these.
           </p>
+          } @else {
+          <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">Tell us the mileage and model so we can value your car.</p>
+          }
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="form-label">Mileage (miles)*</label>
@@ -241,9 +251,13 @@
         </div>
 
         <div class="mt-8 pt-6 border-t border-gray-200 dark:border-slate-600">
-          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">From your registration — check or edit</h3>
+          <h3 class="text-base font-bold text-gray-900 dark:text-white mb-1">{{ lookupAvailable ? 'From your registration — check or edit' : 'About your car' }}</h3>
           <p class="text-sm text-gray-600 dark:text-slate-400 mb-4">
-            These are filled from DVLA after <strong>Look up</strong>, or you can type them if you skip lookup.
+            @if (lookupAvailable) {
+              These are filled from DVLA after <strong>Look up</strong>, or you can type them if you skip lookup.
+            } @else {
+              Type these from your logbook (V5C) or the car itself.
+            }
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>

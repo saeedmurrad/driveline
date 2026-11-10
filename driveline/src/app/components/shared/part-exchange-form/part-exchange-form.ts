@@ -28,6 +28,8 @@ import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
 export class PartExchangeFormComponent {
   private platformId = inject(PLATFORM_ID);
   private dvlaVehicle = inject(DvlaVehicleService);
+  /** Hide the Look up button when this build has no lookup service. */
+  readonly lookupAvailable = this.dvlaVehicle.isAvailable();
   private enquirySubmit = inject(EnquirySubmitService);
 
   /** Full sell-your-car page vs compact modal on vehicle detail */

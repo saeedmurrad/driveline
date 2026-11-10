@@ -44,7 +44,7 @@ jobs:
           key = os.environ.get("WEB3FORMS_ACCESS_KEY", "").strip()
           if not key:
               exit(0)
-          path = "driveline/src/environments/environment.prod.ts"
+          path = "driveline/src/environments/environment.github-pages.ts"
           with open(path) as f:
               text = f.read()
           safe = key.replace("\\", "\\\\").replace("'", "\\'")
@@ -68,14 +68,14 @@ jobs:
           import json, os, re
           url = os.environ.get("DVLA_LOOKUP_URL", "").strip()
           if not url:
-              print("DVLA_LOOKUP_URL secret not set; build uses dvlaLookupUrl from environment.prod.ts (direct DVLA may fail in browser due to CORS).")
+              print("DVLA_LOOKUP_URL secret not set; registration lookup stays hidden on the site.")
               exit(0)
           if not (url.startswith("http://") or url.startswith("https://")):
               raise SystemExit(
                   "DVLA_LOOKUP_URL must be a full URL (e.g. https://your-worker.xxx.workers.dev), "
-                  "not your DVLA API key. Put the API key in dvlaApiKey in environment.prod.ts only."
+                  "not your DVLA API key. Store the DVLA API key on the worker (wrangler secret put DVLA_API_KEY)."
               )
-          path = "driveline/src/environments/environment.prod.ts"
+          path = "driveline/src/environments/environment.github-pages.ts"
           with open(path) as f:
               text = f.read()
           replacement = f"dvlaLookupUrl: {json.dumps(url)},"
@@ -89,7 +89,7 @@ jobs:
               raise SystemExit(f"Could not patch dvlaLookupUrl in {path}")
           with open(path, "w") as f:
               f.write(text)
-          print("Patched dvlaLookupUrl for GitHub Pages build.")
+          print("Patched dvlaLookupUrl into environment.github-pages.ts.")
           PY
 
       - name: Build (production, GitHub Pages base href)

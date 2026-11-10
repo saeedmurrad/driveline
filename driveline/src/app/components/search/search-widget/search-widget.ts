@@ -106,8 +106,13 @@ export class SearchWidgetComponent implements OnInit {
   }
 
   resetFilters() {
-    this.filters = this.emptyFilters();
+    const category = this.filters.category || this.initialCategory;
+    this.filters = { ...this.emptyFilters(), category };
     this.vehicleService.clearFilters();
+    // On the listing page, drop the old filters from the address too.
+    if (this.variant === 'page') {
+      void this.router.navigate([category === 'van' ? '/vans' : '/cars'], { replaceUrl: true });
+    }
   }
 
   private emptyFilters(): SearchFilters {

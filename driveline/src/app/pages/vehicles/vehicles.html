@@ -202,7 +202,7 @@
       </div>
       <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">No vehicles found</h3>
       <p class="text-gray-500 dark:text-gray-400 mb-6">Try adjusting your search filters to find more vehicles.</p>
-      <button (click)="vehicleService.clearFilters()" class="btn-primary">Clear Filters</button>
+      <a [routerLink]="category === 'van' ? '/vans' : '/cars'" (click)="vehicleService.clearFilters()" class="btn-primary">Clear filters</a>
     </div>
   }
 

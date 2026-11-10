@@ -1,5 +1,6 @@
 import { Component, signal, inject, PLATFORM_ID, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { DomSanitizer, type SafeResourceUrl } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 import { DealerContextService } from '../../services/dealer-context.service';
@@ -38,9 +39,16 @@ export class ContactComponent {
   mapsDirectionsUrl = computed(
     () => `https://maps.google.com/?q=${encodeURIComponent(this.mapsQuery())}`,
   );
-  mapsEmbedUrl = computed(
-    () =>
+  private readonly sanitizer = inject(DomSanitizer);
+  /**
+   * Google Maps embed. Angular blocks any iframe URL that is not marked as trusted
+   * (error NG0904, so the map never showed). The host is fixed and only the encoded
+   * address varies, so it is safe to trust.
+   */
+  mapsEmbedUrl = computed<SafeResourceUrl>(() =>
+    this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.google.com/maps?q=${encodeURIComponent(this.mapsQuery())}&output=embed`,
+    ),
   );
   enquirySent = signal(false);
   enquirySubmitting = signal(false);

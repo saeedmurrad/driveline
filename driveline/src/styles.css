@@ -175,20 +175,18 @@
 .animate-slide-down { animation: slideDown 0.3s var(--dl-ease-out); }
 
 /* Scroll reveal (used with appReveal directive) — obvious on scroll */
+/* Scroll reveal: opacity + small lift only (no blur: blurring whole photo sections made scrolling flicker). */
 .reveal-init {
   opacity: 0;
-  transform: translateY(2.25rem) scale(0.98);
-  filter: blur(4px);
+  transform: translateY(1.25rem);
   transition:
-    opacity 0.75s var(--dl-ease-out),
-    transform 0.75s var(--dl-ease-out),
-    filter 0.75s var(--dl-ease-out);
+    opacity 0.6s var(--dl-ease-out),
+    transform 0.6s var(--dl-ease-out);
 }
 
 .reveal-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: none;
 }
 
 .hero-gradient-animated {
@@ -210,7 +208,6 @@
   .reveal-init {
     opacity: 1;
     transform: none;
-    filter: none;
     transition: none;
   }
 

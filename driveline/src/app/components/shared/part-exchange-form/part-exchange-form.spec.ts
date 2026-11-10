@@ -25,7 +25,7 @@ describe('PartExchangeFormComponent — DVLA lookup', () => {
         { provide: PLATFORM_ID, useValue: 'browser' },
         {
           provide: DvlaVehicleService,
-          useValue: { lookupByRegistration: lookupSpy },
+          useValue: { lookupByRegistration: lookupSpy, isAvailable: () => true },
         },
         {
           provide: EnquirySubmitService,
@@ -133,7 +133,7 @@ describe('PartExchangeFormComponent — DVLA lookup', () => {
         { provide: PLATFORM_ID, useValue: 'server' },
         {
           provide: DvlaVehicleService,
-          useValue: { lookupByRegistration: lookupSpy },
+          useValue: { lookupByRegistration: lookupSpy, isAvailable: () => true },
         },
         {
           provide: EnquirySubmitService,

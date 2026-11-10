@@ -12,6 +12,9 @@ import type {
   DvlaVehicleDetails,
 } from '../models/dvla-vehicle.model';
 
+const LOOKUP_UNAVAILABLE =
+  'Registration lookup is not available right now. Please type your car details below and we will check everything when we value it.';
+
 @Injectable({ providedIn: 'root' })
 export class DvlaVehicleService {
   private readonly http = inject(HttpClient);
@@ -21,29 +24,20 @@ export class DvlaVehicleService {
    * via `environment.dvlaLookupUrl` (dev proxy or SSR `/api/dvla-vehicle`).
    * @see https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html
    */
+  /** True when this build has a registration lookup service to call. */
+  isAvailable(): boolean {
+    const url = environment.dvlaLookupUrl?.trim() ?? '';
+    return /^https?:\/\//i.test(url) || url.startsWith('/');
+  }
+
   lookupByRegistration(registration: string): Observable<DvlaVehicleDetails> {
     const vrn = registration.replace(/\s+/g, '').toUpperCase();
     if (!vrn || vrn.length < 2) {
       return throwError(() => new Error('Please enter a valid UK registration.'));
     }
-    const url = environment.dvlaLookupUrl?.trim();
-    if (!url) {
-      return throwError(
-        () =>
-          new Error(
-            'Registration lookup is not configured. Set dvlaLookupUrl in environment (and dvlaApiKey or server DVLA_API_KEY).',
-          ),
-      );
-    }
-    const urlOk =
-      /^https?:\/\//i.test(url) || url.startsWith('/');
-    if (!urlOk) {
-      return throwError(
-        () =>
-          new Error(
-            'Registration lookup URL is invalid. On GitHub Pages, set secret DVLA_LOOKUP_URL to your full worker URL (https://…), not your DVLA API key. For dev/SSR, use a path such as /api/dvla-vehicle.',
-          ),
-      );
+    const url = environment.dvlaLookupUrl?.trim() ?? '';
+    if (!this.isAvailable()) {
+      return throwError(() => new Error(LOOKUP_UNAVAILABLE));
     }
 
     const key = environment.dvlaApiKey?.trim();
@@ -56,28 +50,16 @@ export class DvlaVehicleService {
       .pipe(catchError((err: HttpErrorResponse) => throwError(() => this.mapError(err))));
   }
 
+  /** Messages a customer can act on; technical detail goes to the console only. */
   private mapError(err: HttpErrorResponse): Error {
     const body = err.error as DvlaErrorBody | undefined;
-    const first = body?.errors?.[0];
-    if (first?.detail) {
-      return new Error(first.detail);
-    }
-    if (first?.title) {
-      return new Error(first.title);
-    }
+    console.warn('Registration lookup failed', err.status, body?.errors?.[0] ?? err.message);
     if (err.status === 404) {
-      return new Error('No vehicle found for that registration.');
+      return new Error('We could not find that registration. Check it and try again, or type your car details below.');
     }
-    if (err.status === 0) {
-      const hint =
-        environment.production &&
-        environment.dvlaLookupUrl?.includes('driver-vehicle-licensing.api.gov.uk')
-          ? ' Browsers usually block direct calls to DVLA from a website (CORS). Deploy the Cloudflare Worker in workers/dvla-ves-proxy/ and set the GitHub secret DVLA_LOOKUP_URL to your worker URL, then redeploy.'
-          : '';
-      return new Error(
-        `Could not reach the registration service. Check your connection or proxy URL.${hint}`,
-      );
+    if (err.status === 400) {
+      return new Error('That does not look like a UK registration. Check it, or type your car details below.');
     }
-    return new Error(err.message || 'Registration lookup failed.');
+    return new Error(LOOKUP_UNAVAILABLE);
   }
 }

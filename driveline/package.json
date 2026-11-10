@@ -21,7 +21,9 @@
     "serve:ssr:driveline": "node dist/driveline/server/server.mjs",
     "screenshots:client": "node scripts/capture-client-screenshots.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
-    "filter:images": "node scripts/filter-stock-images.mjs"
+    "filter:images": "node scripts/filter-stock-images.mjs",
+    "serve:dist": "node scripts/serve-dist.mjs",
+    "test:e2e": "node scripts/e2e-site-check.mjs"
   },
   "private": true,
   "packageManager": "npm@11.11.0",
@@ -48,6 +50,7 @@
     "autoprefixer": "^10.4.27",
     "jsdom": "^28.0.0",
     "playwright": "^1.58.2",
+    "playwright-core": "^1.65.0",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
     "tailwindcss": "^3.4.19",

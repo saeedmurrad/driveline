@@ -58,21 +58,21 @@ describe('DvlaVehicleService', () => {
       environment.dvlaLookupUrl = '';
       await expect(
         firstValueFrom(service.lookupByRegistration('AB12CDE')),
-      ).rejects.toThrow(/not configured/);
+      ).rejects.toThrow(/not available right now/);
     });
 
     it('rejects when dvlaLookupUrl is whitespace only', async () => {
       environment.dvlaLookupUrl = '  \t  ';
       await expect(
         firstValueFrom(service.lookupByRegistration('AB12CDE')),
-      ).rejects.toThrow(/not configured/);
+      ).rejects.toThrow(/not available right now/);
     });
 
     it('rejects when dvlaLookupUrl is a bare string (e.g. API key pasted as URL)', async () => {
       environment.dvlaLookupUrl = 'eYWCJ4jiTm9mkOZKGQkIA7yw6j2LtMJRaKAXc7K5';
       await expect(
         firstValueFrom(service.lookupByRegistration('AB12CDE')),
-      ).rejects.toThrow(/DVLA_LOOKUP_URL to your full worker URL/);
+      ).rejects.toThrow(/not available right now/);
     });
   });
 
@@ -116,7 +116,7 @@ describe('DvlaVehicleService', () => {
   });
 
   describe('lookupByRegistration — error mapping', () => {
-    it('maps DVLA errors[].detail', async () => {
+    it('maps a DVLA 400 to a plain-English registration message', async () => {
       const promise = firstValueFrom(
         service.lookupByRegistration('XX00XXX'),
       );
@@ -129,10 +129,10 @@ describe('DvlaVehicleService', () => {
         { status: 400, statusText: 'Bad Request' },
       );
 
-      await expect(promise).rejects.toThrow('Vehicle not taxed');
+      await expect(promise).rejects.toThrow(/does not look like a UK registration/);
     });
 
-    it('maps DVLA errors[].title when detail missing', async () => {
+    it('never shows customers technical errors such as 401', async () => {
       const promise = firstValueFrom(
         service.lookupByRegistration('XX00XXX'),
       );
@@ -143,7 +143,7 @@ describe('DvlaVehicleService', () => {
         { status: 401, statusText: 'Unauthorized' },
       );
 
-      await expect(promise).rejects.toThrow('Unauthorised');
+      await expect(promise).rejects.toThrow(/not available right now/);
     });
 
     it('maps HTTP 404 to friendly message', async () => {
@@ -154,12 +154,10 @@ describe('DvlaVehicleService', () => {
       const req = httpMock.expectOne(TEST_DVLA_URL);
       req.flush({}, { status: 404, statusText: 'Not Found' });
 
-      await expect(promise).rejects.toThrow(
-        'No vehicle found for that registration.',
-      );
+      await expect(promise).rejects.toThrow(/could not find that registration/);
     });
 
-    it('maps status 0 to connection message', async () => {
+    it('maps a network failure to the unavailable message', async () => {
       const promise = firstValueFrom(
         service.lookupByRegistration('AB12CDE'),
       );
@@ -167,9 +165,7 @@ describe('DvlaVehicleService', () => {
       const req = httpMock.expectOne(TEST_DVLA_URL);
       req.error(new ProgressEvent('error'));
 
-      await expect(promise).rejects.toThrow(
-        /Could not reach the registration service/,
-      );
+      await expect(promise).rejects.toThrow(/not available right now/);
     });
 
     it('falls back to generic message for other failures', async () => {

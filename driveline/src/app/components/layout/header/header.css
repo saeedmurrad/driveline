@@ -43,7 +43,8 @@ html.dark .header-glow-line {
 }
 
 .logo-mark {
-  animation: logoGlow 4s ease-in-out infinite;
+  /* Static glow: an endless box-shadow animation repainted the header on every scroll frame. */
+  box-shadow: 0 8px 22px -8px rgba(225, 29, 72, 0.45);
 }
 
 .logo-drive-text {
@@ -65,7 +66,6 @@ html.dark .header-glow-line {
   padding: 3px 8px;
   border: 1px solid transparent;
   background: transparent;
-  backdrop-filter: saturate(130%) blur(4px);
 }
 
 html.dark .logo-drive-text,
