@@ -7,13 +7,21 @@
   <!-- Photo: hover across it to flick through the first few (desktop) -->
   <div class="card-media relative aspect-[4/3] overflow-hidden" (pointermove)="onScrub($event)">
     @if (hasPhotos()) {
-      <img
-        [src]="cardImageSrc()"
-        [alt]="vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model"
-        class="h-full w-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-[1.025]"
-        loading="lazy"
-        decoding="async"
-      >
+      @if (vehicle.thumbBlur) {
+        <img [src]="vehicle.thumbBlur" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full scale-110 object-cover blur-xl" />
+      }
+      <picture class="contents">
+        <source type="image/webp" [attr.srcset]="webp(cardImageSrc())" [attr.sizes]="sizes.card" />
+        <img
+          [src]="cardImageSrc()"
+          [alt]="vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model"
+          width="800"
+          height="600"
+          class="relative h-full w-full object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover:scale-[1.025]"
+          loading="lazy"
+          decoding="async"
+        >
+      </picture>
       @if (scrubCount() > 1) {
         <div class="pointer-events-none absolute inset-x-3 bottom-3 z-[1] hidden gap-1 opacity-0 transition-opacity duration-200 md:flex md:group-hover:opacity-100" aria-hidden="true">
           @for (n of scrubSlots(); track n) {
@@ -34,7 +42,7 @@
       type="button"
       data-vehicle-card-cta
       (click)="toggleSaved($event)"
-      class="save-heart absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-stone-700 shadow-lg ring-1 ring-black/5 transition-all duration-200 hover:scale-110 hover:text-rose-600 dark:bg-slate-900/80 dark:text-slate-200"
+      class="save-heart absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-stone-700 shadow-lg ring-1 ring-black/5 transition-all duration-200 hover:scale-110 hover:text-rose-700 dark:bg-slate-900/80 dark:text-slate-200"
       [class.is-saved]="garage.isSaved(vehicle.id)"
       [attr.aria-pressed]="garage.isSaved(vehicle.id)"
       [attr.aria-label]="(garage.isSaved(vehicle.id) ? 'Remove from saved: ' : 'Save ') + vehicle.make + ' ' + vehicle.model"
@@ -59,9 +67,9 @@
       } @else if (reduction()) {
         <span class="badge badge-reduced text-[11px] font-bold uppercase tracking-wide shadow-lg" [title]="'Was ' + formatPrice(vehicle.previousPrice!)">Reduced {{ formatPrice(reduction()) }}</span>
       } @else if (vehicle.isNew) {
-        <span class="badge bg-emerald-500 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Just arrived</span>
+        <span class="badge bg-emerald-700 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Just arrived</span>
       } @else if (vehicle.isFeatured) {
-        <span class="badge bg-rose-500 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Featured</span>
+        <span class="badge bg-rose-600 text-[11px] font-bold uppercase tracking-wide text-white shadow-lg">Featured</span>
       }
       @if (ulez() && !sold()) {
         <span class="badge bg-white/90 text-[11px] font-bold text-sky-800 shadow-lg" title="Meets the ULEZ / Clean Air Zone emissions standard (Euro {{ euro() }}). Always confirm with the TfL vehicle checker.">ULEZ</span>
@@ -71,7 +79,7 @@
 
   <!-- Details -->
   <div class="flex flex-1 flex-col p-5">
-    <h3 class="text-[17px] font-bold leading-tight text-gray-900 transition-colors group-hover:text-rose-600 dark:text-gray-100 dark:group-hover:text-rose-400">
+    <h3 class="text-[17px] font-bold leading-tight text-gray-900 transition-colors group-hover:text-rose-700 dark:text-gray-100 dark:group-hover:text-rose-400">
       {{ vehicle.make }} {{ vehicle.model }}
     </h3>
     <p class="mt-0.5 truncate text-[13px] text-gray-500 dark:text-gray-400" [title]="vehicle.derivative">{{ vehicle.derivative }}</p>
@@ -79,17 +87,17 @@
     <div class="mt-4 flex items-end justify-between gap-3">
       <div>
         @if (reduction()) {
-          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-slate-500">Was <s class="tabular-nums">{{ formatPrice(vehicle.previousPrice!) }}</s></p>
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">Was <s class="tabular-nums">{{ formatPrice(vehicle.previousPrice!) }}</s></p>
         } @else {
-          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-slate-500">{{ sold() ? 'Last advertised' : 'Cash price' }}</p>
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">{{ sold() ? 'Last advertised' : 'Cash price' }}</p>
         }
         <p class="text-[26px] font-bold leading-none tabular-nums tracking-tight" [class]="reduction() ? 'text-state-reduced' : 'text-gray-900 dark:text-white'">{{ formatPrice(vehicle.price) }}</p>
       </div>
       @let monthlyFin = monthlyFinanceQuote();
       @if (monthlyFin && !sold()) {
         <div class="text-right">
-          <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-700/80 dark:text-emerald-400/80">Finance from</p>
-          <p class="text-[17px] font-bold leading-none tabular-nums text-emerald-600 dark:text-emerald-400" [title]="financeDisclaimerShort">{{ formatPrice(monthlyFin) }}<span class="text-xs font-semibold">/mo*</span></p>
+          <p class="text-[10px] font-semibold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">Finance from</p>
+          <p class="text-[17px] font-bold leading-none tabular-nums text-emerald-700 dark:text-emerald-400" [title]="financeDisclaimerShort">{{ formatPrice(monthlyFin) }}<span class="text-xs font-semibold">/mo*</span></p>
         </div>
       }
     </div>
@@ -116,7 +124,7 @@
       <a
         data-vehicle-card-cta
         [routerLink]="['/vehicle', vehicle.id]"
-        class="flex min-w-0 flex-1 items-center justify-center rounded-xl bg-rose-50 px-2 py-2.5 text-sm font-semibold text-rose-600 transition-all duration-200 hover:bg-rose-500 hover:text-white dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-white"
+        class="flex min-w-0 flex-1 items-center justify-center rounded-xl bg-rose-50 px-2 py-2.5 text-sm font-semibold text-rose-700 transition-all duration-200 hover:bg-rose-500 hover:text-white dark:bg-rose-950/40 dark:text-rose-300 dark:hover:bg-rose-500 dark:hover:text-white"
       >
         {{ sold() ? 'See this car' : 'View details' }}
       </a>

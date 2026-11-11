@@ -6,7 +6,7 @@
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       <span class="text-white">Finance</span>
     </div>
-    <h1 class="text-4xl font-bold font-display text-white mb-3">Car Finance</h1>
+    <h1 class="page-title mb-3">Car Finance</h1>
     <p class="text-rose-100/90 text-lg max-w-2xl">FCA-registered dealership offering flexible finance packages for all credit histories. Drive away your dream car today.</p>
   </div>
 </div>
@@ -14,7 +14,7 @@
 <!-- FCA Badge -->
 <div class="bg-rose-50 border-b border-rose-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-3">
-    <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
     </svg>
     <p class="text-sm text-rose-900"><span class="font-semibold">FCA Registered Dealership.</span> Finance subject to status. Written quotation available on request. We are authorised and regulated by the Financial Conduct Authority.</p>
@@ -104,7 +104,7 @@
       <div class="space-y-5">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 bg-rose-100 rounded-xl flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-rose-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
           </div>
@@ -115,7 +115,7 @@
         </div>
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
@@ -155,7 +155,7 @@
       @if (enquirySent()) {
         <div class="text-center py-8">
           <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
           </div>
@@ -189,12 +189,12 @@
           <div>
             <label class="form-label">Preferred Loan Term</label>
             <div class="relative">
-              <select [(ngModel)]="enquiry.loanTerm" name="loanTerm" class="form-select pr-10">
+              <select aria-label="Preferred loan term" [(ngModel)]="enquiry.loanTerm" name="loanTerm" class="form-select pr-10">
                 @for (term of loanTerms; track term) {
                   <option [value]="term">{{ term }} months</option>
                 }
               </select>
-              <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
               </svg>
             </div>
@@ -204,7 +204,7 @@
             <textarea [(ngModel)]="enquiry.message" name="message" rows="3" placeholder="Any additional information..." class="form-input resize-none"></textarea>
           </div>
           <label class="flex items-start gap-2.5 cursor-pointer">
-            <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-rose-600">
+            <input [(ngModel)]="enquiry.newsletterOptIn" name="newsletter" type="checkbox" class="mt-0.5 rounded text-rose-700">
             <span class="text-sm text-gray-500 dark:text-gray-400">Keep me updated with latest news and offers from {{ dealerName() }}</span>
           </label>
           @if (enquiryError()) {

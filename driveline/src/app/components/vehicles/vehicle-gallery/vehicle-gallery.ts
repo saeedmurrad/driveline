@@ -16,6 +16,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { PHOTO_TAG_CODES, type PhotoTag, type Vehicle } from '../../../models/vehicle.model';
 import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
+import { IMG_SIZES, webpSrcset } from '../../../utils/stock-image';
 
 const RESUME_KEY = 'dl.photo.';
 const MAX_ZOOM = 3;
@@ -49,6 +50,13 @@ export class VehicleGalleryComponent {
   private readonly strip = viewChild<ElementRef<HTMLElement>>('strip');
 
   readonly vehicle = signal<Vehicle | null>(null);
+  readonly sizes = IMG_SIZES;
+
+  /** WebP sizes for a photo; the car's main photo also has a 1600px version. */
+  srcset(src: string): string | null {
+    const v = this.vehicle();
+    return webpSrcset(src, !!v?.mainHiRes && src === v.images?.[0]);
+  }
   private readonly allImages = computed(() => this.vehicle()?.images ?? []);
 
   /** Category of each photo (same order as images), decoded from the sync's e/i/d string. */

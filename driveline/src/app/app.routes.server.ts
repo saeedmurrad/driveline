@@ -1,6 +1,7 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { environment } from '../environments/environment';
 import { VEHICLES } from './data/vehicles.data';
+import { makeSlug } from './utils/make-slug';
 
 export const serverRoutes: ServerRoute[] = [
   // Static (GitHub Pages) builds bake stock into the app, so every vehicle gets a real,
@@ -15,6 +16,12 @@ export const serverRoutes: ServerRoute[] = [
         path: 'vehicle/:id',
         renderMode: RenderMode.Client,
       },
+  {
+    path: 'used-cars/:make',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () =>
+      [...new Set(VEHICLES.filter((v) => v.status !== 'sold').map((v) => makeSlug(v.make)))].map((make) => ({ make })),
+  },
   {
     path: 'legal/:page',
     renderMode: RenderMode.Prerender,

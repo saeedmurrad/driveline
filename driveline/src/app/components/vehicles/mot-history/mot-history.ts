@@ -21,7 +21,7 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
     } @else if (state() === 'none') {
       <p class="text-sm text-gray-600 dark:text-slate-300">
         We could not load the MOT history just now.
-        <a [href]="govLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-rose-600 hover:underline dark:text-rose-300">Check it on GOV.UK ↗</a>
+        <a [href]="govLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-rose-700 hover:underline dark:text-rose-300">Check it on GOV.UK ↗</a>
       </p>
     } @else if (history(); as h) {
       @let s = summary()!;
@@ -68,7 +68,7 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
               </div>
             }
           </div>
-          <div class="mt-1 flex gap-1.5 text-[11px] text-gray-400">
+          <div class="mt-1 flex gap-1.5 text-[11px] text-gray-500">
             @for (p of s.mileagePoints; track p.date) {
               <span class="min-w-0 flex-1 truncate text-center">{{ p.date | date: 'MMM y' }}</span>
             }
@@ -97,7 +97,7 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
                     <li class="flex gap-2 text-rose-800 dark:text-rose-300"><span aria-hidden="true">✕</span><span>{{ d.text }}@if (d.dangerous) { <strong> (dangerous)</strong> }</span></li>
                   }
                   @for (d of t.minors; track $index) {
-                    <li class="flex gap-2 text-gray-700 dark:text-slate-300"><span aria-hidden="true">•</span><span>{{ d.text }} <span class="text-xs text-gray-400">(minor)</span></span></li>
+                    <li class="flex gap-2 text-gray-700 dark:text-slate-300"><span aria-hidden="true">•</span><span>{{ d.text }} <span class="text-xs text-gray-500">(minor)</span></span></li>
                   }
                   @for (d of t.advisories; track $index) {
                     <li class="flex gap-2 text-gray-700 dark:text-slate-300"><span aria-hidden="true">!</span><span>{{ d.text }}</span></li>
@@ -113,11 +113,11 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
         }
       </ol>
       @if (h.tests.length > visibleTests().length) {
-        <button type="button" (click)="showAll.set(true)" class="mt-3 text-sm font-semibold text-rose-600 hover:underline dark:text-rose-300">Show all {{ h.tests.length }} tests</button>
+        <button type="button" (click)="showAll.set(true)" class="mt-3 text-sm font-semibold text-rose-700 hover:underline dark:text-rose-300">Show all {{ h.tests.length }} tests</button>
       }
       <p class="mt-4 text-xs text-gray-500 dark:text-slate-400">
         Official record from the DVSA MOT history service. Advisories are items the tester noted to watch, not failures.
-        <a [href]="govLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-rose-600 hover:underline dark:text-rose-300">View on GOV.UK ↗</a>
+        <a [href]="govLink" target="_blank" rel="noopener noreferrer" class="font-semibold text-rose-700 hover:underline dark:text-rose-300">View on GOV.UK ↗</a>
       </p>
     }
   `,

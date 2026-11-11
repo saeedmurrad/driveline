@@ -78,11 +78,15 @@ console.log(`Removed ${dropped} non-photo images. ${pending.length} vehicles awa
 
 // Delete stock image files that no vehicle references.
 const STOCK_DIR = join(PUBLIC, 'stock/fengate');
-const used = new Set(vehicles.flatMap((v) => v.images ?? []).filter((p) => !/^https?:/.test(p)));
+// Keep each used photo and its WebP copies (X-480.webp, X-800.webp, X-1600.webp).
+const used = new Set(
+  vehicles.flatMap((v) => v.images ?? []).filter((p) => !/^https?:/.test(p)).map((p) => p.replace(/\.(jpe?g|png|webp)$/i, '')),
+);
 let removed = 0;
 if (existsSync(STOCK_DIR)) {
   for (const f of readdirSync(STOCK_DIR)) {
-    if (!used.has(`stock/fengate/${f}`)) {
+    const fileBase = `stock/fengate/${f}`.replace(/-(480|800|1600)\.webp$/i, '').replace(/\.(jpe?g|png|webp)$/i, '');
+    if (!used.has(fileBase)) {
       unlinkSync(join(STOCK_DIR, f));
       removed++;
     }

@@ -49,7 +49,7 @@ const DEVICE_LABELS: Record<string, string> = { mobile: 'Phone', tablet: 'Tablet
       </div>
       <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
         <p class="text-xs font-medium text-stone-500">Car pages viewed</p>
-        <p class="mt-1 text-2xl font-bold tabular-nums text-rose-600">{{ totals().carViews | number }}</p>
+        <p class="mt-1 text-2xl font-bold tabular-nums text-rose-700">{{ totals().carViews | number }}</p>
       </div>
       <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
         <p class="text-xs font-medium text-stone-500">On a phone</p>
@@ -83,7 +83,7 @@ const DEVICE_LABELS: Record<string, string> = { mobile: 'Phone', tablet: 'Tablet
           <div class="flex items-center gap-3 border-t border-stone-100 py-2 text-sm first:border-0">
             <span class="w-5 text-right tabular-nums text-stone-400">{{ i + 1 }}</span>
             @if (r.link) {
-              <a [routerLink]="r.link" target="_blank" class="min-w-0 flex-1 truncate font-medium hover:text-rose-600">{{ r.label }}</a>
+              <a [routerLink]="r.link" target="_blank" class="min-w-0 flex-1 truncate font-medium hover:text-rose-700">{{ r.label }}</a>
             } @else {
               <span class="min-w-0 flex-1 truncate text-stone-500">{{ r.label }}</span>
             }

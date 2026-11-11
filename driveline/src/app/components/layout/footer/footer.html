@@ -8,7 +8,7 @@
           <img src="brand/driveline-mark.svg" alt="" width="44" height="44" class="h-10 w-10 shrink-0 rounded-xl ring-1 ring-white/10" />
           <span class="text-lg font-bold font-display text-white">{{ dealerName() }}</span>
         </a>
-        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+        <p class="text-gray-500 text-xs leading-relaxed mb-4">
           {{ business.tagline }}
         </p>
         @if (business.social) {
@@ -41,18 +41,18 @@
       <!-- Contact (single block — no repeat in bottom bar) -->
       <div class="lg:col-span-4">
         <h3 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Contact</h3>
-        <address class="not-italic text-xs text-gray-400 leading-snug mb-3">
+        <address class="not-italic text-xs text-gray-500 leading-snug mb-3">
           {{ business.address.line1 }}, {{ business.address.line2 }}, {{ business.address.town }},
           {{ business.address.county }} {{ business.address.postcode }}
         </address>
         <ul class="space-y-1.5 text-xs">
           <li>
-            <a [href]="'tel:' + business.phone" class="text-gray-400 hover:text-white transition-colors">{{ business.phone }}</a>
+            <a [href]="'tel:' + business.phone" class="text-gray-500 hover:text-white transition-colors">{{ business.phone }}</a>
             <span class="text-gray-600 mx-1">·</span>
-            <a [href]="'tel:' + business.mobile" class="text-gray-400 hover:text-white transition-colors">{{ business.mobile }}</a>
+            <a [href]="'tel:' + business.mobile" class="text-gray-500 hover:text-white transition-colors">{{ business.mobile }}</a>
           </li>
           <li>
-            <a [href]="salesMailtoHref()" class="text-gray-400 hover:text-white transition-colors break-all">{{ business.email }}</a>
+            <a [href]="salesMailtoHref()" class="text-gray-500 hover:text-white transition-colors break-all">{{ business.email }}</a>
           </li>
         </ul>
       </div>
@@ -62,7 +62,7 @@
         <h3 class="text-white font-semibold text-xs uppercase tracking-wider mb-3">Opening hours</h3>
         <ul class="grid grid-cols-1 gap-y-0.5 text-xs">
           @for (hour of business.openingHours; track hour.day) {
-            <li class="flex justify-between gap-4 text-gray-400">
+            <li class="flex justify-between gap-4 text-gray-500">
               <span>{{ hour.day }}</span>
               <span class="text-gray-300 tabular-nums shrink-0">{{ hour.open }}–{{ hour.close }}</span>
             </li>
@@ -76,7 +76,7 @@
       <p class="text-gray-500 text-[11px]">
         &copy; {{ currentYear }} {{ business.name }}. All rights reserved.
         <span class="text-gray-700 mx-1">·</span>
-        Developed by <a href="https://snatech.co.uk" target="_blank" rel="noopener" class="text-gray-400 hover:text-white underline decoration-stone-700 underline-offset-2 transition-colors">SNA Tech</a>
+        Developed by <a href="https://snatech.co.uk" target="_blank" rel="noopener" class="text-gray-500 hover:text-white underline decoration-stone-700 underline-offset-2 transition-colors">SNA Tech</a>
       </p>
       <nav aria-label="Legal" class="flex flex-wrap gap-x-4 gap-y-1">
         @for (link of legalLinks; track link.route) {

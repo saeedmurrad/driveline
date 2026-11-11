@@ -24,7 +24,7 @@
     --dl-surface-sunken-rgb: 250 245 240;
     --dl-ink-rgb: 41 37 36;
     --dl-ink-muted-rgb: 87 83 78;
-    --dl-ink-faint-rgb: 168 162 158;
+    --dl-ink-faint-rgb: 120 113 108;
     --dl-line-rgb: 231 229 228;
     --dl-brand-rgb: 244 63 94;
     --dl-brand-deep-rgb: 225 29 72;
@@ -306,6 +306,17 @@
     margin-right: auto;
   }
 
+  /** Text links in brand colour, readable in light and dark mode (WCAG AA). */
+  .link-brand { @apply text-rose-700; }
+  html.dark .link-brand { @apply text-rose-300; }
+
+  /** Page header titles (one size scale everywhere). */
+  .page-title {
+    @apply text-[2rem] leading-tight sm:text-4xl lg:text-[2.75rem] font-bold text-white tracking-tight;
+    font-family: 'Poppins', system-ui, sans-serif;
+    text-wrap: balance;
+  }
+
   .section-subtitle {
     @apply text-lg text-ink-muted mt-3;
   }
@@ -348,7 +359,7 @@
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 border-2 border-rose-500 text-rose-600 bg-transparent font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:bg-rose-500 hover:text-white;
+    @apply inline-flex items-center gap-2 border-2 border-rose-600 text-rose-700 bg-transparent font-semibold px-6 py-3 rounded-xl transition-all duration-200 hover:bg-rose-600 hover:text-white;
   }
 
   .btn-accent {
@@ -530,18 +541,25 @@
 }
 
 /* ===================== VIEW TRANSITIONS ===================== */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.25s;
-  animation-timing-function: ease-in-out;
-}
+/* Page changes: the new page fades in with a small lift; the header stays still. */
+header.header-shell { view-transition-name: site-header; }
 
 ::view-transition-old(root) {
-  animation-name: fadeOut;
+  animation: 160ms ease-out both fadeOut;
 }
 
 ::view-transition-new(root) {
-  animation-name: fadeIn;
+  animation: 260ms var(--dl-ease-out) both dlPageIn;
+}
+
+@keyframes dlPageIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
 }
 
 /* ===================== SCROLLBAR ===================== */
@@ -684,3 +702,11 @@ html.dark {
   --dl-surface: #0b1120;
   --dl-surface-warm: #0f172a;
 }
+
+/* ===================== CONTRAST (WCAG AA) ===================== */
+/* Dark mode: darker brand/green text used for light backgrounds becomes light. */
+html.dark .text-rose-700 { color: #fda4af; }
+html.dark .text-green-700 { color: #4ade80; }
+html.dark .text-emerald-700 { color: #34d399; }
+html.dark .text-orange-700 { color: #fdba74; }
+html.dark .text-amber-700 { color: #fcd34d; }

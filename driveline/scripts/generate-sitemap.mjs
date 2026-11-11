@@ -20,6 +20,9 @@ const pages = [
   ['/sell-your-car', 'monthly', '0.7'],
   ['/reviews', 'weekly', '0.6'],
   ['/contact', 'monthly', '0.7'],
+  ['/faq', 'monthly', '0.6'],
+  ['/delivery', 'monthly', '0.6'],
+  ['/part-exchange', 'monthly', '0.6'],
   ['/legal/privacy-policy', 'yearly', '0.3'],
   ['/legal/cookie-policy', 'yearly', '0.3'],
   ['/legal/disclaimer', 'yearly', '0.3'],
@@ -30,9 +33,11 @@ const data = readFileSync(join(ROOT, 'src/app/data/vehicles.data.ts'), 'utf8');
 const START = 'export const VEHICLES: Vehicle[] = ';
 const from = data.indexOf(START) + START.length;
 // Sold cars keep their page for a few days but are not offered to search engines.
-const ids = JSON.parse(data.slice(from, data.indexOf('];', from) + 1))
-  .filter((v) => v.status !== 'sold')
-  .map((v) => v.id);
+const onSale = JSON.parse(data.slice(from, data.indexOf('];', from) + 1)).filter((v) => v.status !== 'sold');
+const ids = onSale.map((v) => v.id);
+// Same slug rule as src/app/utils/make-slug.ts
+const makeSlug = (m) => m.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const makes = [...new Set(onSale.map((v) => makeSlug(v.make)))].sort();
 
 const entry = (path, freq, priority) =>
   `  <url>\n    <loc>${SITE}${path}</loc>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
@@ -41,10 +46,11 @@ const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ...pages.map(([p, f, pr]) => entry(p, f, pr)),
+  ...makes.map((m) => entry(`/used-cars/${m}`, 'weekly', '0.7')),
   ...ids.map((id) => entry(`/vehicle/${encodeURIComponent(id)}`, 'weekly', '0.8')),
   '</urlset>',
   '',
 ].join('\n');
 
 writeFileSync(join(ROOT, 'public/sitemap.xml'), xml);
-console.log(`sitemap.xml: ${pages.length} pages + ${ids.length} vehicles`);
+console.log(`sitemap.xml: ${pages.length} pages + ${makes.length} makes + ${ids.length} vehicles`);

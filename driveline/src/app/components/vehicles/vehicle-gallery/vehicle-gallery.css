@@ -39,7 +39,7 @@
 .photo-tab:hover { border-color: rgb(var(--dl-brand-rgb) / 0.5); color: rgb(var(--dl-brand-deep-rgb)); }
 .photo-tab.active { background: rgb(var(--dl-ink-rgb)); border-color: rgb(var(--dl-ink-rgb)); color: rgb(var(--dl-surface-rgb)); }
 .photo-tab:focus-visible { outline: 3px solid rgb(var(--dl-brand-rgb)); outline-offset: 2px; }
-.photo-tab-count { font-size: 12px; font-variant-numeric: tabular-nums; opacity: 0.6; }
+.photo-tab-count { font-size: 12px; font-variant-numeric: tabular-nums; opacity: 0.85; }
 
 .viewer-tabs {
   display: flex;
@@ -73,7 +73,10 @@
   object-fit: cover;
   transition: transform 500ms var(--dl-ease-out, ease-out);
 }
-.tile:hover img { transform: scale(1.04); }
+.tile:hover img:not(.tile-blur) { transform: scale(1.04); }
+/* Blurred preview of the main photo, shown until the real photo has loaded on top. */
+.tile .tile-blur { position: absolute; inset: 0; filter: blur(18px); transform: scale(1.1); }
+.tile picture img { position: relative; }
 .tile:focus-visible { outline: 3px solid #f43f5e; outline-offset: -3px; }
 .tile-main { grid-row: span 2; }
 .tile-shade {

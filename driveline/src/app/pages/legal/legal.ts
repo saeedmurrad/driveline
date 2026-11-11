@@ -121,6 +121,9 @@ export class LegalComponent implements OnInit {
       { label: 'Finance', route: '/finance' },
       { label: 'Warranty', route: '/warranty' },
       { label: 'Sell Your Car', route: '/sell-your-car' },
+      { label: 'Part Exchange', route: '/part-exchange' },
+      { label: 'Delivery & Collection', route: '/delivery' },
+      { label: 'FAQ', route: '/faq' },
     ]},
     { section: 'Company', links: [
       { label: 'Reviews', route: '/reviews' },

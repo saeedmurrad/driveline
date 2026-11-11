@@ -13,7 +13,7 @@
         @for (v of slots(); track $index) {
           @if (v) {
             @if (v.thumbnailImage) {
-              <img [src]="v.thumbnailImage" [alt]="v.make + ' ' + v.model" class="h-10 w-14 rounded-lg object-cover ring-2 ring-white dark:ring-slate-900" />
+              <img loading="lazy" decoding="async" [src]="v.thumbnailImage | thumb" [alt]="v.make + ' ' + v.model" class="h-10 w-14 rounded-lg object-cover ring-2 ring-white dark:ring-slate-900" />
             } @else {
               <span class="block h-10 w-14 overflow-hidden rounded-lg ring-2 ring-white dark:ring-slate-900"><app-photo-pending [compact]="true" /></span>
             }
@@ -24,7 +24,7 @@
       </div>
       <div class="min-w-0 flex-1">
         <p class="text-sm font-bold text-stone-900 dark:text-white">{{ garage.compareCount() }} of {{ limit }} selected</p>
-        <button type="button" (click)="garage.clearCompare()" class="text-xs font-medium text-stone-500 underline-offset-2 hover:text-rose-600 hover:underline dark:text-slate-400">Clear</button>
+        <button type="button" (click)="garage.clearCompare()" class="text-xs font-medium text-stone-500 underline-offset-2 hover:text-rose-700 hover:underline dark:text-slate-400">Clear</button>
       </div>
       <a
         routerLink="/compare"

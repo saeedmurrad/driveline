@@ -11,7 +11,7 @@
     "build:gh-pages-github-io": "ng build --configuration production,github-pages --base-href /driveline/",
     "test:rules": "firebase emulators:exec --only auth,firestore --project driveline-car-sales \"node scripts/test-firestore-rules.mjs\"",
     "deploy:rules": "firebase deploy --only firestore:rules --project driveline-car-sales",
-    "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/stock-history.mjs && node scripts/filter-stock-images.mjs && node scripts/tag-stock-photos.mjs && node scripts/generate-sitemap.mjs",
+    "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/stock-history.mjs && node scripts/filter-stock-images.mjs && node scripts/tag-stock-photos.mjs && node scripts/optimize-stock-images.mjs && node scripts/generate-share-images.mjs && node scripts/generate-sitemap.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
     "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
     "deploy:firebase": "bash scripts/firebase-deploy-apphosting.sh",
@@ -23,7 +23,8 @@
     "sitemap": "node scripts/generate-sitemap.mjs",
     "filter:images": "node scripts/filter-stock-images.mjs",
     "serve:dist": "node scripts/serve-dist.mjs",
-    "test:e2e": "node scripts/e2e-site-check.mjs"
+    "test:e2e": "node scripts/e2e-site-check.mjs",
+    "test:a11y": "node scripts/a11y-check.mjs"
   },
   "private": true,
   "packageManager": "npm@11.11.0",
@@ -48,11 +49,13 @@
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "autoprefixer": "^10.4.27",
+    "axe-core": "^4.14.0",
     "jsdom": "^28.0.0",
     "playwright": "^1.58.2",
     "playwright-core": "^1.65.0",
     "postcss": "^8.5.8",
     "prettier": "^3.8.1",
+    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.19",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"

@@ -145,3 +145,10 @@ export function isSold(v: Pick<Vehicle, 'status'>): boolean {
 export function isReserved(v: Pick<Vehicle, 'status'>): boolean {
   return v.status === 'reserved';
 }
+
+/** YouTube video id from a watch / share / embed / shorts URL, else null. */
+export function youtubeId(url: string | null | undefined): string | null {
+  if (!url) return null;
+  const m = /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/.exec(url);
+  return m ? m[1] : null;
+}

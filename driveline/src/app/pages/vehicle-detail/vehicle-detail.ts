@@ -1,4 +1,8 @@
+import { ThumbPipe } from '../../pipes/thumb.pipe';
 import {
+  effect,
+  ElementRef,
+  viewChild,
   Component,
   DOCUMENT,
   inject,
@@ -11,6 +15,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MotHistoryComponent } from '../../components/vehicles/mot-history/mot-history';
 import { DvlaVehicleService } from '../../services/dvla-vehicle.service';
 import { FormsModule } from '@angular/forms';
@@ -27,7 +32,7 @@ import { DeliveryCheckComponent } from '../../components/shared/ownership-tools/
 import { VehicleGalleryComponent } from '../../components/vehicles/vehicle-gallery/vehicle-gallery';
 import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
 import { GarageService } from '../../services/garage.service';
-import { GOV_MOT_CHECK, TFL_VEHICLE_CHECKER, euroStandard, meetsUlezStandard, similarVehicles, priceReduction } from '../../utils/vehicle-insights';
+import { GOV_MOT_CHECK, TFL_VEHICLE_CHECKER, euroStandard, meetsUlezStandard, similarVehicles, priceReduction, youtubeId } from '../../utils/vehicle-insights';
 import { EnquirySubmitService } from '../../services/enquiry-submit.service';
 import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
@@ -42,7 +47,7 @@ import {
 
 @Component({
   selector: 'app-vehicle-detail',
-  imports: [
+  imports: [ThumbPipe, 
     RouterLink,
     FormsModule,
     CommonModule,
@@ -71,6 +76,7 @@ export class VehicleDetailComponent implements OnDestroy {
   private destroyRef = inject(DestroyRef);
   private viewportScroller = inject(ViewportScroller);
   private title = inject(Title);
+  private readonly sanitizer = inject(DomSanitizer);
   private meta = inject(Meta);
   private document = inject(DOCUMENT);
   protected readonly garage = inject(GarageService);
@@ -89,6 +95,44 @@ export class VehicleDetailComponent implements OnDestroy {
     return v ? meetsUlezStandard(v) : false;
   });
   readonly sold = computed(() => this.vehicle()?.status === 'sold');
+
+  /** At-a-glance facts with icons (Heroicons-style paths). */
+  readonly keyFacts = computed(() => {
+    const v = this.vehicle();
+    if (!v) return [];
+    const facts = [
+      { label: 'Year', value: String(v.year), icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+      { label: 'Mileage', value: `${this.formatMileage(v.mileage)} mi`, icon: 'M12 12l3-3m-3 3a2 2 0 100 0zM4.9 19a9 9 0 1114.2 0' },
+      { label: 'Fuel', value: v.fuelType, icon: 'M3 21V6a2 2 0 012-2h6a2 2 0 012 2v15M3 21h10M7 8h2m6-2l3 3v8a2 2 0 01-4 0v-3h-1' },
+      { label: 'Gearbox', value: v.transmission, icon: 'M6 4v16m6-16v16m6-16v8H6' },
+      { label: 'Engine', value: v.engineSize ? `${v.engineSize.toFixed(1)}L` : '—', icon: 'M4 9h2V7h4V5h4v2h2l2 2h2v6h-2l-2 2H8l-2-2H4V9z' },
+      { label: 'Body', value: v.bodyType, icon: 'M3 13l2-5a2 2 0 011.9-1.4h10.2A2 2 0 0119 8l2 5v5h-2a2 2 0 01-4 0H9a2 2 0 01-4 0H3v-5zm0 0h18' },
+    ];
+    if (v.previousOwners > 0) facts.push({ label: 'Owners', value: String(v.previousOwners), icon: 'M17 20h5v-2a3 3 0 00-5.4-1.8M9 20H2v-2a3 3 0 015.4-1.8M15 7a3 3 0 11-6 0 3 3 0 016 0z' });
+    return facts.filter((f) => f.value && f.value !== '—');
+  });
+
+  /** YouTube walkaround (loaded only when the visitor presses play). */
+  readonly videoId = computed(() => youtubeId(this.vehicle()?.videoUrl));
+  readonly videoPlaying = signal(false);
+  videoEmbedUrl(id: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`);
+  }
+
+  /** Desktop summary bar: shown once the price card has scrolled out of view. */
+  readonly showSummaryBar = signal(false);
+  private summaryObserver: IntersectionObserver | null = null;
+  private readonly priceCard = viewChild<ElementRef<HTMLElement>>('priceCard');
+  private readonly watchPriceCard = effect(() => {
+    const el = this.priceCard()?.nativeElement;
+    this.summaryObserver?.disconnect();
+    if (!el || !isPlatformBrowser(this.platformId) || typeof IntersectionObserver === 'undefined') return;
+    this.summaryObserver = new IntersectionObserver(
+      ([entry]) => this.showSummaryBar.set(!entry.isIntersecting && entry.boundingClientRect.top < 0),
+      { threshold: 0 },
+    );
+    this.summaryObserver.observe(el);
+  });
   readonly reserved = computed(() => this.vehicle()?.status === 'reserved');
   readonly reduction = computed(() => {
     const v = this.vehicle();
@@ -213,6 +257,7 @@ export class VehicleDetailComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.summaryObserver?.disconnect();
     if (isPlatformBrowser(this.platformId)) this.document.body.style.overflow = '';
     this.stopGalleryAutoplay();
     this.clearVehicleSchema();
@@ -230,17 +275,18 @@ export class VehicleDetailComponent implements OnDestroy {
     this.meta.updateTag({ name: 'description', content: description });
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:description', content: description });
-    this.meta.updateTag({
-      property: 'og:image',
-      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || 'hero/hero-01.jpeg'),
-    });
+    // Branded share card (scripts/generate-share-images.mjs) for cars with photos.
+    const shareImage = this.toAbsoluteUrl(
+      v.images?.length && !v.photosPending ? `og/${v.id}.jpg` : 'og-image.jpg',
+    );
+    this.meta.updateTag({ property: 'og:image', content: shareImage });
+    this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+    this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    this.meta.updateTag({ property: 'og:image:alt', content: `${v.year} ${v.make} ${v.model} at ${dealerName}` });
     this.meta.updateTag({ property: 'og:url', content: canonical });
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
-    this.meta.updateTag({
-      name: 'twitter:image',
-      content: this.toAbsoluteUrl(v.images?.[0] || v.thumbnailImage || 'hero/hero-01.jpeg'),
-    });
+    this.meta.updateTag({ name: 'twitter:image', content: shareImage });
     this.upsertCanonical(canonical);
     this.upsertVehicleSchema(v, canonical);
   }

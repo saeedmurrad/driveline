@@ -66,7 +66,7 @@ page.on('pageerror', (e) => consoleErrors.push(`${page.url()} :: ${e.message.sli
 await context.route(/^(mailto|tel|https:\/\/wa\.me)/, (r) => r.abort());
 
 // ---------------- Pages load ----------------
-for (const p of ['/', '/cars', '/vans', '/finance', '/warranty', '/sell-your-car', '/reviews', '/contact', '/saved', '/compare', '/legal/privacy-policy', '/legal/cookie-policy', '/legal/disclaimer', '/legal/sitemap', '/hub']) {
+for (const p of ['/', '/cars', '/vans', '/finance', '/warranty', '/sell-your-car', '/reviews', '/contact', '/saved', '/compare', '/faq', '/delivery', '/part-exchange', '/used-cars/audi', '/legal/privacy-policy', '/legal/cookie-policy', '/legal/disclaimer', '/legal/sitemap', '/hub']) {
   await step(`page ${p} loads`, async () => {
     await go(p);
     const h = await page.locator('h1').first().innerText().catch(() => '');
@@ -280,6 +280,68 @@ await step('vehicle: enquiry form saves a lead', async () => {
   await form.locator('button[type=submit]').click();
   await page.waitForTimeout(2500);
   check('vehicle: enquiry form saves a lead', (await leadCount()) === n0 + 1);
+});
+
+// ---------------- New: photos, share images, car page extras, new pages ----------------
+await step('photos are served as WebP with a blurred preview', async () => {
+  await go('/cars');
+  const r = await page.evaluate(() => {
+    const imgs = [...document.querySelectorAll('app-vehicle-card picture img')].slice(0, 6);
+    return { webp: imgs.filter((i) => /\.webp$/.test(i.currentSrc)).length, total: imgs.length, blur: document.querySelectorAll('app-vehicle-card img[src^="data:image/webp"]').length };
+  });
+  check('cards: photos load as WebP', r.total > 0 && r.webp === r.total, JSON.stringify(r));
+  check('cards: blurred previews present', r.blur > 0, String(r.blur));
+});
+await step('home banner loads at most 3 photos', async () => {
+  await go('/');
+  const n = await page.evaluate(() => new Set([...document.querySelectorAll('section img[role="presentation"]')].map((i) => i.currentSrc)).size);
+  check('home: banner keeps at most 3 photos in the page', n >= 1 && n <= 3, String(n));
+});
+await step('car page: key facts, share image, summary bar', async () => {
+  await go(VEHICLE);
+  const facts = await page.locator('ul.key-facts li').allInnerTexts();
+  check('vehicle: key facts strip', facts.length >= 5 && facts.some((f) => /Mileage/i.test(f)), facts.map((f) => f.replace(/\s+/g, ' ')).join(' | '));
+  const og = await page.locator('meta[property="og:image"]').getAttribute('content');
+  check('vehicle: share image is the car’s own card', /\/og\/10475\.jpg$/.test(og ?? ''), og ?? '');
+  const ogRes = await fetch(BASE + '/og/10475.jpg');
+  check('vehicle: share image file exists', ogRes.ok && /image\/jpeg/.test(ogRes.headers.get('content-type') ?? ''), String(ogRes.status));
+  const bar = page.locator('.summary-bar');
+  const before = await bar.evaluate((e) => e.classList.contains('is-visible'));
+  // The price card is pinned while its column scrolls; the bar shows once it has gone.
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight - innerHeight - 200));
+  await page.waitForTimeout(700);
+  const after = await bar.evaluate((e) => e.classList.contains('is-visible'));
+  check('vehicle: summary bar appears after scrolling past the price', !before && after, `${before} → ${after}`);
+  await page.evaluate(() => scrollTo(0, 0));
+});
+await step('make page lists only that make', async () => {
+  await go('/used-cars/audi');
+  const titles = await page.$$eval('app-vehicle-card h3', (hs) => hs.map((h) => h.innerText));
+  const h1 = await page.locator('h1').innerText();
+  check('make page: only Audis, with a matching heading', titles.length > 0 && titles.every((t) => /Audi/.test(t)) && /Used Audi/.test(h1), `${h1} · ${titles.length} cars`);
+  const title = await page.title();
+  check('make page: own page title', /Used Audi for sale in Peterborough/.test(title), title);
+  await page.locator('a[href="/used-cars/ford"]').first().click();
+  await page.waitForURL(/used-cars\/ford/);
+  await page.waitForTimeout(500);
+  const fords = await page.$$eval('app-vehicle-card h3', (hs) => hs.map((h) => h.innerText));
+  check('make page: link to another make works', fords.length > 0 && fords.every((t) => /Ford/.test(t)), fords.join(' | '));
+});
+await step('FAQ, delivery and part-exchange pages', async () => {
+  await go('/faq');
+  const faqSchema = await page.locator('#faq-schema').count();
+  await page.locator('details.faq-item summary').first().click();
+  check('faq: answers open and FAQ schema present', faqSchema === 1 && (await page.locator('details.faq-item[open]').count()) === 1);
+  await go('/delivery');
+  const pc = page.locator('app-delivery-check input');
+  await pc.fill('CB1 1PT');
+  await page.locator('app-delivery-check button[type=submit]').click();
+  await page.waitForTimeout(2500);
+  check('delivery: distance check works without a car', /About \d+ miles/.test(await text()));
+  await go('/part-exchange');
+  check('part exchange: steps and valuation link', (await page.locator('ol li').count()) === 4 && (await page.locator('a[href="/sell-your-car"]').count()) > 0);
+  await go('/');
+  check('home: browse by make links', (await page.locator('a[href^="/used-cars/"]').count()) >= 10);
 });
 
 // ---------------- Other forms ----------------

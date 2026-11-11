@@ -167,6 +167,9 @@ function mapToVehicle(api, localImages) {
     sourceListingUrl,
   };
   if (api.reserved === true) v.status = 'reserved';
+  if (typeof api.youtube_link === 'string' && /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(api.youtube_link.trim())) {
+    v.videoUrl = api.youtube_link.trim();
+  }
 
   // Align with site calculator: 60 mo, 0% deposit, 9.9% APR (lowest headline payment)
   const ill60 = illustrativeMonthlyPayment(v.price, 60);

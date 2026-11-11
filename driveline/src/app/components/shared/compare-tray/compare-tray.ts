@@ -1,3 +1,4 @@
+import { ThumbPipe } from '../../../pipes/thumb.pipe';
 import { Component, computed, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -8,7 +9,7 @@ import { COMPARE_LIMIT, GarageService } from '../../../services/garage.service';
 /** Floating "compare" bar plus the small toast used by save / compare actions. */
 @Component({
   selector: 'app-compare-tray',
-  imports: [RouterLink, PhotoPendingComponent],
+  imports: [ThumbPipe, RouterLink, PhotoPendingComponent],
   templateUrl: './compare-tray.html',
 })
 export class CompareTrayComponent {

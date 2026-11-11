@@ -41,6 +41,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://drivelinecarsales.co.uk/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/delivery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/part-exchange</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://drivelinecarsales.co.uk/legal/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -59,6 +74,91 @@
     <loc>https://drivelinecarsales.co.uk/legal/sitemap</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/abarth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/audi</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/bmw</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/citroen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/ford</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/jaguar</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/land-rover</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/mercedes-benz</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/mini</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/nissan</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/peugeot</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/renault</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/seat</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/skoda</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/toyota</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/vauxhall</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drivelinecarsales.co.uk/used-cars/volkswagen</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://drivelinecarsales.co.uk/vehicle/10543</loc>

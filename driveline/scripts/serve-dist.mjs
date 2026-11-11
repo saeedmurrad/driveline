@@ -5,6 +5,7 @@
  *   node scripts/serve-dist.mjs   →  http://127.0.0.1:4310
  */
 import { createServer } from 'node:http';
+import { gzipSync } from 'node:zlib';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,6 +27,14 @@ createServer((req, res) => {
     file = join(ROOT, '404.html');
     status = 404;
   }
-  res.writeHead(status, { 'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream' });
-  res.end(readFileSync(file));
+  const type = TYPES[extname(file)] ?? 'application/octet-stream';
+  let body = readFileSync(file);
+  const headers = { 'Content-Type': type };
+  // Compress text like GitHub Pages does, so local speed tests match the live site.
+  if (/text|javascript|json|xml|svg/.test(type) && /gzip/.test(req.headers['accept-encoding'] ?? '')) {
+    body = gzipSync(body);
+    headers['Content-Encoding'] = 'gzip';
+  }
+  res.writeHead(status, headers);
+  res.end(body);
 }).listen(PORT, '127.0.0.1', () => console.log(`Serving ${ROOT} on http://127.0.0.1:${PORT}`));

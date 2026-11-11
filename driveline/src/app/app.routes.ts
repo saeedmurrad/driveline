@@ -170,6 +170,41 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'faq',
+    loadComponent: () => import('./pages/info/faq').then((m) => m.FaqComponent),
+    data: {
+      seo: {
+        title: 'FAQ: buying, finance, warranty and delivery | DriveLine',
+        description: 'Answers to common questions about buying a used car or van from DriveLine in Peterborough: reserving, test drives, finance, warranty, part exchange and delivery.',
+      },
+    },
+  },
+  {
+    path: 'delivery',
+    loadComponent: () => import('./pages/info/delivery').then((m) => m.DeliveryComponent),
+    data: {
+      seo: {
+        title: 'UK delivery and video viewings | DriveLine',
+        description: 'Buy a used car from DriveLine without visiting: video viewing on WhatsApp or FaceTime, reserve with no online payment, and delivery across the UK.',
+      },
+    },
+  },
+  {
+    path: 'part-exchange',
+    loadComponent: () => import('./pages/info/part-exchange').then((m) => m.PartExchangeInfoComponent),
+    data: {
+      seo: {
+        title: 'How part exchange works | DriveLine',
+        description: 'Part exchange your car at DriveLine, Peterborough: a fair valuation, put it against your next car, and we can collect it from you.',
+      },
+    },
+  },
+  {
+    path: 'used-cars/:make',
+    loadComponent: () => import('./pages/makes/make-page').then((m) => m.MakePageComponent),
+    data: { seo: { managed: true } },
+  },
+  {
     path: 'legal/:page',
     loadComponent: () =>
       import('./pages/legal/legal').then((m) => m.LegalComponent),

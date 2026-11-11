@@ -34,6 +34,8 @@ export class LeadsService {
   /** Signed in with Firebase but not on the staff list. */
   readonly notStaff = signal(false);
   readonly leads = signal<Lead[]>([]);
+  /** False until the first list of leads has arrived (show a placeholder, not "no enquiries"). */
+  readonly leadsLoaded = signal(false);
   readonly leadsError = signal<string | null>(null);
 
   private unsubscribeLeads: Unsubscribe | null = null;
@@ -126,6 +128,7 @@ export class LeadsService {
       query(collection(db, 'leads'), orderBy('createdAt', 'desc'), limit(500)),
       (snap) => {
         this.leadsError.set(null);
+        this.leadsLoaded.set(true);
         this.leads.set(
           snap.docs.map((d) => {
             const x = d.data({ serverTimestamps: 'estimate' });
@@ -157,6 +160,7 @@ export class LeadsService {
     this.unsubscribeLeads?.();
     this.unsubscribeLeads = null;
     this.leads.set([]);
+    this.leadsLoaded.set(false);
   }
 
   /** Visit counts for every London day from `fromDay` (YYYY-MM-DD) onwards. */

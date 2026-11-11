@@ -38,12 +38,12 @@
           <div class="relative sm:col-span-2 xl:col-span-1">
             <label class="search-widget-label">Stock</label>
             <div class="relative">
-              <select [(ngModel)]="filters.category" class="search-widget-field form-select pr-10 font-semibold">
+              <select aria-label="Vehicle type" [(ngModel)]="filters.category" class="search-widget-field form-select pr-10 font-semibold">
                 @for (cat of categories(); track cat.value) {
                   <option [value]="cat.value">{{ cat.label }}</option>
                 }
               </select>
-              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -51,13 +51,13 @@
           <div class="relative">
             <label class="search-widget-label">Make</label>
             <div class="relative">
-              <select [(ngModel)]="filters.make" class="search-widget-field form-select pr-10">
+              <select aria-label="Make" [(ngModel)]="filters.make" class="search-widget-field form-select pr-10">
                 <option value="">Any make</option>
                 @for (make of makes; track make) {
                   <option [value]="make">{{ make }}</option>
                 }
               </select>
-              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -65,13 +65,13 @@
           <div class="relative">
             <label class="search-widget-label">Transmission</label>
             <div class="relative">
-              <select [(ngModel)]="filters.transmission" class="search-widget-field form-select pr-10">
+              <select aria-label="Gearbox" [(ngModel)]="filters.transmission" class="search-widget-field form-select pr-10">
                 <option value="">Any</option>
                 @for (trans of transmissions; track trans) {
                   <option [value]="trans">{{ trans }}</option>
                 }
               </select>
-              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -79,13 +79,13 @@
           <div class="relative">
             <label class="search-widget-label">Fuel</label>
             <div class="relative">
-              <select [(ngModel)]="filters.fuelType" class="search-widget-field form-select pr-10">
+              <select aria-label="Fuel type" [(ngModel)]="filters.fuelType" class="search-widget-field form-select pr-10">
                 <option value="">Any fuel</option>
                 @for (fuel of fuelTypes; track fuel) {
                   <option [value]="fuel">{{ fuel }}</option>
                 }
               </select>
-              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -93,13 +93,13 @@
           <div class="relative">
             <label class="search-widget-label">Doors</label>
             <div class="relative">
-              <select [(ngModel)]="filters.doors" class="search-widget-field form-select pr-10">
+              <select aria-label="Doors" [(ngModel)]="filters.doors" class="search-widget-field form-select pr-10">
                 <option [ngValue]="undefined">Any</option>
                 @for (d of doorOptions; track d) {
                   <option [ngValue]="d">{{ d }}</option>
                 }
               </select>
-              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -116,7 +116,7 @@
           </div>
           <div>
             <label class="search-widget-label">Min engine</label>
-            <select [(ngModel)]="filters.minEngineSize" class="search-widget-field form-select">
+            <select aria-label="Minimum engine size" [(ngModel)]="filters.minEngineSize" class="search-widget-field form-select">
               <option [ngValue]="undefined">Any</option>
               <option value="1.0">1.0L</option>
               <option value="1.2">1.2L</option>
@@ -130,7 +130,7 @@
           </div>
           <div>
             <label class="search-widget-label">Max engine</label>
-            <select [(ngModel)]="filters.maxEngineSize" class="search-widget-field form-select">
+            <select aria-label="Maximum engine size" [(ngModel)]="filters.maxEngineSize" class="search-widget-field form-select">
               <option [ngValue]="undefined">Any</option>
               <option value="1.2">1.2L</option>
               <option value="1.4">1.4L</option>
@@ -189,7 +189,7 @@
         <div class="relative">
           <label class="form-label text-xs">Make</label>
           <div class="relative">
-            <select [(ngModel)]="filters.make" class="form-select pr-10">
+            <select aria-label="Make" [(ngModel)]="filters.make" class="form-select pr-10">
               <option value="">Any Make</option>
               @for (make of makes; track make) {
                 <option [value]="make">{{ make }}</option>
@@ -221,7 +221,7 @@
         <div class="relative">
           <label class="form-label text-xs">Transmission</label>
           <div class="relative">
-            <select [(ngModel)]="filters.transmission" class="form-select pr-10">
+            <select aria-label="Gearbox" [(ngModel)]="filters.transmission" class="form-select pr-10">
               <option value="">Any</option>
               @for (trans of transmissions; track trans) {
                 <option [value]="trans">{{ trans }}</option>
@@ -242,7 +242,7 @@
         <div class="relative">
           <label class="form-label text-xs">Fuel Type</label>
           <div class="relative">
-            <select [(ngModel)]="filters.fuelType" class="form-select pr-10">
+            <select aria-label="Fuel type" [(ngModel)]="filters.fuelType" class="form-select pr-10">
               <option value="">Any Fuel</option>
               @for (fuel of fuelTypes; track fuel) {
                 <option [value]="fuel">{{ fuel }}</option>
@@ -263,7 +263,7 @@
       <!-- Advanced Filters Toggle -->
       <button
         (click)="toggleExpanded()"
-        class="mb-4 flex items-center gap-2 text-sm font-medium text-rose-600 transition-colors hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300"
+        class="mb-4 flex items-center gap-2 text-sm font-medium text-rose-700 transition-colors hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300"
       >
         <svg
           class="h-4 w-4 transition-transform duration-200"
@@ -311,7 +311,7 @@
           <div class="relative">
             <label class="form-label text-xs">Min Engine</label>
             <div class="relative">
-              <select [(ngModel)]="filters.minEngineSize" class="form-select pr-10">
+              <select aria-label="Minimum engine size" [(ngModel)]="filters.minEngineSize" class="form-select pr-10">
                 <option [ngValue]="undefined">Any</option>
                 <option value="1.0">1.0L</option>
                 <option value="1.2">1.2L</option>
@@ -337,7 +337,7 @@
           <div class="relative">
             <label class="form-label text-xs">Max Engine</label>
             <div class="relative">
-              <select [(ngModel)]="filters.maxEngineSize" class="form-select pr-10">
+              <select aria-label="Maximum engine size" [(ngModel)]="filters.maxEngineSize" class="form-select pr-10">
                 <option [ngValue]="undefined">Any</option>
                 <option value="1.2">1.2L</option>
                 <option value="1.4">1.4L</option>
@@ -363,7 +363,7 @@
           <div class="relative">
             <label class="form-label text-xs">Doors</label>
             <div class="relative">
-              <select [(ngModel)]="filters.doors" class="form-select pr-10">
+              <select aria-label="Doors" [(ngModel)]="filters.doors" class="form-select pr-10">
                 <option [ngValue]="undefined">Any</option>
                 @for (d of doorOptions; track d) {
                   <option [ngValue]="d">{{ d }}</option>
@@ -400,7 +400,7 @@
         </button>
         <button
           (click)="resetFilters()"
-          class="rounded-xl border border-transparent bg-gray-100 px-4 py-3.5 text-sm font-medium text-gray-500 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 dark:hover:text-white"
+          class="rounded-xl border border-transparent bg-gray-100 px-4 py-3.5 text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-gray-200 hover:text-gray-700 dark:bg-slate-700 dark:text-gray-300 dark:hover:bg-slate-600 dark:hover:text-white"
         >
           Reset
         </button>

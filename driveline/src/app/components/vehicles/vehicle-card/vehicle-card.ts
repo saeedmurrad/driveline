@@ -17,6 +17,7 @@ import {
 import { GarageService } from '../../../services/garage.service';
 import { euroStandard, meetsUlezStandard, priceReduction } from '../../../utils/vehicle-insights';
 import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
+import { IMG_SIZES, webpSrcset } from '../../../utils/stock-image';
 
 @Component({
   selector: 'app-vehicle-card',
@@ -28,6 +29,8 @@ export class VehicleCardComponent implements OnChanges {
   @Input({ required: true }) vehicle!: Vehicle;
 
   readonly financeDisclaimerShort = FINANCE_DISCLAIMER_SHORT;
+  readonly sizes = IMG_SIZES;
+  readonly webp = webpSrcset;
 
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);

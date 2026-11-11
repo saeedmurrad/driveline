@@ -25,6 +25,9 @@ export class FooterComponent {
     { label: 'Warranty', route: '/warranty' },
     { label: 'Sell Your Car', route: '/sell-your-car' },
     { label: 'Customer Reviews', route: '/reviews' },
+    { label: 'Part Exchange', route: '/part-exchange' },
+    { label: 'Delivery & Collection', route: '/delivery' },
+    { label: 'FAQ', route: '/faq' },
   ];
 
   legalLinks = [

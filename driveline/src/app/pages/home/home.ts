@@ -18,6 +18,7 @@ import { DealerContextService } from '../../services/dealer-context.service';
 import { FindMeACarComponent } from '../../components/shared/find-me-a-car/find-me-a-car';
 import { GarageService } from '../../services/garage.service';
 import { meetsUlezStandard } from '../../utils/vehicle-insights';
+import { makeSlug } from '../../utils/make-slug';
 import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
 
 @Component({
@@ -75,6 +76,15 @@ export class HomeComponent {
       .filter((b) => b.count > 0);
   });
 
+  /** Makes in stock (most first) for the "By make" links. */
+  readonly makes = computed(() => {
+    const counts = new Map<string, number>();
+    for (const v of this.vehicleService.allStock()) counts.set(v.make, (counts.get(v.make) ?? 0) + 1);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([name, count]) => ({ name, count, slug: makeSlug(name) }));
+  });
+
   readonly ulezCount = computed(
     () => this.vehicleService.allStock().filter((v) => meetsUlezStandard(v)).length,
   );
@@ -112,6 +122,18 @@ export class HomeComponent {
         this.heroActiveIndex.update((i) => (i + 1) % this.heroSlides.length);
       }, 8000);
     });
+  }
+
+  /** Slide on show, the next one (preloading) and the previous one (still fading out). */
+  heroNear(idx: number): boolean {
+    const n = this.heroSlides.length;
+    const a = this.heroActiveIndex();
+    return idx === a || idx === (a + 1) % n || idx === (a - 1 + n) % n;
+  }
+
+  heroSrcset(src: string): string {
+    const base = src.replace(/\.jpe?g$/i, '');
+    return `${base}-960.webp 960w, ${base}-1600.webp 1402w`;
   }
 
   setHeroSlide(index: number): void {

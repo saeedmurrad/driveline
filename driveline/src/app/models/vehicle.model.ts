@@ -65,6 +65,12 @@ export interface Vehicle {
    * baked-in stock data small.
    */
   imageTags?: string;
+  /** Tiny blurred preview of the main photo (data URI), shown while it loads. */
+  thumbBlur?: string;
+  /** Main photo also exists as a 1600px WebP (X-1600.webp). */
+  mainHiRes?: boolean;
+  /** YouTube walkaround video from the stock feed, when the dealer adds one. */
+  videoUrl?: string;
 }
 
 export type PhotoTag = 'exterior' | 'interior' | 'detail';

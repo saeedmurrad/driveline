@@ -33,13 +33,13 @@
         <select
           [(ngModel)]="selectedSort"
           (change)="onSortChange()"
-          class="form-select text-sm pr-10 py-2 pl-3 border border-gray-200 dark:border-slate-600 rounded-xl min-w-[180px]"
+          aria-label="Sort by" class="form-select text-sm pr-10 py-2 pl-3 border border-gray-200 dark:border-slate-600 rounded-xl min-w-[180px]"
         >
           @for (option of sortOptions; track option.value) {
             <option [value]="option.value">{{ option.label }}</option>
           }
         </select>
-        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
         </svg>
       </div>
@@ -122,8 +122,8 @@
                     </div>
                   </div>
                   <div class="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-300">
-                    <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>{{ vehicle.year }}</span>
-                    <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>{{ vehicle.mileage.toLocaleString() }} mi</span>
+                    <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>{{ vehicle.year }}</span>
+                    <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>{{ vehicle.mileage.toLocaleString() }} mi</span>
                     <span class="flex items-center gap-1">{{ vehicle.transmission }}</span>
                     <span class="flex items-center gap-1">{{ vehicle.fuelType }}</span>
                     <span class="flex items-center gap-1">{{ vehicle.engineSize }}L</span>
@@ -142,7 +142,7 @@
                     </svg>
                   </a>
                   @if (vehicle.isNew) {
-                    <span class="badge bg-green-500 text-white text-xs">NEW IN</span>
+                    <span class="badge bg-emerald-700 text-white text-xs">NEW IN</span>
                   }
                   @if (vehicle.serviceHistory !== 'None') {
                     <span class="badge-green">{{ vehicle.serviceHistory }} SH</span>
@@ -160,10 +160,10 @@
     <!-- Pagination -->
     @if (totalPages > 1) {
       <div class="flex items-center justify-center gap-2 mt-10">
-        <button
+        <button [attr.aria-label]="'Previous page'"
           (click)="setPage(currentPage() - 1)"
           [disabled]="currentPage() === 1"
-          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-700 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -175,16 +175,16 @@
             [ngClass]="
               currentPage() === page
                 ? 'w-10 h-10 rounded-xl border text-sm font-medium transition-all bg-rose-500 text-white border-rose-500 dark:bg-rose-500'
-                : 'w-10 h-10 rounded-xl border text-sm font-medium transition-all border-gray-200 text-gray-600 hover:bg-rose-50 hover:text-rose-600 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 dark:hover:text-rose-400'
+                : 'w-10 h-10 rounded-xl border text-sm font-medium transition-all border-gray-200 text-gray-600 hover:bg-rose-50 hover:text-rose-700 dark:border-slate-600 dark:text-gray-300 dark:hover:bg-slate-700 dark:hover:text-rose-400'
             "
           >
             {{ page }}
           </button>
         }
-        <button
+        <button [attr.aria-label]="'Next page'"
           (click)="setPage(currentPage() + 1)"
           [disabled]="currentPage() === totalPages"
-          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-600 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="w-10 h-10 rounded-xl border border-gray-200 dark:border-slate-600 flex items-center justify-center text-gray-500 hover:bg-rose-50 hover:text-rose-700 hover:border-rose-200 dark:hover:bg-slate-700 dark:hover:text-rose-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -196,7 +196,7 @@
     <!-- Empty State -->
     <div class="text-center py-20">
       <div class="w-20 h-20 bg-gray-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
-        <svg class="w-10 h-10 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-10 h-10 text-gray-500 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
       </div>

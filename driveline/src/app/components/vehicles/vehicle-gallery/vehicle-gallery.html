@@ -20,12 +20,21 @@
   <!-- Desktop: cinematic mosaic -->
   <div class="gallery-mosaic hidden md:grid" [class.single]="count() === 1" [class.few]="count() > 1 && count() < 5" [style.grid-template-rows]="'repeat(' + mosaicRows() + ', 1fr)'">
     <button type="button" class="tile tile-main group" [style.grid-row]="'span ' + mosaicRows()" (click)="openViewer(0)" [attr.aria-label]="'Open photo 1 of ' + count()">
-      <img [src]="images()[0]" [alt]="title() + ' — main photo'" fetchpriority="high" />
+      @if (category() === 'all' && vehicle()?.thumbBlur) {
+        <img [src]="vehicle()!.thumbBlur" alt="" aria-hidden="true" class="tile-blur" loading="lazy" />
+      }
+      <picture class="contents">
+        <source type="image/webp" [attr.srcset]="srcset(images()[0])" sizes="(max-width: 767px) 1px, (min-width: 1280px) 820px, 64vw" />
+        <img [src]="images()[0]" [alt]="title() + ' — main photo'" fetchpriority="high" width="800" height="600" />
+      </picture>
       <span class="tile-shade" aria-hidden="true"></span>
     </button>
     @for (src of tiles(); track src; let i = $index) {
-      <button type="button" class="tile group" (click)="openViewer(i + 1)" [attr.aria-label]="'Open photo ' + (i + 2) + ' of ' + count()">
-        <img [src]="src" [alt]="title() + ' — photo ' + (i + 2)" loading="lazy" decoding="async" />
+      <button type="button" class="tile group" (click)="openViewer(i + 1)" [attr.aria-label]="'Open photo ' + (i + 2) + ' of ' + count() + (i === tiles().length - 1 && moreCount() > 0 ? ', +' + moreCount() + ' photos' : '')">
+        <picture class="contents">
+          <source type="image/webp" [attr.srcset]="srcset(src)" [attr.sizes]="sizes.galleryTile" />
+          <img [src]="src" [alt]="title() + ' — photo ' + (i + 2)" loading="lazy" decoding="async" width="800" height="600" />
+        </picture>
         <span class="tile-shade" aria-hidden="true"></span>
         @if (i === tiles().length - 1 && moreCount() > 0) {
           <span class="tile-more">+{{ moreCount() }} photos</span>
@@ -48,7 +57,10 @@
     <div #strip class="gallery-strip" (scroll)="onStripScroll()" tabindex="0" aria-label="Vehicle photos, swipe to browse">
       @for (src of images(); track $index) {
         <button type="button" class="strip-item" (click)="openViewer($index)" [attr.aria-label]="'Open photo ' + ($index + 1) + ' of ' + count()">
-          <img [src]="src" [alt]="title() + ' — photo ' + ($index + 1)" [attr.loading]="$index < 2 ? 'eager' : 'lazy'" decoding="async" />
+          <picture class="contents">
+            <source type="image/webp" [attr.srcset]="srcset(src)" sizes="(min-width: 768px) 1px, 100vw" />
+            <img [src]="src" [alt]="title() + ' — photo ' + ($index + 1)" [attr.loading]="$index === 0 ? null : 'lazy'" [attr.fetchpriority]="$index === 0 ? 'high' : null" decoding="async" width="800" height="600" />
+          </picture>
         </button>
       }
     </div>
@@ -91,7 +103,7 @@
       <div class="viewer-grid">
         @for (src of images(); track $index) {
           <button type="button" class="grid-item" (click)="goTo($index)" [attr.aria-label]="'Photo ' + ($index + 1)">
-            <img [src]="src" alt="" loading="lazy" decoding="async" />
+            <picture class="contents"><source type="image/webp" [attr.srcset]="srcset(src)" sizes="(min-width: 1024px) 25vw, 50vw" /><img [src]="src" alt="" loading="lazy" decoding="async" /></picture>
           </button>
         }
       </div>
@@ -100,7 +112,10 @@
         (pointerdown)="onPointerDown($event)" (pointermove)="onPointerMove($event)"
         (pointerup)="onPointerUp($event)" (pointercancel)="onPointerUp($event)" (wheel)="onWheel($event)">
         @for (i of [index()]; track i) {
-          <img class="viewer-img" [src]="images()[i]" [alt]="title() + ' — photo ' + (i + 1)" [style.transform]="transform()" draggable="false" />
+          <picture class="contents">
+            <source type="image/webp" [attr.srcset]="srcset(images()[i])" [attr.sizes]="sizes.full" />
+            <img class="viewer-img" [src]="images()[i]" [alt]="title() + ' — photo ' + (i + 1)" [style.transform]="transform()" draggable="false" />
+          </picture>
         }
         @if (count() > 1) {
           <button type="button" class="vnav left-3" (click)="go(-1)" (pointerdown)="$event.stopPropagation()" aria-label="Previous photo">
@@ -116,7 +131,7 @@
         <div #thumbs class="viewer-thumbs">
           @for (src of images(); track $index) {
             <button type="button" class="thumb" [attr.data-thumb]="$index" [class.active]="$index === index()" (click)="goTo($index)" [attr.aria-label]="'Photo ' + ($index + 1)" [attr.aria-current]="$index === index()">
-              <img [src]="src" alt="" loading="lazy" decoding="async" />
+              <picture class="contents"><source type="image/webp" [attr.srcset]="srcset(src)" [attr.sizes]="sizes.thumb" /><img [src]="src" alt="" loading="lazy" decoding="async" /></picture>
             </button>
           }
         </div>

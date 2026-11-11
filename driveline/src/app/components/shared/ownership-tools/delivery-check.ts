@@ -34,7 +34,8 @@ interface PostcodeResult {
   `,
 })
 export class DeliveryCheckComponent {
-  @Input({ required: true }) vehicle!: Vehicle;
+  /** Optional: the car the visitor is looking at (used in the WhatsApp quote message). */
+  @Input() vehicle?: Vehicle;
   @Input() dealerPostcode = 'PE1 5BH';
   @Input() whatsAppNumber = '447423374244';
 
@@ -76,7 +77,9 @@ export class DeliveryCheckComponent {
 
   whatsAppQuote(): string {
     const v = this.vehicle;
-    const text = `Hello, could I have a delivery quote to ${this.postcode.toUpperCase()} for the ${v.year} ${v.make} ${v.model} (stock ref ${v.id})?`;
+    const text = v
+      ? `Hello, could I have a delivery quote to ${this.postcode.toUpperCase()} for the ${v.year} ${v.make} ${v.model} (stock ref ${v.id})?`
+      : `Hello, could I have a delivery quote to ${this.postcode.toUpperCase()}?`;
     return `https://wa.me/${this.whatsAppNumber}?text=${encodeURIComponent(text)}`;
   }
 }

@@ -8,7 +8,7 @@
         <div class="mb-6 flex items-center gap-3">
           <img src="brand/driveline-mark.svg" alt="" width="44" height="44" class="h-11 w-11 rounded-xl shadow-md" />
           <div>
-            <p class="text-xs font-semibold uppercase tracking-widest text-rose-600">DriveLine Hub</p>
+            <p class="text-xs font-semibold uppercase tracking-widest text-rose-700">DriveLine Hub</p>
             <h1 class="text-xl font-bold">Enquiries</h1>
           </div>
         </div>
@@ -51,7 +51,7 @@
     <header class="sticky top-0 z-20 border-b border-stone-200 bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3">
         <div class="min-w-0">
-          <p class="text-xs font-semibold uppercase tracking-widest text-rose-600">DriveLine Hub</p>
+          <p class="text-xs font-semibold uppercase tracking-widest text-rose-700">DriveLine Hub</p>
           <p class="truncate text-sm text-stone-500">{{ staff()!.email }}</p>
         </div>
         <div class="flex items-center gap-2">
@@ -81,7 +81,7 @@
       <div class="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
           <p class="text-xs font-medium text-stone-500">New, not yet contacted</p>
-          <p class="mt-1 text-2xl font-bold tabular-nums text-rose-600">{{ counts()['new'] }}</p>
+          <p class="mt-1 text-2xl font-bold tabular-nums text-rose-700">{{ counts()['new'] }}</p>
         </div>
         <div class="rounded-2xl bg-white p-4 ring-1 ring-stone-200">
           <p class="text-xs font-medium text-stone-500">Received this week</p>
@@ -139,9 +139,18 @@
               </button>
             </li>
           } @empty {
+            @if (!leadsService.leadsLoaded()) {
+              @for (n of [1, 2, 3]; track n) {
+                <li class="rounded-2xl bg-white p-4 ring-1 ring-stone-200" aria-hidden="true">
+                  <div class="skeleton mb-2 h-4 w-1/2"></div>
+                  <div class="skeleton h-3 w-3/4"></div>
+                </li>
+              }
+            } @else {
             <li class="rounded-2xl bg-white p-8 text-center text-sm text-stone-500 ring-1 ring-stone-200">
               {{ leads().length ? 'No enquiries match.' : 'No enquiries yet. They appear here as soon as someone sends a form on the website.' }}
             </li>
+            }
           }
         </ul>
 
@@ -160,7 +169,7 @@
             <!-- Contact -->
             <div class="mt-4 flex flex-wrap gap-2">
               @if (l.phone) {
-                <a [href]="telHref(l.phone)" class="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700">Call {{ l.phone }}</a>
+                <a [href]="telHref(l.phone)" class="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-800">Call {{ l.phone }}</a>
                 @if (whatsappHref(l.phone); as wa) {
                   <a [href]="wa" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-50">WhatsApp</a>
                 }
@@ -174,7 +183,7 @@
               <p class="mt-4 text-sm">
                 <span class="text-stone-500">Vehicle:</span>
                 @if (vehicleLink(l); as link) {
-                  <a [routerLink]="link" target="_blank" class="font-semibold text-rose-600 hover:underline">{{ l.vehicleLabel }}</a>
+                  <a [routerLink]="link" target="_blank" class="font-semibold text-rose-700 hover:underline">{{ l.vehicleLabel }}</a>
                 } @else {
                   <span class="font-semibold">{{ l.vehicleLabel }}</span> <span class="text-stone-400">(no longer listed)</span>
                 }

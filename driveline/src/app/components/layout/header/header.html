@@ -20,7 +20,7 @@
         <img src="brand/driveline-mark.svg" alt="" width="44" height="44" class="logo-mark h-10 w-10 shrink-0 rounded-xl shadow-md shadow-rose-950/25 transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105 md:h-11 md:w-11" />
         <span class="logo-wordmark flex flex-col leading-none">
           <span class="text-base sm:text-lg md:text-xl font-bold font-display tracking-tight">{{ dealerName() }}</span>
-          <span class="logo-tagline mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-rose-600/80 sm:block dark:text-rose-300/80">Car Sales</span>
+          <span class="logo-tagline mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.22em] text-rose-700 sm:block dark:text-rose-300">Car Sales</span>
         </span>
       </a>
 
@@ -39,7 +39,7 @@
               [routerLink]="item.route"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{exact: false}"
-              class="nav-pill-link px-3 py-2 xl:px-3.5 text-[13px] xl:text-sm font-semibold text-stone-700 hover:text-rose-600 dark:text-slate-200 dark:hover:text-rose-300"
+              class="nav-pill-link px-3 py-2 xl:px-3.5 text-[13px] xl:text-sm font-semibold text-stone-700 hover:text-rose-700 dark:text-slate-200 dark:hover:text-rose-300"
             >
               {{ item.label }}
             </a>
@@ -68,7 +68,7 @@
 
         <a
           routerLink="/saved"
-          class="relative flex h-10 w-10 items-center justify-center rounded-xl text-stone-600 transition-all duration-200 hover:bg-stone-100/90 hover:text-rose-600 dark:text-slate-300 dark:hover:bg-slate-800/90"
+          class="relative flex h-10 w-10 items-center justify-center rounded-xl text-stone-600 transition-all duration-200 hover:bg-stone-100/90 hover:text-rose-700 dark:text-slate-300 dark:hover:bg-slate-800/90"
           [attr.aria-label]="'Saved vehicles (' + garage.savedCount() + ')'"
           title="Saved vehicles"
         >

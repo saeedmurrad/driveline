@@ -1,3 +1,4 @@
+import { ThumbPipe } from '../../pipes/thumb.pipe';
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PhotoPendingComponent } from '../../components/shared/photo-pending/photo-pending';
@@ -21,7 +22,7 @@ const num = (n: number | undefined, suffix = '') =>
 
 @Component({
   selector: 'app-compare',
-  imports: [RouterLink, PhotoPendingComponent],
+  imports: [ThumbPipe, RouterLink, PhotoPendingComponent],
   templateUrl: './compare.html',
 })
 export class CompareComponent {

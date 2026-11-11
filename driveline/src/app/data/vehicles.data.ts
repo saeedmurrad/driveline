@@ -280,7 +280,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1789,
     "bootSpaceSeatsUpLitres": 350,
     "isFeatured": true,
-    "imageTags": "eieeeeeeiiiiiiiiiiiiiieddiedeeee"
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiieddiedeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdIIpJ/gPQN7iw8xAclRAA3mVZub5F/7w2Gpc0Zr1uVDdz3PmNscwnalps916NTfaKfrSg7MuPC0rwPjSQisb5YkaXA2UIrvmdLemUmnog1EQTt9V6LEBw+4ivduVptM33QHnAvcUYlCq+y+0oIfPrAuSsDsx+VJEQlaAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10540",
@@ -418,7 +420,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2113,
     "bootSpaceSeatsUpLitres": 512,
     "isFeatured": true,
-    "imageTags": "eieeeeiiiiiiiiiieieiidieddeiee"
+    "imageTags": "eieeeeiiiiiiiiiieieiidieddeiee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOgMYYbbfXqQvBU59csKmQ8MAD2Rj14VfReYrvIkvUHnTd27T5tpNg612tJ7OB5rqqQSeqbI35WROVbtI/Mef3cz77Ur4D2zf03WsL8OIDZhwV8WEZ2EJoPHN6BCGsXLsQyiRfjNws6JE4gUvS/Y+pNULLhbp53RVdMIAAwEAJCAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10539",
@@ -606,7 +610,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 555,
     "bootSpaceSeatsDownLitres": 1637,
     "isFeatured": true,
-    "imageTags": "eieeeeiiiiiiiee"
+    "imageTags": "eieeeeiiiiiiiee",
+    "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJZgCdACIACsvoqWHRHyAA/dvvFinA6/Q0UbGC8++xM6yWHLtvxpxo68KfC6gzuDhvlAMPtP9dcjvvYzVWILdiBxXixDDCvqzmr7QG59rxC43pZc9fmDXYprOKkdqR70HrTnDsnVsn7rnnodUeSN2/xz9kYb+zkk+OmH+5yPggAA==",
+    "mainHiRes": true
   },
   {
     "id": "10536",
@@ -761,7 +767,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2128,
     "bootSpaceSeatsUpLitres": 233,
     "isFeatured": true,
-    "imageTags": "eieeeeeeiiiiiiiiiiiiiidiideddeeeee"
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiidiideddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdH8J7+AmZHY4wRW12ecFIAP39Oc3K+uuGPyN3r5RA2XpfEP/R1XZrqstwbso4TPyDqPjIe4bz5J4EDiTYe5sJNWxSfqnBdbh2IM/SjXX1vCuXW+GafndQsg7pdgMyut3Hhia3MQj8e6TzDSJvIYPcBGU8R+ZUQeHkT9jz6zd41HL4eVgA",
+    "mainHiRes": true
   },
   {
     "id": "10537",
@@ -901,7 +909,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 660,
     "bootSpaceSeatsDownLitres": 1775,
     "isFeatured": true,
-    "imageTags": "eieeeeeiiiiiiiiiiiiiiie"
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiie",
+    "thumbBlur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdACIeszXN3bRoCT+nFADN8scWcEwhcCCWqDvkv8Cs7JhpsyEXVsZnO/jbuuT0N9rvDs3p2j2xwGnHtRqmDwHThWUR7EorVcmkIa3iRE3Be67+bncx5kGadjftMs/5WrVSohEbL/Ps8Rgkak6IAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10534",
@@ -1053,7 +1063,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1450,
     "acceleration0To60Seconds": 11.1,
     "isFeatured": true,
-    "imageTags": "eieeeeeiiiiiiiiiiiiiiiieide"
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiiieide",
+    "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdEf/2S0BhUV+5oWpDhkwKMAAA/eO4peFCkOgFzWly9rF5rYaUB/jwcJ0s8JtiAuY/2i76BKbASpoWPOvGELAVgZ5GNb85VYa3qE3fvlA9dY7aR9KaABzEYIER9PJIVm2SlU2bQ8ZnUXxLCECUm+Z+bhMC9wvhZwmx88tUyoWZ2ZrC/ZqHTrsipizV6oAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10531",
@@ -1210,7 +1222,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1372,
     "acceleration0To60Seconds": 10.1,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiideedeee"
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiideedeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdH8ADEyaq+AkWABGkJgAA3mVZucBiF8eESFPU/uTqsOprBDbFwWNDZZUMtPQc5fB7cIqz11ge9tCgYayajw15M08paULuHOCbsqMzD6gamqoK4YfoI2KhLxBzFJhx4RSLjTwZfT1D0rNA9JaGjFcb9u/+ZvPF+//4z+eqHUAA",
+    "mainHiRes": true
   },
   {
     "id": "10532",
@@ -1364,7 +1378,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 580,
     "bootSpaceSeatsDownLitres": 1504,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiididdee"
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiididdee",
+    "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCw/f/i2HXCTvSPWPnBeRmSvTAA/Nlwn0w7EzoWDAb5eVGYi7hm2K5VCTceoU5QmTjqBlnjsi174Rj/wJaNzMQI2wy0/p3YGH62w4yA/wImWAtGyZIcTdpiCmhgrr8k5RsUKL70/nGlCCYqhz8V0lRmugwTVoxaInt+AAA=",
+    "mainHiRes": true
   },
   {
     "id": "10526",
@@ -1524,7 +1540,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2084,
     "bootSpaceSeatsUpLitres": 540,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiieiiiiiiiiiiiiiiiiededdeeeee"
+    "imageTags": "eieeeeeeiieiiiiiiiiiiiiiiiiededdeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJYgCdACHunnGzfOaJIkAA/lv+hyAega8KHq1y2Qzr6yqEEwQLOUR+B93onbkArRgFnBaWc4xdQAlXpzWG471q021oNnh2zgIdfLV3SCEbGYnY0K42u1Z4Xp4csE75JdPJ5oH90w3LQsWxQFsRo+yPxm//q17jsW4AAA==",
+    "mainHiRes": true
   },
   {
     "id": "10527",
@@ -1645,7 +1663,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1530,
     "acceleration0To60Seconds": 9.5,
     "isFeatured": false,
-    "imageTags": "eieeiiiiiiiiiiiidddeeeee"
+    "imageTags": "eieeiiiiiiiiiiiidddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZACsEf/gNlwTPckW8oCL1QAA/nwJwsHegPQKF8mnHNhVQF5Z4NGtNeFY8v75TQ6BrSBPQa9bZ8zdHKKKgOQxnhPIz69yMcmVIMm3vR5IIpRxEbRqa4HpogdKR7BjArOghKtguprQZ0jSqJp7DRjwKVBkHmaTnVKGzsjDYfPwGMYWwAA=",
+    "mainHiRes": true
   },
   {
     "id": "10525",
@@ -1788,7 +1808,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 512,
     "bootSpaceSeatsDownLitres": 1604,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiieeiiiidiieeiddeeeee"
+    "imageTags": "eieeeeeiiiiiiiieeiiiidiieeiddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJYgCdEf/gPQY/tXcAzcDLdz8GgADeZVm5vkX/u1tAYFiqADeiDtKdGdcdsLOfqsZddWhCDnk6Cn0BshUnF64IzRhjbbVJkpzTwxjja8pG6zFenOKnb6r0WIA0HLZCXJ/fj6YJcrj805otS+we1XOE9HFsYHXtKXWJfnP3eOIKTabmniagAA==",
+    "mainHiRes": true
   },
   {
     "id": "10523",
@@ -1893,7 +1915,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 185,
     "bootSpaceSeatsDownLitres": 550,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiieideddeddieee"
+    "imageTags": "eieeeeeiiiiiiiieideddeddieee",
+    "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdIHGJ/gOf6zf/8dvFg3xb6sAA99MNRMOqV7o9yxWpepJmwPMHRCSD2j1NDGYFEXOFIvLW+rATZ+mPCMbVClRWYrtWBGhOtV1A4j4TsTqwTH5xjE0qCfu8tGwOaONJI/XWR5Nh2HXHVfQKMR2+lvzVNsyYcLcxO41/BjytkYAA",
+    "mainHiRes": true
   },
   {
     "id": "10522",
@@ -2036,7 +2060,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 360,
     "bootSpaceSeatsDownLitres": 1172,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiddiiiiiiiiiiiiddddeeee"
+    "imageTags": "eieeeeeeiiddiiiiiiiiiiiiddddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoACwKwZ6ot/On2CONAA8jQ1c5NmeBSpIk0X5fLCVbAzxwN0FqJlcwIdIkURuEswj9JaVtQczqNnddkesTLpTsKpsm6q5FSKTJjYYkg12yWOji/kpo/MyP5wiOJGY0RuaG/aNDV2Ktn83Qg7itSmRt67vFt1HBW3yAA=",
+    "mainHiRes": true
   },
   {
     "id": "10521",
@@ -2184,7 +2210,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 290,
     "bootSpaceSeatsDownLitres": 974,
     "isFeatured": false,
-    "imageTags": "eieeeeeidiiiiiiiiddddeee"
+    "imageTags": "eieeeeeidiiiiiiiiddddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJaACdGugD0GlTtQ2CRLKLjhB4APeOVSiR3yqkSQEzgNLP2YnIzLyHd/ZsWVbqOol4UCml98NniAuzjIGY0+ruzl6zYvbDqkp0iwtlovR8CrbMGhrVKu8QCR+43EmrEiUp2E06jxHgr3pnXhr90zTcsqn8f5vLGG6BRmndwluXo7WNAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10520",
@@ -2342,7 +2370,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 565,
     "bootSpaceSeatsDownLitres": 1680,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiiddididdddeeeee"
+    "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiiddididdddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZQCdIFzDMl0JjZuLvtdH1/QA/BYGQCFKK/UOuNnv5eHX5w1MKlOoMa0Vs2gH8AVfUdNu5I3Th+upeTXUzsu4T6J4YQJK2BkSoH+LPsgVvc9JWGOg7JpYE15HO6ffuL/zV9PT/fuRY63og1xgchaAAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10519",
@@ -2503,7 +2533,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
     "isFeatured": false,
-    "imageTags": "eieeeeeeidiiidiiiiiiddideieddeeeeeee"
+    "imageTags": "eieeeeeeidiiidiiiiiiddideieddeeeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQCsAB6XeorvFK3JkpPv4AD7csiYa+Au9VYfqE2LSbVXOd1RRPXLAYwb970U2D2PoFPqRJPESXdXsG5yKP74JtZjvAYYGYxwHQkIV6W4yLhFXW7LxrDbSLMLADe1Zv20Fl66lQSJInXC3XjvTv3POEUnW9MWxqeMAAAA",
+    "mainHiRes": true
   },
   {
     "id": "10517",
@@ -2662,7 +2694,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiddiiiiiiiiiddiiieieddee"
+    "imageTags": "eieeeeeiiiiddiiiiiiiiiddiiieieddee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYgCdIDfJ/gPEeKFj8/65tvQA/I/pexAiJ6LNMa9Mgj0uDSewV1DSWtazzVsY99UFKOmyrnCuuM4dkiSX5KlwkR9TLL0f4Y7TdEkdcYCPlRen0/FwUR1UisX60tDY+BBN/tO2iolseuPRyNek9mag/tb866/rvAAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10516",
@@ -2823,7 +2857,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1530,
     "acceleration0To60Seconds": 9.5,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiieiiiiiiiiiiiiiidededeeeee"
+    "imageTags": "eieeeeeiiiieiiiiiiiiiiiiiidededeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJaACdEf/gJc2CRlDZgzo9MAD947gaEOT4KTm+dZtqAAojtbqnYhoRbZiwZygaf8GlhnDNhgO3T+rd51cveXhS7TAxDvKv6WLp6ie64guVk/NtcqA322hO2JOJwCzSqaBvmQ2qtqIn45dVjOL74rzrL3xDq6Q/ogKDOz/Q0ob/Qu7BCeVDS8M4oAA=",
+    "mainHiRes": true
   },
   {
     "id": "10515",
@@ -2932,7 +2968,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 5998,
     "widthMm": 2050,
     "isFeatured": false,
-    "imageTags": "eiieedeiiiiiiidedddeeee"
+    "imageTags": "eiieedeiiiiiiidedddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdAB9OsrYT+SY2BTQAx2hwh8jwVxGv7RbDZzNBlspu+Bbq7Ei5xQwtVmA4byEXGT3gvVhOsEj0a8cadbTO+zbTeTWYiT2paT1c40LQV/26+KccgJsRWaR9ll1wqoW73tAE6dS8EyWlp1agDKbLzv8H4diBYAZBbgS6DAAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10514",
@@ -3095,7 +3133,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
     "isFeatured": false,
-    "imageTags": "eieeeeeiddiiiiiiiidiiiddiidddddeeieeee"
+    "imageTags": "eieeeeeiddiiiiiiiidiiiddiidddddeeieeee",
+    "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdEf/gPMA7JR46W2n93zDAAAD+W/j15aDPQoEVPXCWW6teLE9yKnujXnLulafjiJlg/V0DZolEAfoLJUA/Hv8FPFvGhhbErwattyp5qgbImwBPzs+qD4cXSaBFKo/myVguvKVwjvs/cTeQKFVOIA671vISUrza8b9v/iH1xMqkeN1MCVsAAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10513",
@@ -3263,7 +3303,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1445,
     "acceleration0To60Seconds": 8.6,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiiidiiddiiiiiiidddeideeeeeeeee"
+    "imageTags": "eieeeeeiiiiiiiiidiiddiiiiiiidddeideeeeeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZQC06dwApXNjs1hAGuJ6EoAA/j+gfB0RapluPgYxu3FKTCc6YjmLaB/O08t2idggvK/sAOKoE1WGlkt54eUJ9aiIERCODBKRkZVw8S3Py5hZ3DM85kcp5/qxFuGImu62zbftWJU8EPJKk+7te8Oyv5bezeys928EDqcglBgAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10511",
@@ -3517,7 +3559,9 @@ export const VEHICLES: Vehicle[] = [
     "seats": 7,
     "taxRate12Month": 200,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiiiiiidedddee"
+    "imageTags": "eieeeeeiiiiiiiiiiiidedddee",
+    "thumbBlur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBOgBCzzYVLx/bbr03cAAPlXWN0sglU/cVSq+ts0cAoZvpulkXdm8E+DjKsTtbCZYmA0cg+Jl2mt46lSrqmTKMoPT0Vk9yqOKf6jbtzZa7IBmCxsNgS9Z74dPwYYqUSxHBoSVQAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10501",
@@ -3666,7 +3710,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 650,
     "acceleration0To60Seconds": 8.4,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiidiidedeeee"
+    "imageTags": "eieeeeeiiiiiiiidiidedeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUFAAASL0oxQCwqyxql/CAAD+sgANp/O9BtVdYPZ3gBlcFu9YTUTZOxVzsXI3QS2R64GL3N6Yig6Qt2FJ230odc9kPwkBWfLyDFv3T1bApVRfvHSWzfaujkwoytV1DUnCkLgGohabYb8IAAAA",
+    "mainHiRes": true
   },
   {
     "id": "10498",
@@ -3815,7 +3861,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 290,
     "bootSpaceSeatsDownLitres": 974,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiiiiiddddeee"
+    "imageTags": "eieeeeeeiiiiiiiiiiddddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdGvND0eiBnYg9+q+AAPeNXT1UQtj9au+qnSPBZFRh+lajY/anVzi4XvrVUMNwSM1rWo0yd/ia+zRfU4Zm29K4RKbfXgS1K+H60po0jKP8/6QmExxU9si/m/lwCJpJLKC38V9roxjRX0jI44o32WfN79/d1Zn6GMB9d9yto4G3gAA=",
+    "mainHiRes": true
   },
   {
     "id": "10500",
@@ -3943,7 +3991,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 437,
     "bootSpaceSeatsDownLitres": 1332,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiiiideee"
+    "imageTags": "eieeeeeeiiiiiiiiideee",
+    "thumbBlur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQAAV4h1rEvlyIv7tdQbJAD+sfdLT0nRoJqSlbBqkO4iUvSf2dHEIGxfy8CaS3c0LFav9Qgd7nn3AQOiKBrvnftc6w8ASRL4Y0e+xBsd/fkRUH8eWJKkxf3ukZTROv/OgpECfxKrAXU+EPERxGIosgh3ImFqAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10499",
@@ -4018,7 +4068,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1175,
     "acceleration0To60Seconds": 13.7,
     "isFeatured": false,
-    "imageTags": "eeieeieieii"
+    "imageTags": "eeieeieieii",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdLpWAQzga03ldSYZqJGKAAMyTe8xJVMdHtZs4d5U8sAVoZ3pGRSV76hkgz6OJZSe116hV+aFvLSxdIvAlR2ybh1pNtAnX+qBi6zuVRRRqPgdmFl+rQVjpjzeuInpYUg1Es5+EqVbGNbBYhp9Dbc97AHqlnQeaA1QOPxvSE1AAAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10492",
@@ -4150,7 +4202,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1816,
     "bootSpaceSeatsUpLitres": 380,
     "isFeatured": false,
-    "imageTags": "eieeeeeeidiiiiiiiddddee"
+    "imageTags": "eieeeeeeidiiiiiiiddddee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQC7Ef/gObMc6VS2mNcaX9LTgAAA/gWsidLWFfRpfPsYFG4VhC4VVNEo6QcuP+sij3BiJUYhVoPFoPirS+fQQJJ/utjI1uka2KRTI8OVWJuf8kofk+UdEbw6LZ9if4no6A4qJxRpMUpJSV8eRw6i2fNbhBAMgc2Trvdh9U5hLQUgAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10485",
@@ -4295,7 +4349,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 650,
     "acceleration0To60Seconds": 8.4,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiideeeee"
+    "imageTags": "eieeeeeiiiiiiiideeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdL13wzDyYmpwLurnIBf8oMVS8AMno49q/jaHJI6ILscOI/qkvJyfpocowQIaIexlUFf02wgsVS80+cLq7r1G2VMapUEZYzW232LC3QsXeYlC5s9MP6sCiA20rqT6Nce2f/IC6hB2MNVukEdpOCAqvKBcOdKctLGXuXwb4Sl8CLLjdjT5MCjgzUDOEoUAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10475",
@@ -4434,7 +4490,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 11950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeieeiiiddiidiidddeeeei"
+    "imageTags": "eieeeeeieeiiiddiidiidddeeeei",
+    "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWD+AQYQyzMJJkiTpIoqAAA9r3ZhKUb7jDFIEyw7MAUJJOOwo18JCB4o0UJ7NX1obEZ3oMHN6Vxz4nryoDaJHSxtuDewlcB7fgLskc0f8fz9jNzwQgf3av/z1GoSiv4qq/JLryWriaGtPK7AgPzbtr0P63Pf0btbUHWdh261H6jcc/lARQAAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10470",
@@ -4586,7 +4644,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 410,
     "bootSpaceSeatsDownLitres": 1255,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiiiiddeeddeeeee"
+    "imageTags": "eieeeeiiiiiiiiiiiddeeddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWCP/wHNe1wiVpku54RddwAAPlwX6c/y2on9HVP61tHL6qHxVCXoFhNewnJq7kyQn26VkACn4ZiOuCwEdp4uVcn7pX9OFmxKcegdp5A0vRMtpUsf1XmuWmuysIjvGBCrQ6xv1TQQTeutm77ukjGx5TtZHNVDAAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10468",
@@ -4991,7 +5051,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 11750,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiiiididiiddddeeee"
+    "imageTags": "eieeeeeiiiiiiiiiididiiddddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBUihLhmFbNBEG8H0FTUXqEkAAD9w9Q5cvQRZmcH6VWoKQT83qSOh052mmW37jODd4Cq+G5zVQ3q2JzHbvcDrmpOI/QcD3ilgiRRz6wiJIArEryL/7foH2VznrDZ/ZjElMavYvIrJe+wx3vR76PR+AAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10457",
@@ -5142,7 +5204,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 530,
     "bootSpaceSeatsDownLitres": 1470,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiidiiiiiieddeee"
+    "imageTags": "eieeeeiiiiiiiidiiiiiieddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGMACcVd9NdV7cXq82YAAPa5yh71pcq+xrGuyHO3N8N6eTCW/5CAiUZUDdY6gzJsrubx0g29UcG1JdQf92WOjMdqNXV1/XNC+krK4jksl7EpFTuMJLASfWYhy4/Qup/OEREjqHmA8Xp2SSAR2369ZRoVbQvAJfitAJG32tw6vGk1EGtBpIkSuj7OVSAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10454",
@@ -5297,7 +5361,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 5950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeeiidiiiiiiiiiiiddddeee"
+    "imageTags": "eieeeeeeiidiiiiiiiiiiiddddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCsBagR+Qtv5AbZwvVnZvcQAPwwX5ZMjeYEV+ZqMwnsdeSmTph/8QgJI5EWVx4fO2bAJpnMp8V4ObLJR3LYfQG+5X5J3dfdJo+U8iIMcLck0O1zxb5WCa8B4Yoq/JlGvF4d3BKobYnYz5mYvQXqzUXWBzyENcTxeFF0iFB5k+AA",
+    "mainHiRes": true
   },
   {
     "id": "10451",
@@ -5452,7 +5518,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 4950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiidiiiddiiiiddddedee"
+    "imageTags": "eieeeeeiiiiidiiiddiiiiddddedee",
+    "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoMYJn/AgG2y1wlEGsExiKzAAPa5vFbzP0BVjMQFdcSI8CbI5o1/AnidyjVdWjZjKCeGFwZhx0A/7KlmLKnvKULrehkiJ4PHH8DbADonaz9YwgJLy0L49zKgV3ZXiph64H6olGJhEV0rYGf2UXGURl0/LL7dPCC5gNVzCTGnYOUx9OCUYCh5UQAA",
+    "mainHiRes": true
   },
   {
     "id": "10449",
@@ -5553,7 +5621,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiideee"
+    "imageTags": "eieeeeiiiiiiideee",
+    "thumbBlur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWAMYdaqTq/d0n/ThoZxT/gAPwsf2BdgwyickiTtpNXkZYMz/zNAXdExt6BfQ22F6y+J0hzFfUGUtmpAqoKzVkl+ctHWv/9RaBaDJun0DqGs05t/7ymry8lyRWisaXp3RN830EQXA0ayCAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10444",
@@ -5630,7 +5700,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 410,
     "bootSpaceSeatsDownLitres": 660,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiidiiiidedddddeeeee"
+    "imageTags": "eieeeeiiiiiiiiidiiiidedddddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGZjB3li4I4yw3B2UZYAAPlAXNytoz1OEdYDbpIX4VpWn7m+dEFrP2glNaaNp91fSyD0RgdIcQUkHGjDXFjCZmIWjhRu606vyUAfJwOJpXBpDmhKksN+DHSb/z7AGhHM87/nIUn8Y/yByxmLqJ22MsnfzZ7kYvCuln3+frPImLAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10441",
@@ -5805,7 +5877,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 23950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiidediddiiiiiiiiddiidedddeeeddeddiidddeee"
+    "imageTags": "eieeeeeeiiiiidediddiiiiiiiiddiidedddeeeddeddiidddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCsH8GJ/gQDJStzvy2YSIoqiGAA+WHPozqV5p44dg8RekWpCVtlRh39zAvZeagdtLfZWUVzdm9qElz5QfzsYXbDoweh2cjcAeTiBDkwiE7Ayw7V9hUzEYJrchbnhqqt9PGre6AAUgYtoy3Oq4YoyN2FyuS3QmzXlOlSvN2Pzd/QrQAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10433",
@@ -5918,7 +5992,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 9950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiiiiiedeee"
+    "imageTags": "eieeeeiiiiiiiiiiiiedeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJYwC7AB6HVXJ5dV8DHL+ukAD+cbSRvUuu2imamRNBZc8TPJBq53D5ZkBPLk4+zjTnpxtx8DgrooTkVklXRk8uabns5DvfWj+Sz7+SYowieEWo/1nsuS4rGTvO4rU6hXjNg/HC+OwQ+a0ibxDWhFbxj3JgAA==",
+    "mainHiRes": true
   },
   {
     "id": "10428",
@@ -6003,7 +6079,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 1698,
     "acceleration0To60Seconds": 11.2,
     "isFeatured": false,
-    "imageTags": "eieeeeeiideeee"
+    "imageTags": "eieeeeeiideeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBdkDjE/wHObYpdg8tBUwQbMBgAA9r3Zifwn0Dg9HVctPoaOeBymEmPd5H1f15oIZXDpXf0N0Zrem4m8A3bcWd+JKlaCwDV7Q901Am3iYEGDmsAXTqeG/4Cg6Ja+BO2tou/GGJH6Dv1W+PmsY3DhSLbfjsbG45zY4AAA",
+    "mainHiRes": true
   },
   {
     "id": "10427",
@@ -6126,7 +6204,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 121,
     "bootSpaceSeatsDownLitres": 1913,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiidiiiiiiddeeeee"
+    "imageTags": "eieeeeiiiidiiiiiiddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCsACBTTzMhs8GwM47YYwAA/b+7Y9/3xipi2bMXbKdJalcStolVSR926Y7xX6eybl/l7eZhhsmk61AoFcyaPl04b2Cupq+J/Fp0Mgr5WmPkJA+B32mV8UV6YWfhA+f5qUHcD83LCM8OiWelF7I4VbAEbLfF6pgAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10421",
@@ -6270,7 +6350,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 165,
     "bootSpaceSeatsDownLitres": 2181,
     "isFeatured": false,
-    "imageTags": "eieeeeiiidiiiiiiiddeeee"
+    "imageTags": "eieeeeiiidiiiiiiiddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWD+ABmIubdkVgYXE3oIMeAAPwwX6LgnoBobQhQl+zT2/qLJBDIazFxCB1CyuUkTif6+2qt09xxwVZGK/Y7/LqZoDxPgNuTRjuUYe0xbt7mVmn5NrWjQtJ6TSy2B09dI1C/QCMH0QLwoukOymUvRgAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10419",
@@ -6420,7 +6502,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
     "isFeatured": false,
-    "imageTags": "eieeeeiiidiiiiiiiiddddeeee"
+    "imageTags": "eieeeeiiidiiiiiiiiddddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBadBAqU6haT6HGNdFVYFjwAAPa92YoFgJeaCb4CMudv5Xo8MU4V6EXu/DcIHJpYzsqPpzvLJXIx0EQuj/5uyGzvLn3ZgAMylk4WdMt0Rtti6Z0vQ7K7+IlK1DtmM+JwAO8InNcZY23xide6fPSayWNLQ9+G/tpNOCkAAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10416",
@@ -6566,7 +6650,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 7950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiiiiiiiiiiiiiddedeeee"
+    "imageTags": "eieeeeeiiiiiiiiiiiiiiiiiddedeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdABs2Noq9U2YVGnQAAO+Uu7K4VjuXvxVdAj02e1zlDw7vHqqAm/zg+2KJ+v+nWiOIVXPUMfyvgjQewuhma6WYMYruz1odkyFruUTRmdRgQIh2p64jwGvntagAgB/IYWEl4yJTgAxXNuMmsUra9EXxLgQpGijFF/rrH+YQKJtVgAA=",
+    "mainHiRes": true
   },
   {
     "id": "10414",
@@ -6720,7 +6806,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 6950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeiiiddiiiiiiiidiiddeeee"
+    "imageTags": "eieeeeiiiddiiiiiiiidiiddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCxC8GJ/gQD84q8D2kFlJTRp4o3oIAA4njkkCoEBf49Ozjps/Em3kmnoLOlAUzRXNvpQinhgZbMV5cNhjG/r2uNx/JZ9yZlyZ0uk4TNseIOc33R3s96Tjop38wUs5pTHK7jZzN9HvSp1g6V2YWqoqTc3fMjYs/bKzpm/k3sJemb+SJgJNsUAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10415",
@@ -6850,7 +6938,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 4750,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiieiideeddedee"
+    "imageTags": "eieeeeiiiiiiiiieiideeddedee",
+    "thumbBlur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdMoADgGwjljhZeKcHSsC32AD2vdmJ/CfSE9CSHJtvmO2ACUAa5W4M2qViKwglh/mQA+QbjDXO7qNlZ46p35s6znkHuq5kHgTxJsqGuO90U4DkFfLpOw6HhvJhzGIumYAkd4uqR/sx328QbdD0cyhnGDfZ4AA=",
+    "mainHiRes": true
   },
   {
     "id": "10410",
@@ -6996,7 +7086,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 3950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiidddeeeee"
+    "imageTags": "eieeeeiiiiiiiiidddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoGvtgQDKs3sZD2DOODmqfOAAPz79mjpZVhpuu6gLQ1FRM83zCyzrkfmhL0uG80h6hzF5wECTQ0wT/6YjPxPNEdY5aH3qHGfavt04p2fh9MYLacBZyZcbgyu4kvBkhrR0dNvK/AhA64oXQ1WX9UyYkWjP7pBv6m06s7MLx7AzHTmOvf24RH7LMmegKTWMHTSQVoAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10404",
@@ -7153,7 +7245,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1560,
     "acceleration0To60Seconds": 8.1,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiiiiiiidiiiiiieiiiddddee"
+    "imageTags": "eieeeeeeiiiiiiidiiiiiieiiiddddee",
+    "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoGv/gLWEVBZpOXNLvICtwAA+UCDOFks93zF+H6MPcOq+EwifvLy8xXy9f51FX+bXOsl1STe54Uzy2U5hGg/7Sv8YnrbnPuHZaLxtCc9QsYHpZduOri6C1i/gCTukA08J0GAombHqZr5ZaWvUSfGNCepeuEu/ml8BQlRdB87+JnyV0+TfRpFNgAA",
+    "mainHiRes": true
   },
   {
     "id": "10280",
@@ -7295,7 +7389,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 430,
     "bootSpaceSeatsDownLitres": 1585,
     "isFeatured": false,
-    "imageTags": "eieeeeiiieiidiiiiddddeeee"
+    "imageTags": "eieeeeiiieiidiiiiddddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdGuAAXxmlfLFrovqHgAD5YZ2hFQBko2I6LrLDjwGlE5fhU6RZ0KDfSOVMd7DMR1c3ng1vEdCeNYzXKkInKNp1EiO+QtPzWllCan1H+tEy0uo1TRYKSMFADhq1KnOJNL24OxwJTp/6H73uSqP1aZrmHRfOtIAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10232",
@@ -7463,7 +7559,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 16950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeeeiiiiiiiieiiieiiiidiiiiedeeeiidddee"
+    "imageTags": "eieeeeeeeiiiiiiiieiiieiiiidiiiiedeeeiidddee",
+    "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGMHr+geI73fkk3t7PRP4ZgA4n3ZiOwEo63kBFjZh06Vk7CjZUZNUbZYabjkgCQd+eFCcKfzHRNZQD8tkWFB2MFsbSVAzmUCz4+rI5Ja3viT2ICyyLkD5BupyUZKtxqLaXLwSKJaHK3XdWiOhEjzhx17V50Bpe4MxGLG+g478YiGdTtfNel+mAAA",
+    "mainHiRes": true
   },
   {
     "id": "10221",
@@ -7608,7 +7706,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 2950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiddddeeee"
+    "imageTags": "eieeeeiiiiiddddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBOgBHt/pYE4H7b41QwAAM49oes98zBFp0YRQFAkvMKKUIFXyiz52GBhoo2hFItWVri02T1sB+8c3eZoGhVDmYgPGcXw+RYxJc5/JGr/+HiV61O95GF+5FEOdl1Uul88DHTrgaDf6AAA",
+    "mainHiRes": true
   },
   {
     "id": "10198",
@@ -7728,7 +7828,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 385,
     "bootSpaceSeatsDownLitres": 1506,
     "isFeatured": false,
-    "imageTags": "eeeeeee"
+    "imageTags": "eeeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBACdASoUAA8APt1cpkyopSOiMAgBEBuJQBdkFThXF4ey/Sc/i6ROD1wAyztm9FMi8omLKbzsHgmQ7Jjo7Un83bquhT8pmUxkdU0IsHApe0UOjfHUrRaLpd9dGr5g85fCf1dV6B3AG0NamJwAfj1YwmLQXGcgAAA=",
+    "mainHiRes": true
   },
   {
     "id": "10165",
@@ -7862,7 +7964,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 5450,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeiiieiiiiiiiiiiidddddidiiiieeee"
+    "imageTags": "eieeeeeiiieiiiiiiiiiiidddddidiiiieeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoMh10etyJjL5D/x2feqk0wxOAD+kYgY+I2xyDMd+A/9Ff9tB+gwcFXBj2+gToxsKzAZufdTGdb312K9u5c/Yg1bUDqTbbMlaUMFSOkjG5oHRh9cRfHMyOWI6gmtXAGkQNlFf+M/jTy8fP09dn6vtNzT4L8lsalnok4ctqct3rPNpaN8gxAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10125",
@@ -7949,7 +8053,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 551,
     "bootSpaceSeatsDownLitres": 2050,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiieeee"
+    "imageTags": "eieeeeiiiiiiieeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBadAxzvAtk+CJx6czUAAP6JI83wBxJY9Sxkw3s9xHEJqJC1IyrYXLJDirPaeTFjzL8r6+6019n6qIXItFP1Ytz6FacJQ/8hU6HjvyjicGrIoVVJy0c0x94Qwd8LqNqf77m0MHNWVGZefwAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10002",
@@ -8075,7 +8181,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1761,
     "acceleration0To60Seconds": 6.8,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiiiidiieideiiddddddddeeeee"
+    "imageTags": "eieeeeiiiiiiiiiiidiieideiiddddddddeeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZACdMoMlsn/Ac7dJ9lD5G7zr2hPDGYAA4l9XtxVxR8cAvZF2CNTD0K5xOMa8fi72IEVsjDVpI6652VD+XrfZ695WdVnLm8YeD8y1QepTd0ZAbs7zLrcEW5Uuj/WiZT/+VGQK21MmGYE0BXCM8+W5U5RyCxmcFK+M8R3jSnDMDOxE0OERnymjt+QsTCqcJzuXQAAA",
+    "mainHiRes": true
   },
   {
     "id": "10021",
@@ -8278,7 +8386,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 6450,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeeeidiiiiiiiiiedeee"
+    "imageTags": "eieeeeeeidiiiiiiiiiedeee",
+    "thumbBlur": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoMYJn/AgEzHbBVGiG8DlKfJ1AAA4mfrHGRdxXLXu3N45aKUDMYqCRNAf6VyzS5LC22NskzLSvIhHKd+UN/tH9ekFqr76Irlk03e9N55HPC/+eutnaYHSd4w33sZftuylv5uBieZPUFRM4Tw8i1H7e1JJ6a7pAgmPmZkO50mBj+MEqXLAJZCOTDvySr0PTNUGQMQAA==",
+    "mainHiRes": true
   },
   {
     "id": "10081",
@@ -8408,7 +8518,9 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 537,
     "bootSpaceSeatsDownLitres": 1851,
     "isFeatured": false,
-    "imageTags": "eieeeeeeiididiiididddidiiiiideededee"
+    "imageTags": "eieeeeeeiididiiididddidiiiiideededee",
+    "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoACtNULviTWER4530y8AP5qW59Nog0iNPHkoQjIZu6W7aZQd4aLlYbab8ugMm2VDa2uOmdwiOba8Dn7zCMtPCHrTqZQCXB+DE6n9kodlk76N5FIQnzuiT6wsjtloDi0zLgFvI/HdmpdYv4TqxN7qBq9mEAAAA==",
+    "mainHiRes": true
   },
   {
     "id": "10004",
@@ -8530,7 +8642,9 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 1950,
     "priceReducedAt": "2026-11-09",
     "isFeatured": false,
-    "imageTags": "eieeeeidiiiiiiieddeeee"
+    "imageTags": "eieeeeidiiiiiiieddeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCdACPOPq6HYmgWEGnSAKAA9rmToVYHOxmFAcvrW4s52zL0tD/4laIxjH+SpYkt9Fb29KVZu7o4/tJhhwVGKSPVAmsiUxfHHqNVTThl/BCq82mbCESkv7jxci5vI7mkjxqDY6EZdDD+qEW4IeAA",
+    "mainHiRes": true
   },
   {
     "id": "10006",
@@ -8614,7 +8728,9 @@ export const VEHICLES: Vehicle[] = [
     "widthMm": 2200,
     "acceleration0To60Seconds": 8.8,
     "isFeatured": false,
-    "imageTags": "eieeeeiiiiiiiiideddeee"
+    "imageTags": "eieeeeiiiiiiiiideddeee",
+    "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoHgzAbHgsY3MmU2eF3AfQbAAOJgCvkej9xIQiOCwoOTftcyOPtlqtdJjNaD7ob6ZDZs3sPRy7oNXYkBxBNqnGoGaDr/ZyyJd8E2jJXxkWrQREh5jl77B/nP3QzaE26DKdMQB5tB7GD/2d65oAp9ZIvjaLy4KCvBK30AAA==",
+    "mainHiRes": true
   },
   {
     "id": "10007",
@@ -8737,7 +8853,9 @@ export const VEHICLES: Vehicle[] = [
     "lengthMm": 5359,
     "widthMm": 1850,
     "isFeatured": false,
-    "imageTags": "eieeeeeiiiiiideeeee"
+    "imageTags": "eieeeeeiiiiiideeeee",
+    "thumbBlur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOgBHnSSjy5zjmJuZtbHAD5N9/7E6MjIahhO7PnJHxg0GnQWbLB7mRNDgQj7pGSf7AdzpUUoC4pasEQx9BHrrY/vgsI4CCwpiPApfbalHARdPX/OlSbe5Sn/8rQH/83Ib2yzE5sam2bB5IR4AAA",
+    "mainHiRes": true
   }
 ];
 
