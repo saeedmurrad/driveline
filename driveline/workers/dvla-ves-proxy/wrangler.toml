@@ -1,13 +1,13 @@
-# Cloudflare Workers — DVLA VES CORS proxy for static sites (GitHub Pages)
-# 1. npm i -g wrangler && wrangler login
-# 2. wrangler secret put DVLA_API_KEY   # optional if app sends x-api-key from browser
-# 3. wrangler deploy
-# 4. Copy https://<your-worker>.<subdomain>.workers.dev into GitHub secret DVLA_LOOKUP_URL
+# DriveLine vehicle check worker (DVLA VES + DVSA MOT History). See README.md.
+# Cloudflare account: snatechltd@gmail.com (SNA Tech)
+# Live URL: https://driveline-dvla-ves-proxy.snatechltd.workers.dev  (GitHub secret DVLA_LOOKUP_URL)
+#
+# Keys are worker secrets, never in this file:
+#   wrangler secret put DVLA_API_KEY
+#   wrangler secret put MOT_CLIENT_ID / MOT_CLIENT_SECRET / MOT_TOKEN_URL / MOT_API_KEY
 
 name = "driveline-dvla-ves-proxy"
 main = "worker.js"
 compatibility_date = "2024-01-01"
-
-# Uncomment after first deploy if you store the key only on the worker:
-# [vars]
-# (use: wrangler secret put DVLA_API_KEY)
+workers_dev = true
+preview_urls = false

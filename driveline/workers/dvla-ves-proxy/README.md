@@ -13,8 +13,10 @@ Only drivelinecarsales.co.uk (and localhost) may call it from a browser. MOT ans
 cached for 12 hours. The website switches each feature on by itself:
 **Sell Your Car → Look up** and the **MOT history** tab on every car page.
 
-Live worker: `https://driveline-dvla-ves-proxy.driveline-dvla-ves-proxy.workers.dev`
-(stored in the GitHub secret `DVLA_LOOKUP_URL`).
+Live worker: `https://driveline-dvla-ves-proxy.snatechltd.workers.dev` on the SNA Tech
+Cloudflare account (snatechltd@gmail.com), stored in the GitHub secret `DVLA_LOOKUP_URL`
+since 11 Nov 2026. (An older copy of the first version still runs on another Cloudflare
+account at `driveline-dvla-ves-proxy.driveline-dvla-ves-proxy.workers.dev`; nothing uses it.)
 
 ## 1. Get the free keys (Saeed, once)
 
