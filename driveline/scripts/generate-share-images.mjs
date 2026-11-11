@@ -98,7 +98,7 @@ for (const v of vehicles) {
   const out = join(OUT_DIR, `${v.id}.jpg`);
   keep.add(`${v.id}.jpg`);
   // Rebuild only when what is drawn changed.
-  const key = createHash('md5').update(JSON.stringify([v.year, v.make, v.model, v.derivative, v.price, v.previousPrice, v.status, v.mileage, v.fuelType, v.transmission, photoPath, statSync(photoPath).mtimeMs, 4])).digest('hex');
+  const key = createHash('md5').update(JSON.stringify([v.year, v.make, v.model, v.derivative, v.price, v.previousPrice, v.status, v.mileage, v.fuelType, v.transmission, photoPath, statSync(photoPath).mtimeMs, 6])).digest('hex');
   const stamp = out.replace(/\.jpg$/, '.key');
   if (existsSync(out) && existsSync(stamp) && readFileSync(stamp, 'utf8') === key) continue;
 
@@ -111,7 +111,9 @@ for (const v of vehicles) {
   if (v.status === 'sold') layers.push({ input: soldSvg(), left: 0, top: 0 });
   await sharp({ create: { width: W, height: H, channels: 3, background: '#16050a' } })
     .composite(layers)
-    .jpeg({ quality: 82, mozjpeg: true })
+    // Baseline (not progressive) JPEG: WhatsApp's phone app shows progressive JPEGs as a
+    // small blurry thumbnail. Well under 300 KB so every app shows the large preview.
+    .jpeg({ quality: 86, progressive: false, optimiseCoding: true, trellisQuantisation: true, overshootDeringing: true, quantisationTable: 3, chromaSubsampling: '4:4:4' })
     .toFile(out);
   writeFileSync(stamp, key);
   made++;

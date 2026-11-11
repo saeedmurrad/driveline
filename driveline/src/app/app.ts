@@ -55,6 +55,8 @@ export class App implements OnInit, OnDestroy {
   private scrollCleanup: (() => void) | null = null;
   private navSub: Subscription | null = null;
   readonly isHubRoute = signal(false);
+  /** Car pages have their own call / WhatsApp bar, so the floating button is hidden there. */
+  readonly isVehicleRoute = signal(false);
   private readonly visitStats = inject(VisitStatsService);
 
   constructor() {
@@ -100,6 +102,7 @@ export class App implements OnInit, OnDestroy {
   private updateHubRouteFlag(): void {
     const path = this.router.url.split('?')[0].split('#')[0];
     this.isHubRoute.set(path.startsWith('/hub'));
+    this.isVehicleRoute.set(path.startsWith('/vehicle/'));
   }
 
   isHomeRoute(): boolean {

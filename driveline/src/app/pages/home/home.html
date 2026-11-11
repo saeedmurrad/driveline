@@ -130,6 +130,16 @@
           </div>
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-xl mb-3 font-display">Quality Vehicles</h3>
           <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 max-w-md">Every vehicle undergoes a thorough multi-point safety inspection before being offered for sale.</p>
+          <ul class="mb-6 hidden space-y-3 lg:block">
+            @for (point of ['HPI checked for finance and write-offs', 'Mileage warranted', 'Our own warranty included', 'Delivery and video viewings available']; track point) {
+              <li class="flex items-center gap-3 text-sm font-medium text-gray-800 dark:text-slate-200">
+                <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300" aria-hidden="true">
+                  <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                {{ point }}
+              </li>
+            }
+          </ul>
         </div>
         <a routerLink="/cars" class="inline-flex items-center gap-2 text-rose-700 dark:text-rose-400 text-sm font-bold hover:gap-3 transition-all duration-300">
           Browse Cars <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -286,7 +296,7 @@
       </a>
     </div>
 
-    <div class="home-featured-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="home-featured-grid swipe-row sm:grid-cols-2 lg:grid-cols-3">
       @for (vehicle of featuredVehicles(); track vehicle.id) {
         <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
       }
@@ -307,9 +317,9 @@
           <h2 id="price-drops-heading" class="section-title">Price drops</h2>
           <p class="section-subtitle">Reduced in the last 30 days. The old price is what we advertised it at before.</p>
         </div>
-        <p class="hidden shrink-0 rounded-full bg-state-reduced/10 px-4 py-2 text-sm font-bold text-state-reduced sm:block">{{ reducedVehicles().length }} reduced</p>
+        <p class="hidden shrink-0 rounded-full bg-state-reduced/10 px-4 py-2 text-sm font-bold text-rose-800 dark:text-rose-200 sm:block">{{ reducedVehicles().length }} reduced</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="swipe-row sm:grid-cols-2 lg:grid-cols-3">
         @for (vehicle of reducedVehicles().slice(0, 6); track vehicle.id) {
           <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
         }
@@ -325,7 +335,7 @@
         <h2 id="sold-heading" class="section-title">Recently sold</h2>
         <p class="section-subtitle">Good cars go quickly. Missed one? Tell us what you want and we'll look out for it.</p>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="swipe-row sm:grid-cols-2 lg:grid-cols-4">
         @for (vehicle of recentlySold().slice(0, 4); track vehicle.id) {
           <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
         }
@@ -378,7 +388,7 @@
           }
         </div>
         <span class="font-bold text-gray-900 dark:text-gray-100">5.0</span>
-        <span class="text-gray-500 dark:text-gray-400 text-sm">on Autotrader</span>
+        <span class="text-gray-600 dark:text-gray-400 text-sm">on Autotrader</span>
       </div>
     </div>
 
@@ -449,7 +459,7 @@
             </li>
           }
         </ul>
-        <p class="text-xs text-gray-500 dark:text-gray-400 mt-4">{{ business.bankHolidayNote }}</p>
+        <p class="text-xs text-gray-600 dark:text-gray-400 mt-4">{{ business.bankHolidayNote }}</p>
       </div>
       }
     </div>

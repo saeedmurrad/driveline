@@ -108,8 +108,14 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:title', content: title });
     this.meta.updateTag({ name: 'twitter:description', content: description });
 
-    if (!isPlatformBrowser(this.platformId)) return;
-    const canonical = `${window.location.origin}${window.location.pathname}`;
+    // Match the address GitHub Pages actually serves (folders end in "/"), so there is no redirect.
+    // Prerendered pages use the dealer's public domain so share links are absolute.
+    const browser = isPlatformBrowser(this.platformId);
+    const domain = this.dealerContext.dealer()?.customDomains?.[0];
+    const origin = browser ? window.location.origin : domain ? `https://${domain}` : '';
+    if (!origin) return;
+    const path = browser ? window.location.pathname : this.router.url.split(/[?#]/)[0] || '/';
+    const canonical = `${origin}${path === '/' || path.endsWith('/') ? path : path + '/'}`;
     this.updateCanonical(canonical);
     this.meta.updateTag({ property: 'og:url', content: canonical });
   }

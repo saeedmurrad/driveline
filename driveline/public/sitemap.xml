@@ -6,482 +6,482 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/cars</loc>
+    <loc>https://drivelinecarsales.co.uk/cars/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vans</loc>
+    <loc>https://drivelinecarsales.co.uk/vans/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/finance</loc>
+    <loc>https://drivelinecarsales.co.uk/finance/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/warranty</loc>
+    <loc>https://drivelinecarsales.co.uk/warranty/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/sell-your-car</loc>
+    <loc>https://drivelinecarsales.co.uk/sell-your-car/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/reviews</loc>
+    <loc>https://drivelinecarsales.co.uk/reviews/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/contact</loc>
+    <loc>https://drivelinecarsales.co.uk/contact/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/faq</loc>
+    <loc>https://drivelinecarsales.co.uk/faq/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/delivery</loc>
+    <loc>https://drivelinecarsales.co.uk/delivery/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/part-exchange</loc>
+    <loc>https://drivelinecarsales.co.uk/part-exchange/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/legal/privacy-policy</loc>
+    <loc>https://drivelinecarsales.co.uk/legal/privacy-policy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/legal/cookie-policy</loc>
+    <loc>https://drivelinecarsales.co.uk/legal/cookie-policy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/legal/disclaimer</loc>
+    <loc>https://drivelinecarsales.co.uk/legal/disclaimer/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/legal/sitemap</loc>
+    <loc>https://drivelinecarsales.co.uk/legal/sitemap/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/abarth</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/abarth/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/audi</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/audi/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/bmw</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/bmw/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/citroen</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/citroen/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/ford</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/ford/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/jaguar</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/jaguar/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/land-rover</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/land-rover/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/mercedes-benz</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/mercedes-benz/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/mini</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/mini/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/nissan</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/nissan/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/peugeot</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/peugeot/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/renault</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/renault/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/seat</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/seat/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/skoda</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/skoda/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/toyota</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/toyota/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/vauxhall</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/vauxhall/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/used-cars/volkswagen</loc>
+    <loc>https://drivelinecarsales.co.uk/used-cars/volkswagen/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10543</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10543/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10541</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10541/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10540</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10540/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10539</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10539/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10538</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10538/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10536</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10536/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10537</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10537/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10534</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10534/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10531</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10531/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10532</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10532/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10526</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10526/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10527</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10527/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10525</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10525/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10523</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10523/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10522</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10522/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10521</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10521/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10520</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10520/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10519</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10519/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10517</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10517/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10516</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10516/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10515</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10515/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10514</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10514/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10513</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10513/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10511</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10511/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10502</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10502/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10501</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10501/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10498</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10498/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10500</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10500/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10499</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10499/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10492</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10492/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10485</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10485/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10475</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10475/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10470</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10470/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10468</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10468/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10461</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10461/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10455</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10455/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10457</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10457/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10454</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10454/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10451</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10451/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10449</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10449/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10444</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10444/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10441</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10441/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10433</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10433/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10428</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10428/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10427</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10427/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10421</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10421/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10419</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10419/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10416</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10416/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10414</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10414/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10415</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10415/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10410</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10410/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10404</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10404/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10280</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10280/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10232</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10232/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10221</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10221/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10198</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10198/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10165</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10165/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10125</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10125/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10002</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10002/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10021</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10021/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10010</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10010/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10081</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10081/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10004</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10004/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10006</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10006/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://drivelinecarsales.co.uk/vehicle/10007</loc>
+    <loc>https://drivelinecarsales.co.uk/vehicle/10007/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

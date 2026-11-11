@@ -93,7 +93,7 @@ export class MakePageComponent {
     this.meta.updateTag({ property: 'og:description', content: d });
     this.meta.updateTag({ name: 'twitter:title', content: t });
     this.meta.updateTag({ name: 'twitter:description', content: d });
-    const url = `https://drivelinecarsales.co.uk/used-cars/${this.slug()}`;
+    const url = `https://drivelinecarsales.co.uk/used-cars/${this.slug()}/`;
     this.meta.updateTag({ property: 'og:url', content: url });
     let link = this.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!link) {

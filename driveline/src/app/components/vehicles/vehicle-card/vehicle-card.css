@@ -1,3 +1,5 @@
 :host {
   display: block;
+  /* Let the card shrink inside grids/carousels instead of pushing past the screen edge */
+  min-width: 0;
 }

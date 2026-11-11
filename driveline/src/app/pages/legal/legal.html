@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center gap-2 text-rose-200 text-sm mb-3">
+    <div role="navigation" aria-label="Breadcrumb" class="flex items-center gap-2 text-rose-200 text-sm mb-3">
       <a routerLink="/" class="hover:text-white transition-colors">Home</a>
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       <span class="text-white">{{ content.title }}</span>
@@ -42,9 +42,9 @@
   }
 
   <div class="mt-12 pt-8 border-t border-gray-100 dark:border-slate-700 flex flex-wrap gap-4">
-    <a routerLink="/legal/privacy-policy" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-sm text-gray-500 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Privacy Policy</a>
-    <a routerLink="/legal/cookie-policy" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-sm text-gray-500 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Cookie Policy</a>
-    <a routerLink="/legal/disclaimer" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-sm text-gray-500 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Disclaimer</a>
-    <a routerLink="/legal/sitemap" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="text-sm text-gray-500 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Sitemap</a>
+    <a routerLink="/legal/privacy-policy" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="inline-flex min-h-6 items-center text-sm text-gray-600 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Privacy Policy</a>
+    <a routerLink="/legal/cookie-policy" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="inline-flex min-h-6 items-center text-sm text-gray-600 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Cookie Policy</a>
+    <a routerLink="/legal/disclaimer" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="inline-flex min-h-6 items-center text-sm text-gray-600 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Disclaimer</a>
+    <a routerLink="/legal/sitemap" routerLinkActive="text-rose-700 dark:text-rose-400 font-medium" [routerLinkActiveOptions]="{exact: true}" class="inline-flex min-h-6 items-center text-sm text-gray-600 dark:text-slate-400 hover:text-rose-700 dark:hover:text-rose-400 transition-colors">Sitemap</a>
   </div>
 </div>

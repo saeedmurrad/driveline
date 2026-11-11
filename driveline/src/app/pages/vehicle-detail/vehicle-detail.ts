@@ -37,6 +37,7 @@ import { EnquirySubmitService } from '../../services/enquiry-submit.service';
 import { DealerContextService } from '../../services/dealer-context.service';
 import { validateEnquiryFields } from '../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../utils/scroll-form-alert';
+import { tidyDescription } from '../../utils/tidy-description';
 import {
   monthlyPaymentForVehicle,
   financeTermOptionsForPrice,
@@ -97,6 +98,17 @@ export class VehicleDetailComponent implements OnDestroy {
   readonly sold = computed(() => this.vehicle()?.status === 'sold');
 
   /** At-a-glance facts with icons (Heroicons-style paths). */
+  /** Feed text in capitals → highlight chips + readable sentence-case text */
+  readonly desc = computed(() => {
+    const v = this.vehicle();
+    return tidyDescription(v?.description, v ? `${v.make} ${v.model}` : '');
+  });
+
+  /** "2" → "2.0L", "1.6" → "1.6L"; nothing for electric cars without a size */
+  engineLabel(size: number | undefined): string {
+    return size ? `${Number(size).toFixed(1)}L` : '—';
+  }
+
   readonly keyFacts = computed(() => {
     const v = this.vehicle();
     if (!v) return [];
@@ -282,6 +294,8 @@ export class VehicleDetailComponent implements OnDestroy {
       v.images?.length && !v.photosPending ? `og/${v.id}.jpg` : 'og-image.jpg',
     );
     this.meta.updateTag({ property: 'og:image', content: shareImage });
+    this.meta.updateTag({ property: 'og:image:secure_url', content: shareImage });
+    this.meta.updateTag({ property: 'og:image:type', content: 'image/jpeg' });
     this.meta.updateTag({ property: 'og:image:width', content: '1200' });
     this.meta.updateTag({ property: 'og:image:height', content: '630' });
     this.meta.updateTag({ property: 'og:image:alt', content: `${v.year} ${v.make} ${v.model} at ${dealerName}` });
@@ -548,7 +562,9 @@ export class VehicleDetailComponent implements OnDestroy {
     if (!v) return '';
     const base = this.getDeployedAppBaseUrl();
     if (!base) return '';
-    return `${base}/vehicle/${encodeURIComponent(v.id)}`;
+    // Trailing slash: GitHub Pages serves /vehicle/X/ directly (no 301), which WhatsApp and
+    // Facebook prefer when they build a link preview.
+    return `${base}/vehicle/${encodeURIComponent(v.id)}/`;
   }
 
   /** QR image encoding the current deployment listing URL for this vehicle only. */
@@ -625,7 +641,10 @@ export class VehicleDetailComponent implements OnDestroy {
     const v = this.vehicle();
     if (!v) return;
 
-    const url = window.location.href;
+    // Canonical link with the price as a version: phones cache a link preview per URL, so a
+    // price change (or a new share card) gets a fresh preview instead of an old cached one.
+    const canonical = this.getCanonicalVehicleListingUrl() || window.location.href.split('?')[0];
+    const url = `${canonical}?p=${v.price}`;
     const title = `${v.year} ${v.make} ${v.model}`;
     const text = `Check out this ${title} at ${this.dealerContext.dealerName()}`;
 

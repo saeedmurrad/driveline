@@ -40,10 +40,13 @@ import { DeliveryCheckComponent } from '../../components/shared/ownership-tools/
         </section>
       </div>
 
-      <p class="mt-10 text-center text-sm text-ink-muted">
-        Questions about delivery? <a href="https://wa.me/447423374244" target="_blank" rel="noopener" class="font-semibold link-brand hover:underline">WhatsApp us</a>
-        or call <a href="tel:01733563559" class="font-semibold link-brand hover:underline">01733 563559</a>.
-      </p>
+      <div class="mt-10 text-center">
+        <p class="text-sm text-ink-muted">Questions about delivery?</p>
+        <div class="mt-3 flex flex-wrap justify-center gap-3">
+          <a href="https://wa.me/447423374244" target="_blank" rel="noopener" class="inline-flex h-11 items-center rounded-xl bg-emerald-700 px-5 text-sm font-semibold text-white hover:bg-emerald-800">WhatsApp us</a>
+          <a href="tel:01733563559" class="inline-flex h-11 items-center rounded-xl border border-line px-5 text-sm font-semibold text-ink hover:bg-surface-sunken">Call 01733 563559</a>
+        </div>
+      </div>
     </div>
   `,
 })

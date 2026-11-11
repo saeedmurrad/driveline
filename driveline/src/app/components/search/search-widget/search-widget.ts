@@ -48,9 +48,12 @@ export class SearchWidgetComponent implements OnInit {
   ngOnInit(): void {
     // Keep UI controls in sync with active service filters (used-cars page after route navigation).
     const current = this.vehicleService.getCurrentFilters();
+    // Unset filters arrive as undefined; drop them so the "Any …" options stay selected
+    // (an undefined value matches no option and the dropdown shows blank).
+    const set = Object.fromEntries(Object.entries(current).filter(([, v]) => v !== undefined && v !== null));
     this.filters = {
       ...this.emptyFilters(),
-      ...current,
+      ...set,
       category: current.category || this.initialCategory,
     };
   }

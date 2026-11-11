@@ -40,7 +40,7 @@ const makeSlug = (m) => m.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,
 const makes = [...new Set(onSale.map((v) => makeSlug(v.make)))].sort();
 
 const entry = (path, freq, priority) =>
-  `  <url>\n    <loc>${SITE}${path}</loc>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+  `  <url>\n    <loc>${SITE}${path.endsWith('/') ? path : path + '/'}</loc>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',

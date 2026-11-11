@@ -25,7 +25,7 @@
         <a routerLink="/compare" class="btn-outline !py-2 text-sm">Compare {{ garage.compareCount() }} selected</a>
       }
     </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       @for (v of garage.savedVehicles(); track v.id) {
         <app-vehicle-card [vehicle]="v" />
       }
@@ -35,7 +35,7 @@
   @if (garage.recentVehicles().length > 0) {
     <div class="mt-16">
       <h2 class="text-xl font-bold text-stone-900 dark:text-white">Recently viewed</h2>
-      <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-5 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
         @for (v of garage.recentVehicles().slice(0, 4); track v.id) {
           <app-vehicle-card [vehicle]="v" />
         }
