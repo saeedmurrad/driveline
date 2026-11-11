@@ -13,7 +13,7 @@
  *  - images stretched out of shape
  *  - tap targets smaller than 24px on phones
  */
-import { chromium } from 'playwright-core';
+import { chromium, webkit } from 'playwright-core';
 import { mkdirSync, writeFileSync } from 'node:fs';
 
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:4310';
@@ -23,7 +23,9 @@ const PAGES = (process.env.PAGES ||
   '/,/cars,/vans,/vehicle/10475,/vehicle/10543,/used-cars/audi,/finance,/warranty,/sell-your-car,/reviews,/contact,/faq,/delivery,/part-exchange,/compare,/saved,/legal/privacy-policy,/legal/sitemap,/hub').split(',');
 mkdirSync(OUT, { recursive: true });
 
-const browser = await chromium.launch({ channel: 'chrome' });
+// ENGINE=webkit checks Safari's engine (every iPhone); default is Chrome
+const ENGINE = process.env.ENGINE || 'chrome';
+const browser = ENGINE === 'webkit' ? await webkit.launch() : await chromium.launch({ channel: 'chrome' });
 const report = [];
 for (const width of WIDTHS) {
   const mobile = width < 768;

@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-stone-100 text-stone-900">
+<div class="min-h-screen bg-stone-100 text-stone-900 [color-scheme:light]">
   @if (staff() === undefined) {
     <div class="flex min-h-screen items-center justify-center text-sm text-stone-500" role="status">Loading…</div>
   } @else if (!staff()) {
@@ -24,12 +24,12 @@
           <div>
             <label for="hub-email" class="mb-1 block text-sm font-medium text-stone-700">Email</label>
             <input id="hub-email" type="email" name="email" autocomplete="username" required [(ngModel)]="email"
-              class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
+              class="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-base text-stone-900 outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
           </div>
           <div>
             <label for="hub-password" class="mb-1 block text-sm font-medium text-stone-700">Password</label>
             <input id="hub-password" type="password" name="password" autocomplete="current-password" required [(ngModel)]="password"
-              class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
+              class="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-base text-stone-900 outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-400/20" />
           </div>
           @if (signInError()) {
             <p class="text-sm text-rose-700" role="alert">{{ signInError() }}</p>
@@ -222,7 +222,7 @@
               }
               <form (ngSubmit)="addNote(l)" class="mt-2 flex flex-col gap-2 sm:flex-row">
                 <textarea name="note" rows="2" [(ngModel)]="noteText" placeholder="Add a note, e.g. called, no answer, try again Friday"
-                  class="w-full rounded-xl border border-stone-300 px-3.5 py-2.5 text-base outline-none focus:border-rose-400"></textarea>
+                  class="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-base text-stone-900 outline-none focus:border-rose-400"></textarea>
                 <button type="submit" [disabled]="busy() || !noteText.trim()" class="shrink-0 rounded-xl bg-rose-500 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-600 disabled:opacity-50">Add note</button>
               </form>
               @if (actionError()) {

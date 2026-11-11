@@ -416,6 +416,40 @@
     @apply w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-gray-800 text-sm outline-none transition-all duration-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-400/15 placeholder:text-gray-400;
   }
 
+  /* iPhone Safari draws date/time fields and dropdowns its own way: a date field shrinks to a
+     small grey pill (and won't shrink to its column), dropdowns are shorter than text boxes.
+     Make every field the same full-width, same-height box on every browser. */
+  input.form-input,
+  select.form-input,
+  .form-select {
+    min-height: 2.75rem;
+  }
+  input.form-input:is([type='date'], [type='time'], [type='month'], [type='datetime-local']) {
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    line-height: 1.25rem;
+    text-align: left;
+  }
+  input.form-input::-webkit-date-and-time-value {
+    text-align: left;
+    margin: 0;
+  }
+  input.form-input::-webkit-datetime-edit {
+    padding: 0;
+  }
+  select.form-input {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2378716c'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 1.1rem;
+  }
+
   .form-select {
     @apply w-full px-4 py-3 rounded-xl border border-stone-200 bg-white text-gray-800 text-sm outline-none transition-all duration-200 focus:border-rose-400 focus:ring-2 focus:ring-rose-400/15 cursor-pointer appearance-none;
   }
@@ -747,4 +781,15 @@ html.dark .text-amber-700 { color: #fcd34d; }
     min-width: 1.25rem;
     min-height: 1.25rem;
   }
+}
+
+/* Number boxes (prices, mileage): no tiny up/down arrows — people type the number */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }

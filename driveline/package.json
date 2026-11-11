@@ -24,7 +24,9 @@
     "filter:images": "node scripts/filter-stock-images.mjs",
     "serve:dist": "node scripts/serve-dist.mjs",
     "test:e2e": "node scripts/e2e-site-check.mjs",
-    "test:a11y": "node scripts/a11y-check.mjs"
+    "test:a11y": "node scripts/a11y-check.mjs",
+    "test:layout": "node scripts/layout-audit.mjs && ENGINE=webkit node scripts/layout-audit.mjs",
+    "test:popups": "node scripts/interaction-audit.mjs"
   },
   "private": true,
   "packageManager": "npm@11.11.0",

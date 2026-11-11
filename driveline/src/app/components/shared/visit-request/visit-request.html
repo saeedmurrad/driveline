@@ -22,7 +22,7 @@
     </div>
     <p class="text-sm text-stone-600 dark:text-slate-300">{{ copy.lead }}</p>
 
-    <div class="grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-2 gap-3 [&>div]:min-w-0">
       <div>
         <label class="form-label text-xs" for="vr-first">First name*</label>
         <input id="vr-first" [(ngModel)]="form.firstName" name="firstName" autocomplete="given-name" class="form-input py-2.5 text-sm" />
@@ -39,11 +39,11 @@
         <label class="form-label text-xs" for="vr-email">Email*</label>
         <input id="vr-email" [(ngModel)]="form.email" name="email" type="email" autocomplete="email" class="form-input py-2.5 text-sm" />
       </div>
-      <div>
+      <div class="col-span-2 min-[400px]:col-span-1">
         <label class="form-label text-xs" for="vr-date">{{ kind === 'reserve' ? 'Planning to visit' : 'Preferred day' }}</label>
         <input id="vr-date" [(ngModel)]="form.date" name="date" type="date" [min]="minDate" class="form-input py-2.5 text-sm" />
       </div>
-      <div>
+      <div class="col-span-2 min-[400px]:col-span-1">
         <label class="form-label text-xs" for="vr-time">Time</label>
         <select id="vr-time" [(ngModel)]="form.time" name="time" class="form-input py-2.5 text-sm">
           @for (slot of timeSlots; track slot) {
