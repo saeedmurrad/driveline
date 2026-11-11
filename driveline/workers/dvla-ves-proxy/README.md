@@ -20,6 +20,9 @@ account at `driveline-dvla-ves-proxy.driveline-dvla-ves-proxy.workers.dev`; noth
 
 ## 1. Get the free keys (Saeed, once)
 
+**Applied 11 Nov 2026** by SNATECH LTD (contact info@snatech.co.uk): DVLA VES application
+submitted; DVSA MOT History form reference **AW3LC5AD**. Keys arrive by email.
+
 - **DVLA VES key**: https://register-for-ves.driver-vehicle-licensing.api.gov.uk
 - **DVSA MOT History**: https://documentation.history.mot.api.gov.uk/mot-history-api/register
   (review takes up to 5 working days; the email contains client ID, client secret,
