@@ -197,13 +197,15 @@ export class VehicleDetailComponent implements OnDestroy {
 
   activeTab = signal<'overview' | 'features' | 'finance' | 'costs' | 'mot'>('overview');
   /** MOT history tab only when the vehicle check service is set up and we know the reg. */
-  private readonly motAvailable = inject(DvlaVehicleService).isAvailable();
+  private readonly vehicleCheck = inject(DvlaVehicleService);
+  private readonly motAvailable = computed(() => !!this.vehicleCheck.services()?.mot);
+  private readonly askVehicleCheck = this.vehicleCheck.loadServices();
   readonly tabs = computed(() => [
     { key: 'overview', label: 'Overview' },
     { key: 'features', label: 'Features & Equipment' },
     { key: 'finance', label: 'Finance' },
     { key: 'costs', label: 'Running costs' },
-    ...(this.motAvailable && this.vehicle()?.registration ? [{ key: 'mot', label: 'MOT history' }] : []),
+    ...(this.motAvailable() && this.vehicle()?.registration ? [{ key: 'mot', label: 'MOT history' }] : []),
   ]);
   enquirySent = signal(false);
   enquirySubmitting = signal(false);

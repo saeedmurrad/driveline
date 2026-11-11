@@ -4,7 +4,8 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -25,6 +26,22 @@ export class DvlaVehicleService {
    * via `environment.dvlaLookupUrl` (dev proxy or SSR `/api/dvla-vehicle`).
    * @see https://developer-portal.driver-vehicle-licensing.api.gov.uk/availableapis.html
    */
+  private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
+  /** Which upstream services the vehicle check worker has keys for (null until known). */
+  readonly services = signal<{ dvla: boolean; mot: boolean } | null>(null);
+  private healthRequested = false;
+
+  /** Ask the worker once which services are set up (MOT history needs the DVSA key). */
+  loadServices(): void {
+    if (this.healthRequested || !this.browser || !this.isAvailable()) return;
+    this.healthRequested = true;
+    const base = environment.dvlaLookupUrl!.trim().replace(/\/+$/, '');
+    this.http.get<{ dvla?: boolean; mot?: boolean }>(`${base}/health`).subscribe({
+      next: (h) => this.services.set({ dvla: !!h.dvla, mot: !!h.mot }),
+      error: () => this.services.set({ dvla: false, mot: false }),
+    });
+  }
+
   /** True when this build has a registration lookup service to call. */
   isAvailable(): boolean {
     const url = environment.dvlaLookupUrl?.trim() ?? '';
