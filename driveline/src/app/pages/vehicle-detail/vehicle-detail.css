@@ -144,7 +144,7 @@
   left: 0;
   right: 0;
   z-index: 45;
-  background: rgb(var(--dl-surface-raised-rgb) / 0.97);
+  background: rgb(var(--dl-surface-raised-rgb));
   border-bottom: 1px solid rgb(var(--dl-line-rgb));
   box-shadow: var(--dl-shadow-pop);
   transform: translateY(-120%);

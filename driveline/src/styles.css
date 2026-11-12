@@ -301,7 +301,8 @@
     background: linear-gradient(90deg, #f43f5e, #fb923c, #fbbf24);
   }
 
-  .text-center .section-title::after {
+  .text-center .section-title::after,
+  .section-title.text-center::after {
     margin-left: auto;
     margin-right: auto;
   }
@@ -792,4 +793,15 @@ input[type='number']::-webkit-outer-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+/* ===================== NO iOS ZOOM ON FORMS =====================
+   iPhone/iPad Safari zooms the whole page in when you tap a field whose text is smaller
+   than 16px, and the page stays zoomed: the layout then looks squashed and cut off.
+   On touch screens every text field, dropdown and text box uses 16px text. :is() takes the
+   specificity of its strongest selector, so this beats text-sm/text-xs without !important. */
+@media (pointer: coarse) {
+  :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']), select, textarea) {
+    font-size: 16px;
+  }
 }

@@ -143,6 +143,23 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # A run held up in GitHub's queue (e.g. during an Actions outage) must never put older
+      # code back on the live site after a newer commit has already been deployed.
+      - name: Only deploy the newest commit on main
+        id: fresh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest=$(gh api "repos/${{ github.repository }}/commits/main" --jq .sha)
+          if [ "$latest" = "$GITHUB_SHA" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+            echo "Deploying ${GITHUB_SHA::7}, the newest commit on main."
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Skipped: this run is for ${GITHUB_SHA::7} but main is now at ${latest::7}, which its own run deploys."
+          fi
+
       - name: Deploy
         id: deployment
+        if: steps.fresh.outputs.ok == 'true'
         uses: actions/deploy-pages@v4
