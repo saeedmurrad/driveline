@@ -1,4 +1,4 @@
-import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { Injectable, PLATFORM_ID, afterNextRender, inject, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 /**
@@ -27,7 +27,16 @@ export class ThemeService {
   private readonly document = inject(DOCUMENT);
   private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
 
-  readonly theme = signal<SiteTheme>(this.readInitial());
+  /**
+   * Starts as 'default' everywhere so the browser's first render matches the prerendered HTML
+   * (Angular hydration). Right after that first render the stored theme is applied; pages with
+   * a Prestige-only layout show a dark placeholder until then (CSS keyed on html[data-theme]).
+   */
+  readonly theme = signal<SiteTheme>('default');
+
+  constructor() {
+    if (this.browser) afterNextRender(() => this.theme.set(this.readInitial()));
+  }
 
   /** Logo mark that matches the theme */
   logoMark(): string {

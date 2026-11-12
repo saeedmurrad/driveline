@@ -1,0 +1,288 @@
+<!-- ================= 1. HERO FILM: pinned stage, 4 chapters driven by scroll ================= -->
+<section #film class="pf-film" aria-label="DriveLine at a glance">
+  <div class="pf-stage">
+    <canvas #canvas class="pf-canvas" [class.pf-hidden]="!gl()" aria-hidden="true"></canvas>
+    @if (!gl()) {
+      <!-- No WebGL / reduced motion: photos cross-fade -->
+      @for (url of shotUrls; track url; let i = $index) {
+        <img class="pf-fallback" [class.on]="chapter() === i" [src]="url" alt="" [attr.fetchpriority]="i === 0 ? 'high' : null" decoding="async" />
+      }
+    }
+    <div class="pf-shade" aria-hidden="true"></div>
+    <div #ghost class="pf-ghost" aria-hidden="true">DRIVELINE</div>
+
+    <div class="pf-inner">
+      <div class="pf-rail" aria-hidden="true"><span #rail></span></div>
+
+      <div class="pf-copy">
+        <!-- 01 Stock -->
+        <div class="pf-ch" [class.on]="chapter() === 0" [attr.aria-hidden]="chapter() !== 0">
+          <p class="pf-pill">Used cars · Fengate, Peterborough <i></i></p>
+          <h1 class="pf-title"><span class="pf-w">Quality cars,</span> <span class="pf-w pf-gold">honestly priced.</span></h1>
+          <p class="pf-lead">{{ counts().car }} cars and {{ counts().van }} vans in stock. Every one inspected, with our own warranty and finance available.</p>
+          <div class="pf-actions">
+            <a routerLink="/cars" class="pf-btn pf-btn-gold" prestigeMagnetic>Browse {{ counts().car }} cars</a>
+            <a routerLink="/sell-your-car" class="pf-btn pf-btn-ghost" prestigeMagnetic>Value my car</a>
+          </div>
+        </div>
+        <!-- 02 Finance -->
+        <div class="pf-ch" [class.on]="chapter() === 1" [attr.aria-hidden]="chapter() !== 1">
+          <p class="pf-pill">Finance · FCA registered <i></i></p>
+          <h2 class="pf-title"><span class="pf-w">Drive now.</span> <span class="pf-w pf-gold">Pay monthly.</span></h2>
+          <p class="pf-lead">Hire purchase on every car in stock over 36 to 60 months@if (lowestMonthly(); as m) {, from {{ formatPrice(m) }} a month}. {{ apr }}% APR representative, subject to status.</p>
+          <div class="pf-actions"><a routerLink="/finance" class="pf-btn pf-btn-gold" prestigeMagnetic>Explore finance</a></div>
+        </div>
+        <!-- 03 Part exchange -->
+        <div class="pf-ch" [class.on]="chapter() === 2" [attr.aria-hidden]="chapter() !== 2">
+          <p class="pf-pill">Part exchange · Sell your car <i></i></p>
+          <h2 class="pf-title"><span class="pf-w">Your old car,</span> <span class="pf-w pf-gold">our best price.</span></h2>
+          <p class="pf-lead">Part exchange it against your next car or sell it outright. Send the details and a few photos on WhatsApp for an accurate figure.</p>
+          <div class="pf-actions"><a routerLink="/part-exchange" class="pf-btn pf-btn-gold" prestigeMagnetic>Get a valuation</a></div>
+        </div>
+        <!-- 04 Delivery -->
+        <div class="pf-ch" [class.on]="chapter() === 3" [attr.aria-hidden]="chapter() !== 3">
+          <p class="pf-pill">Delivery · Warranty <i></i></p>
+          <h2 class="pf-title"><span class="pf-w">Delivered.</span> <span class="pf-w pf-gold">Warranted.</span></h2>
+          <p class="pf-lead">Our own in-house warranty on every car, and delivery across the UK on a day that suits you.</p>
+          <div class="pf-actions"><a routerLink="/delivery" class="pf-btn pf-btn-gold" prestigeMagnetic>Delivery &amp; collection</a></div>
+        </div>
+      </div>
+
+      <dl class="pf-stats">
+        <div><dt>Years trading</dt><dd>{{ yearsTrading }}</dd></div>
+        <div><dt>In stock now</dt><dd>{{ counts().car + counts().van }}</dd></div>
+        @if (rating(); as r) {
+          <div><dt>{{ r.count }} reviews</dt><dd>{{ r.avg }}</dd></div>
+        }
+      </dl>
+
+      <div class="pf-progress" aria-hidden="true">
+        <div class="pf-bar"><span #bar></span></div>
+        <ol>
+          @for (c of chapters; track c; let i = $index) {
+            <li [class.on]="chapter() === i">0{{ i + 1 }} {{ c }}</li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. FLOATING SEARCH BAR over the film's lower edge ================= -->
+<div class="pf-wrap pf-search-wrap">
+  <form class="pf-search" (ngSubmit)="runSearch()" aria-label="Search our stock">
+    <label><span>Make</span>
+      <select name="make" [(ngModel)]="search.make"><option value="">Any make</option>@for (m of makes(); track m) {<option [value]="m">{{ m }}</option>}</select>
+    </label>
+    <label><span>Body type</span>
+      <select name="bodyType" [(ngModel)]="search.bodyType"><option value="">Any body</option>@for (b of bodies(); track b) {<option [value]="b">{{ b }}</option>}</select>
+    </label>
+    <label><span>Budget</span>
+      <select name="maxPrice" [(ngModel)]="search.maxPrice"><option value="">Any price</option>@for (p of budgets; track p) {<option [value]="p">Up to {{ formatPrice(p) }}</option>}</select>
+    </label>
+    <button type="submit" class="pf-btn pf-btn-gold" prestigeMagnetic>Search cars</button>
+  </form>
+</div>
+
+<!-- ================= 3. STOCK GRID + STICKY FINANCE PANEL ================= -->
+<section class="pf-wrap pf-sec" id="stock" aria-labelledby="pf-stock-title">
+  <div class="pf-head">
+    <div>
+      <p class="pf-kicker">The forecourt · {{ counts().car + counts().van }} in stock</p>
+      <h2 id="pf-stock-title" class="pf-h2">Pick your <span class="pf-gold">car.</span></h2>
+    </div>
+    <div class="pf-chips" role="group" aria-label="Filter stock">
+      @for (c of chips; track c.id) {
+        @if (chipCounts()[c.id]) {
+          <button type="button" class="pf-chip" [class.on]="chip() === c.id" [attr.aria-pressed]="chip() === c.id" (click)="setChip(c.id)">{{ c.label }}</button>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="pf-stock">
+    <div class="pf-grid">
+      @for (v of grid(); track v.id) {
+        <article class="pf-card" prestigeTilt [class.sel]="selected()?.id === v.id" (mouseenter)="selectedId.set(v.id)" (focusin)="selectedId.set(v.id)">
+          <a [routerLink]="['/vehicle', v.id]" class="pf-card-link">
+            <div class="pf-card-img">
+              <picture>
+                @if (srcset(v); as ss) { <source type="image/webp" [attr.srcset]="ss" [attr.sizes]="sizes" /> }
+                <img [src]="(v.thumbnailImage || v.images[0]) | thumb" [alt]="v.year + ' ' + v.make + ' ' + v.model" loading="lazy" decoding="async" width="800" height="600" />
+              </picture>
+              @if (badge(v); as b) { <span class="pf-tag">{{ b }}</span> }
+            </div>
+            <div class="pf-card-body">
+              <div class="min-w-0">
+                <h3 class="pf-card-title">{{ v.make }} {{ v.model }}</h3>
+                <p class="pf-card-meta"><span>{{ v.year }}</span><span>{{ v.mileage.toLocaleString('en-GB') }} mi</span><span>{{ v.fuelType }}</span></p>
+              </div>
+              <p class="pf-card-price">{{ formatPrice(v.price) }}<small>Cash price</small></p>
+            </div>
+          </a>
+        </article>
+      }
+    </div>
+
+    @if (selected(); as s) {
+      <aside class="pf-quote" aria-label="Finance estimate">
+        <div class="pf-quote-img">
+          <img [src]="(s.thumbnailImage || s.images[0]) | thumb" [alt]="s.year + ' ' + s.make + ' ' + s.model" loading="lazy" decoding="async" />
+        </div>
+        <h3>{{ s.make }} {{ s.model }}</h3>
+        <p class="pf-quote-sub">{{ s.year }} · {{ s.derivative }}</p>
+        <p class="pf-quote-label">Term</p>
+        <div class="pf-terms" role="group" aria-label="Finance term">
+          @for (t of terms(); track t.termMonths) {
+            <button type="button" [class.on]="term() === t.termMonths" [attr.aria-pressed]="term() === t.termMonths" (click)="term.set(t.termMonths)">
+              <span>{{ t.termMonths }} months</span><b>{{ formatPrice(t.monthly) }}</b>
+            </button>
+          }
+        </div>
+        <div class="pf-quote-total">
+          <p>No deposit · {{ apr }}% APR rep. · cash {{ formatPrice(s.price) }}</p>
+          <strong>@if (monthly(); as m) { {{ formatPrice(m) }}<small>/mo</small> }</strong>
+        </div>
+        <a [routerLink]="['/vehicle', s.id]" class="pf-btn pf-btn-gold w-full" prestigeMagnetic>View this car</a>
+        <a routerLink="/finance" class="pf-quote-link">Apply for finance →</a>
+        <p class="pf-fine">{{ financeNote }}</p>
+      </aside>
+    }
+  </div>
+  <div class="pf-center"><a routerLink="/cars" class="pf-btn pf-btn-dark" prestigeMagnetic>View all {{ counts().car }} cars</a></div>
+</section>
+
+<!-- ================= 4. STATEMENT: words light up as you scroll ================= -->
+<section class="pf-wrap pf-sec pf-statement-sec" aria-label="About DriveLine">
+  <p #statementRef class="pf-statement">
+    @for (w of statement; track $index; let i = $index) {
+      <span [class.lit]="i < lit()" [class.pf-gold]="accentWords.has(w)">{{ w }} </span>
+    }
+  </p>
+</section>
+
+<!-- ================= 5. FEATURES: photo + four rows ================= -->
+<section class="pf-wrap pf-sec pf-features" aria-label="Why buy from DriveLine">
+  <div class="pf-feature-img" appReveal>
+    <img src="hero/hero-02-960.webp" alt="BMW X7 in the DriveLine showroom" loading="lazy" decoding="async" />
+  </div>
+  <div class="pf-rows">
+    @for (f of [
+      { t: 'HPI checked', d: 'Finance, write-off and mileage checks on every car before it goes on sale.', l: '/faq', i: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+      { t: 'In-house warranty', d: 'Our own cover on every car: no third parties and no call-centre queues.', l: '/warranty', i: 'M5 13l4 4L19 7' },
+      { t: 'Finance for all credit', d: 'FCA-registered dealer with packages for all credit histories.', l: '/finance', i: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1' },
+      { t: 'Delivery & video viewings', d: 'UK-wide delivery, and live video walkarounds if you can’t visit.', l: '/delivery', i: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' },
+    ]; track f.t) {
+      <a [routerLink]="f.l" class="pf-row" appReveal>
+        <span class="pf-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" [attr.d]="f.i" /></svg></span>
+        <span class="min-w-0 flex-1"><b>{{ f.t }}</b><span>{{ f.d }}</span></span>
+        <span class="pf-row-arrow" aria-hidden="true">→</span>
+      </a>
+    }
+  </div>
+</section>
+
+<!-- ================= 6. THREE STEPS ================= -->
+<section class="pf-wrap pf-sec" aria-labelledby="pf-steps-title">
+  <p class="pf-kicker">How it works</p>
+  <h2 id="pf-steps-title" class="pf-h2">Three steps. <span class="pf-gold">Zero pressure.</span></h2>
+  <div class="pf-steps">
+    @for (s of [
+      { t: 'Choose your car', d: 'Browse, compare side by side and save favourites. Every price is the price you pay.' },
+      { t: 'See it your way', d: 'Test drive at our Fengate showroom, or ask for a live video walkaround.' },
+      { t: 'Drive away', d: 'Pay, finance or part exchange, then collect it or have it delivered.' },
+    ]; track s.t; let i = $index) {
+      <div class="pf-step" appReveal>
+        <span class="pf-num" aria-hidden="true">0{{ i + 1 }}</span>
+        <h3>{{ s.t }}</h3>
+        <p>{{ s.d }}</p>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- ================= 7. DARK SPLIT: part exchange ================= -->
+<section class="pf-dark" aria-labelledby="pf-px-title">
+  <div class="pf-wrap pf-split">
+    <div class="pf-split-img" appReveal>
+      <img src="hero/hero-06-960.webp" alt="Audi and BMW in the DriveLine showroom" loading="lazy" decoding="async" />
+      <p class="pf-price-tag">Fair valuation<small>Takes about two minutes</small></p>
+    </div>
+    <div>
+      <p class="pf-kicker pf-kicker-dark">Part exchange &amp; sell your car</p>
+      <h2 id="pf-px-title" class="pf-h2 pf-h2-dark">Your old car, <span class="pf-gold">our best price.</span></h2>
+      <p class="pf-dark-lead">Use your current car as a deposit on your next one, or sell it to us outright. It takes about two minutes, and photos on WhatsApp help us give you an accurate figure.</p>
+      <div class="pf-tiles">
+        <div><b>Part exchange</b><span>Against your next car</span></div>
+        <div><b>Or sell outright</b><span>No need to buy from us</span></div>
+        <div><b>WhatsApp photos</b><span>For an accurate figure</span></div>
+        <div><b>We collect it</b><span>At a time that suits you</span></div>
+      </div>
+      <a routerLink="/sell-your-car" class="pf-btn pf-btn-gold" prestigeMagnetic>Value my car</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. SHOP BY TYPE: tall photo cards ================= -->
+<section class="pf-wrap pf-sec" aria-labelledby="pf-types-title">
+  <div class="pf-head">
+    <div>
+      <p class="pf-kicker">Shop by type</p>
+      <h2 id="pf-types-title" class="pf-h2">Find your <span class="pf-gold">fit.</span></h2>
+    </div>
+    <p class="pf-side-note">Every body style we have in stock today, with live counts and starting prices.</p>
+  </div>
+  <div class="pf-types">
+    @for (t of types(); track t.name) {
+      <a [routerLink]="t.link" [queryParams]="t.query" class="pf-type" prestigeTilt>
+        <img [src]="t.image! | thumb" [alt]="t.name" loading="lazy" decoding="async" />
+        <span class="pf-type-count">{{ t.count }} in stock</span>
+        <span class="pf-type-name">{{ t.name }}<small>From {{ formatPrice(t.from) }}</small></span>
+      </a>
+    }
+  </div>
+</section>
+
+<!-- ================= 9. REVIEWS ================= -->
+@if (reviews().length) {
+  <section class="pf-wrap pf-sec" aria-labelledby="pf-rev-title">
+    <p class="pf-kicker">Reviews @if (rating(); as r) { · {{ r.avg }} average}</p>
+    <h2 id="pf-rev-title" class="pf-h2">Buyers <span class="pf-gold">talk.</span></h2>
+    <div class="pf-reviews">
+      @for (r of reviews(); track r.id) {
+        <figure class="pf-review" appReveal>
+          <p class="pf-stars" [attr.aria-label]="r.rating + ' out of 5 stars'">{{ '★★★★★'.slice(0, r.rating) }}</p>
+          <blockquote>“{{ r.body }}”</blockquote>
+          <figcaption><span class="pf-avatar" aria-hidden="true">{{ initials(r.author) }}</span><span><b>{{ r.author }}</b><small>{{ r.source }} review</small></span></figcaption>
+        </figure>
+      }
+    </div>
+    <div class="pf-center"><a routerLink="/reviews" class="pf-btn pf-btn-dark" prestigeMagnetic>Read all reviews</a></div>
+  </section>
+}
+
+<!-- ================= 10. FAQ + FIND ME A CAR ================= -->
+<section class="pf-wrap pf-sec pf-faq-sec" aria-labelledby="pf-faq-title">
+  <div>
+    <p class="pf-kicker">FAQ</p>
+    <h2 id="pf-faq-title" class="pf-h2">Before you <span class="pf-gold">buy.</span></h2>
+    <a routerLink="/faq" class="pf-quote-link">All questions →</a>
+  </div>
+  <div>
+    <div class="pf-faq">
+      @for (f of faqs; track f.q; let i = $index) {
+        <div class="pf-faq-item" [class.open]="openFaq() === i">
+          <button type="button" (click)="openFaq.set(openFaq() === i ? -1 : i)" [attr.aria-expanded]="openFaq() === i" [attr.aria-controls]="'pf-faq-' + i">
+            <span>{{ f.q }}</span><i aria-hidden="true">{{ openFaq() === i ? '−' : '+' }}</i>
+          </button>
+          <div class="pf-faq-a" [id]="'pf-faq-' + i" [hidden]="openFaq() !== i"><p>{{ f.a }}</p></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11. FIND ME A CAR ================= -->
+<section class="pf-wrap pf-sec pf-last" aria-label="Vehicle sourcing">
+  <app-find-me-a-car heading="Can’t see it? We’ll find it." />
+</section>

@@ -20,6 +20,8 @@ import { GarageService } from '../../services/garage.service';
 import { meetsUlezStandard } from '../../utils/vehicle-insights';
 import { makeSlug } from '../../utils/make-slug';
 import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
+import { ThemeService } from '../../services/theme.service';
+import { PrestigeHomeComponent } from './prestige/prestige-home';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +33,7 @@ import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
     TestimonialCardComponent,
     RevealOnScrollDirective,
     FindMeACarComponent,
+    PrestigeHomeComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
@@ -41,6 +44,7 @@ export class HomeComponent {
   private platformId = inject(PLATFORM_ID);
 
   private dealerContext = inject(DealerContextService);
+  protected readonly themeService = inject(ThemeService);
 
   featuredVehicles = this.vehicleService.featuredVehicles;
   readonly reducedVehicles = this.vehicleService.reducedVehicles;

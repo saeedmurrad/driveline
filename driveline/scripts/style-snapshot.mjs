@@ -60,6 +60,7 @@ for (const width of [390, 1440]) {
           .filter((e) => !e.closest('svg') || e.tagName === 'svg')
           // Theme plumbing added later (theme-only elements, accent markers, theme picker) is not part of the comparison
           .filter((e) => !e.closest('[data-theme-only], .title-accent, [data-theme-picker]'))
+          .filter((e) => !e.hasAttribute('data-theme-wrapper'))
           .map((e) => {
             const s = getComputedStyle(e);
             return `${e.tagName.toLowerCase()}.${(typeof e.className === 'string' ? e.className : '').split(' ').slice(0, 2).join('.')} ` + props.map((p) => s.getPropertyValue(p)).join(' | ');

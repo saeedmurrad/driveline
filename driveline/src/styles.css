@@ -984,25 +984,6 @@ html.dark[data-theme='prestige'] .text-orange-700 { color: rgb(var(--p-orange-30
 html:not([data-theme='prestige']) [data-theme-only='prestige'] { display: none !important; }
 html[data-theme='prestige'] [data-theme-hide='prestige'] { display: none !important; }
 
-/* Prestige hero: giant outlined name behind the content, low on the photo */
-.hero-wordmark {
-  position: absolute;
-  left: 50%;
-  bottom: 18%;
-  z-index: 1;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  font-family: var(--dl-font-display);
-  font-stretch: 125%;
-  font-weight: 800;
-  font-size: clamp(4.5rem, 19vw, 17rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgb(246 243 238 / 0.22);
-}
 
 /* Prestige: the hero's second button is a pill like the others */
 html[data-theme='prestige'] .home-hero-stats > a:not(.btn-primary) {
@@ -1012,3 +993,180 @@ html[data-theme='prestige'] .home-hero-stats > a:not(.btn-primary) {
   font-size: 0.8125rem;
   font-family: var(--dl-font-display);
 }
+
+/* Dark stage shown while a Prestige-only page loads (never visible in Default) */
+.prestige-boot { min-height: 100svh; margin-top: -4rem; background: #0e0e11; }
+@media (min-width: 768px) { .prestige-boot { margin-top: -5rem; } }
+
+/* Prestige: the header floats transparently over the home film, then turns solid */
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell :is(.logo-wordmark, .nav-pill-link, .nav-pill-link:not(.active)) { color: #f6f3ee !important; }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell .nav-pill-track { background: transparent !important; box-shadow: none !important; }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell .nav-pill-link.active { background: rgb(246 243 238 / 0.14) !important; }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell button[aria-label='Toggle menu'] { background: rgb(246 243 238 / 0.12); border-color: rgb(246 243 238 / 0.25); color: #f6f3ee; }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell :is([data-theme-picker] > button, a[href='/saved'], button[aria-label*='mode']) { color: rgb(246 243 238 / 0.85); }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell .logo-tagline { color: #d6ba8c; }
+html[data-theme='prestige']:is(.prestige-over-film, :has(.prestige-boot)) .header-shell .logo-wordmark { background: transparent !important; border-color: transparent !important; }
+
+/* Prestige footer: the name as a giant outline across the top (replaces the thin rose line) */
+html[data-theme='prestige'] .footer-shell { overflow: hidden; }
+html[data-theme='prestige'] .footer-shell::before {
+  content: 'DRIVELINE';
+  height: auto;
+  background: none;
+  padding-top: clamp(2rem, 5vw, 4rem);
+  text-align: center;
+  white-space: nowrap;
+  font-family: var(--dl-font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 13vw, 13rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(246 243 238 / 0.16);
+  pointer-events: none;
+}
+
+/* =====================================================================================
+   PRESTIGE COMPONENTS (cars list, car page, forms)
+   Same building blocks as the Prestige home: inset rounded photos, mono badges, pill
+   buttons, cream fields, a dark gallery band and a dark price panel.
+   ===================================================================================== */
+
+/* ---- Car cards ---- */
+html[data-theme='prestige'] app-vehicle-card .card {
+  padding: 0.55rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgb(var(--dl-line-rgb));
+  box-shadow: none;
+  --tw-ring-shadow: 0 0 #0000;
+}
+html[data-theme='prestige'] app-vehicle-card .card:hover {
+  border-color: rgb(var(--dl-brand-rgb));
+  box-shadow: 0 30px 60px -30px rgb(20 20 22 / 0.45);
+}
+html[data-theme='prestige'] app-vehicle-card .card-media { border-radius: 0.95rem; aspect-ratio: 16 / 10.5; }
+html[data-theme='prestige'] app-vehicle-card .card > .p-5 { padding: 0.95rem 0.6rem 0.5rem; }
+html[data-theme='prestige'] app-vehicle-card .badge {
+  background: rgb(255 255 255 / 0.94) !important;
+  color: #16161a !important;
+  font-family: var(--dl-font-mono);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  box-shadow: none;
+}
+html[data-theme='prestige'] app-vehicle-card .badge-reduced { background: #b8925a !important; }
+html[data-theme='prestige'] app-vehicle-card .badge-sold { background: #16161a !important; color: #f6f3ee !important; }
+html[data-theme='prestige'] app-vehicle-card .badge-reserved { background: rgb(var(--dl-state-reserved-rgb)) !important; color: #451a03 !important; }
+html[data-theme='prestige'] app-vehicle-card .text-\[26px\] { font-family: var(--dl-font-display); font-size: 1.45rem; }
+html[data-theme='prestige'] app-vehicle-card a[data-vehicle-card-cta].flex-1 {
+  border-radius: 999px;
+  background: #16161a;
+  color: #f6f3ee;
+  font-family: var(--dl-font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+html[data-theme='prestige'] app-vehicle-card a[data-vehicle-card-cta].flex-1:hover { background: #b8925a; color: #16161a; }
+html.dark[data-theme='prestige'] app-vehicle-card a[data-vehicle-card-cta].flex-1 { background: #f6f3ee; color: #16161a; }
+html[data-theme='prestige'] app-vehicle-card :is(button, a)[data-vehicle-card-cta]:not(.flex-1) { border-radius: 999px; }
+
+/* ---- Page banners: charcoal stage with the outlined name ---- */
+html[data-theme='prestige'] .page-header::after {
+  content: 'DRIVELINE';
+  position: absolute;
+  right: -1vw;
+  bottom: -0.16em;
+  font-family: var(--dl-font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(4rem, 15vw, 13rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(246 243 238 / 0.12);
+  pointer-events: none;
+}
+html[data-theme='prestige'] .page-header > * { position: relative; z-index: 1; }
+@media (min-width: 1024px) {
+  html[data-theme='prestige'] .page-header :is(.page-title, .theme-title) { font-size: 3.5rem; }
+}
+
+/* ---- Forms: cream fields with small mono labels (the booking-bar look) ---- */
+html[data-theme='prestige']:not(.dark) :is(.form-input, .form-select) {
+  background-color: rgb(246 243 238);
+  border-color: rgb(var(--dl-line-rgb));
+  border-radius: 0.9rem;
+}
+html[data-theme='prestige'] :is(.form-input, .form-select):focus { border-color: rgb(var(--dl-brand-rgb)); }
+html[data-theme='prestige'] .form-label {
+  font-family: var(--dl-font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---- Car page: dark band behind breadcrumbs and gallery ---- */
+html[data-theme='prestige'] .vd-crumbs { background: #16161a; border-color: transparent; }
+html[data-theme='prestige'] .vd-crumbs :is(a, svg) { color: rgb(246 243 238 / 0.66); }
+html[data-theme='prestige'] .vd-crumbs span { color: #f6f3ee; }
+html[data-theme='prestige'] app-vehicle-gallery {
+  display: block;
+  position: relative;
+  margin-top: -1.5rem;
+  padding: 0.25rem 0 1.75rem;
+  background: #16161a;
+  box-shadow: 0 0 0 100vmax #16161a;
+  clip-path: inset(0 -100vmax);
+}
+@media (min-width: 1024px) { html[data-theme='prestige'] app-vehicle-gallery { margin-top: -2rem; } }
+html[data-theme='prestige'] app-vehicle-gallery .photo-tab {
+  background: transparent;
+  border: 1px solid rgb(246 243 238 / 0.28);
+  color: #f6f3ee;
+  font-family: var(--dl-font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+html[data-theme='prestige'] app-vehicle-gallery .photo-tab.active { background: #b8925a; border-color: #b8925a; color: #16161a; }
+html[data-theme='prestige'] app-vehicle-gallery .photo-tab-count { color: inherit; opacity: 0.75; }
+html[data-theme='prestige'] app-vehicle-gallery .photo-tab.active .photo-tab-count { opacity: 1; }
+
+/* ---- Car page: the price card becomes a dark panel (light mode; dark mode already is) ---- */
+html[data-theme='prestige']:not(.dark) .price-card {
+  background: #16161a;
+  border-color: #16161a;
+  border-radius: 1.5rem;
+  color: #f6f3ee;
+  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.55);
+  /* Inside the panel the neutral scale flips: grey text turns light, pale fills turn dark */
+  --p-gray-900: 246 243 238; --p-gray-800: 236 232 225; --p-gray-700: 216 210 200; --p-gray-600: 188 182 172; --p-gray-500: 160 154 146;
+  --p-gray-200: 54 53 57; --p-gray-100: 46 45 50; --p-gray-50: 36 36 41;
+  --p-stone-900: 246 243 238; --p-stone-800: 236 232 225; --p-stone-700: 216 210 200; --p-stone-600: 188 182 172; --p-stone-500: 160 154 146;
+  --p-stone-300: 78 76 74; --p-stone-200: 54 53 57; --p-stone-100: 46 45 50; --p-stone-50: 36 36 41;
+  --dl-state-reduced-rgb: 214 186 140;
+}
+html[data-theme='prestige']:not(.dark) .price-card .badge-reduced { color: #16161a; }
+html[data-theme='prestige']:not(.dark) .price-card :is(.text-emerald-800, .text-emerald-700) { color: #6ee7b7; }
+html[data-theme='prestige']:not(.dark) .price-card .text-green-800 { color: #86efac; }
+html[data-theme='prestige']:not(.dark) .price-card :is(.text-rose-700, .util-btn.is-on) { color: #d6ba8c; }
+html[data-theme='prestige']:not(.dark) .price-card a[href^='tel:'] { background: #f6f3ee; color: #16161a; }
+html[data-theme='prestige']:not(.dark) .price-card .action-tile {
+  background: rgb(246 243 238 / 0.06);
+  border-color: rgb(246 243 238 / 0.16);
+  color: #f6f3ee;
+}
+html[data-theme='prestige']:not(.dark) .price-card .action-tile:hover { border-color: #b8925a; color: #d6ba8c; }
+html[data-theme='prestige']:not(.dark) .price-card .btn-outline { color: #f6f3ee; }
+html[data-theme='prestige'] .price-card h1 { font-family: var(--dl-font-display); font-stretch: 108%; font-size: 1.5rem; letter-spacing: -0.01em; }
+html[data-theme='prestige'] .price-card .text-3xl { font-family: var(--dl-font-display); font-size: 2.4rem; }
+html[data-theme='prestige'] .price-card .action-tile { border-radius: 999px; font-size: 0.75rem; }

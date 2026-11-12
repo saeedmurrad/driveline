@@ -1,3 +1,14 @@
+@if (themeService.theme() === 'prestige') {
+  <!-- Prestige theme: its own home page, downloaded only when Prestige is chosen -->
+  @defer (on immediate) {
+    <app-prestige-home />
+  } @placeholder {
+    <div class="prestige-boot" aria-hidden="true"></div>
+  }
+} @else {
+<!-- Prestige visitors briefly see this dark stage (not the Default page) until their theme loads -->
+<div class="prestige-boot" data-theme-only="prestige" aria-hidden="true"></div>
+<div class="contents" data-theme-hide="prestige" data-theme-wrapper>
 <!-- Hero: premium dark landing — responsive height + safe areas for mobile -->
 <section
   class="relative isolate flex min-h-[100svh] sm:min-h-[min(85svh,760px)] lg:min-h-[min(90dvh,920px)] flex-col overflow-hidden"
@@ -42,9 +53,6 @@
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(251,113,133,0.12),transparent_46%)]" data-theme-hide="prestige"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-stone-950/40 to-transparent sm:from-stone-950/75 sm:via-stone-950/30"></div>
   </div>
-
-  <!-- Prestige: the DriveLine name as a giant outline across the hero -->
-  <div class="hero-wordmark" data-theme-only="prestige" aria-hidden="true">DRIVELINE</div>
 
   <div
     class="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pb-6 sm:pt-7 lg:px-8"
@@ -486,3 +494,5 @@
     <a routerLink="/sell-your-car" class="btn-primary text-lg px-8 py-4">Get Your Free Valuation</a>
   </div>
 </section>
+</div>
+}

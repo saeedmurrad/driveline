@@ -56,6 +56,13 @@ async function fillContact(scope, prefix = '') {
 
 const browser = await chromium.launch({ channel: 'chrome', headless: !process.env.HEADED });
 const context = await browser.newContext({ viewport: { width: 1366, height: 860 } });
+// The site build talks to the emulators on their standard ports (8080 / 9099). When those are
+// busy (another project's emulators), start ours with `--config firebase.alt-ports.json`:
+// requests to the standard ports are then redirected to the ports firebase gave this run.
+for (const [std, host] of [['8080', FS], ['9099', AUTH]]) {
+  const port = host.split(':')[1];
+  if (port && port !== std) await context.route(`http://127.0.0.1:${std}/**`, (r) => r.continue({ url: r.request().url().replace(`127.0.0.1:${std}`, `127.0.0.1:${port}`) }));
+}
 page = await context.newPage();
 const consoleErrors = [];
 page.on('console', (m) => {
@@ -431,6 +438,24 @@ await step('theme switch', async () => {
   check('theme: Prestige applies at once', (await theme()) === 'prestige');
   check('theme: Prestige fonts load', await page.evaluate(() => !!document.getElementById('dl-prestige-fonts')));
   check('theme: gold logo shows', await page.locator('img[src$="driveline-mark-prestige.svg"]').first().isVisible());
+  // Prestige has its own home page (hero film, stock grid with chips, finance panel)
+  await page.locator('app-prestige-home .pf-film').waitFor({ timeout: 15000 }).catch(() => {});
+  check('prestige home: hero film loads', await page.locator('app-prestige-home .pf-film').count() === 1);
+  check('prestige home: film shows a photo (WebGL or fallback)', await page.evaluate(() => { const c = document.querySelector('.pf-canvas'); return (!!c && !c.classList.contains('pf-hidden')) || !!document.querySelector('.pf-fallback.on'); }));
+  const cardsAll = await page.locator('.pf-card').count();
+  await page.locator('.pf-chip', { hasText: 'SUV' }).click();
+  const suvTitles = await page.locator('.pf-card .pf-card-title').allInnerTexts();
+  check('prestige home: stock chips filter the grid', cardsAll > 0 && suvTitles.length > 0 && (await page.locator('.pf-chip.on').innerText()).trim().toUpperCase() === 'SUV', `${cardsAll} cards → ${suvTitles.length} SUVs`);
+  await page.locator('.pf-card').nth(1).scrollIntoViewIfNeeded();
+  await page.locator('.pf-card').nth(1).hover();
+  const quoteTitle = (await page.locator('.pf-quote h3').innerText().catch(() => '')).trim();
+  check('prestige home: finance panel follows the car you point at', !!quoteTitle && quoteTitle === (suvTitles[1] || '').trim(), quoteTitle);
+  const m60 = await page.locator('.pf-quote-total strong').innerText();
+  await page.locator('.pf-terms button', { hasText: '36 months' }).click();
+  await page.waitForFunction((before) => document.querySelector('.pf-quote-total strong')?.textContent?.replace(/\s+/g, '') !== before.replace(/\s+/g, ''), m60, { timeout: 3000 }).catch(() => {});
+  const m36 = await page.locator('.pf-quote-total strong').innerText();
+  check('prestige home: finance term changes the monthly figure', /£\d/.test(m60) && m36 !== m60, `${m60.replace(/\s+/g, '')} → ${m36.replace(/\s+/g, '')}`);
+  await page.evaluate(() => scrollTo(0, 0));
   await go('/cars');
   check('theme: kept on the next page', (await theme()) === 'prestige');
   await page.reload({ waitUntil: 'networkidle' });
