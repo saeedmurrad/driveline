@@ -6,11 +6,13 @@ import {
   OnDestroy,
   PLATFORM_ID,
   computed,
+  HostListener,
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { DealerContextService } from '../../../services/dealer-context.service';
 import { GarageService } from '../../../services/garage.service';
+import { SITE_THEMES, SiteTheme, ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +24,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private dealerContext = inject(DealerContextService);
   protected readonly garage = inject(GarageService);
+  protected readonly themeService = inject(ThemeService);
+  protected readonly themes = SITE_THEMES;
+  /** Desktop theme picker popover */
+  themeMenuOpen = signal(false);
 
   dealerName = computed(() => this.dealerContext.dealerName());
 
@@ -71,6 +77,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   closeMobileMenu() {
     this.isMobileMenuOpen.set(false);
+  }
+
+  toggleThemeMenu(event: Event) {
+    event.stopPropagation();
+    this.themeMenuOpen.update((v) => !v);
+  }
+
+  chooseTheme(theme: SiteTheme) {
+    this.themeService.set(theme);
+    this.themeMenuOpen.set(false);
+  }
+
+  @HostListener('document:click')
+  @HostListener('document:keydown.escape')
+  closeThemeMenu() {
+    this.themeMenuOpen.set(false);
   }
 
   toggleDarkMode() {

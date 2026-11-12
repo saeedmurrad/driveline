@@ -39,9 +39,12 @@
       }
     }
     <div class="absolute inset-0 bg-gradient-to-b from-rose-950/25 via-rose-950/10 to-stone-950/30 sm:from-rose-950/30 sm:via-rose-950/12 sm:to-stone-950/35"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(251,113,133,0.12),transparent_46%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(251,113,133,0.12),transparent_46%)]" data-theme-hide="prestige"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-stone-950/40 to-transparent sm:from-stone-950/75 sm:via-stone-950/30"></div>
   </div>
+
+  <!-- Prestige: the DriveLine name as a giant outline across the hero -->
+  <div class="hero-wordmark" data-theme-only="prestige" aria-hidden="true">DRIVELINE</div>
 
   <div
     class="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pb-6 sm:pt-7 lg:px-8"
@@ -115,7 +118,7 @@
 <section appReveal class="home-bento-section py-20 bg-[#fffbf7] dark:bg-slate-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-14">
-      <h2 class="section-title">Why Choose {{ dealerName() }}?</h2>
+      <h2 class="section-title">Why choose <span class="title-accent">{{ dealerName() }}?</span></h2>
       <p class="section-subtitle">We go above and beyond to make your car buying experience exceptional</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:gap-5">
@@ -203,7 +206,7 @@
       <div class="inline-flex items-center gap-2 bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-300 rounded-full px-4 py-1.5 text-sm font-semibold mb-6">
         <span>Trusted local dealer</span>
       </div>
-      <h2 class="section-title">Numbers that matter</h2>
+      <h2 class="section-title">Numbers that <span class="title-accent">matter</span></h2>
       <p class="section-subtitle max-w-2xl mx-auto">
         Family-run since 2006 — thousands of happy customers and quality stock you can rely on.
       </p>
@@ -224,7 +227,7 @@
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <h2 id="shop-by-heading" class="section-title">Find your next car faster</h2>
+        <h2 id="shop-by-heading" class="section-title">Find your next car <span class="title-accent">faster</span></h2>
         <p class="section-subtitle">Jump straight to what suits you.</p>
       </div>
       @if (garage.savedCount() > 0) {
@@ -285,7 +288,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between mb-12">
       <div>
-        <h2 class="section-title">Browse our stock</h2>
+        <h2 class="section-title">Browse our <span class="title-accent">stock</span></h2>
         <p class="section-subtitle">Cars, vans and 4x4s—updated regularly</p>
       </div>
       <a routerLink="/cars" class="hidden sm:flex btn-outline text-sm">
@@ -314,7 +317,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-12 flex items-end justify-between gap-4">
         <div>
-          <h2 id="price-drops-heading" class="section-title">Price drops</h2>
+          <h2 id="price-drops-heading" class="section-title">Price <span class="title-accent">drops</span></h2>
           <p class="section-subtitle">Reduced in the last 30 days. The old price is what we advertised it at before.</p>
         </div>
         <p class="hidden shrink-0 rounded-full bg-state-reduced/10 px-4 py-2 text-sm font-bold text-rose-800 dark:text-rose-200 sm:block">{{ reducedVehicles().length }} reduced</p>
@@ -332,7 +335,7 @@
   <section appReveal class="py-16 bg-[#fffbf7] dark:bg-slate-900" aria-labelledby="sold-heading">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="mb-10">
-        <h2 id="sold-heading" class="section-title">Recently sold</h2>
+        <h2 id="sold-heading" class="section-title">Recently <span class="title-accent">sold</span></h2>
         <p class="section-subtitle">Good cars go quickly. Missed one? Tell us what you want and we'll look out for it.</p>
       </div>
       <div class="swipe-row sm:grid-cols-2 lg:grid-cols-4">
@@ -376,7 +379,7 @@
   <div class="glow-orb-rose absolute bottom-0 right-0 w-72 h-72 opacity-50" aria-hidden="true"></div>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
     <div class="text-center mb-12">
-      <h2 class="section-title">What Our Customers Say</h2>
+      <h2 class="section-title">What our customers <span class="title-accent">say</span></h2>
       <p class="section-subtitle">Trusted by hundreds of happy buyers</p>
       <!-- Rating summary -->
       <div class="flex items-center justify-center gap-2 mt-4">
@@ -422,7 +425,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       @if (business(); as business) {
       <div>
-        <h2 class="section-title">Visit {{ dealerName() }}</h2>
+        <h2 class="section-title">Visit <span class="title-accent">{{ dealerName() }}</span></h2>
         <p class="section-subtitle mb-6">{{ business.tagline }}</p>
         <div class="space-y-4 text-gray-600 dark:text-gray-300">
           <div class="flex items-start gap-3">

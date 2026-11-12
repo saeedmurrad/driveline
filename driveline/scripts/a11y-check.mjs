@@ -19,7 +19,8 @@ const all = [];
 const byRule = new Map();
 for (const dark of [false, true]) {
   const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, colorScheme: dark ? 'dark' : 'light' });
-  await context.addInitScript((d) => { try { localStorage.setItem('darkMode', String(d)); localStorage.setItem('cookieConsent', 'declined'); } catch {} }, dark);
+  // THEME=prestige checks the Prestige theme
+  await context.addInitScript(([d, t]) => { try { localStorage.setItem('darkMode', String(d)); localStorage.setItem('cookieConsent', 'declined'); if (t) localStorage.setItem('dlTheme', t); } catch {} }, [dark, process.env.THEME || '']);
   const page = await context.newPage();
   for (const path of PAGES) {
     await page.goto(BASE + path, { waitUntil: 'networkidle' });

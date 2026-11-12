@@ -56,6 +56,8 @@ const SCENARIOS_ALL = [
   { name: 'saved-page', path: '/saved/', pre: async (p) => { await p.goto(BASE + `/vehicle/${CAR}/`); await btn(p, /^Save$/).click(); await p.goto(BASE + '/saved/'); }, scope: 'main', run: () => {} },
   { name: 'hub-login-error', path: '/hub', scope: 'main, form', run: async (p) => { const b = p.getByRole('button', { name: 'Sign in' }); if (await b.count()) await b.click(); } },
   { name: 'cookie-banner', path: '/', fresh: true, scope: '[aria-label=Cookies]', run: () => {} },
+  { name: 'theme-picker', path: '/', scope: '[data-theme-picker] [role=group]', run: (p) => p.getByRole('button', { name: 'Change website theme' }).click(), desktopOnly: true },
+  { name: 'menu-theme', path: '/', scope: '[aria-label="Website theme"]', run: (p) => p.getByRole('button', { name: /Toggle menu/i }).click(), mobileOnly: true },
 ];
 
 const SCENARIOS = ONLY ? SCENARIOS_ALL.filter((s) => ONLY.includes(s.name)) : SCENARIOS_ALL;
@@ -145,6 +147,8 @@ for (const engine of ENGINES) {
       const mobile = width < 768;
       for (const sc of SCENARIOS) {
         if (sc.mobileOnly && !mobile) continue;
+        // Desktop-only (the header picker shows from 1024px; a desktop scrollbar can eat a few px)
+        if (sc.desktopOnly && width < 1100) continue;
         const context = await browser.newContext({
           viewport: { width, height: mobile ? 740 : 1000 },
           isMobile: mobile,
@@ -152,12 +156,14 @@ for (const engine of ENGINES) {
           colorScheme: theme,
           deviceScaleFactor: 2,
         });
-        await context.addInitScript(([fresh, dark]) => {
+        // SITE_THEME=prestige checks the Prestige site theme (THEMES is light/dark)
+        await context.addInitScript(([fresh, dark, site]) => {
           try {
             if (!fresh) localStorage.setItem('cookieConsent', 'accepted');
             localStorage.setItem('darkMode', dark ? 'true' : 'false');
+            if (site) localStorage.setItem('dlTheme', site);
           } catch {}
-        }, [!!sc.fresh, theme === 'dark']);
+        }, [!!sc.fresh, theme === 'dark', process.env.SITE_THEME || '']);
         const page = await context.newPage();
         const tag = `${engine}@${width}-${theme}:${sc.name}`;
         let issues = [];

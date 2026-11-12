@@ -19,6 +19,16 @@
  */
 @layer base {
   :root {
+    /* Theme palettes (Default = Tailwind's own colours; html[data-theme] themes override). */
+    --p-rose-50: 255 241 242; --p-rose-100: 255 228 230; --p-rose-200: 254 205 211; --p-rose-300: 253 164 175; --p-rose-400: 251 113 133; --p-rose-500: 244 63 94; --p-rose-600: 225 29 72; --p-rose-700: 190 18 60; --p-rose-800: 159 18 57; --p-rose-900: 136 19 55; --p-rose-950: 76 5 25;
+    --p-orange-50: 255 247 237; --p-orange-100: 255 237 213; --p-orange-200: 254 215 170; --p-orange-300: 253 186 116; --p-orange-400: 251 146 60; --p-orange-500: 249 115 22; --p-orange-600: 234 88 12; --p-orange-700: 194 65 12; --p-orange-800: 154 52 18; --p-orange-900: 124 45 18; --p-orange-950: 67 20 7;
+    --p-stone-50: 250 250 249; --p-stone-100: 245 245 244; --p-stone-200: 231 229 228; --p-stone-300: 214 211 209; --p-stone-400: 168 162 158; --p-stone-500: 120 113 108; --p-stone-600: 87 83 78; --p-stone-700: 68 64 60; --p-stone-800: 41 37 36; --p-stone-900: 28 25 23; --p-stone-950: 12 10 9;
+    --p-gray-50: 249 250 251; --p-gray-100: 243 244 246; --p-gray-200: 229 231 235; --p-gray-300: 209 213 219; --p-gray-400: 156 163 175; --p-gray-500: 107 114 128; --p-gray-600: 75 85 99; --p-gray-700: 55 65 81; --p-gray-800: 31 41 55; --p-gray-900: 17 24 39; --p-gray-950: 3 7 18;
+    --p-slate-50: 248 250 252; --p-slate-100: 241 245 249; --p-slate-200: 226 232 240; --p-slate-300: 203 213 225; --p-slate-400: 148 163 184; --p-slate-500: 100 116 139; --p-slate-600: 71 85 105; --p-slate-700: 51 65 85; --p-slate-800: 30 41 59; --p-slate-900: 15 23 42; --p-slate-950: 2 6 23;
+    /* Theme fonts */
+    --dl-font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+    --dl-font-display: Poppins, system-ui, sans-serif;
+    --dl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --dl-surface-rgb: 255 251 247;
     --dl-surface-raised-rgb: 255 255 255;
     --dl-surface-sunken-rgb: 250 245 240;
@@ -773,6 +783,7 @@ html.dark .text-amber-700 { color: #fcd34d; }
 @media (pointer: coarse) {
   :where(a, button):not(:where(p, span, label, h1, h2, h3, h4) *) {
     min-height: 1.5rem;
+    min-width: 1.5rem;
   }
   :where(footer, nav, [role='navigation']) :where(a):not(:where(p) *):not([class*='flex']):not([class*='block']):not([class*='grid']) {
     display: inline-flex;
@@ -804,4 +815,196 @@ input[type='number'] {
   :is(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']), select, textarea) {
     font-size: 16px;
   }
+}
+
+/* =====================================================================================
+   PRESTIGE THEME  (html[data-theme='prestige'])
+   Cream, charcoal and gold, wide capital headings, monospace labels, pill buttons.
+   Everything is driven by the same variables the Default theme uses, so components need
+   no theme-specific code. Fonts load on demand (ThemeService / index.html).
+   ===================================================================================== */
+html[data-theme='prestige'] {
+  /* Gold (replaces rose): 600+ carry white text at WCAG AA */
+  --p-rose-50: 250 246 239; --p-rose-100: 243 234 219; --p-rose-200: 230 213 182; --p-rose-300: 214 186 140; --p-rose-400: 192 158 108; --p-rose-500: 168 131 78; --p-rose-600: 138 106 60; --p-rose-700: 112 86 48; --p-rose-800: 92 70 40; --p-rose-900: 72 55 32; --p-rose-950: 42 32 18;
+  /* Bronze (replaces orange) */
+  --p-orange-50: 251 245 238; --p-orange-100: 245 232 214; --p-orange-200: 234 208 175; --p-orange-300: 219 177 128; --p-orange-400: 196 146 92; --p-orange-500: 170 118 66; --p-orange-600: 142 96 52; --p-orange-700: 114 76 41; --p-orange-800: 92 61 33; --p-orange-900: 72 48 27; --p-orange-950: 42 27 14;
+  /* Warm neutrals from cream to ink (replace stone and gray) */
+  --p-stone-50: 246 243 238; --p-stone-100: 239 235 228; --p-stone-200: 226 220 210; --p-stone-300: 204 197 186; --p-stone-400: 160 154 146; --p-stone-500: 108 103 97; --p-stone-600: 84 80 76; --p-stone-700: 62 59 57; --p-stone-800: 38 37 40; --p-stone-900: 22 22 26; --p-stone-950: 14 14 17;
+  --p-gray-50: 246 243 238; --p-gray-100: 239 235 228; --p-gray-200: 226 220 210; --p-gray-300: 204 197 186; --p-gray-400: 160 154 146; --p-gray-500: 108 103 97; --p-gray-600: 84 80 76; --p-gray-700: 62 59 57; --p-gray-800: 38 37 40; --p-gray-900: 22 22 26; --p-gray-950: 14 14 17;
+  /* Charcoal (replaces slate; mostly dark mode) */
+  --p-slate-50: 246 243 238; --p-slate-100: 236 232 225; --p-slate-200: 216 210 200; --p-slate-300: 188 182 172; --p-slate-400: 152 147 140; --p-slate-500: 114 110 105; --p-slate-600: 78 76 74; --p-slate-700: 54 53 57; --p-slate-800: 36 36 41; --p-slate-900: 25 25 29; --p-slate-950: 16 16 19;
+
+  --dl-font-sans: Inter, system-ui, sans-serif;
+  --dl-font-display: Archivo, system-ui, sans-serif;
+  --dl-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --dl-surface-rgb: 246 243 238;
+  --dl-surface-raised-rgb: 255 255 255;
+  --dl-surface-sunken-rgb: 239 235 228;
+  --dl-ink-rgb: 20 20 22;
+  --dl-ink-muted-rgb: 84 80 76;
+  --dl-ink-faint-rgb: 108 103 97;
+  --dl-line-rgb: 226 220 210;
+  --dl-brand-rgb: 184 146 90;
+  --dl-brand-deep-rgb: 138 106 60;
+  --dl-brand-soft-rgb: 243 234 219;
+  --dl-accent-rgb: 170 118 66;
+  --dl-state-reduced-rgb: 112 86 48;
+  --dl-state-sold-rgb: 20 20 22;
+  --dl-radius-md: 1.25rem;
+  --dl-radius-lg: 1.5rem;
+  --dl-shadow-card: 0 1px 2px rgb(20 20 22 / 0.04), 0 8px 24px -12px rgb(20 20 22 / 0.12);
+  --dl-shadow-pop: 0 24px 48px -16px rgb(20 20 22 / 0.28);
+
+  --dl-surface: rgb(246 243 238);
+  --dl-surface-warm: #efebe4;
+  --dl-accent-deep: #8e6034;
+  --dl-glow-rose: rgb(184 146 90 / 0.16);
+  --dl-gradient-brand: linear-gradient(135deg, #c3a06c 0%, #b8925a 100%);
+  --dl-gradient-hero: linear-gradient(125deg, #0e0e11 0%, #1b1a1f 55%, #2b2318 100%);
+  --dl-gradient-banner: linear-gradient(105deg, #16161a 0%, #2b2318 60%, #8e6c3e 100%);
+}
+
+html.dark[data-theme='prestige'] {
+  --dl-surface-rgb: 16 16 19;
+  --dl-surface-raised-rgb: 36 36 41;
+  --dl-surface-sunken-rgb: 25 25 29;
+  --dl-ink-rgb: 246 243 238;
+  --dl-ink-muted-rgb: 216 210 200;
+  --dl-ink-faint-rgb: 160 154 146;
+  --dl-line-rgb: 54 53 57;
+  --dl-brand-rgb: 198 166 116;
+  --dl-brand-deep-rgb: 184 146 90;
+  --dl-brand-soft-rgb: 42 32 18;
+  --dl-state-reduced-rgb: 138 106 60;
+  --dl-state-sold-rgb: 246 243 238;
+  --dl-surface: #101013;
+  --dl-surface-warm: #19191d;
+}
+
+/* Fonts: wide display face for headings, Inter for text, mono for small labels */
+html[data-theme='prestige'] body { font-family: var(--dl-font-sans); }
+html[data-theme='prestige'] :is(.font-display, .section-title, .page-title, .home-hero-title, .theme-title) {
+  font-family: var(--dl-font-display);
+  font-stretch: 112%;
+}
+html[data-theme='prestige'] :is(.section-title, .page-title, .home-hero-title, .theme-title) {
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  font-weight: 700;
+}
+html[data-theme='prestige'] :is(.tool-kicker, .kicker, .uppercase.tracking-wider, .uppercase.tracking-widest, .uppercase.tracking-wide) {
+  font-family: var(--dl-font-mono);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+/* Two-tone headings: the marked words turn gold (no effect in Default) */
+/* Light: deeper gold so large headings keep 3:1 contrast on cream; dark mode uses the brighter brand gold */
+html[data-theme='prestige'] .title-accent { color: rgb(var(--p-rose-500)); }
+html.dark[data-theme='prestige'] .title-accent { color: rgb(var(--dl-brand-rgb)); }
+html[data-theme='prestige'] .page-title .title-accent,
+html[data-theme='prestige'] .home-hero-title .title-accent { color: #d6ba8c; }
+html[data-theme='prestige'] .gradient-text {
+  background: none;
+  -webkit-text-fill-color: #d6ba8c;
+  color: #d6ba8c;
+}
+html[data-theme='prestige'] .section-title::after {
+  width: 3rem;
+  height: 2px;
+  background: rgb(var(--dl-brand-rgb));
+  box-shadow: none;
+}
+
+/* Buttons: gold and charcoal pills with small capitals */
+html[data-theme='prestige'] :is(.btn-primary, .btn-secondary, .btn-outline, .btn-accent) {
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8125rem;
+  font-family: var(--dl-font-display);
+  font-weight: 600;
+  transform: none;
+}
+html[data-theme='prestige'] .btn-primary,
+html[data-theme='prestige'] .btn-primary:hover {
+  background: rgb(var(--dl-brand-rgb));
+  color: #16161a;
+  box-shadow: 0 10px 24px -12px rgb(120 90 40 / 0.55);
+}
+html[data-theme='prestige'] .btn-primary:hover { background: #c6a674; }
+html[data-theme='prestige'] .btn-accent,
+html[data-theme='prestige'] .btn-accent:hover {
+  background: #16161a;
+  color: #f6f3ee;
+  box-shadow: none;
+}
+html.dark[data-theme='prestige'] .btn-accent { background: #f6f3ee; color: #16161a; }
+html[data-theme='prestige'] .btn-outline {
+  border: 1.5px solid currentColor;
+  color: rgb(var(--dl-ink-rgb));
+}
+html[data-theme='prestige'] .btn-outline:hover { background: rgb(var(--dl-ink-rgb)); color: rgb(var(--dl-surface-rgb)); }
+html[data-theme='prestige'] .btn-action-accent,
+html[data-theme='prestige'] .btn-action-accent:hover {
+  background: #16161a;
+  border-color: #16161a;
+  box-shadow: none;
+}
+
+/* Cards and panels: white on cream, softer and rounder */
+html[data-theme='prestige'] .card { border-radius: 1.25rem; }
+html[data-theme='prestige'] .card:hover { border-color: rgb(var(--p-rose-300) / 0.9); box-shadow: var(--dl-shadow-pop); }
+html[data-theme='prestige'] .glass-warm { background: rgb(255 255 255 / 0.96); border-color: rgb(226 220 210); }
+html.dark[data-theme='prestige'] .glass-warm { background: rgb(36 36 41 / 0.96); border-color: rgb(54 53 57); }
+html[data-theme='prestige'] .glass { border-color: rgb(226 220 210 / 0.8); }
+
+/* Hard-coded warm white backgrounds become cream */
+html[data-theme='prestige']:not(.dark) :is(.bg-\[\#fffbf7\], .header-shell) { background-color: rgb(246 243 238); }
+html[data-theme='prestige'] .header-glow-line { opacity: 0 !important; }
+
+/* Page banners and hero: charcoal with a soft gold light instead of rose */
+html[data-theme='prestige'] .page-header::before {
+  background: radial-gradient(ellipse 80% 60% at 20% 0%, rgb(184 146 90 / 0.18), transparent 60%);
+}
+html[data-theme='prestige'] .page-header-breadcrumb { color: #d6ba8c; }
+html[data-theme='prestige'] .page-header-subtitle { color: rgb(246 243 238 / 0.85); }
+
+/* Dark-mode text fixes follow the theme palette (identical values in Default) */
+html.dark[data-theme='prestige'] .text-rose-700 { color: rgb(var(--p-rose-300)); }
+html.dark[data-theme='prestige'] .text-orange-700 { color: rgb(var(--p-orange-300)); }
+
+/* Elements that only exist in one theme */
+html:not([data-theme='prestige']) [data-theme-only='prestige'] { display: none !important; }
+html[data-theme='prestige'] [data-theme-hide='prestige'] { display: none !important; }
+
+/* Prestige hero: giant outlined name behind the content, low on the photo */
+.hero-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  z-index: 1;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--dl-font-display);
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(4.5rem, 19vw, 17rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(246 243 238 / 0.22);
+}
+
+/* Prestige: the hero's second button is a pill like the others */
+html[data-theme='prestige'] .home-hero-stats > a:not(.btn-primary) {
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8125rem;
+  font-family: var(--dl-font-display);
 }

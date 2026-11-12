@@ -422,6 +422,24 @@ await step('dark mode toggle', async () => {
   await page.getByRole('button', { name: /light mode|dark mode/i }).first().click();
   await page.evaluate(() => localStorage.clear());
 });
+await step('theme switch', async () => {
+  await go('/');
+  const theme = () => page.evaluate(() => document.documentElement.getAttribute('data-theme'));
+  check('theme: Default on first visit', (await theme()) === null);
+  await page.getByRole('button', { name: 'Change website theme' }).click();
+  await page.locator('[data-theme-picker]').getByRole('button', { name: /Prestige/ }).click();
+  check('theme: Prestige applies at once', (await theme()) === 'prestige');
+  check('theme: Prestige fonts load', await page.evaluate(() => !!document.getElementById('dl-prestige-fonts')));
+  check('theme: gold logo shows', await page.locator('img[src$="driveline-mark-prestige.svg"]').first().isVisible());
+  await go('/cars');
+  check('theme: kept on the next page', (await theme()) === 'prestige');
+  await page.reload({ waitUntil: 'networkidle' });
+  check('theme: kept after reload (no flash: set before Angular starts)', (await theme()) === 'prestige');
+  await page.getByRole('button', { name: 'Change website theme' }).click();
+  await page.locator('[data-theme-picker]').getByRole('button', { name: /Default/ }).click();
+  check('theme: back to Default', (await theme()) === null && (await page.evaluate(() => localStorage.getItem('dlTheme'))) === 'default');
+  await page.evaluate(() => localStorage.removeItem('dlTheme'));
+});
 await step('cookie banner', async () => {
   await page.evaluate(() => localStorage.removeItem('cookieConsent'));
   await go('/');

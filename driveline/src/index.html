@@ -7,6 +7,15 @@
       if (localStorage.getItem('darkMode') === 'true') {
         document.documentElement.classList.add('dark');
       }
+      // Site theme (ThemeService): apply before first paint so the page never flashes the other look
+      if (localStorage.getItem('dlTheme') === 'prestige') {
+        document.documentElement.setAttribute('data-theme', 'prestige');
+        var f = document.createElement('link');
+        f.id = 'dl-prestige-fonts';
+        f.rel = 'stylesheet';
+        f.href = 'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
+        document.head.appendChild(f);
+      }
     } catch (_) {}
   </script>
   <title>DriveLine | Used Cars &amp; Vans in Peterborough</title>

@@ -35,7 +35,8 @@ for (const width of WIDTHS) {
     isMobile: mobile,
     hasTouch: mobile,
   });
-  await context.addInitScript(() => { try { localStorage.setItem('cookieConsent', 'accepted'); } catch {} });
+  // THEME=prestige checks the Prestige theme
+  await context.addInitScript((t) => { try { localStorage.setItem('cookieConsent', 'accepted'); if (t) localStorage.setItem('dlTheme', t); } catch {} }, process.env.THEME || '');
   const page = await context.newPage();
   for (const path of PAGES) {
     await page.goto(BASE + path, { waitUntil: 'networkidle' });

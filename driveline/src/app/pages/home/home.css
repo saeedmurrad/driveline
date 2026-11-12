@@ -51,6 +51,13 @@
   background-clip: text;
 }
 
+/* Prestige theme: the accent phrase is solid gold */
+:host-context(html[data-theme='prestige']) .home-hero-title .gradient-text {
+  background: none;
+  -webkit-text-fill-color: #d6ba8c;
+  color: #d6ba8c;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-hero-eyebrow,
   .home-hero-title,

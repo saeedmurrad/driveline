@@ -1,4 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+// Theme-switchable palettes: these five colour families read CSS variables, so a theme
+// (html[data-theme]) can recolour the whole site. Default values in src/styles.css are
+// Tailwind's own, so the Default theme renders exactly as before.
+const THEMED = ['rose', 'orange', 'stone', 'gray', 'slate'];
+const SHADES = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+const themed = Object.fromEntries(
+  THEMED.map((name) => [name, Object.fromEntries(SHADES.map((s) => [s, `rgb(var(--p-${name}-${s}) / <alpha-value>)`]))]),
+);
+
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
@@ -7,11 +16,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'system-ui', 'sans-serif'],
+        // Font stacks come from the theme (--dl-font-*), see src/styles.css
+        sans: ['var(--dl-font-sans)'],
+        display: ['var(--dl-font-display)'],
+        mono: ['var(--dl-font-mono)'],
       },
       // Design tokens: values live in src/styles.css (:root and html.dark).
       colors: {
+        ...themed,
         surface: {
           DEFAULT: 'rgb(var(--dl-surface-rgb) / <alpha-value>)',
           raised: 'rgb(var(--dl-surface-raised-rgb) / <alpha-value>)',

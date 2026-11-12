@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="DriveLine Car Sales">
+  <defs>
+    <linearGradient id="dl-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2930"/>
+      <stop offset="1" stop-color="#0e0e11"/>
+    </linearGradient>
+    <linearGradient id="dl-d" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6ecd9"/>
+      <stop offset=".45" stop-color="#d9bd8f"/>
+      <stop offset="1" stop-color="#a8834e"/>
+    </linearGradient>
+    <linearGradient id="dl-gold" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#cfc6b6"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <radialGradient id="dl-glow" cx=".3" cy=".2" r=".8">
+      <stop offset="0" stop-color="#d6ba8c" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#d6ba8c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#dl-bg)"/>
+  <rect width="64" height="64" rx="15" fill="url(#dl-glow)"/>
+  <rect x=".75" y=".75" width="62.5" height="62.5" rx="14.25" fill="none" stroke="#d6ba8c" stroke-opacity=".28" stroke-width="1.5"/>
+  <!-- The D -->
+  <path fill="url(#dl-d)" fill-rule="evenodd" d="M15 13h16c10.5 0 19 8.5 19 19s-8.5 19-19 19H15zM23.5 21.5v21H31c5.8 0 10.5-4.7 10.5-10.5S36.8 21.5 31 21.5z"/>
+  <!-- The road: wide at the front of the D, narrowing into the distance -->
+  <path fill="url(#dl-gold)" d="M23.5 42.5 C 28.2 37.4 33.4 30.6 38.4 23 L 40.4 24.6 C 37.6 31.4 34.8 37.4 33 42.5 Z"/>
+  <g stroke="#2a0a12" stroke-linecap="round" fill="none">
+    <path d="M28.6 41.6 L30.4 38.6" stroke-width="1.5"/>
+    <path d="M32.2 35.6 L33.6 33.1" stroke-width="1.15"/>
+    <path d="M35.2 30.2 L36.2 28.4" stroke-width=".85"/>
+    <path d="M37.6 26.2 L38.2 25.1" stroke-width=".6"/>
+  </g>
+</svg>

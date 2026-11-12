@@ -44,7 +44,7 @@ html.dark .header-glow-line {
 
 .logo-mark {
   /* Static glow: an endless box-shadow animation repainted the header on every scroll frame. */
-  box-shadow: 0 8px 22px -8px rgba(225, 29, 72, 0.45);
+  box-shadow: 0 8px 22px -8px rgb(var(--p-rose-600) / 0.45);
 }
 
 .logo-drive-text {
@@ -186,9 +186,9 @@ html.dark .header-is-scrolled .header-desktop-nav .nav-pill-link.active {
 .nav-pill-link.router-link-active,
 .nav-pill-link.active {
   background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
-  color: rgb(225 29 72);
+  color: rgb(var(--p-rose-600));
   box-shadow:
-    0 2px 8px rgba(244, 63, 94, 0.15),
+    0 2px 8px rgb(var(--p-rose-500) / 0.15),
     0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
