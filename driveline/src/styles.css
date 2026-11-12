@@ -783,6 +783,10 @@ html.dark .text-amber-700 { color: #fcd34d; }
 @media (pointer: coarse) {
   :where(a, button):not(:where(p, span, label, h1, h2, h3, h4) *) {
     min-height: 1.5rem;
+  }
+  /* Width only for footer links (short ones like "FAQ"). A global min-width would replace the
+     automatic minimum of flex items and let tab labels squash and overlap. */
+  :where(footer) :where(a):not(:where(p) *) {
     min-width: 1.5rem;
   }
   :where(footer, nav, [role='navigation']) :where(a):not(:where(p) *):not([class*='flex']):not([class*='block']):not([class*='grid']) {
