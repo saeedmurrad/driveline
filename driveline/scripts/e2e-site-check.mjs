@@ -55,8 +55,10 @@ async function fillContact(scope, prefix = '') {
 }
 
 const browser = await chromium.launch({ channel: 'chrome', headless: !process.env.HEADED });
-// The service worker is tested on its own (scripts/pwa-check.mjs); here it would hide requests from page.route().
-const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, serviceWorkers: 'block' });
+// The service worker is tested on its own (scripts/pwa-check.mjs); here it would hide requests
+// from page.route(). SW=allow runs every check with the service worker in control instead
+// (standard emulator ports only), to prove forms and the hub work in the installed app.
+const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, serviceWorkers: process.env.SW === 'allow' ? 'allow' : 'block' });
 // The site build talks to the emulators on their standard ports (8080 / 9099). When those are
 // busy (another project's emulators), start ours with `--config firebase.alt-ports.json`:
 // requests to the standard ports are then redirected to the ports firebase gave this run.
@@ -532,6 +534,10 @@ await step('hub: sign in, see leads, update, visitors', async () => {
 });
 
 check('no console errors on any page', consoleErrors.length === 0, consoleErrors.slice(0, 6).join(' || '));
+if (process.env.SW === 'allow') {
+  await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+  check('the service worker was in control during this run', await page.evaluate(() => !!navigator.serviceWorker?.controller));
+}
 
 await browser.close();
 const failed = results.filter((r) => !r.ok);
