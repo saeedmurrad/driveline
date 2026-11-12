@@ -24,7 +24,7 @@ const health = await (await fetch(`${WORKER}/health`)).json();
 check('worker health reports DVLA + MOT ready', health.dvla && health.mot, JSON.stringify(health));
 
 const browser = await chromium.launch({ channel: 'chrome', headless: !process.env.HEADED });
-const page = await browser.newPage({ viewport: { width: 1366, height: 860 } });
+const page = await browser.newPage({ viewport: { width: 1366, height: 860 }, serviceWorkers: 'block' });
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 

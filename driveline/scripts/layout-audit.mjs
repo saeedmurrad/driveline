@@ -39,6 +39,7 @@ for (const width of WIDTHS) {
     deviceScaleFactor: 1,
     isMobile: mobile,
     hasTouch: mobile,
+    serviceWorkers: 'block', // the saved copy (PWA) has its own test: scripts/pwa-check.mjs
   });
   // THEME=prestige checks the Prestige theme
   await context.addInitScript((t) => { try { localStorage.setItem('cookieConsent', 'accepted'); if (t) localStorage.setItem('dlTheme', t); } catch {} }, process.env.THEME || '');

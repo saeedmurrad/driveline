@@ -1,14 +1,27 @@
 {
+  "id": "/",
   "name": "DriveLine Car Sales",
   "short_name": "DriveLine",
-  "description": "Quality used cars and vans in Peterborough.",
+  "description": "Used cars and vans in Peterborough. Browse the stock, check any car's MOT history and DVLA record, and get in touch.",
+  "lang": "en-GB",
+  "dir": "ltr",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#fffbf7",
   "theme_color": "#4a0f1f",
+  "categories": ["shopping", "auto", "business"],
   "icons": [
-    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/brand/driveline-mark.svg", "sizes": "any", "type": "image/svg+xml" }
+    { "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/brand/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/brand/driveline-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Browse used cars", "short_name": "Cars", "url": "/cars", "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Free MOT & DVLA check", "short_name": "MOT check", "url": "/mot-check", "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Sell your car", "short_name": "Sell", "url": "/sell-your-car", "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Contact us", "short_name": "Contact", "url": "/contact", "icons": [{ "src": "/brand/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
   ]
 }

@@ -1,10 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DealerContextService } from '../../../services/dealer-context.service';
+import { InstallAppComponent } from '../../shared/install-app/install-app';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink],
+  imports: [RouterLink, InstallAppComponent],
   templateUrl: './footer.html',
   styleUrl: './footer.css',
 })

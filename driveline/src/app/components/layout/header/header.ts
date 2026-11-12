@@ -13,10 +13,11 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { DealerContextService } from '../../../services/dealer-context.service';
 import { GarageService } from '../../../services/garage.service';
 import { SITE_THEMES, SiteTheme, ThemeService } from '../../../services/theme.service';
+import { InstallAppComponent } from '../../shared/install-app/install-app';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, InstallAppComponent],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })

@@ -8,7 +8,7 @@
  *  - popups taller than the screen that cannot be scrolled
  *
  *   node scripts/serve-dist.mjs &
- *   OUT=/tmp/ia node scripts/interaction-audit.mjs        # ENGINES=webkit,chrome WIDTHS=360,390,768 ONLY=car-test-drive,menu
+ *   OUT=/tmp/ia node scripts/interaction-audit.mjs        # ENGINES=webkit,chrome WIDTHS=360,390,768,844x390 ONLY=car-test-drive,menu
  *
  * Needs the WebKit engine once: npx playwright-core install webkit
  */
@@ -18,12 +18,15 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:4310';
 const OUT = process.env.OUT || '/tmp/interaction-audit';
 const ENGINES = (process.env.ENGINES || 'webkit,chrome').split(',');
-const WIDTHS = (process.env.WIDTHS || '360,390,768').split(',').map(Number);
+// A size is a width ("390") or width x height ("844x390" = a phone on its side, "360x560" = a short screen)
+const SIZES = (process.env.WIDTHS || '360,390,768').split(',').map((s) => { const [w, h] = s.split('x').map(Number); return { width: w, height: h || null }; });
 const THEMES = (process.env.THEMES || 'light,dark').split(',');
 const CAR = process.env.CAR || '10475';
 mkdirSync(OUT, { recursive: true });
 
 const btn = (page, name) => page.getByRole('button', { name }).filter({ visible: true }).first();
+/** Stands in for the browser saying "this site can be installed". */
+const offerInstall = (page) => page.evaluate(() => window.dispatchEvent(new Event('beforeinstallprompt', { cancelable: true })));
 
 /** Each scenario opens something; `scope` is the part of the page to check (default: open dialog or whole page). */
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
@@ -64,6 +67,10 @@ const SCENARIOS_ALL = [
   { name: 'sell-lookup-full-mot', path: '/sell-your-car/', scope: 'app-part-exchange-form', run: async (p) => { const f = p.locator('app-part-exchange-form'); const look = f.getByRole('button', { name: 'Look up' }); if (!(await look.count())) return; await f.locator('[name="peRegistration"]').fill('LB15WMA'); await look.click(); await p.waitForTimeout(1500); await f.getByRole('button', { name: /See the full MOT history/ }).click().catch(() => {}); await p.waitForTimeout(400); } },
   { name: 'theme-picker', path: '/', scope: '[data-theme-picker] [role=group]', run: (p) => p.getByRole('button', { name: 'Change website theme' }).click(), desktopOnly: true },
   { name: 'menu-theme', path: '/', scope: '[aria-label="Website theme"]', run: (p) => p.getByRole('button', { name: /Toggle menu/i }).click(), mobileOnly: true },
+  // Installable app (PWA): the install button only shows once the browser offers an install
+  { name: 'install-footer', path: '/', scope: 'app-footer', run: async (p) => { await offerInstall(p); await p.locator('app-footer app-install-app button').scrollIntoViewIfNeeded(); } },
+  { name: 'install-menu', path: '/', scope: '.mobile-drawer', mobileOnly: true, run: async (p) => { await offerInstall(p); await p.getByRole('button', { name: /Toggle menu/i }).click(); await p.locator('.mobile-drawer app-install-app button').waitFor(); } },
+  { name: 'offline-notice', path: '/cars/', scope: 'app-offline-notice', run: async (p) => { await p.context().setOffline(true); await p.locator('app-offline-notice p').waitFor(); } },
 ];
 
 const SCENARIOS = ONLY ? SCENARIOS_ALL.filter((s) => ONLY.includes(s.name)) : SCENARIOS_ALL;
@@ -95,6 +102,23 @@ function checks(scopeSel) {
       const panel = [...dialog.querySelectorAll('*')].find((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 2);
       const tallest = [...dialog.children].reduce((m, c) => Math.max(m, c.getBoundingClientRect().height), 0);
       if (!panel && tallest > innerHeight + 2 && !/(auto|scroll)/.test(getComputedStyle(dialog).overflowY)) out.push(`popup ${Math.round(tallest)}px tall on a ${innerHeight}px screen and cannot scroll`);
+    }
+    // Buttons, links and fields inside a fixed bar or menu (header menu, sticky bars) that sit
+    // below or above the screen: the page cannot scroll them, so the bar must scroll itself.
+    if (scope === scopes[0]) {
+      for (const e of document.querySelectorAll('a, button, input:not([type=hidden]), select, textarea')) {
+        if (!shown(e)) continue;
+        let root = null;
+        let scrollable = false;
+        for (let p = e.parentElement; p && p !== document.documentElement; p = p.parentElement) {
+          const s = getComputedStyle(p);
+          if (/(auto|scroll)/.test(s.overflowY) && p.scrollHeight > p.clientHeight + 2) scrollable = true;
+          if (s.position === 'fixed') { root = p; break; }
+        }
+        if (!root || scrollable) continue;
+        const r = e.getBoundingClientRect();
+        if (r.bottom > innerHeight + 2 || r.top < -2) out.push(`cannot be reached: ${name(e)} is off the ${innerHeight}px screen inside a fixed ${root.tagName.toLowerCase()} that does not scroll`);
+      }
     }
     const items = [...scope.querySelectorAll('input:not([type=hidden]), select, textarea, button, a, label, p, h1, h2, h3, h4, li, span, dt, dd, td, th, legend, summary, small, strong')]
       .filter((e) => shown(e) && (/^(INPUT|SELECT|TEXTAREA|BUTTON|A)$/.test(e.tagName) || hasText(e)));
@@ -148,19 +172,21 @@ function checks(scopeSel) {
 const report = [];
 for (const engine of ENGINES) {
   const browser = engine === 'webkit' ? await webkit.launch() : await chromium.launch({ channel: 'chrome' });
-  for (const width of WIDTHS) {
+  for (const { width, height } of SIZES) {
     for (const theme of THEMES) {
       const mobile = width < 768;
       for (const sc of SCENARIOS) {
-        if (sc.mobileOnly && !mobile) continue;
+        // "mobileOnly" = needs the menu button, which shows below 1180px (phones and tablets)
+        if (sc.mobileOnly && width >= 1180) continue;
         // Desktop-only (the header picker shows from 1024px; a desktop scrollbar can eat a few px)
         if (sc.desktopOnly && width < 1200) continue;
         const context = await browser.newContext({
-          viewport: { width, height: mobile ? 740 : 1000 },
+          viewport: { width, height: height ?? (mobile ? 740 : 1000) },
           isMobile: mobile,
           hasTouch: mobile,
           colorScheme: theme,
           deviceScaleFactor: 2,
+          serviceWorkers: 'block', // the saved copy (PWA) has its own test: scripts/pwa-check.mjs
         });
         // SITE_THEME=prestige checks the Prestige site theme (THEMES is light/dark)
         await context.addInitScript(([fresh, dark, site]) => {
@@ -171,7 +197,8 @@ for (const engine of ENGINES) {
           } catch {}
         }, [!!sc.fresh, theme === 'dark', process.env.SITE_THEME || '']);
         const page = await context.newPage();
-        const tag = `${engine}@${width}-${theme}:${sc.name}`;
+        const size = height ? `${width}x${height}` : `${width}`;
+        const tag = `${engine}@${size}-${theme}:${sc.name}`;
         let issues = [];
         try {
           if (sc.pre) await sc.pre(page);
@@ -201,7 +228,7 @@ for (const engine of ENGINES) {
         } catch (err) {
           issues.push(`could not run: ${String(err.message).split('\n')[0].slice(0, 120)}`);
         }
-        const file = `${OUT}/${engine}-${width}-${theme}-${sc.name}.png`;
+        const file = `${OUT}/${engine}-${size}-${theme}-${sc.name}.png`;
         await page.screenshot({ path: file }).catch(() => {});
         report.push({ engine, width, theme, scenario: sc.name, issues, file });
         if (issues.length) console.log(`${tag}: ${issues.length}\n  - ${[...new Set(issues)].slice(0, 10).join('\n  - ')}`);

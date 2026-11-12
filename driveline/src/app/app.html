@@ -8,6 +8,7 @@
   [class.md:pt-20]="!isHubRoute()"
   [class.pt-0]="isHubRoute()"
 >
+  <app-offline-notice />
   <router-outlet></router-outlet>
 </main>
 @if (!isHubRoute()) {

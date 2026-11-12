@@ -55,7 +55,8 @@ async function fillContact(scope, prefix = '') {
 }
 
 const browser = await chromium.launch({ channel: 'chrome', headless: !process.env.HEADED });
-const context = await browser.newContext({ viewport: { width: 1366, height: 860 } });
+// The service worker is tested on its own (scripts/pwa-check.mjs); here it would hide requests from page.route().
+const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, serviceWorkers: 'block' });
 // The site build talks to the emulators on their standard ports (8080 / 9099). When those are
 // busy (another project's emulators), start ours with `--config firebase.alt-ports.json`:
 // requests to the standard ports are then redirected to the ports firebase gave this run.

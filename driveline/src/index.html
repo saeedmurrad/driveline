@@ -17,6 +17,12 @@
         document.head.appendChild(f);
       }
     } catch (_) {}
+    // Installable app: keep the browser's install offer for our own "Install the app" button
+    // (PwaService), and keep its pop-up bar from covering the bars at the bottom of the page.
+    addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      window.__dlInstallEvent = e;
+    });
   </script>
   <title>DriveLine | Used Cars &amp; Vans in Peterborough</title>
   <base href="/">
@@ -30,6 +36,10 @@
   <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
+  <!-- Installable app (PWA): opens in its own window from the home screen -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="DriveLine">
+  <meta name="apple-mobile-web-app-title" content="DriveLine">
   <!-- Open Graph / Twitter: absolute URLs required for link previews (update SITE_URL if you change host) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="DriveLine">

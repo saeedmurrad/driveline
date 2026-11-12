@@ -18,7 +18,7 @@ let total = 0;
 const all = [];
 const byRule = new Map();
 for (const dark of [false, true]) {
-  const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, colorScheme: dark ? 'dark' : 'light' });
+  const context = await browser.newContext({ viewport: { width: 1366, height: 860 }, colorScheme: dark ? 'dark' : 'light', serviceWorkers: 'block' });
   // THEME=prestige checks the Prestige theme
   await context.addInitScript(([d, t]) => { try { localStorage.setItem('darkMode', String(d)); localStorage.setItem('cookieConsent', 'declined'); if (t) localStorage.setItem('dlTheme', t); } catch {} }, [dark, process.env.THEME || '']);
   const page = await context.newPage();

@@ -201,9 +201,20 @@ html.dark .nav-pill-link.active {
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Mobile drawer */
+/* Mobile drawer. The header is fixed, so the page cannot scroll the menu: it must fit the
+   screen itself and scroll inside when it is taller (short phones, landscape, large text). */
 .mobile-drawer {
   animation: mobileDrawerIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  max-height: calc(100vh - 4rem);
+  max-height: calc(100dvh - 4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (min-width: 768px) {
+  .mobile-drawer {
+    max-height: calc(100vh - 5rem);
+    max-height: calc(100dvh - 5rem);
+  }
 }
 
 @keyframes mobileDrawerIn {

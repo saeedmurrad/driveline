@@ -41,7 +41,7 @@ const browser = await chromium.launch({ channel: 'chrome' });
 const result = {};
 for (const width of [390, 1440]) {
   for (const dark of [false, true]) {
-    const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+    const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce', serviceWorkers: 'block' });
     await context.addInitScript(([d, t]) => {
       try {
         localStorage.setItem('cookieConsent', 'accepted');

@@ -15,6 +15,7 @@ import { CookieBannerComponent } from './components/layout/cookie-banner/cookie-
 import { TrustedPartnersComponent } from './components/layout/trusted-partners/trusted-partners';
 import { CompareTrayComponent } from './components/shared/compare-tray/compare-tray';
 import { VehicleCheckBandComponent } from './components/shared/vehicle-check-band/vehicle-check-band';
+import { OfflineNoticeComponent } from './components/layout/offline-notice/offline-notice';
 import { SeoService } from './services/seo.service';
 import { DealerContextService } from './services/dealer-context.service';
 
@@ -28,6 +29,7 @@ import { DealerContextService } from './services/dealer-context.service';
     CookieBannerComponent,
     CompareTrayComponent,
     VehicleCheckBandComponent,
+    OfflineNoticeComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

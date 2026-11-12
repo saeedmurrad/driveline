@@ -63,7 +63,8 @@
                   "maximumError": "24kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
             },
             "github-pages": {
               "outputMode": "static",
