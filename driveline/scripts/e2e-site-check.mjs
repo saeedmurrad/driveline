@@ -73,7 +73,7 @@ page.on('pageerror', (e) => consoleErrors.push(`${page.url()} :: ${e.message.sli
 await context.route(/^(mailto|tel|https:\/\/wa\.me)/, (r) => r.abort());
 
 // ---------------- Pages load ----------------
-for (const p of ['/', '/cars', '/vans', '/finance', '/warranty', '/sell-your-car', '/reviews', '/contact', '/saved', '/compare', '/faq', '/delivery', '/part-exchange', '/used-cars/audi', '/legal/privacy-policy', '/legal/cookie-policy', '/legal/disclaimer', '/legal/sitemap', '/hub']) {
+for (const p of ['/', '/cars', '/vans', '/finance', '/warranty', '/sell-your-car', '/reviews', '/contact', '/saved', '/compare', '/mot-check', '/faq', '/delivery', '/part-exchange', '/used-cars/audi', '/legal/privacy-policy', '/legal/cookie-policy', '/legal/disclaimer', '/legal/sitemap', '/hub']) {
   await step(`page ${p} loads`, async () => {
     await go(p);
     const h = await page.locator('h1').first().innerText().catch(() => '');
@@ -424,9 +424,13 @@ await step('forms refuse empty submissions', async () => {
 // ---------------- Site chrome ----------------
 await step('dark mode toggle', async () => {
   await go('/');
-  await page.getByRole('button', { name: /dark mode/i }).first().click();
+  // Dark mode lives in the header's appearance menu (brush icon) with the theme choice
+  await page.getByRole('button', { name: 'Change website theme' }).click();
+  await page.getByRole('switch', { name: /dark mode/i }).click();
   check('dark mode turns on', await page.evaluate(() => document.documentElement.classList.contains('dark')));
-  await page.getByRole('button', { name: /light mode|dark mode/i }).first().click();
+  await page.getByRole('switch', { name: /light mode/i }).click();
+  check('dark mode turns off again', await page.evaluate(() => !document.documentElement.classList.contains('dark')));
+  await page.keyboard.press('Escape');
   await page.evaluate(() => localStorage.clear());
 });
 await step('theme switch', async () => {

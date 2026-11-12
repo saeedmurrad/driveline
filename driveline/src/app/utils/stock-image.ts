@@ -17,9 +17,9 @@ export function webpAt(path: string | null | undefined, width: 480 | 800 | 1600)
 
 /** `sizes` hints for the common layouts. */
 export const IMG_SIZES = {
-  card: '(min-width: 1280px) 400px, (min-width: 1024px) 31vw, (min-width: 640px) 48vw, 100vw',
-  galleryMain: '(min-width: 1280px) 820px, (min-width: 768px) 64vw, 100vw',
-  galleryTile: '(min-width: 1280px) 300px, (min-width: 768px) 22vw, 50vw',
+  card: '(min-width: 3000px) 580px, (min-width: 2200px) 500px, (min-width: 1280px) 400px, (min-width: 1024px) 31vw, (min-width: 640px) 48vw, 100vw',
+  galleryMain: '(min-width: 3000px) 1150px, (min-width: 2200px) 1000px, (min-width: 1280px) 820px, (min-width: 768px) 64vw, 100vw',
+  galleryTile: '(min-width: 2200px) 380px, (min-width: 1280px) 300px, (min-width: 768px) 22vw, 50vw',
   full: '100vw',
   thumb: '160px',
 };

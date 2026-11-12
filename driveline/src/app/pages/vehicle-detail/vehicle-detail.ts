@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MotHistoryComponent } from '../../components/vehicles/mot-history/mot-history';
+import { OfficialCheckComponent } from '../../components/vehicles/official-check/official-check';
 import { DvlaVehicleService } from '../../services/dvla-vehicle.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, isPlatformBrowser, ViewportScroller } from '@angular/common';
@@ -60,7 +61,7 @@ import {
     DeliveryCheckComponent,
     VehicleGalleryComponent,
     PhotoPendingComponent,
-    MotHistoryComponent,
+    MotHistoryComponent, OfficialCheckComponent,
   ],
   templateUrl: './vehicle-detail.html',
   styleUrl: './vehicle-detail.css',

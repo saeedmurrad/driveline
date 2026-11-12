@@ -11,6 +11,9 @@
   <router-outlet></router-outlet>
 </main>
 @if (!isHubRoute()) {
+  @if (showCheckBand()) {
+    <app-vehicle-check-band />
+  }
   <section
     class="border-t border-rose-100/80 dark:border-slate-800 surface-warm dark:bg-stone-950 print:hidden"
     aria-label="Proud to work with — finance partners"

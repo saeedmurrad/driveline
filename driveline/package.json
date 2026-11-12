@@ -11,7 +11,7 @@
     "build:gh-pages-github-io": "ng build --configuration production,github-pages --base-href /driveline/",
     "test:rules": "firebase emulators:exec --only auth,firestore --project driveline-car-sales \"node scripts/test-firestore-rules.mjs\"",
     "deploy:rules": "firebase deploy --only firestore:rules --project driveline-car-sales",
-    "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/stock-history.mjs && node scripts/filter-stock-images.mjs && node scripts/tag-stock-photos.mjs && node scripts/optimize-stock-images.mjs && node scripts/generate-share-images.mjs && node scripts/generate-sitemap.mjs",
+    "sync:stock": "node scripts/fetch-fengate-stock.mjs && node scripts/stock-history.mjs && node scripts/verify-stock.mjs && node scripts/filter-stock-images.mjs && node scripts/tag-stock-photos.mjs && node scripts/optimize-stock-images.mjs && node scripts/generate-share-images.mjs && node scripts/generate-sitemap.mjs",
     "seed:platform": "node scripts/seed-platform.mjs",
     "export:platform-snapshot": "node scripts/export-platform-snapshot.mjs",
     "deploy:firebase": "bash scripts/firebase-deploy-apphosting.sh",
@@ -25,6 +25,7 @@
     "serve:dist": "node scripts/serve-dist.mjs",
     "test:e2e": "node scripts/e2e-site-check.mjs",
     "test:a11y": "node scripts/a11y-check.mjs",
+    "verify:stock": "node scripts/verify-stock.mjs",
     "test:layout": "node scripts/layout-audit.mjs && ENGINE=webkit node scripts/layout-audit.mjs",
     "test:popups": "node scripts/interaction-audit.mjs"
   },

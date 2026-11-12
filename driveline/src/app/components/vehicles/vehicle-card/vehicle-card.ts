@@ -18,6 +18,7 @@ import { GarageService } from '../../../services/garage.service';
 import { euroStandard, meetsUlezStandard, priceReduction } from '../../../utils/vehicle-insights';
 import { PhotoPendingComponent } from '../../shared/photo-pending/photo-pending';
 import { IMG_SIZES, webpSrcset } from '../../../utils/stock-image';
+import { advertAgreesWithRecords } from '../../../utils/official-check';
 
 @Component({
   selector: 'app-vehicle-card',
@@ -64,6 +65,11 @@ export class VehicleCardComponent implements OnChanges {
   /** £ cut from the previous published price (0 when none). */
   reduction(): number {
     return priceReduction(this.vehicle);
+  }
+
+  /** DVLA + DVSA records were read and nothing in the advert disagrees with them. */
+  recordsAgree(): boolean {
+    return !this.sold() && advertAgreesWithRecords(this.vehicle);
   }
 
   sold(): boolean {

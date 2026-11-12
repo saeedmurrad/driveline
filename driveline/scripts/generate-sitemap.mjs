@@ -20,6 +20,7 @@ const pages = [
   ['/sell-your-car', 'monthly', '0.7'],
   ['/reviews', 'weekly', '0.6'],
   ['/contact', 'monthly', '0.7'],
+  ['/mot-check', 'monthly', '0.7'],
   ['/faq', 'monthly', '0.6'],
   ['/delivery', 'monthly', '0.6'],
   ['/part-exchange', 'monthly', '0.6'],

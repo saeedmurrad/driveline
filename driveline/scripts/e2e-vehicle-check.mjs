@@ -66,6 +66,61 @@ await page.setViewportSize({ width: 390, height: 844 });
 await page.waitForTimeout(300);
 check('vehicle (mobile): no sideways scroll with MOT tab', (await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)) <= 1);
 
+// ---- Official records panel on a stock car (data baked in by scripts/verify-stock.mjs) ----
+await page.setViewportSize({ width: 1366, height: 860 });
+await page.goto(`${BASE}/vehicle/10475`, { waitUntil: 'networkidle' });
+const oc = page.locator('app-official-check');
+const ocText = (await oc.innerText().catch(() => '')).replace(/\s+/g, ' ');
+check('vehicle: "Checked against official records" panel shown', /Checked against official records/.test(ocText) && /DVLA and DVSA records for YW19 XHE/.test(ocText), ocText.slice(0, 90));
+check('vehicle: panel confirms details that match the DVLA record', /match the DVLA record/.test(ocText));
+check('vehicle: panel shows the last MOT reading with its date', /(last reading|Last MOT reading:?) [\d,]+ miles on \d+ \w+ \d{4}/.test(ocText), (/(last reading|Last MOT reading:?)[^.]{0,40}/i.exec(ocText) ?? [''])[0]);
+// An advert below the last MOT reading must never be ticked as "in line"
+const advert = Number((await page.locator('.key-facts').innerText()).replace(/,/g, '').match(/(\d{4,7})\s*mi/)?.[1] ?? 0);
+const lastMot = Number((ocText.replace(/,/g, '').match(/(?:last reading|Last MOT reading:?) (\d+) miles/i) ?? [])[1] ?? 0);
+check('vehicle: mileage only called "in line" when the advert is not below the MOT record', advert >= lastMot ? /in line with the MOT record/.test(ocText) : !/in line with the MOT record/.test(ocText), `advert ${advert}, last MOT ${lastMot}`);
+await oc.getByRole('link', { name: /full MOT history and DVLA record/i }).click();
+await page.waitForURL(/\/mot-check\/?\?reg=YW19XHE/);
+check('vehicle: panel links to the full check for that car', /mot-check\/?\?reg=YW19XHE/.test(page.url()));
+
+// ---- Free vehicle check page (any registration) ----
+await page.goto(`${BASE}/mot-check?reg=LB15WMA`, { waitUntil: 'networkidle' });
+await page.waitForTimeout(1200);
+const vc = (await page.locator('app-vehicle-check').innerText()).replace(/\s+/g, ' ');
+check('checker: runs straight from a shared link and names the car', /Mini Countryman/i.test(vc), vc.slice(0, 80));
+check('checker: tax and MOT status with dates', /Vehicle tax Taxed Due 1 August 2026/i.test(vc) && /MOT Valid Expires 20 July 2026/i.test(vc), (/Vehicle tax.{0,60}/i.exec(vc) ?? [''])[0]);
+check('checker: complete DVLA details', /DVLA vehicle details/i.test(vc) && /Colour Green/i.test(vc) && /Fuel type Diesel/i.test(vc) && /Engine size 1,995 cc/i.test(vc) && /First registered July 2015/i.test(vc), (/DVLA vehicle details.{0,120}/i.exec(vc) ?? [''])[0]);
+check('checker: full MOT history with every test', /MOT history/i.test(vc) && (vc.match(/\b(Pass|Fail)\b/gi) ?? []).length >= 4 && /Goes up every test/.test(vc));
+await page.locator('app-vehicle-check .reg-plate input').fill('zz99 zzz');
+await page.locator('app-vehicle-check .reg-btn').click();
+await page.waitForTimeout(1500);
+check('checker: unknown registration gives a plain message', /could not find ZZ99 ZZZ/i.test(await page.locator('app-vehicle-check [role=alert]').first().innerText().catch(() => '')));
+await page.locator('app-vehicle-check .reg-plate input').fill('!!');
+await page.locator('app-vehicle-check .reg-btn').click();
+check('checker: rejects text that is not a registration', /Enter a UK registration/i.test(await page.locator('app-vehicle-check .reg-error').innerText().catch(() => '')));
+
+// ---- Site-wide band and header link ----
+await page.goto(`${BASE}/cars`, { waitUntil: 'networkidle' });
+check('band: shown on other pages', (await page.locator('app-vehicle-check-band section').count()) === 1);
+await page.locator('app-vehicle-check-band .reg-plate input').fill('lb15 wma');
+await page.locator('app-vehicle-check-band .reg-btn').click();
+await page.waitForURL(/\/mot-check\/?\?reg=LB15WMA/);
+await page.waitForTimeout(1200);
+check('band: searching opens the check with results', /Mini Countryman/i.test(await page.locator('app-vehicle-check').innerText()));
+check('band: not repeated on the check page itself', (await page.locator('app-vehicle-check-band section').count()) === 0);
+await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+check('band: on the home page too (once)', (await page.locator('app-vehicle-check-band section').count()) === 1);
+check('header: MOT Check link', (await page.locator('header').getByRole('link', { name: 'MOT Check' }).count()) >= 1);
+
+// ---- Sell Your Car: full MOT history opens under the summary ----
+await page.goto(`${BASE}/sell-your-car`, { waitUntil: 'networkidle' });
+const f2 = page.locator('app-part-exchange-form');
+await f2.locator('[name="peRegistration"]').fill('LB15WMA');
+await f2.getByRole('button', { name: 'Look up' }).click();
+await page.waitForTimeout(1500);
+await f2.getByRole('button', { name: /See the full MOT history/ }).click();
+await page.waitForTimeout(400);
+check('sell: full MOT history opens after a lookup', (await f2.locator('app-mot-history').innerText().catch(() => '')).match(/\b(Pass|Fail)\b/gi)?.length >= 4);
+
 check('no page errors', errors.length === 0, errors.join(' | '));
 await browser.close();
 console.log(`\n${results.filter(Boolean).length}/${results.length} vehicle-check checks passed.`);

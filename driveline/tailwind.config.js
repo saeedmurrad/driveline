@@ -15,6 +15,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        // Desktop header (full menu + actions) from here; narrower screens use the menu button
+        nav: '1180px',
+      },
       fontFamily: {
         // Font stacks come from the theme (--dl-font-*), see src/styles.css
         sans: ['var(--dl-font-sans)'],

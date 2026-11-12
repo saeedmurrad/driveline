@@ -13,6 +13,7 @@ import { validateEnquiryFields } from '../../../utils/enquiry-validation';
 import { scrollFormAlertIntoView } from '../../../utils/scroll-form-alert';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MotHistoryComponent } from '../../vehicles/mot-history/mot-history';
 import { CommonModule } from '@angular/common';
 import { finalize, catchError } from 'rxjs/operators';
 import { forkJoin, of } from 'rxjs';
@@ -23,7 +24,7 @@ import { DvlaVehicleService } from '../../../services/dvla-vehicle.service';
 
 @Component({
   selector: 'app-part-exchange-form',
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule, MotHistoryComponent],
   templateUrl: './part-exchange-form.html',
   styleUrl: './part-exchange-form.css',
 })
@@ -95,11 +96,14 @@ export class PartExchangeFormComponent {
   /** DVSA MOT history for the looked-up registration (null until found). */
   readonly motHistory = signal<MotHistory | null>(null);
   readonly motSummary = signal<MotSummary | null>(null);
+  /** Full MOT history (every test) opened under the summary */
+  readonly showFullMot = signal(false);
 
   lookupVehicle(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     this.registrationLookupError.set(null);
+    this.showFullMot.set(false);
     this.step1FieldsError.set(null);
     this.dvlaVehicleDetails.set(null);
     this.motHistory.set(null);

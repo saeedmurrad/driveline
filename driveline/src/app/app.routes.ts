@@ -180,6 +180,16 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'mot-check',
+    loadComponent: () => import('./pages/vehicle-check/vehicle-check').then((m) => m.VehicleCheckComponent),
+    data: {
+      seo: {
+        title: 'Free MOT history check and DVLA vehicle details | DriveLine',
+        description: 'Check any UK vehicle free: full MOT history with advisories and mileage record from the DVSA, plus tax, MOT status and official DVLA details. Instant, no sign-up.',
+      },
+    },
+  },
+  {
     path: 'delivery',
     loadComponent: () => import('./pages/info/delivery').then((m) => m.DeliveryComponent),
     data: {

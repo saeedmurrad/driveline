@@ -68,7 +68,7 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
               </div>
             }
           </div>
-          <div class="mt-1 flex gap-1.5 text-[11px] text-gray-500">
+          <div class="mt-1 flex gap-1.5 text-[11px] text-gray-600 dark:text-slate-300">
             @for (p of s.mileagePoints; track p.date) {
               <span class="min-w-0 flex-1 truncate text-center">{{ p.date | date: 'MMM y' }}</span>
             }
@@ -124,6 +124,11 @@ import { GOV_MOT_CHECK } from '../../../utils/vehicle-insights';
 })
 export class MotHistoryComponent implements OnChanges {
   @Input({ required: true }) registration!: string;
+  /**
+   * History already fetched by the parent (vehicle check page, Sell Your Car lookup): shown
+   * as is, with no second request. null = the parent's request found nothing.
+   */
+  @Input() preloaded?: MotHistory | null;
 
   private readonly lookup = inject(DvlaVehicleService);
   private readonly browser = isPlatformBrowser(inject(PLATFORM_ID));
@@ -145,8 +150,14 @@ export class MotHistoryComponent implements OnChanges {
 
   ngOnChanges(): void {
     if (!this.browser || !this.registration) return;
-    this.state.set('loading');
     this.showAll.set(false);
+    if (this.preloaded !== undefined) {
+      this.history.set(this.preloaded);
+      this.summary.set(this.preloaded ? summariseMot(this.preloaded) : null);
+      this.state.set(this.preloaded ? 'ready' : 'none');
+      return;
+    }
+    this.state.set('loading');
     this.lookup.motHistory(this.registration).subscribe({
       next: (h) => {
         this.history.set(h);

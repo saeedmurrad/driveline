@@ -71,6 +71,42 @@ export interface Vehicle {
   mainHiRes?: boolean;
   /** YouTube walkaround video from the stock feed, when the dealer adds one. */
   videoUrl?: string;
+  /** DVLA + DVSA records for this registration, written by scripts/verify-stock.mjs at each stock sync. */
+  official?: OfficialCheck;
+}
+
+/** What the official records say about a vehicle (compact; see scripts/verify-stock.mjs). */
+export interface OfficialCheck {
+  /** YYYY-MM-DD the records were read */
+  checkedAt: string;
+  /** DVLA Vehicle Enquiry Service */
+  dvla?: {
+    make?: string;
+    colour?: string;
+    fuelType?: string;
+    year?: number;
+    /** YYYY-MM */
+    firstRegistered?: string;
+    engineCc?: number;
+    co2?: number;
+    euroStatus?: string;
+  };
+  /** DVSA MOT history summary */
+  mot?: {
+    model?: string | null;
+    tests: number;
+    passes: number;
+    firstTimePassRate: number | null;
+    /** Current MOT expiry (YYYY-MM-DD) */
+    validUntil: string | null;
+    /** First MOT due date for cars not yet tested */
+    dueDate?: string | null;
+    lastMiles: number | null;
+    lastDate: string | null;
+    mileageConsistent: boolean | null;
+    /** 'Yes' | 'No' | 'Unknown' */
+    recall?: string | null;
+  };
 }
 
 export type PhotoTag = 'exterior' | 'interior' | 'detail';

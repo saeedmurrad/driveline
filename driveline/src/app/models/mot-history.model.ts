@@ -53,7 +53,13 @@ const toMiles = (m: { value: number; unit: 'mi' | 'km' }) => Math.round(m.unit =
 
 export function summariseMot(h: MotHistory): MotSummary {
   const tests = h.tests ?? [];
-  const oldestFirst = [...tests].sort((a, b) => a.date.localeCompare(b.date));
+  // Oldest first. Dates have no time of day, so on the SAME day a fail comes before the pass (the pass
+  // is its retest), then lower mileage first. Otherwise a fail and its retest a mile or two apart read
+  // as the mileage "going down", and the retest could count as a first-time pass.
+  const rank = (t: MotTest) => (t.result === 'fail' ? 0 : 1);
+  const oldestFirst = [...tests].sort(
+    (a, b) => a.date.localeCompare(b.date) || rank(a) - rank(b) || (a.mileage ? toMiles(a.mileage) : 0) - (b.mileage ? toMiles(b.mileage) : 0),
+  );
   const readings = oldestFirst.filter((t) => t.mileage).map((t) => ({ date: t.date, miles: toMiles(t.mileage!) }));
   // A fail and its retest a few days later are one MOT: keep the later reading.
   const points: { date: string; miles: number }[] = [];
@@ -88,7 +94,9 @@ export function summariseMot(h: MotHistory): MotSummary {
     latest: tests[0] ?? null,
     validUntil: latestPass?.expiry ?? null,
     lastMiles: last ? { miles: last.miles, date: last.date } : null,
-    mileageConsistent: readings.length >= 2 ? readings.every((p, i) => !i || p.miles >= readings[i - 1].miles) : null,
+    // Compared MOT to MOT (a fail + retest within 31 days is one MOT), so a tester noting a mile or
+    // two less on a retest is not reported as a mileage problem.
+    mileageConsistent: points.length >= 2 ? points.every((p, i) => !i || p.miles >= points[i - 1].miles) : null,
     mileagePoints: points,
     averageMilesPerYear: years >= 1 && first && last ? Math.round((last.miles - first.miles) / years) : null,
   };

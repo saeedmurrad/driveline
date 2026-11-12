@@ -24,6 +24,7 @@ export class FooterComponent {
     { label: 'Finance Options', route: '/finance' },
     { label: 'Warranty', route: '/warranty' },
     { label: 'Sell Your Car', route: '/sell-your-car' },
+    { label: 'Free MOT & DVLA Check', route: '/mot-check' },
     { label: 'Customer Reviews', route: '/reviews' },
     { label: 'Part Exchange', route: '/part-exchange' },
     { label: 'Delivery & Collection', route: '/delivery' },

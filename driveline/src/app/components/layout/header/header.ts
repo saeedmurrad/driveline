@@ -42,6 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     { label: 'Finance', route: '/finance' },
     { label: 'Warranty', route: '/warranty' },
     { label: 'Sell Your Car', route: '/sell-your-car' },
+    { label: 'MOT Check', route: '/mot-check' },
     { label: 'Reviews', route: '/reviews' },
     { label: 'Contact', route: '/contact' },
   ];

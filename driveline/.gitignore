@@ -52,3 +52,6 @@ data/platform/platform.json
 
 # Firebase emulator logs
 *-debug.log
+
+# Local report from `npm run verify:stock` (adverts to review); not for the repository
+STOCK-CHECK-REPORT.md

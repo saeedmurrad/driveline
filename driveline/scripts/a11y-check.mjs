@@ -11,7 +11,7 @@ import { createRequire } from 'node:module';
 
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:4310';
 const axeSource = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
-const PAGES = ['/', '/cars', '/vehicle/10541', '/used-cars/audi', '/finance', '/warranty', '/sell-your-car', '/contact', '/reviews', '/faq', '/delivery', '/part-exchange', '/compare', '/saved', '/legal/privacy-policy'];
+const PAGES = ['/', '/cars', '/vehicle/10541', '/used-cars/audi', '/finance', '/warranty', '/sell-your-car', '/contact', '/reviews', '/mot-check', '/mot-check?reg=LB15WMA', '/faq', '/delivery', '/part-exchange', '/compare', '/saved', '/legal/privacy-policy'];
 
 const browser = await chromium.launch({ channel: 'chrome' });
 let total = 0;

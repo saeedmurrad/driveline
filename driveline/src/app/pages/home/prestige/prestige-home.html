@@ -140,7 +140,7 @@
           }
         </div>
         <div class="pf-quote-total">
-          <p>No deposit · {{ apr }}% APR rep. · cash {{ formatPrice(s.price) }}</p>
+          <p><span>No deposit</span><span>{{ apr }}% APR representative</span><span>Cash price {{ formatPrice(s.price) }}</span></p>
           <strong>@if (monthly(); as m) { {{ formatPrice(m) }}<small>/mo</small> }</strong>
         </div>
         <a [routerLink]="['/vehicle', s.id]" class="pf-btn pf-btn-gold w-full" prestigeMagnetic>View this car</a>
@@ -151,6 +151,9 @@
   </div>
   <div class="pf-center"><a routerLink="/cars" class="pf-btn pf-btn-dark" prestigeMagnetic>View all {{ counts().car }} cars</a></div>
 </section>
+
+<!-- ================= Free MOT history + DVLA check for any car ================= -->
+<div class="pf-check"><app-vehicle-check-band /></div>
 
 <!-- ================= 4. STATEMENT: words light up as you scroll ================= -->
 <section class="pf-wrap pf-sec pf-statement-sec" aria-label="About DriveLine">

@@ -22,6 +22,7 @@ import { makeSlug } from '../../utils/make-slug';
 import { FINANCE_DISCLAIMER_SHORT } from '../../utils/finance-display';
 import { ThemeService } from '../../services/theme.service';
 import { PrestigeHomeComponent } from './prestige/prestige-home';
+import { VehicleCheckBandComponent } from '../../components/shared/vehicle-check-band/vehicle-check-band';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,7 @@ import { PrestigeHomeComponent } from './prestige/prestige-home';
     RevealOnScrollDirective,
     FindMeACarComponent,
     PrestigeHomeComponent,
+    VehicleCheckBandComponent,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',

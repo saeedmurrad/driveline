@@ -189,7 +189,8 @@
 .pf-terms button.on { border-color: var(--pf-gold); background: rgb(184 146 90 / 0.14); }
 .pf-terms button.on b { color: #d6ba8c; }
 .pf-quote-total { display: flex; justify-content: space-between; align-items: flex-end; gap: 0.6rem; margin: 1.1rem 0.4rem 1rem; padding-top: 1rem; border-top: 1px solid rgb(246 243 238 / 0.14); }
-.pf-quote-total p { margin: 0; font-size: 0.7rem; line-height: 1.4; color: rgb(246 243 238 / 0.6); max-width: 9rem; }
+.pf-quote-total p { margin: 0; font-size: 0.7rem; line-height: 1.45; color: rgb(246 243 238 / 0.62); }
+.pf-quote-total p span { display: block; white-space: nowrap; }
 .pf-quote-total strong { font-family: var(--pf-display); font-size: 2rem; line-height: 1; white-space: nowrap; }
 .pf-quote-total small { font-size: 0.9rem; font-weight: 500; opacity: 0.7; }
 .pf-quote .pf-btn { width: 100%; }
@@ -300,4 +301,15 @@
   }
   .pf-ch { top: 5.25rem; transform: none; }
   .pf-ghost { bottom: 15%; -webkit-text-stroke-color: rgb(246 243 238 / 0.13); }
+}
+
+/* Free vehicle check band between the stock grid and the statement */
+.pf-check { margin-top: clamp(4rem, 9vw, 7.5rem); }
+
+/* Very wide screens: same wider column as the rest of the site (see styles.css) */
+@media (min-width: 2200px) {
+  .pf-wrap, .pf-inner { max-width: 96rem; }
+}
+@media (min-width: 3000px) {
+  .pf-wrap, .pf-inner { max-width: 110rem; }
 }

@@ -123,6 +123,7 @@ export class LegalComponent implements OnInit {
       { label: 'Sell Your Car', route: '/sell-your-car' },
       { label: 'Part Exchange', route: '/part-exchange' },
       { label: 'Delivery & Collection', route: '/delivery' },
+      { label: 'Free MOT & DVLA check', route: '/mot-check' },
       { label: 'FAQ', route: '/faq' },
     ]},
     { section: 'Company', links: [

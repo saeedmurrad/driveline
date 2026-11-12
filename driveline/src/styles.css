@@ -702,6 +702,27 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   .action-tile {
     @apply inline-flex min-h-11 items-center justify-center rounded-xl border border-stone-200 bg-white px-2 text-center text-[13px] font-semibold leading-tight text-gray-800 transition-colors hover:border-rose-300 hover:text-rose-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-rose-400 dark:hover:text-rose-300;
   }
+  /* Row of secondary actions: each label stays on one line; the row tightens in narrow
+     columns and only breaks into two rows when even that cannot fit. */
+  .action-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    container-type: inline-size;
+  }
+  .action-tiles > .action-tile {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+  @container (max-width: 345px) {
+    .action-tiles > .action-tile {
+      font-size: 12px;
+      padding-left: 0.35rem;
+      padding-right: 0.35rem;
+    }
+  }
   .util-btn {
     @apply flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg text-xs font-medium text-gray-600 transition-colors hover:bg-stone-100 hover:text-gray-900 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-white;
   }
@@ -1170,3 +1191,16 @@ html[data-theme='prestige']:not(.dark) .price-card .btn-outline { color: #f6f3ee
 html[data-theme='prestige'] .price-card h1 { font-family: var(--dl-font-display); font-stretch: 108%; font-size: 1.5rem; letter-spacing: -0.01em; }
 html[data-theme='prestige'] .price-card .text-3xl { font-family: var(--dl-font-display); font-size: 2.4rem; }
 html[data-theme='prestige'] .price-card .action-tile { border-radius: 999px; font-size: 0.75rem; }
+
+/* ===================== VERY WIDE SCREENS =====================
+   On 2560px monitors and ultrawides a 1280px column leaves the page as a narrow strip.
+   The main column grows there; laptops and 1920px screens are unchanged. */
+@media (min-width: 2200px) {
+  .max-w-7xl { max-width: 96rem; }
+}
+@media (min-width: 3000px) {
+  .max-w-7xl { max-width: 110rem; }
+}
+
+/* The floating compare tray never permanently covers the end of a page */
+html.has-compare-tray app-footer > footer { padding-bottom: 5.5rem; }

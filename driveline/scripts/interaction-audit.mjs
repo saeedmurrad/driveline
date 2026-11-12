@@ -56,6 +56,12 @@ const SCENARIOS_ALL = [
   { name: 'saved-page', path: '/saved/', pre: async (p) => { await p.goto(BASE + `/vehicle/${CAR}/`); await btn(p, /^Save$/).click(); await p.goto(BASE + '/saved/'); }, scope: 'main', run: () => {} },
   { name: 'hub-login-error', path: '/hub', scope: 'main, form', run: async (p) => { const b = p.getByRole('button', { name: 'Sign in' }); if (await b.count()) await b.click(); } },
   { name: 'cookie-banner', path: '/', fresh: true, scope: '[aria-label=Cookies]', run: () => {} },
+  // Free vehicle check (needs a build with the lookup service: the stand-in worker in tests)
+  { name: 'check-results', path: '/mot-check?reg=LB15WMA', scope: 'app-vehicle-check', run: (p) => p.waitForTimeout(1500) },
+  { name: 'check-not-found', path: '/mot-check?reg=ZZ99ZZZ', scope: 'app-vehicle-check', run: (p) => p.waitForTimeout(1500) },
+  { name: 'check-band-error', path: '/cars/', scope: 'app-vehicle-check-band', run: async (p) => { const b = p.locator('app-vehicle-check-band .reg-btn'); if (await b.count()) { await b.scrollIntoViewIfNeeded(); await b.click(); } } },
+  { name: 'car-official-check', path: `/vehicle/${CAR}/`, scope: 'app-official-check', run: (p) => p.locator('app-official-check').scrollIntoViewIfNeeded().catch(() => {}) },
+  { name: 'sell-lookup-full-mot', path: '/sell-your-car/', scope: 'app-part-exchange-form', run: async (p) => { const f = p.locator('app-part-exchange-form'); const look = f.getByRole('button', { name: 'Look up' }); if (!(await look.count())) return; await f.locator('[name="peRegistration"]').fill('LB15WMA'); await look.click(); await p.waitForTimeout(1500); await f.getByRole('button', { name: /See the full MOT history/ }).click().catch(() => {}); await p.waitForTimeout(400); } },
   { name: 'theme-picker', path: '/', scope: '[data-theme-picker] [role=group]', run: (p) => p.getByRole('button', { name: 'Change website theme' }).click(), desktopOnly: true },
   { name: 'menu-theme', path: '/', scope: '[aria-label="Website theme"]', run: (p) => p.getByRole('button', { name: /Toggle menu/i }).click(), mobileOnly: true },
 ];
@@ -148,7 +154,7 @@ for (const engine of ENGINES) {
       for (const sc of SCENARIOS) {
         if (sc.mobileOnly && !mobile) continue;
         // Desktop-only (the header picker shows from 1024px; a desktop scrollbar can eat a few px)
-        if (sc.desktopOnly && width < 1100) continue;
+        if (sc.desktopOnly && width < 1200) continue;
         const context = await browser.newContext({
           viewport: { width, height: mobile ? 740 : 1000 },
           isMobile: mobile,

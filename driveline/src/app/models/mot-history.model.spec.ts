@@ -35,6 +35,29 @@ describe('summariseMot', () => {
     expect(s.mileageConsistent).toBe(false);
   });
 
+  it('does not flag a fail and its retest a mile or two apart (same day or a few days later)', () => {
+    // Real patterns: pass listed first for the same day with a slightly higher reading than the fail
+    const sameDay = summariseMot({
+      ...base,
+      tests: [t('2024-07-25', 'pass', 46367), t('2024-07-25', 'fail', 46363), t('2023-07-20', 'pass', 37488), t('2022-07-18', 'pass', 30865)],
+    });
+    expect(sameDay.mileageConsistent).toBe(true);
+    expect(sameDay.lastMiles).toEqual({ miles: 46367, date: '2024-07-25' });
+    expect(sameDay.firstTimePassRate).toBe(67); // the 2024 MOT failed first, then passed its retest
+
+    // Retest three days later noted two miles less than the fail
+    const laterRetest = summariseMot({
+      ...base,
+      tests: [t('2022-12-10', 'pass', 42311), t('2021-12-14', 'pass', 37787), t('2021-12-11', 'fail', 37789), t('2020-12-09', 'pass', 28906)],
+    });
+    expect(laterRetest.mileageConsistent).toBe(true);
+
+    // Same day, identical readings: the fail still counts as the first attempt
+    const equal = summariseMot({ ...base, tests: [t('2024-01-03', 'pass', 59996), t('2024-01-03', 'fail', 59996), t('2023-01-05', 'pass', 52515)] });
+    expect(equal.firstTimePassRate).toBe(50);
+    expect(equal.mileageConsistent).toBe(true);
+  });
+
   it('converts km readings and skips unreadable odometers', () => {
     const s = summariseMot({
       ...base,

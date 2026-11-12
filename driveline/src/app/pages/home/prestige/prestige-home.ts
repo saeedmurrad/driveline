@@ -26,6 +26,7 @@ import { FindMeACarComponent } from '../../../components/shared/find-me-a-car/fi
 import { RevealOnScrollDirective } from '../../../directives/reveal-on-scroll.directive';
 import { FilmRenderer } from './film-renderer';
 import { PrestigeTiltDirective, PrestigeMagneticDirective } from './prestige-motion';
+import { VehicleCheckBandComponent } from '../../../components/shared/vehicle-check-band/vehicle-check-band';
 
 type Chip = { id: string; label: string; test: (v: Vehicle) => boolean };
 
@@ -36,7 +37,7 @@ type Chip = { id: string; label: string; test: (v: Vehicle) => boolean };
  */
 @Component({
   selector: 'app-prestige-home',
-  imports: [RouterLink, FormsModule, ThumbPipe, FindMeACarComponent, RevealOnScrollDirective, PrestigeTiltDirective, PrestigeMagneticDirective],
+  imports: [RouterLink, FormsModule, ThumbPipe, FindMeACarComponent, RevealOnScrollDirective, PrestigeTiltDirective, PrestigeMagneticDirective, VehicleCheckBandComponent],
   templateUrl: './prestige-home.html',
   styleUrl: './prestige-home.css',
 })

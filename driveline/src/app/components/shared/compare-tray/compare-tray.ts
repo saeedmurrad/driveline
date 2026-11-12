@@ -1,5 +1,6 @@
 import { ThumbPipe } from '../../../pipes/thumb.pipe';
-import { Component, computed, inject } from '@angular/core';
+import { Component, PLATFORM_ID, computed, effect, inject } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs';
@@ -31,4 +32,13 @@ export class CompareTrayComponent {
   readonly slots = computed(() =>
     Array.from({ length: this.limit }, (_, i) => this.garage.compareVehicles()[i]),
   );
+
+  constructor() {
+    // While the tray floats over the page, the footer gets extra room underneath (styles.css),
+    // so the last lines of every page can be scrolled clear of it.
+    const doc = inject(DOCUMENT);
+    if (isPlatformBrowser(inject(PLATFORM_ID))) {
+      effect(() => doc.documentElement.classList.toggle('has-compare-tray', this.garage.compareCount() > 0 && !this.onComparePage()));
+    }
+  }
 }

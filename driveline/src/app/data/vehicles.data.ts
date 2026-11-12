@@ -125,7 +125,32 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsDownLitres": 1450,
     "acceleration0To60Seconds": 8.4,
     "isFeatured": false,
-    "photosPending": true
+    "photosPending": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2020,
+        "firstRegistered": "2020-11",
+        "engineCc": 1995,
+        "co2": 131,
+        "euroStatus": "EURO 6 AP"
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 4,
+        "passes": 4,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-07-09",
+        "dueDate": null,
+        "lastMiles": 76600,
+        "lastDate": "2026-07-10",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10541",
@@ -282,7 +307,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeeeiiiiiiiiiiiiiieddiedeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdIIpJ/gPQN7iw8xAclRAA3mVZub5F/7w2Gpc0Zr1uVDdz3PmNscwnalps916NTfaKfrSg7MuPC0rwPjSQisb5YkaXA2UIrvmdLemUmnog1EQTt9V6LEBw+4ivduVptM33QHnAvcUYlCq+y+0oIfPrAuSsDsx+VJEQlaAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "MINI",
+        "colour": "GREEN",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-07",
+        "engineCc": 1995,
+        "co2": 161
+      },
+      "mot": {
+        "model": "COUNTRYMAN",
+        "tests": 9,
+        "passes": 9,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-11-06",
+        "dueDate": null,
+        "lastMiles": 87867,
+        "lastDate": "2026-11-07",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10540",
@@ -422,7 +471,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeiiiiiiiiiieieiidieddeiee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOgMYYbbfXqQvBU59csKmQ8MAD2Rj14VfReYrvIkvUHnTd27T5tpNg612tJ7OB5rqqQSeqbI35WROVbtI/Mef3cz77Ur4D2zf03WsL8OIDZhwV8WEZ2EJoPHN6BCGsXLsQyiRfjNws6JE4gUvS/Y+pNULLhbp53RVdMIAAwEAJCAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "PEUGEOT",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-03",
+        "engineCc": 1560,
+        "co2": 112
+      },
+      "mot": {
+        "model": "3008",
+        "tests": 13,
+        "passes": 9,
+        "firstTimePassRate": 60,
+        "validUntil": "2027-06-22",
+        "dueDate": null,
+        "lastMiles": 92783,
+        "lastDate": "2026-06-23",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10539",
@@ -545,7 +618,31 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 165,
     "bootSpaceSeatsDownLitres": 2181,
     "isFeatured": false,
-    "photosPending": true
+    "photosPending": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "RED",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-05",
+        "engineCc": 1997,
+        "co2": 112
+      },
+      "mot": {
+        "model": "C4",
+        "tests": 10,
+        "passes": 8,
+        "firstTimePassRate": 75,
+        "validUntil": "2027-05-30",
+        "dueDate": null,
+        "lastMiles": 58027,
+        "lastDate": "2026-05-11",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10538",
@@ -612,7 +709,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeiiiiiiiee",
     "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJZgCdACIACsvoqWHRHyAA/dvvFinA6/Q0UbGC8++xM6yWHLtvxpxo68KfC6gzuDhvlAMPtP9dcjvvYzVWILdiBxXixDDCvqzmr7QG59rxC43pZc9fmDXYprOKkdqR70HrTnDsnVsn7rnnodUeSN2/xz9kYb+zkk+OmH+5yPggAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "RENAULT",
+        "colour": "GREY",
+        "fuelType": "PETROL",
+        "year": 2011,
+        "firstRegistered": "2011-11",
+        "engineCc": 1598,
+        "co2": 174
+      },
+      "mot": {
+        "model": "SCENIC",
+        "tests": 19,
+        "passes": 13,
+        "firstTimePassRate": 54,
+        "validUntil": "2027-08-14",
+        "dueDate": null,
+        "lastMiles": 61627,
+        "lastDate": "2026-07-15",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10536",
@@ -769,7 +890,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeeeiiiiiiiiiiiiiidiideddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdH8J7+AmZHY4wRW12ecFIAP39Oc3K+uuGPyN3r5RA2XpfEP/R1XZrqstwbso4TPyDqPjIe4bz5J4EDiTYe5sJNWxSfqnBdbh2IM/SjXX1vCuXW+GafndQsg7pdgMyut3Hhia3MQj8e6TzDSJvIYPcBGU8R+ZUQeHkT9jz6zd41HL4eVgA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "RENAULT",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2019,
+        "firstRegistered": "2019-12",
+        "engineCc": 1749,
+        "co2": 127,
+        "euroStatus": "EURO 6DG"
+      },
+      "mot": {
+        "model": "GRAND SCENIC",
+        "tests": 8,
+        "passes": 5,
+        "firstTimePassRate": 40,
+        "validUntil": "2027-08-08",
+        "dueDate": null,
+        "lastMiles": 97725,
+        "lastDate": "2026-07-13",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10537",
@@ -911,7 +1057,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeeiiiiiiiiiiiiiiie",
     "thumbBlur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdACIeszXN3bRoCT+nFADN8scWcEwhcCCWqDvkv8Cs7JhpsyEXVsZnO/jbuuT0N9rvDs3p2j2xwGnHtRqmDwHThWUR7EorVcmkIa3iRE3Be67+bncx5kGadjftMs/5WrVSohEbL/Ps8Rgkak6IAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "PEUGEOT",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-07",
+        "engineCc": 1997,
+        "co2": 109
+      },
+      "mot": {
+        "model": "308",
+        "tests": 11,
+        "passes": 8,
+        "firstTimePassRate": 63,
+        "validUntil": "2027-11-08",
+        "dueDate": null,
+        "lastMiles": 91548,
+        "lastDate": "2026-11-09",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10534",
@@ -1065,7 +1235,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": true,
     "imageTags": "eieeeeeiiiiiiiiiiiiiiiieide",
     "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdEf/2S0BhUV+5oWpDhkwKMAAA/eO4peFCkOgFzWly9rF5rYaUB/jwcJ0s8JtiAuY/2i76BKbASpoWPOvGELAVgZ5GNb85VYa3qE3fvlA9dY7aR9KaABzEYIER9PJIVm2SlU2bQ8ZnUXxLCECUm+Z+bhMC9wvhZwmx88tUyoWZ2ZrC/ZqHTrsipizV6oAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "RED",
+        "fuelType": "DIESEL",
+        "year": 2018,
+        "firstRegistered": "2018-06",
+        "engineCc": 1598,
+        "co2": 105
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 7,
+        "passes": 6,
+        "firstTimePassRate": 83,
+        "validUntil": "2027-02-10",
+        "dueDate": null,
+        "lastMiles": 104689,
+        "lastDate": "2026-02-02",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10531",
@@ -1224,7 +1418,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiideedeee",
     "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdH8ADEyaq+AkWABGkJgAA3mVZucBiF8eESFPU/uTqsOprBDbFwWNDZZUMtPQc5fB7cIqz11ge9tCgYayajw15M08paULuHOCbsqMzD6gamqoK4YfoI2KhLxBzFJhx4RSLjTwZfT1D0rNA9JaGjFcb9u/+ZvPF+//4z+eqHUAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "BLUE",
+        "fuelType": "PETROL",
+        "year": 2015,
+        "firstRegistered": "2015-12",
+        "engineCc": 1364,
+        "co2": 149
+      },
+      "mot": {
+        "model": "MOKKA",
+        "tests": 12,
+        "passes": 9,
+        "firstTimePassRate": 67,
+        "validUntil": "2027-02-12",
+        "dueDate": null,
+        "lastMiles": 51994,
+        "lastDate": "2026-01-29",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10532",
@@ -1380,7 +1598,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiiiiiiiiiiididdee",
     "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCw/f/i2HXCTvSPWPnBeRmSvTAA/Nlwn0w7EzoWDAb5eVGYi7hm2K5VCTceoU5QmTjqBlnjsi174Rj/wJaNzMQI2wy0/p3YGH62w4yA/wImWAtGyZIcTdpiCmhgrr8k5RsUKL70/nGlCCYqhz8V0lRmugwTVoxaInt+AAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "RENAULT",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-05",
+        "engineCc": 1461,
+        "co2": 98
+      },
+      "mot": {
+        "model": "MEGANE",
+        "tests": 8,
+        "passes": 7,
+        "firstTimePassRate": 86,
+        "validUntil": "2026-12-05",
+        "dueDate": null,
+        "lastMiles": 84324,
+        "lastDate": "2025-11-29",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10526",
@@ -1542,7 +1784,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiieiiiiiiiiiiiiiiiiededdeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJYgCdACHunnGzfOaJIkAA/lv+hyAega8KHq1y2Qzr6yqEEwQLOUR+B93onbkArRgFnBaWc4xdQAlXpzWG471q021oNnh2zgIdfLV3SCEbGYnY0K42u1Z4Xp4csE75JdPJ5oH90w3LQsWxQFsRo+yPxm//q17jsW4AAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-10",
+        "engineCc": 1956,
+        "co2": 149
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 10,
+        "passes": 8,
+        "firstTimePassRate": 75,
+        "validUntil": "2027-01-26",
+        "dueDate": null,
+        "lastMiles": 79469,
+        "lastDate": "2026-01-13",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10527",
@@ -1665,7 +1931,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeiiiiiiiiiiiidddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZACsEf/gNlwTPckW8oCL1QAA/nwJwsHegPQKF8mnHNhVQF5Z4NGtNeFY8v75TQ6BrSBPQa9bZ8zdHKKKgOQxnhPIz69yMcmVIMm3vR5IIpRxEbRqa4HpogdKR7BjArOghKtguprQZ0jSqJp7DRjwKVBkHmaTnVKGzsjDYfPwGMYWwAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2012,
+        "firstRegistered": "2012-11",
+        "engineCc": 1956,
+        "co2": 155
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 13,
+        "passes": 11,
+        "firstTimePassRate": 82,
+        "validUntil": "2027-02-04",
+        "dueDate": null,
+        "lastMiles": 135320,
+        "lastDate": "2026-02-05",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10525",
@@ -1810,7 +2100,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiieeiiiidiieeiddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJYgCdEf/gPQY/tXcAzcDLdz8GgADeZVm5vkX/u1tAYFiqADeiDtKdGdcdsLOfqsZddWhCDnk6Cn0BshUnF64IzRhjbbVJkpzTwxjja8pG6zFenOKnb6r0WIA0HLZCXJ/fj6YJcrj805otS+we1XOE9HFsYHXtKXWJfnP3eOIKTabmniagAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "PEUGEOT",
+        "colour": "BROWN",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-03",
+        "engineCc": 1560,
+        "co2": 112
+      },
+      "mot": {
+        "model": "3008",
+        "tests": 12,
+        "passes": 10,
+        "firstTimePassRate": 80,
+        "validUntil": "2027-10-25",
+        "dueDate": null,
+        "lastMiles": 63607,
+        "lastDate": "2026-10-26",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10523",
@@ -1917,7 +2231,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiieideddeddieee",
     "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdIHGJ/gOf6zf/8dvFg3xb6sAA99MNRMOqV7o9yxWpepJmwPMHRCSD2j1NDGYFEXOFIvLW+rATZ+mPCMbVClRWYrtWBGhOtV1A4j4TsTqwTH5xjE0qCfu8tGwOaONJI/XWR5Nh2HXHVfQKMR2+lvzVNsyYcLcxO41/BjytkYAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "ABARTH",
+        "colour": "GREY",
+        "fuelType": "PETROL",
+        "year": 2019,
+        "firstRegistered": "2019-01",
+        "engineCc": 1368,
+        "co2": 151,
+        "euroStatus": "EURO 6 BG"
+      },
+      "mot": {
+        "model": "595",
+        "tests": 7,
+        "passes": 5,
+        "firstTimePassRate": 60,
+        "validUntil": "2027-01-26",
+        "dueDate": null,
+        "lastMiles": 81644,
+        "lastDate": "2026-01-27",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10522",
@@ -2062,7 +2401,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiddiiiiiiiiiiiiddddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoACwKwZ6ot/On2CONAA8jQ1c5NmeBSpIk0X5fLCVbAzxwN0FqJlcwIdIkURuEswj9JaVtQczqNnddkesTLpTsKpsm6q5FSKTJjYYkg12yWOji/kpo/MyP5wiOJGY0RuaG/aNDV2Ktn83Qg7itSmRt67vFt1HBW3yAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "PEUGEOT",
+        "colour": "RED",
+        "fuelType": "PETROL",
+        "year": 2015,
+        "firstRegistered": "2015-03",
+        "engineCc": 1200,
+        "co2": 99
+      },
+      "mot": {
+        "model": "2008",
+        "tests": 14,
+        "passes": 9,
+        "firstTimePassRate": 44,
+        "validUntil": "2027-03-15",
+        "dueDate": null,
+        "lastMiles": 67498,
+        "lastDate": "2026-03-16",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10521",
@@ -2212,7 +2575,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeidiiiiiiiiddddeee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJaACdGugD0GlTtQ2CRLKLjhB4APeOVSiR3yqkSQEzgNLP2YnIzLyHd/ZsWVbqOol4UCml98NniAuzjIGY0+ruzl6zYvbDqkp0iwtlovR8CrbMGhrVKu8QCR+43EmrEiUp2E06jxHgr3pnXhr90zTcsqn8f5vLGG6BRmndwluXo7WNAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "FORD",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-03",
+        "engineCc": 1499,
+        "co2": 98
+      },
+      "mot": {
+        "model": "FIESTA",
+        "tests": 10,
+        "passes": 8,
+        "firstTimePassRate": 75,
+        "validUntil": "2026-10-12",
+        "dueDate": null,
+        "lastMiles": 105483,
+        "lastDate": "2025-10-02",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10520",
@@ -2372,7 +2759,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiiiiiiiiiiiiddididdddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZQCdIFzDMl0JjZuLvtdH1/QA/BYGQCFKK/UOuNnv5eHX5w1MKlOoMa0Vs2gH8AVfUdNu5I3Th+upeTXUzsu4T6J4YQJK2BkSoH+LPsgVvc9JWGOg7JpYE15HO6ffuL/zV9PT/fuRY63og1xgchaAAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2019,
+        "firstRegistered": "2019-03",
+        "engineCc": 1968,
+        "co2": 124,
+        "euroStatus": "EURO 6 AG"
+      },
+      "mot": {
+        "model": "A6",
+        "tests": 5,
+        "passes": 5,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-04-28",
+        "dueDate": null,
+        "lastMiles": 91569,
+        "lastDate": "2026-04-15",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10519",
@@ -2535,7 +2947,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeidiiidiiiiiiddideieddeeeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQCsAB6XeorvFK3JkpPv4AD7csiYa+Au9VYfqE2LSbVXOd1RRPXLAYwb970U2D2PoFPqRJPESXdXsG5yKP74JtZjvAYYGYxwHQkIV6W4yLhFXW7LxrDbSLMLADe1Zv20Fl66lQSJInXC3XjvTv3POEUnW9MWxqeMAAAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-10",
+        "engineCc": 1999,
+        "co2": 134
+      },
+      "mot": {
+        "model": "RANGE ROVER EVOQUE",
+        "tests": 11,
+        "passes": 9,
+        "firstTimePassRate": 78,
+        "validUntil": "2027-03-29",
+        "dueDate": null,
+        "lastMiles": 100714,
+        "lastDate": "2026-03-16",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10517",
@@ -2696,7 +3132,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiddiiiiiiiiiddiiieieddee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYgCdIDfJ/gPEeKFj8/65tvQA/I/pexAiJ6LNMa9Mgj0uDSewV1DSWtazzVsY99UFKOmyrnCuuM4dkiSX5KlwkR9TLL0f4Y7TdEkdcYCPlRen0/FwUR1UisX60tDY+BBN/tO2iolseuPRyNek9mag/tb866/rvAAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "BROWN",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-03",
+        "engineCc": 1999,
+        "co2": 134
+      },
+      "mot": {
+        "model": "RANGE ROVER EVOQUE",
+        "tests": 9,
+        "passes": 7,
+        "firstTimePassRate": 71,
+        "validUntil": "2027-03-27",
+        "dueDate": null,
+        "lastMiles": 74205,
+        "lastDate": "2026-03-28",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10516",
@@ -2859,7 +3319,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiieiiiiiiiiiiiiiidededeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJaACdEf/gJc2CRlDZgzo9MAD947gaEOT4KTm+dZtqAAojtbqnYhoRbZiwZygaf8GlhnDNhgO3T+rd51cveXhS7TAxDvKv6WLp6ie64guVk/NtcqA322hO2JOJwCzSqaBvmQ2qtqIn45dVjOL74rzrL3xDq6Q/ogKDOz/Q0ob/Qu7BCeVDS8M4oAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-11",
+        "engineCc": 1956,
+        "co2": 165
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 10,
+        "passes": 9,
+        "firstTimePassRate": 89,
+        "validUntil": "2027-10-31",
+        "dueDate": null,
+        "lastMiles": 81871,
+        "lastDate": "2026-10-22",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10515",
@@ -2970,7 +3454,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eiieedeiiiiiiidedddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdAB9OsrYT+SY2BTQAx2hwh8jwVxGv7RbDZzNBlspu+Bbq7Ei5xQwtVmA4byEXGT3gvVhOsEj0a8cadbTO+zbTeTWYiT2paT1c40LQV/26+KccgJsRWaR9ll1wqoW73tAE6dS8EyWlp1agDKbLzv8H4diBYAZBbgS6DAAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "PEUGEOT",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2022,
+        "firstRegistered": "2022-03",
+        "engineCc": 2200,
+        "co2": 237,
+        "euroStatus": "EURO 6 AR"
+      },
+      "mot": {
+        "model": "BOXER 335 S L3H2 BLUEHDI",
+        "tests": 3,
+        "passes": 2,
+        "firstTimePassRate": 50,
+        "validUntil": "2027-01-28",
+        "dueDate": null,
+        "lastMiles": 131508,
+        "lastDate": "2026-01-29",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10514",
@@ -3135,7 +3644,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiddiiiiiiiidiiiddiidddddeeieeee",
     "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdEf/gPMA7JR46W2n93zDAAAD+W/j15aDPQoEVPXCWW6teLE9yKnujXnLulafjiJlg/V0DZolEAfoLJUA/Hv8FPFvGhhbErwattyp5qgbImwBPzs+qD4cXSaBFKo/myVguvKVwjvs/cTeQKFVOIA671vISUrza8b9v/iH1xMqkeN1MCVsAAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "RED",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-03",
+        "engineCc": 1999,
+        "co2": 134
+      },
+      "mot": {
+        "model": "RANGE ROVER EVOQUE",
+        "tests": 9,
+        "passes": 9,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-05-28",
+        "dueDate": null,
+        "lastMiles": 59439,
+        "lastDate": "2026-05-28",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10513",
@@ -3305,7 +3838,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiiidiiddiiiiiiidddeideeeeeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJZQC06dwApXNjs1hAGuJ6EoAA/j+gfB0RapluPgYxu3FKTCc6YjmLaB/O08t2idggvK/sAOKoE1WGlkt54eUJ9aiIERCODBKRkZVw8S3Py5hZ3DM85kcp5/qxFuGImu62zbftWJU8EPJKk+7te8Oyv5bezeys928EDqcglBgAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-05",
+        "engineCc": 1999,
+        "co2": 134
+      },
+      "mot": {
+        "model": "RANGE ROVER EVOQUE",
+        "tests": 7,
+        "passes": 7,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-07-08",
+        "dueDate": null,
+        "lastMiles": 95910,
+        "lastDate": "2026-07-09",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10511",
@@ -3419,7 +3976,31 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 530,
     "bootSpaceSeatsDownLitres": 1470,
     "photosPending": true,
-    "isFeatured": false
+    "isFeatured": false,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-08",
+        "engineCc": 1956,
+        "co2": 98
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 10,
+        "passes": 9,
+        "firstTimePassRate": 89,
+        "validUntil": "2026-08-03",
+        "dueDate": null,
+        "lastMiles": 94513,
+        "lastDate": "2025-08-01",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10502",
@@ -3561,7 +4142,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiiiiiidedddee",
     "thumbBlur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBOgBCzzYVLx/bbr03cAAPlXWN0sglU/cVSq+ts0cAoZvpulkXdm8E+DjKsTtbCZYmA0cg+Jl2mt46lSrqmTKMoPT0Vk9yqOKf6jbtzZa7IBmCxsNgS9Z74dPwYYqUSxHBoSVQAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-07",
+        "engineCc": 1997,
+        "co2": 0,
+        "euroStatus": "EURO 6"
+      },
+      "mot": {
+        "model": "GRAND C4 PICASSO",
+        "tests": 2,
+        "passes": 2,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-06-29",
+        "dueDate": null,
+        "lastMiles": 49800,
+        "lastDate": "2026-06-30",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10501",
@@ -3712,7 +4318,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiidiidedeeee",
     "thumbBlur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUFAAASL0oxQCwqyxql/CAAD+sgANp/O9BtVdYPZ3gBlcFu9YTUTZOxVzsXI3QS2R64GL3N6Yig6Qt2FJ230odc9kPwkBWfLyDFv3T1bApVRfvHSWzfaujkwoytV1DUnCkLgGohabYb8IAAAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "JAGUAR",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2018,
+        "firstRegistered": "2018-03",
+        "engineCc": 1999,
+        "co2": 139
+      },
+      "mot": {
+        "model": "F-PACE",
+        "tests": 6,
+        "passes": 6,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-03-15",
+        "dueDate": null,
+        "lastMiles": 94149,
+        "lastDate": "2026-03-10",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10498",
@@ -3863,7 +4493,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiiiiiddddeee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdGvND0eiBnYg9+q+AAPeNXT1UQtj9au+qnSPBZFRh+lajY/anVzi4XvrVUMNwSM1rWo0yd/ia+zRfU4Zm29K4RKbfXgS1K+H60po0jKP8/6QmExxU9si/m/lwCJpJLKC38V9roxjRX0jI44o32WfN79/d1Zn6GMB9d9yto4G3gAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "FORD",
+        "colour": "BLUE",
+        "fuelType": "PETROL",
+        "year": 2015,
+        "firstRegistered": "2015-12",
+        "engineCc": 998,
+        "co2": 114
+      },
+      "mot": {
+        "model": "FIESTA",
+        "tests": 10,
+        "passes": 9,
+        "firstTimePassRate": 89,
+        "validUntil": "2027-11-23",
+        "dueDate": null,
+        "lastMiles": 29609,
+        "lastDate": "2026-11-07",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10500",
@@ -3993,7 +4647,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiiiideee",
     "thumbBlur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQAAV4h1rEvlyIv7tdQbJAD+sfdLT0nRoJqSlbBqkO4iUvSf2dHEIGxfy8CaS3c0LFav9Qgd7nn3AQOiKBrvnftc6w8ASRL4Y0e+xBsd/fkRUH8eWJKkxf3ukZTROv/OgpECfxKrAXU+EPERxGIosgh3ImFqAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "NISSAN",
+        "colour": "BLUE",
+        "fuelType": "PETROL",
+        "year": 2012,
+        "firstRegistered": "2012-05",
+        "engineCc": 1598,
+        "co2": 159
+      },
+      "mot": {
+        "model": "NOTE",
+        "tests": 14,
+        "passes": 12,
+        "firstTimePassRate": 83,
+        "validUntil": "2027-02-07",
+        "dueDate": null,
+        "lastMiles": 39743,
+        "lastDate": "2026-01-15",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10499",
@@ -4070,7 +4748,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eeieeieieii",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdLpWAQzga03ldSYZqJGKAAMyTe8xJVMdHtZs4d5U8sAVoZ3pGRSV76hkgz6OJZSe116hV+aFvLSxdIvAlR2ybh1pNtAnX+qBi6zuVRRRqPgdmFl+rQVjpjzeuInpYUg1Es5+EqVbGNbBYhp9Dbc97AHqlnQeaA1QOPxvSE1AAAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "FORD",
+        "colour": "BLACK",
+        "fuelType": "PETROL",
+        "year": 2008,
+        "firstRegistered": "2008-03",
+        "engineCc": 1388,
+        "co2": 154
+      },
+      "mot": {
+        "model": "FUSION",
+        "tests": 25,
+        "passes": 18,
+        "firstTimePassRate": 61,
+        "validUntil": "2027-08-21",
+        "dueDate": null,
+        "lastMiles": 73378,
+        "lastDate": "2026-08-22",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10492",
@@ -4204,7 +4906,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeidiiiiiiiddddee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZQC7Ef/gObMc6VS2mNcaX9LTgAAA/gWsidLWFfRpfPsYFG4VhC4VVNEo6QcuP+sij3BiJUYhVoPFoPirS+fQQJJ/utjI1uka2KRTI8OVWJuf8kofk+UdEbw6LZ9if4no6A4qJxRpMUpJSV8eRw6i2fNbhBAMgc2Trvdh9U5hLQUgAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "SEAT",
+        "colour": "WHITE",
+        "fuelType": "PETROL",
+        "year": 2018,
+        "firstRegistered": "2018-01",
+        "engineCc": 1395,
+        "co2": 120
+      },
+      "mot": {
+        "model": "LEON",
+        "tests": 8,
+        "passes": 6,
+        "firstTimePassRate": 67,
+        "validUntil": "2027-02-13",
+        "dueDate": null,
+        "lastMiles": 96428,
+        "lastDate": "2026-02-12",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10485",
@@ -4351,7 +5077,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiideeeee",
     "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdL13wzDyYmpwLurnIBf8oMVS8AMno49q/jaHJI6ILscOI/qkvJyfpocowQIaIexlUFf02wgsVS80+cLq7r1G2VMapUEZYzW232LC3QsXeYlC5s9MP6sCiA20rqT6Nce2f/IC6hB2MNVukEdpOCAqvKBcOdKctLGXuXwb4Sl8CLLjdjT5MCjgzUDOEoUAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "JAGUAR",
+        "colour": "RED",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-09",
+        "engineCc": 1999,
+        "co2": 139
+      },
+      "mot": {
+        "model": "F-PACE",
+        "tests": 11,
+        "passes": 8,
+        "firstTimePassRate": 63,
+        "validUntil": "2027-08-04",
+        "dueDate": null,
+        "lastMiles": 115098,
+        "lastDate": "2026-08-05",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10475",
@@ -4492,7 +5242,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeieeiiiddiidiidddeeeei",
     "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWD+AQYQyzMJJkiTpIoqAAA9r3ZhKUb7jDFIEyw7MAUJJOOwo18JCB4o0UJ7NX1obEZ3oMHN6Vxz4nryoDaJHSxtuDewlcB7fgLskc0f8fz9jNzwQgf3av/z1GoSiv4qq/JLryWriaGtPK7AgPzbtr0P63Pf0btbUHWdh261H6jcc/lARQAAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2019,
+        "firstRegistered": "2019-06",
+        "engineCc": 1968,
+        "co2": 123,
+        "euroStatus": "EURO 6 AG"
+      },
+      "mot": {
+        "model": "A6",
+        "tests": 5,
+        "passes": 5,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-06-23",
+        "dueDate": null,
+        "lastMiles": 151652,
+        "lastDate": "2026-06-04",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10470",
@@ -4646,7 +5421,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiiiiddeeddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWCP/wHNe1wiVpku54RddwAAPlwX6c/y2on9HVP61tHL6qHxVCXoFhNewnJq7kyQn26VkACn4ZiOuCwEdp4uVcn7pX9OFmxKcegdp5A0vRMtpUsf1XmuWmuysIjvGBCrQ6xv1TQQTeutm77ukjGx5TtZHNVDAAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "BLACK",
+        "fuelType": "PETROL",
+        "year": 2017,
+        "firstRegistered": "2017-09",
+        "engineCc": 1199,
+        "co2": 109
+      },
+      "mot": {
+        "model": "CROSSLAND",
+        "tests": 7,
+        "passes": 6,
+        "firstTimePassRate": 83,
+        "validUntil": "2026-06-26",
+        "dueDate": null,
+        "lastMiles": 56278,
+        "lastDate": "2025-06-27",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10468",
@@ -4772,7 +5571,31 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 6750,
     "priceReducedAt": "2026-11-09",
     "photosPending": true,
-    "isFeatured": false
+    "isFeatured": false,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-09",
+        "engineCc": 1598,
+        "co2": 134
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 8,
+        "passes": 6,
+        "firstTimePassRate": 67,
+        "validUntil": "2027-01-11",
+        "dueDate": null,
+        "lastMiles": 87124,
+        "lastDate": "2026-01-12",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10461",
@@ -4895,7 +5718,31 @@ export const VEHICLES: Vehicle[] = [
     "bootSpaceSeatsUpLitres": 470,
     "bootSpaceSeatsDownLitres": 1510,
     "photosPending": true,
-    "isFeatured": false
+    "isFeatured": false,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VOLKSWAGEN",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-07",
+        "engineCc": 1968,
+        "co2": 140
+      },
+      "mot": {
+        "model": "TIGUAN",
+        "tests": 10,
+        "passes": 7,
+        "firstTimePassRate": 57,
+        "validUntil": "2027-01-10",
+        "dueDate": null,
+        "lastMiles": 95465,
+        "lastDate": "2026-01-10",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10455",
@@ -5053,7 +5900,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiiiididiiddddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJQBUihLhmFbNBEG8H0FTUXqEkAAD9w9Q5cvQRZmcH6VWoKQT83qSOh052mmW37jODd4Cq+G5zVQ3q2JzHbvcDrmpOI/QcD3ilgiRRz6wiJIArEryL/7foH2VznrDZ/ZjElMavYvIrJe+wx3vR76PR+AAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "MERCEDES-BENZ",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2018,
+        "firstRegistered": "2018-12",
+        "engineCc": 1461,
+        "co2": 111,
+        "euroStatus": "EURO 6(AG)"
+      },
+      "mot": {
+        "model": "A-CLASS",
+        "tests": 6,
+        "passes": 5,
+        "firstTimePassRate": 80,
+        "validUntil": "2026-09-18",
+        "dueDate": null,
+        "lastMiles": 65009,
+        "lastDate": "2025-09-19",
+        "mileageConsistent": true,
+        "recall": "No"
+      }
+    }
   },
   {
     "id": "10457",
@@ -5206,7 +6078,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiidiiiiiieddeee",
     "thumbBlur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGMACcVd9NdV7cXq82YAAPa5yh71pcq+xrGuyHO3N8N6eTCW/5CAiUZUDdY6gzJsrubx0g29UcG1JdQf92WOjMdqNXV1/XNC+krK4jksl7EpFTuMJLASfWYhy4/Qup/OEREjqHmA8Xp2SSAR2369ZRoVbQvAJfitAJG32tw6vGk1EGtBpIkSuj7OVSAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VAUXHALL",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-03",
+        "engineCc": 1598,
+        "co2": 116
+      },
+      "mot": {
+        "model": "INSIGNIA",
+        "tests": 11,
+        "passes": 8,
+        "firstTimePassRate": 63,
+        "validUntil": "2027-08-23",
+        "dueDate": null,
+        "lastMiles": 74629,
+        "lastDate": "2026-08-24",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10454",
@@ -5363,7 +6259,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiidiiiiiiiiiiiddddeee",
     "thumbBlur": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCsBagR+Qtv5AbZwvVnZvcQAPwwX5ZMjeYEV+ZqMwnsdeSmTph/8QgJI5EWVx4fO2bAJpnMp8V4ObLJR3LYfQG+5X5J3dfdJo+U8iIMcLck0O1zxb5WCa8B4Yoq/JlGvF4d3BKobYnYz5mYvQXqzUXWBzyENcTxeFF0iFB5k+AA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "BMW",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-12",
+        "engineCc": 1995,
+        "co2": 119
+      },
+      "mot": {
+        "model": "218",
+        "tests": 15,
+        "passes": 11,
+        "firstTimePassRate": 60,
+        "validUntil": "2027-07-22",
+        "dueDate": null,
+        "lastMiles": 108375,
+        "lastDate": "2026-07-23",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10451",
@@ -5520,7 +6440,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiidiiiddiiiiddddedee",
     "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoMYJn/AgG2y1wlEGsExiKzAAPa5vFbzP0BVjMQFdcSI8CbI5o1/AnidyjVdWjZjKCeGFwZhx0A/7KlmLKnvKULrehkiJ4PHH8DbADonaz9YwgJLy0L49zKgV3ZXiph64H6olGJhEV0rYGf2UXGURl0/LL7dPCC5gNVzCTGnYOUx9OCUYCh5UQAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "BMW",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-05",
+        "engineCc": 1995,
+        "co2": 119
+      },
+      "mot": {
+        "model": "520",
+        "tests": 9,
+        "passes": 9,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-03-19",
+        "dueDate": null,
+        "lastMiles": 185372,
+        "lastDate": "2026-03-02",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10449",
@@ -5623,7 +6567,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiideee",
     "thumbBlur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWAMYdaqTq/d0n/ThoZxT/gAPwsf2BdgwyickiTtpNXkZYMz/zNAXdExt6BfQ22F6y+J0hzFfUGUtmpAqoKzVkl+ctHWv/9RaBaDJun0DqGs05t/7ymry8lyRWisaXp3RN830EQXA0ayCAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-06",
+        "engineCc": 1560,
+        "co2": 99
+      },
+      "mot": {
+        "model": "C4",
+        "tests": 7,
+        "passes": 7,
+        "firstTimePassRate": 100,
+        "validUntil": "2026-05-21",
+        "dueDate": null,
+        "lastMiles": 82895,
+        "lastDate": "2025-05-22",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10444",
@@ -5702,7 +6670,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiidiiiidedddddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGZjB3li4I4yw3B2UZYAAPlAXNytoz1OEdYDbpIX4VpWn7m+dEFrP2glNaaNp91fSyD0RgdIcQUkHGjDXFjCZmIWjhRu606vyUAfJwOJpXBpDmhKksN+DHSb/z7AGhHM87/nIUn8Y/yByxmLqJ22MsnfzZ7kYvCuln3+frPImLAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "NISSAN",
+        "colour": "BEIGE",
+        "fuelType": "DIESEL",
+        "year": 2010,
+        "firstRegistered": "2010-11",
+        "engineCc": 1461,
+        "co2": 135
+      },
+      "mot": {
+        "model": "QASHQAI",
+        "tests": 12,
+        "passes": 10,
+        "firstTimePassRate": 80,
+        "validUntil": "2027-03-18",
+        "dueDate": null,
+        "lastMiles": 56157,
+        "lastDate": "2026-03-19",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10441",
@@ -5879,7 +6871,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiidediddiiiiiiiiddiidedddeeeddeddiidddeee",
     "thumbBlur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJagCsH8GJ/gQDJStzvy2YSIoqiGAA+WHPozqV5p44dg8RekWpCVtlRh39zAvZeagdtLfZWUVzdm9qElz5QfzsYXbDoweh2cjcAeTiBDkwiE7Ayw7V9hUzEYJrchbnhqqt9PGre6AAUgYtoy3Oq4YoyN2FyuS3QmzXlOlSvN2Pzd/QrQAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-01",
+        "engineCc": 3956,
+        "co2": 199
+      },
+      "mot": {
+        "model": "Q7",
+        "tests": 9,
+        "passes": 8,
+        "firstTimePassRate": 88,
+        "validUntil": "2027-03-23",
+        "dueDate": null,
+        "lastMiles": 110115,
+        "lastDate": "2026-03-20",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10433",
@@ -5994,7 +7010,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiiiiiedeee",
     "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJYwC7AB6HVXJ5dV8DHL+ukAD+cbSRvUuu2imamRNBZc8TPJBq53D5ZkBPLk4+zjTnpxtx8DgrooTkVklXRk8uabns5DvfWj+Sz7+SYowieEWo/1nsuS4rGTvO4rU6hXjNg/HC+OwQ+a0ibxDWhFbxj3JgAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "TOYOTA",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2021,
+        "firstRegistered": "2021-12",
+        "engineCc": 1997,
+        "co2": 194,
+        "euroStatus": "EURO 6 AO"
+      },
+      "mot": {
+        "model": "PROACE",
+        "tests": 5,
+        "passes": 5,
+        "firstTimePassRate": 100,
+        "validUntil": "2026-11-26",
+        "dueDate": null,
+        "lastMiles": 219721,
+        "lastDate": "2025-11-21",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10428",
@@ -6081,7 +7122,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiideeee",
     "thumbBlur": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBdkDjE/wHObYpdg8tBUwQbMBgAA9r3Zifwn0Dg9HVctPoaOeBymEmPd5H1f15oIZXDpXf0N0Zrem4m8A3bcWd+JKlaCwDV7Q901Am3iYEGDmsAXTqeG/4Cg6Ja+BO2tou/GGJH6Dv1W+PmsY3DhSLbfjsbG45zY4AAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "RENAULT",
+        "colour": "BEIGE",
+        "fuelType": "PETROL",
+        "year": 2003,
+        "firstRegistered": "2003-07",
+        "engineCc": 1598,
+        "co2": 173
+      },
+      "mot": {
+        "model": "MEGANE SCENIC",
+        "tests": 35,
+        "passes": 21,
+        "firstTimePassRate": 33,
+        "validUntil": "2027-11-09",
+        "dueDate": null,
+        "lastMiles": 110350,
+        "lastDate": "2026-11-10",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10427",
@@ -6206,7 +7271,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiidiiiiiiddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCsACBTTzMhs8GwM47YYwAA/b+7Y9/3xipi2bMXbKdJalcStolVSR926Y7xX6eybl/l7eZhhsmk61AoFcyaPl04b2Cupq+J/Fp0Mgr5WmPkJA+B32mV8UV6YWfhA+f5qUHcD83LCM8OiWelF7I4VbAEbLfF6pgAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "VOLKSWAGEN",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2012,
+        "firstRegistered": "2012-02",
+        "engineCc": 1598,
+        "co2": 134
+      },
+      "mot": {
+        "model": "TOURAN",
+        "tests": 17,
+        "passes": 12,
+        "firstTimePassRate": 58,
+        "validUntil": "2027-02-09",
+        "dueDate": null,
+        "lastMiles": 107613,
+        "lastDate": "2026-02-10",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10421",
@@ -6352,7 +7441,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiidiiiiiiiddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBWD+ABmIubdkVgYXE3oIMeAAPwwX6LgnoBobQhQl+zT2/qLJBDIazFxCB1CyuUkTif6+2qt09xxwVZGK/Y7/LqZoDxPgNuTRjuUYe0xbt7mVmn5NrWjQtJ6TSy2B09dI1C/QCMH0QLwoukOymUvRgAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-09",
+        "engineCc": 1560,
+        "co2": 106
+      },
+      "mot": {
+        "model": "C4 GRAND PICASSO",
+        "tests": 9,
+        "passes": 8,
+        "firstTimePassRate": 88,
+        "validUntil": "2027-09-16",
+        "dueDate": null,
+        "lastMiles": 71320,
+        "lastDate": "2026-09-17",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10419",
@@ -6504,7 +7617,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiidiiiiiiiiddddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBadBAqU6haT6HGNdFVYFjwAAPa92YoFgJeaCb4CMudv5Xo8MU4V6EXu/DcIHJpYzsqPpzvLJXIx0EQuj/5uyGzvLn3ZgAMylk4WdMt0Rtti6Z0vQ7K7+IlK1DtmM+JwAO8InNcZY23xide6fPSayWNLQ9+G/tpNOCkAAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-02",
+        "engineCc": 1560,
+        "co2": 98
+      },
+      "mot": {
+        "model": "C4",
+        "tests": 12,
+        "passes": 10,
+        "firstTimePassRate": 80,
+        "validUntil": "2026-11-07",
+        "dueDate": null,
+        "lastMiles": 75700,
+        "lastDate": "2025-11-05",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10416",
@@ -6652,7 +7789,32 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiiiiiiiiiiiiiiiiddedeeee",
     "thumbBlur": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJaACdABs2Noq9U2YVGnQAAO+Uu7K4VjuXvxVdAj02e1zlDw7vHqqAm/zg+2KJ+v+nWiOIVXPUMfyvgjQewuhma6WYMYruz1odkyFruUTRmdRgQIh2p64jwGvntagAgB/IYWEl4yJTgAxXNuMmsUra9EXxLgQpGijFF/rrH+YQKJtVgAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "NISSAN",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2019,
+        "firstRegistered": "2019-03",
+        "engineCc": 1461,
+        "co2": 106,
+        "euroStatus": "EURO 6AG"
+      },
+      "mot": {
+        "model": "QASHQAI",
+        "tests": 5,
+        "passes": 4,
+        "firstTimePassRate": 75,
+        "validUntil": "2026-02-23",
+        "dueDate": null,
+        "lastMiles": 85487,
+        "lastDate": "2025-02-24",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10414",
@@ -6808,7 +7970,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiddiiiiiiiidiiddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCxC8GJ/gQD84q8D2kFlJTRp4o3oIAA4njkkCoEBf49Ozjps/Em3kmnoLOlAUzRXNvpQinhgZbMV5cNhjG/r2uNx/JZ9yZlyZ0uk4TNseIOc33R3s96Tjop38wUs5pTHK7jZzN9HvSp1g6V2YWqoqTc3fMjYs/bKzpm/k3sJemb+SJgJNsUAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "NISSAN",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-06",
+        "engineCc": 1598,
+        "co2": 119
+      },
+      "mot": {
+        "model": "QASHQAI",
+        "tests": 13,
+        "passes": 11,
+        "firstTimePassRate": 82,
+        "validUntil": "2027-09-17",
+        "dueDate": null,
+        "lastMiles": 81015,
+        "lastDate": "2026-09-18",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10415",
@@ -6940,7 +8126,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiieiideeddedee",
     "thumbBlur": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABwBACdASoUAA8APt1apkyopSOiMAgBEBuJagCdMoADgGwjljhZeKcHSsC32AD2vdmJ/CfSE9CSHJtvmO2ACUAa5W4M2qViKwglh/mQA+QbjDXO7qNlZ46p35s6znkHuq5kHgTxJsqGuO90U4DkFfLpOw6HhvJhzGIumYAkd4uqR/sx328QbdD0cyhnGDfZ4AA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "FORD",
+        "colour": "RED",
+        "fuelType": "PETROL",
+        "year": 2018,
+        "firstRegistered": "2018-01",
+        "engineCc": 998,
+        "co2": 97
+      },
+      "mot": {
+        "model": "FIESTA",
+        "tests": 6,
+        "passes": 6,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-01-26",
+        "dueDate": null,
+        "lastMiles": 102745,
+        "lastDate": "2026-01-27",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10410",
@@ -7088,7 +8298,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiidddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoGvtgQDKs3sZD2DOODmqfOAAPz79mjpZVhpuu6gLQ1FRM83zCyzrkfmhL0uG80h6hzF5wECTQ0wT/6YjPxPNEdY5aH3qHGfavt04p2fh9MYLacBZyZcbgyu4kvBkhrR0dNvK/AhA64oXQ1WX9UyYkWjP7pBv6m06s7MLx7AzHTmOvf24RH7LMmegKTWMHTSQVoAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "MINI",
+        "colour": "ORANGE",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-10",
+        "engineCc": 1496,
+        "co2": 92
+      },
+      "mot": {
+        "model": "COOPER",
+        "tests": 13,
+        "passes": 11,
+        "firstTimePassRate": 82,
+        "validUntil": "2027-10-25",
+        "dueDate": null,
+        "lastMiles": 100640,
+        "lastDate": "2026-10-26",
+        "mileageConsistent": true,
+        "recall": "No"
+      }
+    }
   },
   {
     "id": "10404",
@@ -7247,7 +8481,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiiiiiiidiiiiiieiiiddddee",
     "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoGv/gLWEVBZpOXNLvICtwAA+UCDOFks93zF+H6MPcOq+EwifvLy8xXy9f51FX+bXOsl1STe54Uzy2U5hGg/7Sv8YnrbnPuHZaLxtCc9QsYHpZduOri6C1i/gCTukA08J0GAombHqZr5ZaWvUSfGNCepeuEu/ml8BQlRdB87+JnyV0+TfRpFNgAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-09",
+        "engineCc": 1968,
+        "co2": 157
+      },
+      "mot": {
+        "model": "Q5",
+        "tests": 9,
+        "passes": 8,
+        "firstTimePassRate": 88,
+        "validUntil": "2026-07-19",
+        "dueDate": null,
+        "lastMiles": 110108,
+        "lastDate": "2025-07-11",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10280",
@@ -7391,7 +8649,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiieiidiiiiddddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAAAQBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdGuAAXxmlfLFrovqHgAD5YZ2hFQBko2I6LrLDjwGlE5fhU6RZ0KDfSOVMd7DMR1c3ng1vEdCeNYzXKkInKNp1EiO+QtPzWllCan1H+tEy0uo1TRYKSMFADhq1KnOJNL24OxwJTp/6H73uSqP1aZrmHRfOtIAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "NISSAN",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-12",
+        "engineCc": 1461,
+        "co2": 103
+      },
+      "mot": {
+        "model": "QASHQAI",
+        "tests": 11,
+        "passes": 8,
+        "firstTimePassRate": 71,
+        "validUntil": "2026-02-28",
+        "dueDate": null,
+        "lastMiles": 106880,
+        "lastDate": "2025-02-28",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10232",
@@ -7561,7 +8843,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeeiiiiiiiieiiieiiiidiiiiedeeeiidddee",
     "thumbBlur": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAACQBACdASoUAA8APt1apkyopSOiMAgBEBuJQBOmUGMHr+geI73fkk3t7PRP4ZgA4n3ZiOwEo63kBFjZh06Vk7CjZUZNUbZYabjkgCQd+eFCcKfzHRNZQD8tkWFB2MFsbSVAzmUCz4+rI5Ja3viT2ICyyLkD5BupyUZKtxqLaXLwSKJaHK3XdWiOhEjzhx17V50Bpe4MxGLG+g478YiGdTtfNel+mAAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "BMW",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2018,
+        "firstRegistered": "2018-03",
+        "engineCc": 2993,
+        "co2": 129
+      },
+      "mot": {
+        "model": "730",
+        "tests": 7,
+        "passes": 7,
+        "firstTimePassRate": 100,
+        "validUntil": "2027-11-02",
+        "dueDate": null,
+        "lastMiles": 100855,
+        "lastDate": "2026-11-03",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10221",
@@ -7708,7 +9014,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiddddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBOgBHt/pYE4H7b41QwAAM49oes98zBFp0YRQFAkvMKKUIFXyiz52GBhoo2hFItWVri02T1sB+8c3eZoGhVDmYgPGcXw+RYxJc5/JGr/+HiV61O95GF+5FEOdl1Uul88DHTrgaDf6AAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "RENAULT",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-09",
+        "engineCc": 1598,
+        "co2": 104
+      },
+      "mot": {
+        "model": "MEGANE",
+        "tests": 11,
+        "passes": 9,
+        "firstTimePassRate": 75,
+        "validUntil": "2025-08-11",
+        "dueDate": null,
+        "lastMiles": 93769,
+        "lastDate": "2024-08-12",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10198",
@@ -7830,7 +9160,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eeeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAwBACdASoUAA8APt1cpkyopSOiMAgBEBuJQBdkFThXF4ey/Sc/i6ROD1wAyztm9FMi8omLKbzsHgmQ7Jjo7Un83bquhT8pmUxkdU0IsHApe0UOjfHUrRaLpd9dGr5g85fCf1dV6B3AG0NamJwAfj1YwmLQXGcgAAA=",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2013,
+        "firstRegistered": "2013-03",
+        "engineCc": 1560,
+        "co2": 112
+      },
+      "mot": {
+        "model": "C3",
+        "tests": 11,
+        "passes": 8,
+        "firstTimePassRate": 67,
+        "validUntil": "2025-01-04",
+        "dueDate": null,
+        "lastMiles": 81267,
+        "lastDate": "2025-01-09",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10165",
@@ -7966,7 +9320,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeiiieiiiiiiiiiiidddddidiiiieeee",
     "thumbBlur": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAADQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoMh10etyJjL5D/x2feqk0wxOAD+kYgY+I2xyDMd+A/9Ff9tB+gwcFXBj2+gToxsKzAZufdTGdb312K9u5c/Yg1bUDqTbbMlaUMFSOkjG5oHRh9cRfHMyOWI6gmtXAGkQNlFf+M/jTy8fP09dn6vtNzT4L8lsalnok4ctqct3rPNpaN8gxAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-12",
+        "engineCc": 1968,
+        "co2": 109
+      },
+      "mot": {
+        "model": "A6",
+        "tests": 8,
+        "passes": 6,
+        "firstTimePassRate": 67,
+        "validUntil": "2027-01-28",
+        "dueDate": null,
+        "lastMiles": 190822,
+        "lastDate": "2026-01-29",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10125",
@@ -8055,7 +9433,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiieeee",
     "thumbBlur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAADwAwCdASoUAA8APt1apkyopSOiMAgBEBuJQBadAxzvAtk+CJx6czUAAP6JI83wBxJY9Sxkw3s9xHEJqJC1IyrYXLJDirPaeTFjzL8r6+6019n6qIXItFP1Ytz6FacJQ/8hU6HjvyjicGrIoVVJy0c0x94Qwd8LqNqf77m0MHNWVGZefwAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "MERCEDES-BENZ",
+        "colour": "SILVER",
+        "fuelType": "DIESEL",
+        "year": 2011,
+        "firstRegistered": "2011-04",
+        "engineCc": 2987,
+        "co2": 240
+      },
+      "mot": {
+        "model": "ML",
+        "tests": 9,
+        "passes": 6,
+        "firstTimePassRate": 50,
+        "validUntil": "2027-08-24",
+        "dueDate": null,
+        "lastMiles": 61302,
+        "lastDate": "2026-08-25",
+        "mileageConsistent": true,
+        "recall": "Yes"
+      }
+    }
   },
   {
     "id": "10002",
@@ -8183,7 +9585,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiiiidiieideiiddddddddeeeee",
     "thumbBlur": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZACdMoMlsn/Ac7dJ9lD5G7zr2hPDGYAA4l9XtxVxR8cAvZF2CNTD0K5xOMa8fi72IEVsjDVpI6652VD+XrfZ695WdVnLm8YeD8y1QepTd0ZAbs7zLrcEW5Uuj/WiZT/+VGQK21MmGYE0BXCM8+W5U5RyCxmcFK+M8R3jSnDMDOxE0OERnymjt+QsTCqcJzuXQAAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "GREY",
+        "fuelType": "DIESEL",
+        "year": 2017,
+        "firstRegistered": "2017-03",
+        "engineCc": 2993,
+        "co2": 185
+      },
+      "mot": {
+        "model": "RANGE ROVER SPORT",
+        "tests": 6,
+        "passes": 6,
+        "firstTimePassRate": 100,
+        "validUntil": "2026-07-14",
+        "dueDate": null,
+        "lastMiles": 74330,
+        "lastDate": "2025-07-15",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10021",
@@ -8300,7 +9726,31 @@ export const VEHICLES: Vehicle[] = [
     "previousPrice": 13450,
     "priceReducedAt": "2026-11-09",
     "photosPending": true,
-    "isFeatured": false
+    "isFeatured": false,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "BLACK",
+        "fuelType": "DIESEL",
+        "year": 2014,
+        "firstRegistered": "2014-03",
+        "engineCc": 2967,
+        "co2": 195
+      },
+      "mot": {
+        "model": "Q7",
+        "tests": 7,
+        "passes": 7,
+        "firstTimePassRate": 100,
+        "validUntil": "2024-02-29",
+        "dueDate": null,
+        "lastMiles": 91190,
+        "lastDate": "2023-03-01",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10010",
@@ -8388,7 +9838,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeidiiiiiiiiiedeee",
     "thumbBlur": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAADwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoMYJn/AgEzHbBVGiG8DlKfJ1AAA4mfrHGRdxXLXu3N45aKUDMYqCRNAf6VyzS5LC22NskzLSvIhHKd+UN/tH9ekFqr76Irlk03e9N55HPC/+eutnaYHSd4w33sZftuylv5uBieZPUFRM4Tw8i1H7e1JJ6a7pAgmPmZkO50mBj+MEqXLAJZCOTDvySr0PTNUGQMQAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "AUDI",
+        "colour": "BROWN",
+        "fuelType": "DIESEL",
+        "year": 2010,
+        "firstRegistered": "2010-06",
+        "engineCc": 2967,
+        "co2": 239
+      },
+      "mot": {
+        "model": "Q7",
+        "tests": 14,
+        "passes": 12,
+        "firstTimePassRate": 83,
+        "validUntil": "2025-11-01",
+        "dueDate": null,
+        "lastMiles": 99348,
+        "lastDate": "2024-11-02",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10081",
@@ -8520,7 +9994,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeeeiididiiididddidiiiiideededee",
     "thumbBlur": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABQBACdASoUAA8APt1apkyopSOiMAgBEBuJbACdMoACtNULviTWER4530y8AP5qW59Nog0iNPHkoQjIZu6W7aZQd4aLlYbab8ugMm2VDa2uOmdwiOba8Dn7zCMtPCHrTqZQCXB+DE6n9kodlk76N5FIQnzuiT6wsjtloDi0zLgFvI/HdmpdYv4TqxN7qBq9mEAAAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "CITROEN",
+        "colour": "RED",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-10",
+        "engineCc": 1560,
+        "co2": 100
+      },
+      "mot": {
+        "model": "C4",
+        "tests": 9,
+        "passes": 7,
+        "firstTimePassRate": 71,
+        "validUntil": "2025-09-10",
+        "dueDate": null,
+        "lastMiles": 131534,
+        "lastDate": "2024-08-13",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10004",
@@ -8644,7 +10142,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeidiiiiiiieddeeee",
     "thumbBlur": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAAAwBACdASoUAA8APt1apkyopSOiMAgBEBuJYwCdACPOPq6HYmgWEGnSAKAA9rmToVYHOxmFAcvrW4s52zL0tD/4laIxjH+SpYkt9Fb29KVZu7o4/tJhhwVGKSPVAmsiUxfHHqNVTThl/BCq82mbCESkv7jxci5vI7mkjxqDY6EZdDD+qEW4IeAA",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "SKODA",
+        "colour": "WHITE",
+        "fuelType": "DIESEL",
+        "year": 2015,
+        "firstRegistered": "2015-06",
+        "engineCc": 1598,
+        "co2": 99
+      },
+      "mot": {
+        "model": "OCTAVIA",
+        "tests": 3,
+        "passes": 3,
+        "firstTimePassRate": 100,
+        "validUntil": "2025-03-01",
+        "dueDate": null,
+        "lastMiles": 299330,
+        "lastDate": "2024-03-02",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10006",
@@ -8730,7 +10252,31 @@ export const VEHICLES: Vehicle[] = [
     "isFeatured": false,
     "imageTags": "eieeeeiiiiiiiiideddeee",
     "thumbBlur": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAACwBACdASoUAA8APt1apkyopSOiMAgBEBuJZgCdMoHgzAbHgsY3MmU2eF3AfQbAAOJgCvkej9xIQiOCwoOTftcyOPtlqtdJjNaD7ob6ZDZs3sPRy7oNXYkBxBNqnGoGaDr/ZyyJd8E2jJXxkWrQREh5jl77B/nP3QzaE26DKdMQB5tB7GD/2d65oAp9ZIvjaLy4KCvBK30AAA==",
-    "mainHiRes": true
+    "mainHiRes": true,
+    "official": {
+      "checkedAt": "2026-11-12",
+      "dvla": {
+        "make": "LAND ROVER",
+        "colour": "BLUE",
+        "fuelType": "DIESEL",
+        "year": 2016,
+        "firstRegistered": "2016-07",
+        "engineCc": 2993,
+        "co2": 213
+      },
+      "mot": {
+        "model": "DISCOVERY",
+        "tests": 9,
+        "passes": 5,
+        "firstTimePassRate": 33,
+        "validUntil": "2026-07-20",
+        "dueDate": null,
+        "lastMiles": 77409,
+        "lastDate": "2025-07-21",
+        "mileageConsistent": true,
+        "recall": "Unknown"
+      }
+    }
   },
   {
     "id": "10007",

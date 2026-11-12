@@ -2,4 +2,54 @@
   display: block;
   /* Let the card shrink inside grids/carousels instead of pushing past the screen edge */
   min-width: 0;
+  /* The card adapts to its OWN width (not the screen's), so it stays tidy in any grid:
+     2, 3 or 4 columns, swipe rows, phones and very wide monitors alike. */
+  container-type: inline-size;
+  container-name: vcard;
+}
+
+/* Spec line: "2017 • 56,000 miles • Petrol • Manual".
+   Each item carries its dot in its own left padding. The row is shifted left by exactly that
+   padding and the line clips at its own edge, so the first item of every line starts flush and
+   its dot is cut off. Result: dots only ever sit BETWEEN two specs, however the line wraps,
+   and no two items overlap. */
+.spec-line {
+  overflow: hidden;
+}
+.spec-items {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+  margin-left: -1.3rem;
+}
+.spec-items > span {
+  position: relative;
+  padding-left: 1.3rem;
+  white-space: nowrap;
+}
+.spec-items > span::before {
+  content: '•';
+  content: '•' / '';
+  position: absolute;
+  left: 0;
+  width: 1.3rem;
+  text-align: center;
+  color: rgb(var(--p-gray-300));
+  font-weight: 400;
+}
+:host-context(html.dark) .spec-items > span::before {
+  color: rgb(var(--p-slate-600));
+}
+
+/* Action row: the main button's label never wraps. In a narrow card the word "Compare"
+   gives way to its icon, and in a very narrow one the call shortcut goes too. */
+@container vcard (max-width: 21rem) {
+  .compare-label {
+    display: none;
+  }
+}
+@container vcard (max-width: 14.7rem) {
+  .card-call {
+    display: none;
+  }
 }
