@@ -16,7 +16,7 @@
 
       <div class="veh-print-hero flex gap-2 border-x border-b border-gray-200">
         <div class="veh-print-hero-main min-w-0 flex-1 bg-gray-100">
-          <img loading="lazy"
+          <img [attr.loading]="printImagesReady() ? 'eager' : 'lazy'"
             [src]="getPrintMainImage() || 'hero/hero-01.jpeg'"
             [alt]="vehicle()!.make + ' ' + vehicle()!.model"
             class="veh-print-hero-img w-full h-full object-cover"
@@ -32,7 +32,7 @@
             <span class="text-[9px] font-bold leading-tight uppercase tracking-wide">Nationwide delivery available</span>
           </div>
           <div class="veh-print-hero-thumb flex-1 min-h-[72px] bg-gray-100 overflow-hidden">
-            <img loading="lazy"
+            <img [attr.loading]="printImagesReady() ? 'eager' : 'lazy'"
               [src]="getPrintSecondaryImage() || 'hero/hero-01.jpeg'"
               [alt]="vehicle()!.make + ' interior'"
               class="w-full h-full object-cover"
@@ -84,7 +84,7 @@
         <p class="flex-1 text-[8px] leading-snug text-gray-800 m-0 veh-print-desc">{{ desc().highlights.join(' · ') }}{{ desc().highlights.length && desc().text ? ' — ' : '' }}{{ desc().text }}</p>
         <div class="flex-shrink-0 text-center w-[88px]">
           @if (getQrCodeImageUrl()) {
-            <img loading="lazy"
+            <img [attr.loading]="printImagesReady() ? 'eager' : 'lazy'"
               [src]="getQrCodeImageUrl()"
               alt="QR code — vehicle listing"
               class="w-[88px] h-[88px] mx-auto block border border-gray-200"

@@ -1,4 +1,5 @@
 import { ThumbPipe } from '../../pipes/thumb.pipe';
+import { webpAt } from '../../utils/stock-image';
 import {
   effect,
   ElementRef,
@@ -12,6 +13,7 @@ import {
   PLATFORM_ID,
   DestroyRef,
   HostListener,
+  afterNextRender,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -235,7 +237,23 @@ export class VehicleDetailComponent implements OnDestroy {
     newsletterOptIn: false,
   };
 
+  /**
+   * The print sheet is hidden on screen, so its photos and QR code would never load "lazily":
+   * Chrome and Safari then print empty boxes. They are fetched shortly after the page settles
+   * (small 800px photos), and the Print button waits for them before opening the print dialog.
+   */
+  readonly printImagesReady = signal(false);
+
   constructor() {
+    afterNextRender(() => {
+      const ready = () => this.printImagesReady.set(true);
+      // Ctrl/Cmd+P without the button: the photos are already there by then
+      const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+      if (idle) idle(ready, { timeout: 4000 });
+      else setTimeout(ready, 2500);
+      window.addEventListener('beforeprint', ready);
+      this.destroyRef.onDestroy(() => window.removeEventListener('beforeprint', ready));
+    });
     this.route.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const id = params.get('id');
       this.stopGalleryAutoplay();
@@ -534,10 +552,17 @@ export class VehicleDetailComponent implements OnDestroy {
     return `https://wa.me/447423374244?text=${encodeURIComponent(message)}`;
   }
 
-  printVehicleDetails(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      window.print();
-    }
+  async printVehicleDetails(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.printImagesReady.set(true);
+    // Let Angular switch the images to eager, then wait (max 5s) until every print image has loaded.
+    await new Promise((r) => requestAnimationFrame(() => r(null)));
+    const imgs = [...this.document.querySelectorAll<HTMLImageElement>('.vehicle-print-sheet img')];
+    await Promise.race([
+      Promise.all(imgs.map((img) => (img.complete ? Promise.resolve() : new Promise((r) => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); })))),
+      new Promise((r) => setTimeout(r, 5000)),
+    ]);
+    window.print();
   }
 
   /**
@@ -587,14 +612,16 @@ export class VehicleDetailComponent implements OnDestroy {
     }
   }
 
+  /** Print photos use the 800px WebP (sharp enough for A4, a fraction of the original's size). */
   getPrintMainImage(): string {
-    return this.vehicle()?.images[0] ?? '';
+    const src = this.vehicle()?.images[0] ?? '';
+    return webpAt(src, 800) ?? src;
   }
 
   getPrintSecondaryImage(): string {
     const imgs = this.vehicle()?.images ?? [];
-    if (imgs.length > 1) return imgs[1];
-    return imgs[0] ?? '';
+    const src = imgs.length > 1 ? imgs[1] : (imgs[0] ?? '');
+    return webpAt(src, 800) ?? src;
   }
 
   getPrintSpecItems(): { label: string; value: string }[] {

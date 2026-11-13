@@ -649,10 +649,13 @@ html.dark ::-webkit-scrollbar-thumb:hover {
     print-color-adjust: exact;
   }
 
-  /* min-h-screen on main forces ~1 viewport of empty space when printing */
+  /* min-h-screen on main forces ~1 viewport of empty space when printing; its top padding
+     (room for the fixed header on screen) and page colour would print as an empty bar */
   main {
     min-height: 0 !important;
     height: auto !important;
+    padding-top: 0 !important;
+    background: #fff !important;
   }
 
   /* Custom elements: ensure site chrome stays hidden even if utilities miss the host */
