@@ -3,20 +3,24 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 /**
  * Site themes. "default" is the original DriveLine look; "prestige" is the cream, charcoal
- * and gold editorial look. A theme is just html[data-theme] — all colours and fonts read
+ * and gold editorial look; "forecourt" is the bold charcoal and signal-red dealer look. A theme is just html[data-theme] — all colours and fonts read
  * CSS variables (see tailwind.config.js and src/styles.css), so switching is instant.
  *
  * The choice is stored in localStorage ('dlTheme') and applied by the inline script in
  * index.html before the first paint, so there is no flash of the other theme.
  */
-export type SiteTheme = 'default' | 'prestige';
+export type SiteTheme = 'default' | 'prestige' | 'forecourt';
 
 export const SITE_THEMES: { id: SiteTheme; label: string; hint: string; swatch: string[] }[] = [
   { id: 'default', label: 'Default', hint: 'Classic DriveLine rose', swatch: ['#f43f5e', '#fb923c', '#fffbf7'] },
   { id: 'prestige', label: 'Prestige', hint: 'Cream, charcoal and gold', swatch: ['#b8925a', '#16161a', '#f6f3ee'] },
+  { id: 'forecourt', label: 'Forecourt', hint: 'Charcoal and signal red', swatch: ['#e2330e', '#121214', '#f4f2ee'] },
 ];
 
-/** Extra fonts for Prestige, only downloaded when that theme is used. Keep in sync with index.html. */
+/** Themes with their own home page and wide display fonts (everything except Default). */
+export const DISPLAY_THEMES: SiteTheme[] = ['prestige', 'forecourt'];
+
+/** Extra fonts for Prestige and Forecourt, only downloaded when one of them is used. Keep in sync with index.html. */
 export const PRESTIGE_FONTS_HREF =
   'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
 
@@ -49,7 +53,7 @@ export class ThemeService {
     const root = this.document.documentElement;
     if (theme === 'default') root.removeAttribute('data-theme');
     else root.setAttribute('data-theme', theme);
-    if (theme === 'prestige') this.loadPrestigeFonts();
+    if (DISPLAY_THEMES.includes(theme)) this.loadPrestigeFonts();
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {
@@ -60,7 +64,8 @@ export class ThemeService {
   private readInitial(): SiteTheme {
     if (!this.browser) return 'default';
     // index.html already applied the stored theme before Angular started
-    return this.document.documentElement.getAttribute('data-theme') === 'prestige' ? 'prestige' : 'default';
+    const t = this.document.documentElement.getAttribute('data-theme');
+    return t === 'prestige' || t === 'forecourt' ? t : 'default';
   }
 
   private loadPrestigeFonts(): void {

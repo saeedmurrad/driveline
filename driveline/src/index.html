@@ -8,8 +8,9 @@
         document.documentElement.classList.add('dark');
       }
       // Site theme (ThemeService): apply before first paint so the page never flashes the other look
-      if (localStorage.getItem('dlTheme') === 'prestige') {
-        document.documentElement.setAttribute('data-theme', 'prestige');
+      var dlTheme = localStorage.getItem('dlTheme');
+      if (dlTheme === 'prestige' || dlTheme === 'forecourt') {
+        document.documentElement.setAttribute('data-theme', dlTheme);
         var f = document.createElement('link');
         f.id = 'dl-prestige-fonts';
         f.rel = 'stylesheet';

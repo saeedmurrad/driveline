@@ -5,10 +5,18 @@
   } @placeholder {
     <div class="prestige-boot" aria-hidden="true"></div>
   }
+} @else if (themeService.theme() === 'forecourt') {
+  <!-- Forecourt theme: its own home page, downloaded only when Forecourt is chosen -->
+  @defer (on immediate) {
+    <app-forecourt-home />
+  } @placeholder {
+    <div class="forecourt-boot" aria-hidden="true"></div>
+  }
 } @else {
-<!-- Prestige visitors briefly see this dark stage (not the Default page) until their theme loads -->
+<!-- Prestige / Forecourt visitors briefly see a dark stage (not the Default page) until their theme loads -->
 <div class="prestige-boot" data-theme-only="prestige" aria-hidden="true"></div>
-<div class="contents" data-theme-hide="prestige" data-theme-wrapper>
+<div class="forecourt-boot" data-theme-only="forecourt" aria-hidden="true"></div>
+<div class="contents" data-theme-hide="prestige forecourt" data-theme-wrapper>
 <!-- Hero: premium dark landing — responsive height + safe areas for mobile -->
 <section
   class="relative isolate flex min-h-[100svh] sm:min-h-[min(85svh,760px)] lg:min-h-[min(90dvh,920px)] flex-col overflow-hidden"
