@@ -1198,25 +1198,25 @@ html[data-theme='prestige'] .price-card .action-tile { border-radius: 999px; fon
 
 /* =====================================================================================
    FORECOURT THEME  (html[data-theme='forecourt'])
-   Charcoal and signal red on warm off-white, extended capital headings, mono labels, pill buttons.
-   Generated from the Prestige block (same structure, own palette) plus the overrides after it.
-   Everything is driven by the same variables the Default theme uses, so components need
-   no theme-specific code. Fonts load on demand (ThemeService / index.html).
+   Motorsport dealer look, deliberately unlike Prestige: tall condensed capitals (Barlow
+   Condensed), sharp corners with a cut-off corner, slanted red tags, red racing stripes,
+   a solid dark header and red bars that sweep in on hover. Charcoal and signal red on
+   warm off-white. Fonts load on demand (ThemeService / index.html).
    ===================================================================================== */
 html[data-theme='forecourt'] {
   /* Signal red (replaces rose): 600+ carry white text at WCAG AA */
   --p-rose-50: 254 242 238; --p-rose-100: 253 228 220; --p-rose-200: 251 200 184; --p-rose-300: 248 160 135; --p-rose-400: 242 108 76; --p-rose-500: 226 51 14; --p-rose-600: 196 40 8; --p-rose-700: 163 33 7; --p-rose-800: 133 28 8; --p-rose-900: 110 26 10; --p-rose-950: 60 12 4;
   /* Hot orange (replaces orange) */
   --p-orange-50: 255 245 237; --p-orange-100: 255 230 210; --p-orange-200: 254 205 170; --p-orange-300: 253 172 120; --p-orange-400: 250 133 70; --p-orange-500: 240 100 30; --p-orange-600: 205 75 15; --p-orange-700: 170 58 12; --p-orange-800: 138 47 14; --p-orange-900: 112 40 15; --p-orange-950: 60 18 6;
-  /* Neutrals from warm off-white to near-black ink (replace stone and gray) */
+  /* Neutrals from warm off-white to near-black (replace stone and gray) */
   --p-stone-50: 244 242 238; --p-stone-100: 236 234 229; --p-stone-200: 222 219 213; --p-stone-300: 200 197 191; --p-stone-400: 155 152 148; --p-stone-500: 106 104 101; --p-stone-600: 82 81 79; --p-stone-700: 60 59 58; --p-stone-800: 36 36 38; --p-stone-900: 18 18 20; --p-stone-950: 12 12 14;
   --p-gray-50: 244 242 238; --p-gray-100: 236 234 229; --p-gray-200: 222 219 213; --p-gray-300: 200 197 191; --p-gray-400: 155 152 148; --p-gray-500: 106 104 101; --p-gray-600: 82 81 79; --p-gray-700: 60 59 58; --p-gray-800: 36 36 38; --p-gray-900: 18 18 20; --p-gray-950: 12 12 14;
   /* Charcoal (replaces slate; mostly dark mode) */
   --p-slate-50: 244 242 238; --p-slate-100: 235 233 229; --p-slate-200: 214 211 206; --p-slate-300: 186 183 178; --p-slate-400: 150 147 143; --p-slate-500: 112 110 107; --p-slate-600: 76 75 74; --p-slate-700: 52 52 55; --p-slate-800: 34 34 37; --p-slate-900: 24 24 27; --p-slate-950: 15 15 18;
 
-  --dl-font-sans: Inter, system-ui, sans-serif;
-  --dl-font-display: Archivo, system-ui, sans-serif;
-  --dl-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --dl-font-sans: Barlow, system-ui, sans-serif;
+  --dl-font-display: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
+  --dl-font-mono: 'Barlow Condensed', 'Arial Narrow', system-ui, sans-serif;
 
   --dl-surface-rgb: 244 242 238;
   --dl-surface-raised-rgb: 255 255 255;
@@ -1231,350 +1231,312 @@ html[data-theme='forecourt'] {
   --dl-accent-rgb: 205 75 15;
   --dl-state-reduced-rgb: 163 33 7;
   --dl-state-sold-rgb: 18 18 20;
-  --dl-radius-md: 1rem;
-  --dl-radius-lg: 1.375rem;
-  --dl-shadow-card: 0 1px 2px rgb(20 20 22 / 0.04), 0 8px 24px -12px rgb(20 20 22 / 0.12);
-  --dl-shadow-pop: 0 24px 48px -16px rgb(20 20 22 / 0.28);
+  --dl-radius-md: 0.25rem;
+  --dl-radius-lg: 0.375rem;
+  --dl-shadow-card: 0 1px 0 rgb(18 18 20 / 0.06);
+  --dl-shadow-pop: 0 18px 36px -18px rgb(18 18 20 / 0.45);
 
   --dl-surface: rgb(244 242 238);
   --dl-surface-warm: #ecebe6;
   --dl-accent-deep: #a32107;
   --dl-glow-rose: rgb(226 51 14 / 0.16);
   --dl-gradient-brand: linear-gradient(135deg, #e2330e 0%, #c42808 100%);
-  --dl-gradient-hero: linear-gradient(125deg, #0f0f12 0%, #18181b 55%, #2a1210 100%);
+  --dl-gradient-hero: linear-gradient(125deg, #0f0f12 0%, #18181b 60%, #2a1210 100%);
   --dl-gradient-banner: linear-gradient(105deg, #121214 0%, #2a1210 60%, #a32107 100%);
+  /* The cut-off corner used on buttons, cards and panels */
+  --fc-cut: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+  --fc-cut-sm: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+  --fc-stripes: repeating-linear-gradient(-55deg, #e2330e 0 10px, transparent 10px 20px);
 }
 
 html.dark[data-theme='forecourt'] {
   --dl-surface-rgb: 15 15 18;
-  --dl-surface-raised-rgb: 36 36 41;
-  --dl-surface-sunken-rgb: 25 25 29;
+  --dl-surface-raised-rgb: 30 30 34;
+  --dl-surface-sunken-rgb: 24 24 27;
   --dl-ink-rgb: 244 242 238;
-  --dl-ink-muted-rgb: 216 210 200;
-  --dl-ink-faint-rgb: 160 154 146;
-  --dl-line-rgb: 54 53 57;
+  --dl-ink-muted-rgb: 214 211 206;
+  --dl-ink-faint-rgb: 155 152 148;
+  --dl-line-rgb: 52 52 55;
   --dl-brand-rgb: 255 106 69;
   --dl-brand-deep-rgb: 226 51 14;
   --dl-brand-soft-rgb: 60 18 8;
   --dl-state-reduced-rgb: 214 47 12;
   --dl-state-sold-rgb: 244 242 238;
   --dl-surface: #0f0f12;
-  --dl-surface-warm: #19191d;
+  --dl-surface-warm: #18181b;
 }
 
-/* Fonts: wide display face for headings, Inter for text, mono for small labels */
+/* ---- Type: tall condensed capitals, labels in condensed small caps ---- */
 html[data-theme='forecourt'] body { font-family: var(--dl-font-sans); }
-html[data-theme='forecourt'] :is(.font-display, .section-title, .page-title, .home-hero-title, .theme-title) {
-  font-family: var(--dl-font-display);
-  font-stretch: 112%;
-}
+html[data-theme='forecourt'] :is(.font-display, .section-title, .page-title, .home-hero-title, .theme-title) { font-family: var(--dl-font-display); }
 html[data-theme='forecourt'] :is(.section-title, .page-title, .home-hero-title, .theme-title) {
   text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 1.02;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  line-height: 0.95;
 }
+html[data-theme='forecourt'] .section-title { font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
 html[data-theme='forecourt'] :is(.tool-kicker, .kicker, .uppercase.tracking-wider, .uppercase.tracking-widest, .uppercase.tracking-wide) {
   font-family: var(--dl-font-mono);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+/* Red words: italic, like a race number */
+html[data-theme='forecourt'] .title-accent { color: rgb(var(--p-rose-500)); font-style: italic; }
+html.dark[data-theme='forecourt'] .title-accent { color: rgb(var(--dl-brand-rgb)); }
+html[data-theme='forecourt'] :is(.page-title, .home-hero-title) .title-accent { color: #ff6a45; }
+html[data-theme='forecourt'] .gradient-text { background: none; -webkit-text-fill-color: #ff6a45; color: #ff6a45; font-style: italic; }
+/* Section titles: a slanted red bar underneath instead of a line */
+html[data-theme='forecourt'] .section-title::after {
+  width: 3.5rem;
+  height: 6px;
+  border-radius: 0;
+  background: #e2330e;
+  box-shadow: none;
+  transform: skewX(-25deg);
 }
 
-/* Two-tone headings: the marked words turn gold (no effect in Default) */
-/* Light: deeper gold so large headings keep 3:1 contrast on cream; dark mode uses the brighter brand gold */
-html[data-theme='forecourt'] .title-accent { color: rgb(var(--p-rose-500)); }
-html.dark[data-theme='forecourt'] .title-accent { color: rgb(var(--dl-brand-rgb)); }
-html[data-theme='forecourt'] .page-title .title-accent,
-html[data-theme='forecourt'] .home-hero-title .title-accent { color: #ff6a45; }
-html[data-theme='forecourt'] .gradient-text {
-  background: none;
-  -webkit-text-fill-color: #ff6a45;
-  color: #ff6a45;
-}
-html[data-theme='forecourt'] .section-title::after {
-  width: 3rem;
-  height: 2px;
-  background: rgb(var(--dl-brand-rgb));
+/* ---- Buttons: square with a cut corner, red fill sweeps in on hover ---- */
+html[data-theme='forecourt'] :is(.btn-primary, .btn-secondary, .btn-outline, .btn-accent) {
+  border-radius: 0;
+  clip-path: var(--fc-cut-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--dl-font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  transform: none;
   box-shadow: none;
 }
-
-/* Buttons: gold and charcoal pills with small capitals */
-html[data-theme='forecourt'] :is(.btn-primary, .btn-secondary, .btn-outline, .btn-accent) {
-  border-radius: 9999px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.8125rem;
-  font-family: var(--dl-font-display);
-  font-weight: 600;
-  transform: none;
+html[data-theme='forecourt'] :is(.btn-primary, .btn-accent) {
+  background-image: linear-gradient(90deg, #121214 0 50%, transparent 50% 100%);
+  background-size: 202% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.45s cubic-bezier(0.65, 0, 0.35, 1), color 0.3s;
 }
 html[data-theme='forecourt'] .btn-primary,
-html[data-theme='forecourt'] .btn-primary:hover {
-  background: rgb(var(--dl-brand-rgb));
-  color: #121214;
-  box-shadow: 0 10px 24px -12px rgb(150 30 5 / 0.45);
-}
-html[data-theme='forecourt'] .btn-primary:hover { background: #e2330e; }
+html[data-theme='forecourt'] .btn-primary:hover { background-color: rgb(var(--dl-brand-rgb)); color: #fff; box-shadow: none; }
+html[data-theme='forecourt'] :is(.btn-primary, .btn-accent):hover { background-position: 0 0; color: #fff; }
+html.dark[data-theme='forecourt'] .btn-primary,
+html.dark[data-theme='forecourt'] .btn-primary:hover { background-color: #d62f0c; }
+html.dark[data-theme='forecourt'] :is(.btn-primary, .btn-accent) { background-image: linear-gradient(90deg, #f4f2ee 0 50%, transparent 50% 100%); }
+html.dark[data-theme='forecourt'] :is(.btn-primary, .btn-accent):hover { color: #121214; }
 html[data-theme='forecourt'] .btn-accent,
-html[data-theme='forecourt'] .btn-accent:hover {
-  background: #121214;
-  color: #f4f2ee;
-  box-shadow: none;
-}
-html.dark[data-theme='forecourt'] .btn-accent { background: #f4f2ee; color: #121214; }
-html[data-theme='forecourt'] .btn-outline {
-  border: 1.5px solid currentColor;
-  color: rgb(var(--dl-ink-rgb));
-}
+html[data-theme='forecourt'] .btn-accent:hover { background-color: #121214; color: #fff; }
+html[data-theme='forecourt'] .btn-accent { background-image: linear-gradient(90deg, #d62f0c 0 50%, transparent 50% 100%); }
+html[data-theme='forecourt'] .btn-outline { border: 2px solid currentColor; color: rgb(var(--dl-ink-rgb)); }
 html[data-theme='forecourt'] .btn-outline:hover { background: rgb(var(--dl-ink-rgb)); color: rgb(var(--dl-surface-rgb)); }
 html[data-theme='forecourt'] .btn-action-accent,
-html[data-theme='forecourt'] .btn-action-accent:hover {
-  background: #121214;
-  border-color: #121214;
-  box-shadow: none;
+html[data-theme='forecourt'] .btn-action-accent:hover { background: #121214; border-color: #121214; box-shadow: none; border-radius: 0; }
+
+/* ---- Cards and panels: square, flat, a red bar draws along the bottom on hover ---- */
+html[data-theme='forecourt'] .card { border-radius: 0.25rem; box-shadow: var(--dl-shadow-card); }
+html[data-theme='forecourt'] .card:hover { border-color: rgb(var(--dl-ink-rgb) / 0.35); box-shadow: var(--dl-shadow-pop); }
+html[data-theme='forecourt'] :is(.glass-warm, .glass, .tool-card) { border-radius: 0.25rem; }
+html[data-theme='forecourt'] .glass-warm { background: rgb(255 255 255 / 0.97); border-color: rgb(222 219 213); }
+html.dark[data-theme='forecourt'] .glass-warm { background: rgb(30 30 34 / 0.97); border-color: rgb(52 52 55); }
+html[data-theme='forecourt'] .tool-card { border-top: 4px solid #e2330e; }
+
+/* ---- Header: always a solid dark bar with a red edge; links get a sliding underline ---- */
+html[data-theme='forecourt'] .header-shell {
+  background-color: #121214 !important;
+  border-color: #e2330e !important;
+  border-bottom-width: 3px !important;
+  box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.6) !important;
 }
-
-/* Cards and panels: white on cream, softer and rounder */
-html[data-theme='forecourt'] .card { border-radius: 1.25rem; }
-html[data-theme='forecourt'] .card:hover { border-color: rgb(var(--p-rose-300) / 0.9); box-shadow: var(--dl-shadow-pop); }
-html[data-theme='forecourt'] .glass-warm { background: rgb(255 255 255 / 0.96); border-color: rgb(222 219 213); }
-html.dark[data-theme='forecourt'] .glass-warm { background: rgb(36 36 41 / 0.96); border-color: rgb(54 53 57); }
-html[data-theme='forecourt'] .glass { border-color: rgb(222 219 213 / 0.8); }
-
-/* Hard-coded warm white backgrounds become cream */
-html[data-theme='forecourt']:not(.dark) :is(.bg-\[\#fffbf7\], .header-shell) { background-color: rgb(244 242 238); }
 html[data-theme='forecourt'] .header-glow-line { opacity: 0 !important; }
-
-/* Page banners and hero: charcoal with a soft gold light instead of rose */
-html[data-theme='forecourt'] .page-header::before {
-  background: radial-gradient(ellipse 80% 60% at 20% 0%, rgb(226 51 14 / 0.18), transparent 60%);
-}
-html[data-theme='forecourt'] .page-header-breadcrumb { color: #ff6a45; }
-html[data-theme='forecourt'] .page-header-subtitle { color: rgb(244 242 238 / 0.85); }
-
-/* Dark-mode text fixes follow the theme palette (identical values in Default) */
-html.dark[data-theme='forecourt'] .text-rose-700 { color: rgb(var(--p-rose-300)); }
-html.dark[data-theme='forecourt'] .text-orange-700 { color: rgb(var(--p-orange-300)); }
-
-/* Elements that only exist in one theme */
-html:not([data-theme='forecourt']) [data-theme-only~='forecourt'] { display: none !important; }
-html[data-theme='forecourt'] [data-theme-hide~='forecourt'] { display: none !important; }
-
-
-/* Prestige: the hero's second button is a pill like the others */
-html[data-theme='forecourt'] .home-hero-stats > a:not(.btn-primary) {
-  border-radius: 9999px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 0.8125rem;
-  font-family: var(--dl-font-display);
-}
-
-/* Dark stage shown while a Prestige-only page loads (never visible in Default) */
-.forecourt-boot { min-height: 100svh; margin-top: -4rem; background: #0f0f12; }
-@media (min-width: 768px) { .forecourt-boot { margin-top: -5rem; } }
-
-/* Prestige: the header floats transparently over the home film, then turns solid */
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell {
-  background-color: transparent !important;
-  border-color: transparent !important;
+html[data-theme='forecourt'] .header-shell .logo-wordmark { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
+html[data-theme='forecourt'] .header-shell .logo-wordmark > span:first-child { color: #f4f2ee; font-style: italic; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.5rem; }
+html[data-theme='forecourt'] .header-shell .logo-tagline { color: #ff6a45 !important; }
+html[data-theme='forecourt'] .header-shell .nav-pill-track { background: transparent !important; box-shadow: none !important; border-color: transparent !important; }
+html[data-theme='forecourt'] .header-shell .nav-pill-link {
+  position: relative;
+  border-radius: 0 !important;
+  background: transparent !important;
   box-shadow: none !important;
-}
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell :is(.logo-wordmark, .nav-pill-link, .nav-pill-link:not(.active)) { color: #f4f2ee !important; }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell .nav-pill-track { background: transparent !important; box-shadow: none !important; }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell .nav-pill-link.active { background: rgb(244 242 238 / 0.14) !important; }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell button[aria-label='Toggle menu'] { background: rgb(244 242 238 / 0.12); border-color: rgb(244 242 238 / 0.25); color: #f4f2ee; }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell :is([data-theme-picker] > button, a[href='/saved'], button[aria-label*='mode']) { color: rgb(244 242 238 / 0.85); }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell .logo-tagline { color: #ff6a45; }
-html[data-theme='forecourt']:is(.forecourt-over-film, :has(.forecourt-boot)) .header-shell .logo-wordmark { background: transparent !important; border-color: transparent !important; }
-
-/* Prestige footer: the name as a giant outline across the top (replaces the thin rose line) */
-html[data-theme='forecourt'] .footer-shell { overflow: hidden; }
-html[data-theme='forecourt'] .footer-shell::before {
-  content: 'DRIVELINE';
-  height: auto;
-  background: none;
-  padding-top: clamp(2rem, 5vw, 4rem);
-  text-align: center;
-  white-space: nowrap;
+  color: rgb(244 242 238 / 0.82) !important;
   font-family: var(--dl-font-display);
-  font-stretch: 125%;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+html[data-theme='forecourt'] .header-shell .nav-pill-link::after {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.15rem;
+  height: 3px;
+  background: #e2330e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+html[data-theme='forecourt'] .header-shell .nav-pill-link:is(:hover, .active) { color: #fff !important; }
+html[data-theme='forecourt'] .header-shell .nav-pill-link:is(:hover, .active)::after { transform: scaleX(1); }
+html[data-theme='forecourt'] .header-shell :is([data-theme-picker] > button, a[href='/saved'], button[aria-label*='mode']) { color: rgb(244 242 238 / 0.85); }
+html[data-theme='forecourt'] .header-shell :is([data-theme-picker] > button, a[href='/saved']):hover { background: rgb(244 242 238 / 0.1); color: #fff; }
+html[data-theme='forecourt'] .header-shell button[aria-label='Toggle menu'] { background: rgb(244 242 238 / 0.1); border-color: rgb(244 242 238 / 0.2); color: #f4f2ee; border-radius: 0.25rem; }
+html[data-theme='forecourt'] .header-shell :is(a[href^='tel:'], a[href*='wa.me']) { border-radius: 0.25rem; }
+html[data-theme='forecourt'] .header-shell .mobile-drawer { border-radius: 0; }
+html[data-theme='forecourt'] .header-shell .mobile-drawer :is(.nav-pill-track, .mobile-nav-link) { border-radius: 0.25rem; }
+html[data-theme='forecourt'] .header-shell .mobile-nav-link { font-family: var(--dl-font-display); font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---- Page banners: dark, red racing stripes on the right, the page name in giant outline ---- */
+html[data-theme='forecourt'] .page-header { background: #121214; overflow: hidden; }
+html[data-theme='forecourt'] .page-header::before {
+  background: var(--fc-stripes);
+  opacity: 0.9;
+  inset: 0 0 0 auto;
+  width: min(34vw, 26rem);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 70%);
+  mask-image: linear-gradient(90deg, transparent, #000 70%);
+}
+html[data-theme='forecourt'] .page-header[data-ghost]::after {
+  content: attr(data-ghost);
+  position: absolute;
+  left: -0.04em;
+  bottom: -0.2em;
+  font-family: var(--dl-font-display);
   font-weight: 800;
-  font-size: clamp(2.8rem, 13vw, 13rem);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
+  font-style: italic;
+  font-size: clamp(5rem, 17vw, 15rem);
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgb(244 242 238 / 0.16);
+  -webkit-text-stroke: 1.5px rgb(244 242 238 / 0.1);
   pointer-events: none;
 }
+html[data-theme='forecourt'] .page-header > * { position: relative; z-index: 1; }
+html[data-theme='forecourt'] .page-header :is(.page-title, .theme-title) { font-size: clamp(2.8rem, 7vw, 5.6rem); }
+html[data-theme='forecourt'] .page-header-breadcrumb, html[data-theme='forecourt'] .page-header nav { color: #ff6a45; font-family: var(--dl-font-display); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+html[data-theme='forecourt'] .page-header-subtitle { color: rgb(244 242 238 / 0.85); }
 
-/* =====================================================================================
-   FORECOURT COMPONENTS (cars list, car page, forms)
-   Same building blocks as the Prestige home: inset rounded photos, mono badges, pill
-   buttons, cream fields, a dark gallery band and a dark price panel.
-   ===================================================================================== */
+/* ---- Footer: a band of red racing stripes on top ---- */
+html[data-theme='forecourt'] .footer-shell { background: #121214; border-top: 0; position: relative; }
+html[data-theme='forecourt'] .footer-shell::before {
+  content: '';
+  display: block;
+  height: 14px;
+  background: var(--fc-stripes);
+  box-shadow: none;
+  opacity: 1;
+}
+/* Footer greys: lighter, so small text stays readable on the near-black footer */
+html[data-theme='forecourt'] .footer-shell :is(.text-gray-500, .text-gray-600, .text-stone-400, .text-stone-500) { color: rgb(178 175 170); }
+html[data-theme='forecourt'] .footer-shell h3 { font-family: var(--dl-font-display); font-size: 0.95rem; letter-spacing: 0.14em; }
+
+/* ---- Forms: square fields, a red line under the focused one ---- */
+html[data-theme='forecourt'] :is(.form-input, .form-select) { border-radius: 0.2rem; }
+html[data-theme='forecourt']:not(.dark) :is(.form-input, .form-select) { background: #fff; border-color: rgb(200 197 191); }
+html[data-theme='forecourt'] :is(.form-input, .form-select):focus { border-color: rgb(var(--dl-ink-rgb)); box-shadow: inset 0 -3px 0 #e2330e; }
+html[data-theme='forecourt'] .form-label { font-family: var(--dl-font-mono); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
 
 /* ---- Car cards ---- */
-html[data-theme='forecourt'] app-vehicle-card .card {
-  padding: 0.55rem;
-  border-radius: 1.25rem;
-  border: 1px solid rgb(var(--dl-line-rgb));
-  box-shadow: none;
-  --tw-ring-shadow: 0 0 #0000;
+html[data-theme='forecourt'] app-vehicle-card .card { position: relative; border-radius: 0.2rem; overflow: hidden; }
+html[data-theme='forecourt'] app-vehicle-card .card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: #e2330e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
 }
-html[data-theme='forecourt'] app-vehicle-card .card:hover {
-  border-color: rgb(var(--dl-brand-rgb));
-  box-shadow: 0 30px 60px -30px rgb(20 20 22 / 0.45);
-}
-html[data-theme='forecourt'] app-vehicle-card .card-media { border-radius: 0.95rem; aspect-ratio: 16 / 10.5; }
-html[data-theme='forecourt'] app-vehicle-card .card > .p-5 { padding: 0.95rem 0.6rem 0.5rem; }
+html[data-theme='forecourt'] app-vehicle-card .card:hover::after { transform: scaleX(1); }
+html[data-theme='forecourt'] app-vehicle-card .card-media { border-radius: 0; }
 html[data-theme='forecourt'] app-vehicle-card .badge {
-  background: rgb(255 255 255 / 0.94) !important;
-  color: #121214 !important;
-  font-family: var(--dl-font-mono);
-  font-weight: 500;
+  border-radius: 0 !important;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 7px) 100%, 0 100%);
+  padding-right: 0.9rem !important;
+  background: #121214 !important;
+  color: #fff !important;
+  font-family: var(--dl-font-display);
+  font-weight: 700;
   letter-spacing: 0.1em;
   box-shadow: none;
 }
 html[data-theme='forecourt'] app-vehicle-card .badge-reduced { background: #d62f0c !important; }
-html[data-theme='forecourt'] app-vehicle-card .badge-sold { background: #121214 !important; color: #f4f2ee !important; }
 html[data-theme='forecourt'] app-vehicle-card .badge-reserved { background: rgb(var(--dl-state-reserved-rgb)) !important; color: #451a03 !important; }
-html[data-theme='forecourt'] app-vehicle-card .text-\[26px\] { font-family: var(--dl-font-display); font-size: 1.45rem; }
+html[data-theme='forecourt'] app-vehicle-card .text-\[26px\] { font-family: var(--dl-font-display); font-weight: 800; font-size: 1.9rem; letter-spacing: 0.01em; }
+html[data-theme='forecourt'] app-vehicle-card h3 { font-family: var(--dl-font-display); font-weight: 700; font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.02em; }
 html[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1 {
-  border-radius: 999px;
-  background: #121214;
-  color: #f4f2ee;
+  border-radius: 0;
+  clip-path: var(--fc-cut-sm);
+  background-color: #d62f0c;
+  background-image: linear-gradient(90deg, #121214 0 50%, transparent 50% 100%);
+  background-size: 202% 100%;
+  background-position: 100% 0;
+  color: #fff;
   font-family: var(--dl-font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  transition: background-position 0.45s cubic-bezier(0.65, 0, 0.35, 1);
 }
-html[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1:hover { background: #d62f0c; color: #121214; }
-html.dark[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1 { background: #f4f2ee; color: #121214; }
-html[data-theme='forecourt'] app-vehicle-card :is(button, a)[data-vehicle-card-cta]:not(.flex-1) { border-radius: 999px; }
+html[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1:hover { background-position: 0 0; color: #fff; }
+html[data-theme='forecourt'] app-vehicle-card :is(button, a)[data-vehicle-card-cta]:not(.flex-1) { border-radius: 0.2rem; }
 
-/* ---- Page banners: charcoal stage with the outlined name ---- */
-html[data-theme='forecourt'] .page-header::after {
-  content: 'DRIVELINE';
-  position: absolute;
-  right: -1vw;
-  bottom: -0.16em;
-  font-family: var(--dl-font-display);
-  font-stretch: 125%;
-  font-weight: 800;
-  font-size: clamp(4rem, 15vw, 13rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgb(244 242 238 / 0.12);
-  pointer-events: none;
-}
-html[data-theme='forecourt'] .page-header > * { position: relative; z-index: 1; }
-@media (min-width: 1024px) {
-  html[data-theme='forecourt'] .page-header :is(.page-title, .theme-title) { font-size: 3.5rem; }
-}
-
-/* ---- Forms: cream fields with small mono labels (the booking-bar look) ---- */
-html[data-theme='forecourt']:not(.dark) :is(.form-input, .form-select) {
-  background-color: rgb(244 242 238);
-  border-color: rgb(var(--dl-line-rgb));
-  border-radius: 0.9rem;
-}
-html[data-theme='forecourt'] :is(.form-input, .form-select):focus { border-color: rgb(var(--dl-brand-rgb)); }
-html[data-theme='forecourt'] .form-label {
-  font-family: var(--dl-font-mono);
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* ---- Car page: dark band behind breadcrumbs and gallery ---- */
+/* ---- Car page: light gallery framed in black, underline photo tabs, red-topped price panel ---- */
 html[data-theme='forecourt'] .vd-crumbs { background: #121214; border-color: transparent; }
 html[data-theme='forecourt'] .vd-crumbs :is(a, svg) { color: rgb(244 242 238 / 0.66); }
 html[data-theme='forecourt'] .vd-crumbs span { color: #f4f2ee; }
-html[data-theme='forecourt'] app-vehicle-gallery {
-  display: block;
-  position: relative;
-  margin-top: -1.5rem;
-  padding: 0.25rem 0 1.75rem;
-  background: #121214;
-  box-shadow: 0 0 0 100vmax #121214;
-  clip-path: inset(0 -100vmax);
-}
-@media (min-width: 1024px) { html[data-theme='forecourt'] app-vehicle-gallery { margin-top: -2rem; } }
 html[data-theme='forecourt'] app-vehicle-gallery .photo-tab {
+  border-radius: 0;
+  border: 0;
+  border-bottom: 3px solid transparent;
   background: transparent;
-  border: 1px solid rgb(244 242 238 / 0.28);
-  color: #f4f2ee;
   font-family: var(--dl-font-display);
-  font-size: 0.72rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-html[data-theme='forecourt'] app-vehicle-gallery .photo-tab.active { background: #d62f0c; border-color: #d62f0c; color: #121214; }
-html[data-theme='forecourt'] app-vehicle-gallery .photo-tab-count { color: inherit; opacity: 0.75; }
-html[data-theme='forecourt'] app-vehicle-gallery .photo-tab.active .photo-tab-count { opacity: 1; }
+html[data-theme='forecourt'] app-vehicle-gallery .photo-tab.active { background: transparent; border-color: #e2330e; color: inherit; }
+html[data-theme='forecourt'] app-vehicle-gallery :is(img, .rounded-2xl, .rounded-xl) { border-radius: 0.2rem; }
+html[data-theme='forecourt'] .price-card {
+  border-radius: 0.25rem;
+  border-top: 6px solid #e2330e;
+  box-shadow: var(--dl-shadow-pop);
+}
+html[data-theme='forecourt'] .price-card h1 { font-family: var(--dl-font-display); font-weight: 800; font-size: 2rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.01em; }
+html[data-theme='forecourt'] .price-card .text-3xl { font-family: var(--dl-font-display); font-weight: 800; font-size: 3rem; font-style: italic; }
+html[data-theme='forecourt'] .price-card .action-tile { border-radius: 0.2rem; font-family: var(--dl-font-display); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+html[data-theme='forecourt'] .price-card .action-tile:hover { border-color: #e2330e; }
+html[data-theme='forecourt'] .price-card a[href^='tel:'] { border-radius: 0; clip-path: var(--fc-cut-sm); }
 
-/* ---- Car page: the price card becomes a dark panel (light mode; dark mode already is) ---- */
-html[data-theme='forecourt']:not(.dark) .price-card {
-  background: #121214;
-  border-color: #121214;
-  border-radius: 1.5rem;
-  color: #f4f2ee;
-  box-shadow: 0 40px 80px -40px rgb(0 0 0 / 0.55);
-  /* Inside the panel the neutral scale flips: grey text turns light, pale fills turn dark */
-  --p-gray-900: 244 242 238; --p-gray-800: 236 232 225; --p-gray-700: 216 210 200; --p-gray-600: 188 182 172; --p-gray-500: 160 154 146;
-  --p-gray-200: 54 53 57; --p-gray-100: 46 45 50; --p-gray-50: 36 36 41;
-  --p-stone-900: 244 242 238; --p-stone-800: 236 232 225; --p-stone-700: 216 210 200; --p-stone-600: 188 182 172; --p-stone-500: 160 154 146;
-  --p-stone-300: 78 76 74; --p-stone-200: 54 53 57; --p-stone-100: 46 45 50; --p-stone-50: 36 36 41;
-  --dl-state-reduced-rgb: 255 106 69;
-}
-html[data-theme='forecourt']:not(.dark) .price-card .badge-reduced { color: #121214; }
-html[data-theme='forecourt']:not(.dark) .price-card :is(.text-emerald-800, .text-emerald-700) { color: #6ee7b7; }
-html[data-theme='forecourt']:not(.dark) .price-card .text-green-800 { color: #86efac; }
-html[data-theme='forecourt']:not(.dark) .price-card :is(.text-rose-700, .util-btn.is-on) { color: #ff6a45; }
-html[data-theme='forecourt']:not(.dark) .price-card a[href^='tel:'] { background: #f4f2ee; color: #121214; }
-html[data-theme='forecourt']:not(.dark) .price-card .action-tile {
-  background: rgb(244 242 238 / 0.06);
-  border-color: rgb(244 242 238 / 0.16);
-  color: #f4f2ee;
-}
-html[data-theme='forecourt']:not(.dark) .price-card .action-tile:hover { border-color: #d62f0c; color: #ff6a45; }
-html[data-theme='forecourt']:not(.dark) .price-card .btn-outline { color: #f4f2ee; }
-html[data-theme='forecourt'] .price-card h1 { font-family: var(--dl-font-display); font-stretch: 108%; font-size: 1.5rem; letter-spacing: -0.01em; }
-html[data-theme='forecourt'] .price-card .text-3xl { font-family: var(--dl-font-display); font-size: 2.4rem; }
-html[data-theme='forecourt'] .price-card .action-tile { border-radius: 999px; font-size: 0.75rem; }
-
-/* ---- Forecourt's own touches on top of the shared structure ---- */
-/* Heavier, wider capitals than Prestige */
-html[data-theme='forecourt'] :is(.section-title, .page-title, .home-hero-title, .theme-title) { font-weight: 800; letter-spacing: -0.025em; }
-/* Red buttons carry white text (dark text on red is too faint) */
-html[data-theme='forecourt'] .btn-primary,
-html[data-theme='forecourt'] .btn-primary:hover { color: #fff; }
-html[data-theme='forecourt'] .btn-primary:hover { background: #b8270a; }
-html.dark[data-theme='forecourt'] .btn-primary,
-html.dark[data-theme='forecourt'] .btn-primary:hover { background: #d62f0c; color: #fff; }
-/* Car cards: square-ish photo corners, the red button, a red edge when you point at a card */
-html[data-theme='forecourt'] app-vehicle-card .card { border-radius: 1.125rem; }
-html[data-theme='forecourt'] app-vehicle-card .card:hover { border-color: #e2330e; }
-html[data-theme='forecourt'] app-vehicle-card .card-media { border-radius: 0.75rem; }
-html[data-theme='forecourt'] app-vehicle-card .badge-reduced { color: #fff !important; }
-html[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1 { background: #d62f0c; color: #fff; }
-html[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1:hover { background: #121214; color: #fff; }
-html.dark[data-theme='forecourt'] app-vehicle-card a[data-vehicle-card-cta].flex-1 { background: #d62f0c; color: #fff; }
-html[data-theme='forecourt'] app-vehicle-gallery .photo-tab.active { color: #fff; }
-/* Section titles get the reference's red dash + mono kicker feel */
-html[data-theme='forecourt'] .section-title::after { width: 1.5rem; height: 3px; border-radius: 0; }
-/* Page banners: near-black with a red glow */
-html[data-theme='forecourt'] .page-header::before {
-  background: radial-gradient(ellipse 70% 60% at 15% 0%, rgb(226 51 14 / 0.28), transparent 62%);
-}
+/* ---- Misc ---- */
+html.dark[data-theme='forecourt'] .text-rose-700 { color: rgb(var(--p-rose-300)); }
+html.dark[data-theme='forecourt'] .text-orange-700 { color: rgb(var(--p-orange-300)); }
 /* Green 'good news' text: one shade deeper so it stays readable on the warm off-white */
 html[data-theme='forecourt']:not(.dark) .text-green-700 { color: #166534; }
-/* Footer: a thin signal-red line on top */
-html[data-theme='forecourt'] .footer-shell { border-top: 3px solid #e2330e; }
+html[data-theme='forecourt']:not(.dark) .bg-\[\#fffbf7\] { background-color: rgb(244 242 238); }
+
+/* Header is 4.25rem + a 3px red edge: no light strip between it and the page */
+@media (min-width: 768px) { html[data-theme='forecourt'] main.md\:pt-20 { padding-top: 4.375rem; } }
+/* Sharp corners everywhere in the page (round avatars and dots stay round) */
+html[data-theme='forecourt'] main :is(.rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl) { border-radius: 0.3rem; }
+html[data-theme='forecourt'] app-vehicle-gallery :is(.rounded-lg, .rounded-xl, .rounded-2xl, .rounded-3xl) { border-radius: 0; }
+html[data-theme='forecourt'] app-find-me-a-car h2 { font-family: var(--dl-font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.2rem, 4vw, 3rem); line-height: 0.95; }
+
+/* Elements that only exist in one theme (values are space-separated lists) */
+html:not([data-theme='forecourt']) [data-theme-only~='forecourt'] { display: none !important; }
+html[data-theme='forecourt'] [data-theme-hide~='forecourt'] { display: none !important; }
+
+/* Dark stage shown while the Forecourt home loads (never visible in other themes) */
+.forecourt-boot { min-height: 100svh; margin-top: -4rem; background: #0f0f12; }
+@media (min-width: 768px) { .forecourt-boot { margin-top: -5rem; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme='forecourt'] :is(.btn-primary, .btn-accent, app-vehicle-card a[data-vehicle-card-cta], .nav-pill-link::after, app-vehicle-card .card::after) { transition: none !important; }
+}
 
 /* ===================== VERY WIDE SCREENS =====================
    On 2560px monitors and ultrawides a 1280px column leaves the page as a narrow strip.

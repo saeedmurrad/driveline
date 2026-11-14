@@ -17,10 +17,14 @@ export const SITE_THEMES: { id: SiteTheme; label: string; hint: string; swatch: 
   { id: 'forecourt', label: 'Forecourt', hint: 'Charcoal and signal red', swatch: ['#e2330e', '#121214', '#f4f2ee'] },
 ];
 
-/** Themes with their own home page and wide display fonts (everything except Default). */
+/** Themes with their own home page and their own fonts (everything except Default). */
 export const DISPLAY_THEMES: SiteTheme[] = ['prestige', 'forecourt'];
 
-/** Extra fonts for Prestige and Forecourt, only downloaded when one of them is used. Keep in sync with index.html. */
+/** Forecourt's condensed motorsport fonts, only downloaded when Forecourt is used. Keep in sync with index.html. */
+export const FORECOURT_FONTS_HREF =
+  'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap';
+
+/** Extra fonts for Prestige, only downloaded when that theme is used. Keep in sync with index.html. */
 export const PRESTIGE_FONTS_HREF =
   'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
 
@@ -53,7 +57,8 @@ export class ThemeService {
     const root = this.document.documentElement;
     if (theme === 'default') root.removeAttribute('data-theme');
     else root.setAttribute('data-theme', theme);
-    if (DISPLAY_THEMES.includes(theme)) this.loadPrestigeFonts();
+    if (theme === 'prestige') this.loadFonts('dl-prestige-fonts', PRESTIGE_FONTS_HREF);
+    if (theme === 'forecourt') this.loadFonts('dl-forecourt-fonts', FORECOURT_FONTS_HREF);
     try {
       localStorage.setItem(STORAGE_KEY, theme);
     } catch {
@@ -68,12 +73,13 @@ export class ThemeService {
     return t === 'prestige' || t === 'forecourt' ? t : 'default';
   }
 
-  private loadPrestigeFonts(): void {
-    if (this.document.getElementById('dl-prestige-fonts')) return;
+  private loadFonts(id: string, href: string): void {
+    if (this.document.getElementById(id)) return;
     const link = this.document.createElement('link');
-    link.id = 'dl-prestige-fonts';
+    link.id = id;
     link.rel = 'stylesheet';
-    link.href = PRESTIGE_FONTS_HREF;
+    link.href = href;
     this.document.head.appendChild(link);
   }
+
 }

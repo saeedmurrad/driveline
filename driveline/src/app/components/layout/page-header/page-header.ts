@@ -6,7 +6,8 @@ import { RouterLink } from '@angular/router';
   selector: 'app-page-header',
   imports: [RouterLink],
   template: `
-    <div class="page-header">
+    <!-- data-ghost: the Forecourt theme writes the page name in giant outline behind the banner -->
+    <div class="page-header" [attr.data-ghost]="crumb">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <nav class="mb-3 flex items-center gap-2 text-sm text-rose-200" aria-label="Breadcrumb">
           <a routerLink="/" class="transition-colors hover:text-white">Home</a>

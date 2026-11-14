@@ -7,34 +7,36 @@ import {
   inject,
   signal,
   viewChild,
-  viewChildren,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { VehicleService } from '../../../services/vehicle.service';
 import { DealerContextService } from '../../../services/dealer-context.service';
 import { Vehicle } from '../../../models/vehicle.model';
-import { webpSrcset, IMG_SIZES } from '../../../utils/stock-image';
+import { webpAt, webpSrcset, IMG_SIZES } from '../../../utils/stock-image';
 import { ThumbPipe } from '../../../pipes/thumb.pipe';
-import { FINANCE_DISCLAIMER_SHORT, FINANCE_ILLUSTRATIVE_PARAMS, monthlyPaymentForVehicle } from '../../../utils/finance-display';
+import {
+  FINANCE_DISCLAIMER_SHORT,
+  FINANCE_ILLUSTRATIVE_PARAMS,
+  monthlyPaymentForVehicle,
+} from '../../../utils/finance-display';
 import { FindMeACarComponent } from '../../../components/shared/find-me-a-car/find-me-a-car';
-import { RevealOnScrollDirective } from '../../../directives/reveal-on-scroll.directive';
 import { VehicleCheckBandComponent } from '../../../components/shared/vehicle-check-band/vehicle-check-band';
-import { FilmRenderer } from '../prestige/film-renderer';
-import { PrestigeMagneticDirective } from '../prestige/prestige-motion';
 
 type Chip = { id: string; label: string; test: (v: Vehicle) => boolean };
 
+const SLIDE_MS = 6500;
+
 /**
- * Home page for the Forecourt theme (bold dealer look: charcoal, signal red, extended
- * capitals). A pinned photo "film" with an outlined DRIVELINE wordmark and live stats,
- * a search bar over its edge, the showroom grid with a dark details panel for the car you
- * point at, then brands, finance, reviews, FAQ and a visit block.
- * Loaded only when Forecourt is active (@defer in home.html).
+ * Home page for the Forecourt theme: a motorsport-style dealer page, built to look and move
+ * nothing like Prestige. A car showcase slider with red wipe transitions and slow photo zoom,
+ * kinetic headline, a moving make ticker, live search count, counters that count up, the
+ * showroom with a details panel, a timeline that draws itself, finance tabs and a scrolling
+ * strip of reviews. Loaded only when Forecourt is active (@defer in home.html).
  */
 @Component({
   selector: 'app-forecourt-home',
-  imports: [RouterLink, FormsModule, ThumbPipe, FindMeACarComponent, RevealOnScrollDirective, PrestigeMagneticDirective, VehicleCheckBandComponent],
+  imports: [RouterLink, FormsModule, ThumbPipe, FindMeACarComponent, VehicleCheckBandComponent],
   templateUrl: './forecourt-home.html',
   styleUrl: './forecourt-home.css',
 })
@@ -43,6 +45,7 @@ export class ForecourtHomeComponent {
   private readonly dealer = inject(DealerContextService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly host = inject(ElementRef<HTMLElement>).nativeElement as HTMLElement;
 
   readonly counts = this.vehicles.inventoryCategoryCounts;
   readonly stock = this.vehicles.allStock;
@@ -51,46 +54,86 @@ export class ForecourtHomeComponent {
   readonly financeNote = FINANCE_DISCLAIMER_SHORT;
   readonly apr = FINANCE_ILLUSTRATIVE_PARAMS.representativeApr;
   readonly sizes = IMG_SIZES.card;
+  private readonly reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ---------------- Film (4 scenes driven by scroll) ----------------
-  readonly shots = [
-    { src: 'hero/hero-04-1600.webp', mobile: 'hero/hero-04-960.webp' },
-    { src: 'hero/hero-03-1600.webp', mobile: 'hero/hero-03-960.webp' },
-    { src: 'hero/hero-07-1600.webp', mobile: 'hero/hero-07-960.webp' },
-    { src: 'hero/hero-05-1600.webp', mobile: 'hero/hero-05-960.webp' },
-  ];
-  readonly scenes = ['Since 2006', 'Inspected', 'Finance', 'Delivered'];
-  readonly scene = signal(0);
-  readonly gl = signal(false);
-  readonly shotUrls = this.shots.map((s) => (typeof innerWidth === 'number' && innerWidth < 768 ? s.mobile : s.src));
-  private readonly film = viewChild<ElementRef<HTMLElement>>('film');
-  private readonly canvas = viewChild<ElementRef<HTMLCanvasElement>>('canvas');
-  private readonly mark = viewChild<ElementRef<HTMLElement>>('mark');
-  private readonly bar = viewChild<ElementRef<HTMLElement>>('bar');
+  private readonly withPhotos = computed(() => this.stock().filter((v) => v.images?.length && !v.photosPending));
 
-  readonly lowestMonthly = computed(() => {
-    const m = this.stock()
-      .map((v) => monthlyPaymentForVehicle(v))
-      .filter((x): x is number => x != null);
-    return m.length ? Math.min(...m) : undefined;
+  // ---------------- Hero showcase slider ----------------
+  /** The five dearest cars with photos, shown one after another. */
+  readonly showcase = computed(() => [...this.withPhotos()].filter((v) => v.category !== 'van').sort((a, b) => b.price - a.price).slice(0, 5));
+  readonly slide = signal(0);
+  /** Bumped on every change so the progress bar animation restarts. */
+  readonly slideRun = signal(0);
+  readonly paused = signal(false);
+  private timer: ReturnType<typeof setTimeout> | null = null;
+
+  slideImage(v: Vehicle): string {
+    const src = v.images[0];
+    return webpAt(src, 1600) ?? src;
+  }
+  monthly(v: Vehicle): number | null {
+    return monthlyPaymentForVehicle(v) ?? null;
+  }
+  go(i: number): void {
+    const n = this.showcase().length;
+    if (!n) return;
+    this.slide.set((i + n) % n);
+    this.slideRun.update((x) => x + 1);
+    this.schedule();
+  }
+  pause(on: boolean): void {
+    this.paused.set(on);
+    if (on) this.clearTimer();
+    else this.schedule();
+  }
+  private schedule(): void {
+    this.clearTimer();
+    if (this.reduce || this.paused() || typeof window === 'undefined') return;
+    this.timer = setTimeout(() => this.go(this.slide() + 1), SLIDE_MS);
+  }
+  private clearTimer(): void {
+    if (this.timer) clearTimeout(this.timer);
+    this.timer = null;
+  }
+
+  // ---------------- Ticker ----------------
+  readonly ticker = computed(() => {
+    const makes = [...new Set(this.stock().map((v) => v.make))].sort();
+    return ['Inspected', ...makes.slice(0, 4), 'Warranted', ...makes.slice(4, 8), 'Finance for all', ...makes.slice(8, 12), 'UK delivery'];
   });
 
-  // ---------------- Search bar ----------------
+  // ---------------- Counters (count up when they come into view) ----------------
+  readonly makesCount = computed(() => new Set(this.stock().map((v) => v.make)).size);
+  readonly countersOn = signal(false);
+  readonly counterValues = signal<number[]>([0, 0, 0, 0]);
+
+  // ---------------- Search with live result count ----------------
   readonly makes = computed(() => [...new Set(this.stock().map((v) => v.make))].sort());
   readonly bodies = computed(() => [...new Set(this.stock().map((v) => v.bodyType))].filter(Boolean).sort());
   readonly budgets = [5000, 8000, 10000, 15000, 20000, 25000];
-  search = { kind: 'cars', make: '', bodyType: '', maxPrice: '' };
+  readonly kind = signal<'cars' | 'vans'>('cars');
+  readonly make = signal('');
+  readonly body = signal('');
+  readonly maxPrice = signal('');
+  readonly matches = computed(() =>
+    this.stock().filter(
+      (v) =>
+        (this.kind() === 'vans' ? v.category === 'van' : v.category !== 'van') &&
+        (!this.make() || v.make === this.make()) &&
+        (!this.body() || v.bodyType === this.body()) &&
+        (!this.maxPrice() || v.price <= +this.maxPrice()),
+    ).length,
+  );
 
   runSearch(): void {
     const qp: Record<string, string> = {};
-    if (this.search.make) qp['make'] = this.search.make;
-    if (this.search.bodyType) qp['bodyType'] = this.search.bodyType;
-    if (this.search.maxPrice) qp['maxPrice'] = this.search.maxPrice;
-    this.router.navigate([this.search.kind === 'vans' ? '/vans' : '/cars'], { queryParams: qp });
+    if (this.make()) qp['make'] = this.make();
+    if (this.body()) qp['bodyType'] = this.body();
+    if (this.maxPrice()) qp['maxPrice'] = this.maxPrice();
+    this.router.navigate([this.kind() === 'vans' ? '/vans' : '/cars'], { queryParams: qp });
   }
 
   // ---------------- Showroom grid + details panel ----------------
-  /** One chip per body style in stock (largest first), plus All and Vans, each with its live count. */
   readonly chips = computed<Chip[]>(() => {
     const cars = this.stock().filter((v) => v.category !== 'van');
     const byBody = new Map<string, number>();
@@ -109,11 +152,10 @@ export class ForecourtHomeComponent {
   });
   readonly grid = computed(() => {
     const c = this.chips().find((x) => x.id === this.chip()) ?? this.chips()[0];
-    return this.stock()
+    return this.withPhotos()
       .filter(c.test)
-      .filter((v) => v.images?.length && !v.photosPending)
       .sort((a, b) => b.price - a.price)
-      .slice(0, 8);
+      .slice(0, 6);
   });
   readonly selectedId = signal<string | null>(null);
   readonly selected = computed<Vehicle | null>(() => {
@@ -128,7 +170,7 @@ export class ForecourtHomeComponent {
       { k: 'Fuel', v: v.fuelType },
       { k: 'Gearbox', v: v.transmission },
       { k: 'Colour', v: v.colour },
-      { k: 'Engine', v: v.engineSize ? `${v.engineSize.toFixed(1)}L` : '—' },
+      { k: 'Engine', v: v.engineSize ? `${v.engineSize.toFixed(1)}L` : '' },
       { k: 'Body', v: v.bodyType },
     ].filter((s) => s.v);
   });
@@ -136,17 +178,25 @@ export class ForecourtHomeComponent {
     const v = this.selected();
     return v ? monthlyPaymentForVehicle(v) : null;
   });
-
   setChip(id: string): void {
     this.chip.set(id);
     this.selectedId.set(null);
   }
-
   srcset(v: Vehicle): string | null {
     return webpSrcset(v.thumbnailImage || v.images?.[0]);
   }
 
-  // ---------------- Brands on the forecourt ----------------
+  // ---------------- Timeline (draws itself while you scroll through it) ----------------
+  readonly steps = [
+    { t: 'Choose', d: 'Browse online or walk the forecourt on Fengate, seven days a week.' },
+    { t: 'Check', d: 'Test drive it, or ask for a live video walkaround. Full history and MOT shown.' },
+    { t: 'Reserve', d: 'Call or message to hold it. We sort finance and part exchange.' },
+    { t: 'Drive away', d: 'Collect it from the forecourt, or we deliver anywhere in the UK.' },
+  ];
+  readonly lineProgress = signal(0);
+  private readonly timeline = viewChild<ElementRef<HTMLElement>>('timeline');
+
+  // ---------------- Brands strip ----------------
   readonly brands = computed(() => {
     const groups = new Map<string, Vehicle[]>();
     for (const v of this.stock()) {
@@ -156,25 +206,23 @@ export class ForecourtHomeComponent {
     return [...groups.entries()]
       .map(([name, list]) => {
         const withPhoto = [...list].sort((a, b) => b.price - a.price).find((v) => v.images?.length && !v.photosPending);
-        return {
-          name,
-          count: list.length,
-          from: Math.min(...list.map((v) => v.price)),
-          image: withPhoto?.thumbnailImage || withPhoto?.images?.[0] || null,
-        };
+        return { name, count: list.length, from: Math.min(...list.map((v) => v.price)), image: withPhoto?.thumbnailImage || withPhoto?.images?.[0] || null };
       })
       .filter((b) => b.image)
       .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
-      .slice(0, 5);
+      .slice(0, 10);
   });
 
-  // ---------------- Feature photo: the dearest car in stock ----------------
-  readonly featureCar = computed(() =>
-    [...this.stock()].filter((v) => v.images?.length && !v.photosPending && v.category !== 'van').sort((a, b) => b.price - a.price)[0] ?? null,
-  );
+  // ---------------- Finance tabs ----------------
+  readonly financeTabs = [
+    { id: 'hp', t: 'Hire purchase', k: 'Own it', d: 'Pay a deposit, then the balance in fixed monthly instalments plus interest. After the final payment the car is yours outright.', points: ['Fixed monthly payments', 'You own it at the end', '36 to 60 months'] },
+    { id: 'pcp', t: 'PCP', k: 'Flexible', d: 'A deposit and lower monthly payments. At the end, pay the final balance to keep it, hand it back, or put any equity towards your next car.', points: ['Lower monthly payments', 'Three choices at the end', 'Mileage agreed up front'] },
+    { id: 'ch', t: 'Contract hire', k: 'Lease', d: 'Much like PCP, but without the option to buy the car outright at the end. Hand it back and choose your next one.', points: ['Simple monthly rental', 'No balloon payment', 'Swap at the end'] },
+  ];
+  readonly finTab = signal(0);
 
-  // ---------------- Reviews, FAQ, visit ----------------
-  readonly reviews = computed(() => this.dealer.reviews().slice(0, 3));
+  // ---------------- Reviews strip, FAQ, visit ----------------
+  readonly reviews = computed(() => this.dealer.reviews().slice(0, 6));
   readonly rating = computed(() => {
     const r = this.dealer.reviews();
     if (!r.length) return null;
@@ -182,10 +230,6 @@ export class ForecourtHomeComponent {
   });
   initials(name: string): string {
     return name.split(/\s+/).map((p) => p[0]).join('').slice(0, 2).toUpperCase();
-  }
-  reviewDate(d: string): string {
-    const t = Date.parse(d);
-    return Number.isNaN(t) ? d : new Date(t).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
   readonly faqs = [
     { q: 'When are you open?', a: 'Seven days a week: Monday to Saturday 09:00 to 18:00 and Sunday 10:00 to 16:00. We are open on bank holidays, and other times are available by appointment.' },
@@ -195,7 +239,6 @@ export class ForecourtHomeComponent {
     { q: 'Do you take part exchanges?', a: 'Yes. Send us the details and a few photos and we will give you a fair figure, against your next car or as a straight sale.' },
   ];
   readonly openFaq = signal(0);
-
   mapsUrl(): string {
     const b = this.business();
     const q = b ? `${b.address.line1}, ${b.address.line2}, ${b.address.town} ${b.address.postcode}` : 'DriveLine Car Sales Peterborough';
@@ -205,62 +248,68 @@ export class ForecourtHomeComponent {
     return 'tel:' + (n ?? '').replace(/\s+/g, '');
   }
 
-  // ---------------- Section rail (left edge, desktop) ----------------
-  readonly sections = ['Top', 'Showroom', 'About', 'How it works', 'Sell', 'Brands', 'Finance', 'Reviews', 'Visit'];
-  readonly activeSection = signal(0);
-  private readonly sectionEls = viewChildren<ElementRef<HTMLElement>>('sec');
-
-  goTo(i: number): void {
-    const el = this.sectionEls()[i]?.nativeElement;
-    el?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-  }
-
   constructor() {
     afterNextRender(() => {
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const filmEl = this.film()?.nativeElement;
-      const canvasEl = this.canvas()?.nativeElement;
-      let renderer: FilmRenderer | null = null;
-      if (filmEl && canvasEl && !reduce) {
-        renderer = FilmRenderer.create(canvasEl, this.shotUrls, () => this.gl.set(true));
-        renderer?.resize();
+      this.schedule();
+
+      // Sections slide up into view once (skipped when the visitor prefers less motion)
+      const reveal = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (!e.isIntersecting) continue;
+            e.target.classList.add('in');
+            reveal.unobserve(e.target);
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px' },
+      );
+      for (const el of this.host.querySelectorAll('[data-reveal]')) {
+        if (this.reduce) el.classList.add('in');
+        else reveal.observe(el);
       }
+
+      // Counters count up the first time they are seen
+      const targets = () => [this.counts().car + this.counts().van, this.makesCount(), new Date().getFullYear() - this.since, 7];
+      const counterEl = this.host.querySelector('.fc-counters');
+      const counterObs = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        counterObs.disconnect();
+        this.countersOn.set(true);
+        const end = targets();
+        if (this.reduce) return this.counterValues.set(end);
+        const t0 = performance.now();
+        const tick = (now: number) => {
+          const k = Math.min(1, (now - t0) / 1400);
+          const ease = 1 - Math.pow(1 - k, 3);
+          this.counterValues.set(end.map((n) => Math.round(n * ease)));
+          if (k < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+      if (counterEl) counterObs.observe(counterEl);
+
+      // Timeline line follows the scroll
       let frame = 0;
       const update = () => {
         frame = 0;
-        if (filmEl) {
-          const r = filmEl.getBoundingClientRect();
-          const p = Math.max(0, Math.min(1, -r.top / Math.max(filmEl.offsetHeight - innerHeight, 1)));
-          renderer?.draw(p);
-          this.scene.set(Math.min(3, Math.floor(p * 4)));
-          const m = this.mark()?.nativeElement;
-          if (m) m.style.transform = `translate3d(${(-p * 14).toFixed(2)}vw,0,0)`;
-          const br = this.bar()?.nativeElement;
-          if (br) br.style.transform = `scaleX(${p.toFixed(4)})`;
-          document.documentElement.classList.toggle('forecourt-over-film', r.bottom > 72);
-        }
-        // Which section sits in the middle of the screen
-        const els = this.sectionEls();
-        let active = 0;
-        for (let i = 0; i < els.length; i++) if (els[i].nativeElement.getBoundingClientRect().top < innerHeight * 0.5) active = i;
-        this.activeSection.set(active);
+        const el = this.timeline()?.nativeElement;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const p = (innerHeight * 0.75 - r.top) / (r.height + innerHeight * 0.25);
+        this.lineProgress.set(this.reduce ? 1 : Math.max(0, Math.min(1, p)));
       };
       const onScroll = () => {
         if (!frame) frame = requestAnimationFrame(update);
       };
-      const onResize = () => {
-        renderer?.resize();
-        onScroll();
-      };
       addEventListener('scroll', onScroll, { passive: true });
-      addEventListener('resize', onResize, { passive: true });
       update();
+
       this.destroyRef.onDestroy(() => {
+        this.clearTimer();
+        reveal.disconnect();
+        counterObs.disconnect();
         removeEventListener('scroll', onScroll);
-        removeEventListener('resize', onResize);
         if (frame) cancelAnimationFrame(frame);
-        renderer?.destroy();
-        document.documentElement.classList.remove('forecourt-over-film');
       });
     });
   }

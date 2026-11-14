@@ -48,7 +48,7 @@ const SCENARIOS_ALL = [
   { name: 'cars-advanced-filters', path: '/cars/', scope: 'app-search-widget', run: (p) => btn(p, /Advanced Filters/).click() },
   { name: 'cars-list-view', path: '/cars/', run: (p) => p.getByRole('button', { name: /list view/i }).first().click().catch(() => p.locator('button[aria-label*="List"]').first().click()) },
   { name: 'cars-find-me', path: '/cars/', scope: '#find-me-a-car', run: (p) => p.locator('#find-me-a-car').scrollIntoViewIfNeeded() },
-  { name: 'home-search', path: '/', scope: 'app-search-widget, .pf-search, .fc-search', run: (p) => btn(p, /Filters/i).click({ timeout: 3000 }).catch(() => {}) },
+  { name: 'home-search', path: '/', scope: 'app-search-widget, .pf-search, .fc-finder-form', run: (p) => btn(p, /Filters/i).click({ timeout: 3000 }).catch(() => {}) },
   { name: 'sell-form', path: '/sell-your-car/', steps: true, scope: 'main', run: (p) => p.locator('main').first().scrollIntoViewIfNeeded() },
   { name: 'part-exchange-page', path: '/part-exchange/', steps: true, scope: 'main', run: (p) => p.locator('main').first().scrollIntoViewIfNeeded() },
   { name: 'contact-form-errors', path: '/contact/', scope: 'form', run: async (p) => { await p.locator('form button[type=submit]').first().click(); } },

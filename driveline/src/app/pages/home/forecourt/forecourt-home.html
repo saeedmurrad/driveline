@@ -1,113 +1,117 @@
-<!-- Section rail: one dash per section, the current one stands out (desktop) -->
-<nav class="fc-rail" aria-label="Sections on this page">
-  @for (s of sections; track s; let i = $index) {
-    <button type="button" [class.on]="activeSection() === i" [attr.aria-current]="activeSection() === i ? 'true' : null" (click)="goTo(i)">
-      <span class="sr-only">{{ s }}</span>
-    </button>
-  }
-</nav>
+<!-- ================= 1. HERO: kinetic headline + car showcase slider ================= -->
+<section class="fc-hero" aria-label="DriveLine Car Sales">
+  <div class="fc-hero-stripes" aria-hidden="true"></div>
+  <div class="fc-hero-mark" aria-hidden="true">DRIVELINE</div>
 
-<!-- ================= 1. FILM: pinned photo stage, 4 scenes driven by scroll ================= -->
-<section #film #sec class="fc-film" aria-label="DriveLine at a glance">
-  <div class="fc-stage">
-    <canvas #canvas class="fc-canvas" [class.fc-hidden]="!gl()" aria-hidden="true"></canvas>
-    @if (!gl()) {
-      @for (url of shotUrls; track url; let i = $index) {
-        <img class="fc-fallback" [class.on]="scene() === i" [src]="url" alt="" [attr.fetchpriority]="i === 0 ? 'high' : null" decoding="async" />
-      }
-    }
-    <div class="fc-shade" aria-hidden="true"></div>
-    <div #mark class="fc-mark" aria-hidden="true">DRIVELINE</div>
+  <div class="fc-wrap fc-hero-grid">
+    <div class="fc-hero-copy">
+      <p class="fc-tag-red">Est. {{ since }} · Fengate, Peterborough</p>
+      <h1 class="fc-kinetic">
+        <span class="fc-line"><span>Quality</span></span>
+        <span class="fc-line"><span>used cars,</span></span>
+        <span class="fc-line"><span class="fc-red">sorted.</span></span>
+      </h1>
+      <p class="fc-hero-lead">{{ counts().car }} cars and {{ counts().van }} vans on the forecourt today. Every one inspected, HPI checked and sold with our own warranty.</p>
+      <div class="fc-hero-actions">
+        <a routerLink="/cars" class="fc-btn fc-btn-red">Browse the stock <span class="fc-arrow" aria-hidden="true">→</span></a>
+        @if (business(); as b) {
+          <a [href]="tel(b.phone)" class="fc-btn fc-btn-ghost">Call {{ b.phone }}</a>
+        }
+      </div>
+    </div>
 
-    <div class="fc-inner">
-      <div class="fc-copy">
-        <div class="fc-ch" [class.on]="scene() === 0" [attr.aria-hidden]="scene() !== 0">
-          <p class="fc-pill">Family-run · Fengate, Peterborough</p>
-          <h1 class="fc-title">Quality used cars, <em>Peterborough.</em></h1>
-          <p class="fc-lead">Quality, affordable and reliable used cars, vans and 4×4s. {{ counts().car + counts().van }} in stock today, every one inspected and warranted.</p>
-          <div class="fc-actions">
-            <a routerLink="/cars" class="fc-btn fc-btn-red" prestigeMagnetic>Browse the showroom <span aria-hidden="true">→</span></a>
-            @if (business(); as b) {
-              <a [href]="tel(b.phone)" class="fc-btn fc-btn-line">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                {{ b.phone }}
-              </a>
+    @if (showcase().length) {
+      <div class="fc-show" (mouseenter)="pause(true)" (mouseleave)="pause(false)" (focusin)="pause(true)" (focusout)="pause(false)" aria-roledescription="carousel" aria-label="Featured cars">
+        <div class="fc-show-stage">
+          @for (v of showcase(); track v.id; let i = $index) {
+            <a [routerLink]="['/vehicle', v.id]" class="fc-slide" [class.on]="slide() === i" [attr.aria-hidden]="slide() !== i" [attr.tabindex]="slide() === i ? null : -1" aria-roledescription="slide">
+              <img [src]="slideImage(v)" [alt]="v.year + ' ' + v.make + ' ' + v.model" [attr.loading]="i === 0 ? 'eager' : 'lazy'" [attr.fetchpriority]="i === 0 ? 'high' : null" decoding="async" />
+              <span class="fc-wipe" aria-hidden="true"></span>
+              <span class="fc-slide-cap">
+                <span class="fc-slide-kicker">{{ v.year }} · {{ v.bodyType }} · {{ v.mileage.toLocaleString('en-GB') }} miles</span>
+                <span class="fc-slide-title">{{ v.make }} {{ v.model }}</span>
+                <span class="fc-slide-price">{{ formatPrice(v.price) }}@if (monthly(v); as m) {<small>or {{ formatPrice(m) }}/mo*</small>}</span>
+              </span>
+            </a>
+          }
+        </div>
+        <div class="fc-show-bar">
+          <div class="fc-show-dots">
+            @for (v of showcase(); track v.id; let i = $index) {
+              <button type="button" [class.on]="slide() === i" (click)="go(i)" [attr.aria-label]="'Show ' + v.make + ' ' + v.model" [attr.aria-current]="slide() === i ? 'true' : null">
+                @if (slide() === i) { <span class="fc-fill" [class.run]="!paused()" [attr.data-run]="slideRun()"></span> }
+              </button>
             }
           </div>
-        </div>
-        <div class="fc-ch" [class.on]="scene() === 1" [attr.aria-hidden]="scene() !== 1">
-          <p class="fc-pill">Buy with confidence</p>
-          <h2 class="fc-title">Inspected. <em>Warranted.</em></h2>
-          <p class="fc-lead">Every car has a multi-point safety inspection and an HPI check before it goes on sale, and comes with our own in-house warranty.</p>
-          <div class="fc-actions"><a routerLink="/warranty" class="fc-btn fc-btn-red" prestigeMagnetic>Our warranty <span aria-hidden="true">→</span></a></div>
-        </div>
-        <div class="fc-ch" [class.on]="scene() === 2" [attr.aria-hidden]="scene() !== 2">
-          <p class="fc-pill">FCA registered</p>
-          <h2 class="fc-title">Finance for <em>every budget.</em></h2>
-          <p class="fc-lead">Hire purchase, PCP and contract hire for all credit histories@if (lowestMonthly(); as m) {, from {{ formatPrice(m) }} a month}. {{ apr }}% APR representative, subject to status.</p>
-          <div class="fc-actions"><a routerLink="/finance" class="fc-btn fc-btn-red" prestigeMagnetic>Explore finance <span aria-hidden="true">→</span></a></div>
-        </div>
-        <div class="fc-ch" [class.on]="scene() === 3" [attr.aria-hidden]="scene() !== 3">
-          <p class="fc-pill">Open 7 days</p>
-          <h2 class="fc-title">Pop in, or <em>we deliver.</em></h2>
-          <p class="fc-lead">Visit us on Fengate seven days a week, or we deliver throughout the UK. Live video walkarounds if you can’t make it.</p>
-          <div class="fc-actions"><a routerLink="/delivery" class="fc-btn fc-btn-red" prestigeMagnetic>Plan your visit <span aria-hidden="true">→</span></a></div>
+          <div class="fc-show-nav">
+            <button type="button" (click)="go(slide() - 1)" aria-label="Previous car">←</button>
+            <button type="button" (click)="go(slide() + 1)" aria-label="Next car">→</button>
+          </div>
         </div>
       </div>
+    }
+  </div>
 
-      <dl class="fc-stats">
-        <div><dd>{{ since }}</dd><dt>Trading since</dt></div>
-        <div><dd>{{ counts().car + counts().van }}</dd><dt>Vehicles in stock</dt></div>
-        <div><dd>7 days</dd><dt>Open every week</dt></div>
-      </dl>
-
-      <div class="fc-progress" aria-hidden="true">
-        <div class="fc-bar"><span #bar></span></div>
-        <ol>
-          @for (s of scenes; track s; let i = $index) {
-            <li [class.on]="scene() === i">0{{ i + 1 }} {{ s }}</li>
-          }
-        </ol>
-      </div>
-      <p class="fc-scroll" aria-hidden="true">Scroll</p>
-    </div>
+  <!-- Counters -->
+  <div class="fc-wrap">
+    <dl class="fc-counters" [class.on]="countersOn()">
+      <div><dd>{{ counterValues()[0] }}</dd><dt>Vehicles in stock</dt></div>
+      <div><dd>{{ counterValues()[1] }}</dd><dt>Makes on the forecourt</dt></div>
+      <div><dd>{{ counterValues()[2] }}</dd><dt>Years on Fengate</dt></div>
+      <div><dd>{{ counterValues()[3] }}</dd><dt>Days a week open</dt></div>
+    </dl>
   </div>
 </section>
 
-<!-- ================= 2. SEARCH BAR over the film's lower edge ================= -->
-<div class="fc-wrap fc-book">
-  <form class="fc-search" (ngSubmit)="runSearch()" aria-label="Search our stock">
-    <label><span>Vehicle</span>
-      <select name="kind" [(ngModel)]="search.kind"><option value="cars">Cars</option><option value="vans">Vans</option></select>
-    </label>
-    <label><span>Make</span>
-      <select name="make" [(ngModel)]="search.make"><option value="">Any make</option>@for (m of makes(); track m) {<option [value]="m">{{ m }}</option>}</select>
-    </label>
-    <label><span>Body type</span>
-      <select name="bodyType" [(ngModel)]="search.bodyType"><option value="">Any body</option>@for (b of bodies(); track b) {<option [value]="b">{{ b }}</option>}</select>
-    </label>
-    <label><span>Max price</span>
-      <select name="maxPrice" [(ngModel)]="search.maxPrice"><option value="">No max</option>@for (p of budgets; track p) {<option [value]="p">{{ formatPrice(p) }}</option>}</select>
-    </label>
-    <button type="submit" class="fc-btn fc-btn-red fc-search-btn">Search stock <span aria-hidden="true">→</span></button>
-  </form>
+<!-- ================= 2. TICKER ================= -->
+<div class="fc-ticker" aria-hidden="true">
+  <div class="fc-ticker-track">
+    @for (rep of [0, 1]; track rep) {
+      <span class="fc-ticker-set">
+        @for (t of ticker(); track $index) { <span>{{ t }}</span><i></i> }
+      </span>
+    }
+  </div>
 </div>
 
-<!-- ================= 3. THE SHOWROOM: chips, cards, details panel ================= -->
-<section #sec class="fc-wrap fc-sec" id="showroom" aria-labelledby="fc-show-title">
-  <p class="fc-eyebrow">The showroom · {{ counts().car + counts().van }} vehicles</p>
-  <h2 id="fc-show-title" class="fc-h2">Pick your <em>next car.</em></h2>
+<!-- ================= 3. FINDER with live count ================= -->
+<section class="fc-finder" aria-labelledby="fc-find-title">
+  <div class="fc-wrap">
+    <h2 id="fc-find-title" class="fc-finder-title">Find your car <span class="fc-count" aria-live="polite"><b>{{ matches() }}</b> {{ matches() === 1 ? 'match' : 'matches' }}</span></h2>
+    <form class="fc-finder-form" (ngSubmit)="runSearch()">
+      <div class="fc-seg" role="group" aria-label="Cars or vans">
+        <button type="button" [class.on]="kind() === 'cars'" [attr.aria-pressed]="kind() === 'cars'" (click)="kind.set('cars')">Cars</button>
+        <button type="button" [class.on]="kind() === 'vans'" [attr.aria-pressed]="kind() === 'vans'" (click)="kind.set('vans')">Vans</button>
+      </div>
+      <label><span>Make</span>
+        <select name="make" [ngModel]="make()" (ngModelChange)="make.set($event)"><option value="">Any make</option>@for (m of makes(); track m) {<option [value]="m">{{ m }}</option>}</select>
+      </label>
+      <label><span>Body</span>
+        <select name="bodyType" [ngModel]="body()" (ngModelChange)="body.set($event)"><option value="">Any body</option>@for (b of bodies(); track b) {<option [value]="b">{{ b }}</option>}</select>
+      </label>
+      <label><span>Max price</span>
+        <select name="maxPrice" [ngModel]="maxPrice()" (ngModelChange)="maxPrice.set($event)"><option value="">No max</option>@for (p of budgets; track p) {<option [value]="p">{{ formatPrice(p) }}</option>}</select>
+      </label>
+      <button type="submit" class="fc-btn fc-btn-red fc-finder-go">Show {{ matches() }} <span class="fc-arrow" aria-hidden="true">→</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= 4. SHOWROOM: chips, cards, details panel ================= -->
+<section class="fc-wrap fc-sec" id="showroom" aria-labelledby="fc-show-title">
+  <div class="fc-head" data-reveal>
+    <h2 id="fc-show-title" class="fc-h2"><span class="fc-num-tag">01</span>On the <span class="fc-red">forecourt</span></h2>
+    <a routerLink="/cars" class="fc-link">All {{ counts().car }} cars <span class="fc-arrow" aria-hidden="true">→</span></a>
+  </div>
   <div class="fc-chips" role="group" aria-label="Filter stock">
     @for (c of chips(); track c.id) {
       @if (chipCounts()[c.id]) {
-        <button type="button" class="fc-chip" [class.on]="chip() === c.id" [attr.aria-pressed]="chip() === c.id" (click)="setChip(c.id)">
-          {{ c.label }} <small>{{ chipCounts()[c.id] }}</small>
-        </button>
+        <button type="button" class="fc-chip" [class.on]="chip() === c.id" [attr.aria-pressed]="chip() === c.id" (click)="setChip(c.id)">{{ c.label }} <small>{{ chipCounts()[c.id] }}</small></button>
       }
     }
   </div>
 
-  <div class="fc-show">
+  <div class="fc-room">
     <div class="fc-grid">
       @for (v of grid(); track v.id) {
         <article class="fc-card" [class.sel]="selected()?.id === v.id" (mouseenter)="selectedId.set(v.id)" (focusin)="selectedId.set(v.id)">
@@ -117,14 +121,12 @@
                 @if (srcset(v); as ss) { <source type="image/webp" [attr.srcset]="ss" [attr.sizes]="sizes" /> }
                 <img [src]="(v.thumbnailImage || v.images[0]) | thumb" [alt]="v.year + ' ' + v.make + ' ' + v.model" loading="lazy" decoding="async" width="800" height="600" />
               </picture>
-              <span class="fc-yr">{{ v.year }} · {{ v.category === 'van' ? 'Van' : v.bodyType }}</span>
+              <span class="fc-price-flag">{{ formatPrice(v.price) }}</span>
             </div>
             <div class="fc-card-body">
-              <div class="min-w-0">
-                <h3>{{ v.make }} {{ v.model }}</h3>
-                <p class="fc-meta"><span>{{ v.mileage.toLocaleString('en-GB') }} mi</span><span>{{ v.fuelType }}</span><span>{{ v.transmission }}</span></p>
-              </div>
-              <p class="fc-price"><small>Price</small>{{ formatPrice(v.price) }}</p>
+              <p class="fc-card-kicker">{{ v.year }} · {{ v.category === 'van' ? 'Van' : v.bodyType }}</p>
+              <h3>{{ v.make }} {{ v.model }}</h3>
+              <p class="fc-meta"><span>{{ v.mileage.toLocaleString('en-GB') }} mi</span><span>{{ v.fuelType }}</span><span>{{ v.transmission }}</span></p>
             </div>
           </a>
         </article>
@@ -133,9 +135,7 @@
 
     @if (selected(); as s) {
       <aside class="fc-panel" aria-label="Car details">
-        <div class="fc-panel-img">
-          <img [src]="(s.thumbnailImage || s.images[0]) | thumb" [alt]="s.year + ' ' + s.make + ' ' + s.model" loading="lazy" decoding="async" />
-        </div>
+        <p class="fc-panel-kicker">Selected</p>
         <h3>{{ s.year }} {{ s.make }} {{ s.model }}</h3>
         <p class="fc-panel-sub">{{ s.derivative }}</p>
         <dl class="fc-specs">
@@ -144,167 +144,137 @@
           }
         </dl>
         <div class="fc-panel-price">
-          <p>{{ s.images.length }} photos<br />Warranty included@if (selectedMonthly(); as m) {<br />From {{ formatPrice(m) }}/mo*}</p>
           <strong>{{ formatPrice(s.price) }}</strong>
+          <p>{{ s.images.length }} photos<br />Warranty included@if (selectedMonthly(); as m) {<br />From {{ formatPrice(m) }}/mo*}</p>
         </div>
-        <a [routerLink]="['/vehicle', s.id]" class="fc-btn fc-btn-red fc-w" prestigeMagnetic>View this car <span aria-hidden="true">→</span></a>
+        <a [routerLink]="['/vehicle', s.id]" class="fc-btn fc-btn-red fc-w">View this car <span class="fc-arrow" aria-hidden="true">→</span></a>
         <div class="fc-panel-acts">
-          @if (business(); as b) {
-            <a [href]="tel(b.phone)" class="fc-btn fc-btn-line">Call to reserve</a>
-          }
-          <a routerLink="/finance" class="fc-btn fc-btn-line">Finance</a>
+          @if (business(); as b) { <a [href]="tel(b.phone)" class="fc-btn fc-btn-line">Call to reserve</a> }
+          <a routerLink="/part-exchange" class="fc-btn fc-btn-line">Part exchange</a>
         </div>
-        <a routerLink="/part-exchange" class="fc-btn fc-btn-line fc-w">Part exchange your car</a>
         <p class="fc-fine">*{{ financeNote }}</p>
       </aside>
     }
   </div>
-  <div class="fc-center"><a routerLink="/cars" class="fc-btn fc-btn-ink">Show all {{ counts().car }} cars</a></div>
 </section>
 
-<!-- ================= Free MOT history + DVLA check for any car ================= -->
+<!-- ================= 5. TIMELINE ================= -->
+<section class="fc-wrap fc-sec" aria-labelledby="fc-time-title">
+  <h2 id="fc-time-title" class="fc-h2" data-reveal><span class="fc-num-tag">02</span>How buying <span class="fc-red">works</span></h2>
+  <div #timeline class="fc-timeline" [style.--p]="lineProgress()">
+    <span class="fc-track" aria-hidden="true"><span></span></span>
+    <ol>
+      @for (s of steps; track s.t; let i = $index) {
+        <li [class.lit]="lineProgress() >= (i + 0.35) / steps.length">
+          <span class="fc-node" aria-hidden="true"><b>{{ i + 1 }}</b></span>
+          <h3>{{ s.t }}</h3>
+          <p>{{ s.d }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- ================= Free MOT history + DVLA check ================= -->
 <div class="fc-check"><app-vehicle-check-band /></div>
 
-<!-- ================= 4. STATEMENT ================= -->
-<section #sec class="fc-wrap fc-sec" aria-label="About DriveLine">
-  <p class="fc-state" appReveal>A family-run dealer on Fengate, Peterborough, with <em>every vehicle inspected, HPI checked and warranted.</em></p>
-
-  <div class="fc-feat">
-    @if (featureCar(); as f) {
-      <a [routerLink]="['/vehicle', f.id]" class="fc-feat-img" appReveal>
-        <img [src]="f.images[0] | thumb" [alt]="f.year + ' ' + f.make + ' ' + f.model" loading="lazy" decoding="async" />
-        <span class="fc-badge"><b>{{ counts().car + counts().van }}</b>Cars and vans<br />in stock today</span>
-      </a>
-    }
-    <div class="fc-rows">
-      @for (r of [
-        { t: 'Multi-point safety inspection', d: 'Every vehicle is thoroughly inspected before it is sold.', l: '/faq', i: 'M9 12l2 2 4-4M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z' },
-        { t: 'Our own in-house warranty', d: 'No third-party providers or call-centre queues. Just give us a call.', l: '/warranty', i: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
-        { t: 'Competitive finance', d: 'FCA registered, with lenders for every credit history.', l: '/finance', i: 'M15 9a2 2 0 10-4 0v5a2 2 0 01-2 2h6m-6-4h4m8 0a9 9 0 11-18 0 9 9 0 0118 0z' },
-        { t: 'Fair part exchange', d: 'Competitive valuations, against your next car or as a straight sale.', l: '/part-exchange', i: 'M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4' },
-      ]; track r.t) {
-        <a [routerLink]="r.l" class="fc-row" appReveal>
-          <span class="fc-row-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" [attr.d]="r.i" /></svg></span>
-          <span class="min-w-0 flex-1"><b>{{ r.t }}</b><span>{{ r.d }}</span></span>
-          <span class="fc-row-go" aria-hidden="true">→</span>
-        </a>
-      }
+<!-- ================= 6. SELL: slanted photo split ================= -->
+<section class="fc-sell" aria-labelledby="fc-sell-title">
+  <div class="fc-sell-img" aria-hidden="true"><img src="hero/hero-08-960.webp" alt="" loading="lazy" decoding="async" /></div>
+  <div class="fc-wrap fc-sell-inner">
+    <div class="fc-sell-copy" data-reveal>
+      <h2 id="fc-sell-title" class="fc-h2 fc-h2-light"><span class="fc-num-tag">03</span>Cash for your car. <span class="fc-red">No hoops.</span></h2>
+      <p>Part exchange it against your next car or sell it to us outright. A fair figure from your details, a firm offer once we’ve seen it, and we can collect.</p>
+      <ul class="fc-checks">
+        <li>Fair, competitive valuation</li>
+        <li>Paperwork sorted for you</li>
+        <li>We collect at a time that suits</li>
+      </ul>
+      <a routerLink="/sell-your-car" class="fc-btn fc-btn-red">Get a valuation <span class="fc-arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
 
-<!-- ================= 5. THREE STEPS ================= -->
-<section #sec class="fc-wrap fc-sec" aria-labelledby="fc-steps-title">
-  <p class="fc-eyebrow">How it works</p>
-  <h2 id="fc-steps-title" class="fc-h2">Three steps. <em>No hassle.</em></h2>
-  <ol class="fc-steps">
-    @for (s of [
-      { t: 'Choose your car', d: 'Browse our stock online, or pop in to Vision House on Fengate. We are open seven days a week.' },
-      { t: 'Reserve it', d: 'Call or message us to reserve your car. We can help with finance and part exchange.' },
-      { t: 'Drive away', d: 'Collect it from the forecourt, or we can arrange delivery throughout the UK.' },
-    ]; track s.t; let i = $index) {
-      <li class="fc-step" appReveal>
-        <span class="fc-num" aria-hidden="true">0{{ i + 1 }}</span>
-        <h3>{{ s.t }}</h3>
-        <p>{{ s.d }}</p>
-      </li>
-    }
-  </ol>
-</section>
-
-<!-- ================= 6. DARK: sell your car ================= -->
-<section #sec class="fc-dark" aria-labelledby="fc-sell-title">
-  <div class="fc-wrap fc-split">
-    <div class="fc-split-img" appReveal>
-      <img src="hero/hero-08-960.webp" alt="BMW in the DriveLine showroom" loading="lazy" decoding="async" />
-      <p class="fc-tag"><b>No obligation</b>Vehicle buying service</p>
-    </div>
-    <div>
-      <p class="fc-eyebrow">Sell your car</p>
-      <h2 id="fc-sell-title" class="fc-h2 fc-h2-dark">Cash for your car, <em>no hoops.</em></h2>
-      <p class="fc-dark-lead">Use the money as a deposit on your next car, or just take the cash. A fair, no-obligation offer from people who know cars.</p>
-      <div class="fc-tiles">
-        <div><b>Competitive valuation</b><span>A fair estimate from your details, then a firm figure once we’ve seen it.</span></div>
-        <div><b>Efficient process</b><span>No hoops to jump through, and we sort the paperwork.</span></div>
-        <div><b>We collect</b><span>Tell us a time and place and we come to you.</span></div>
-        <div><b>Expert advice</b><span>Years of experience in the team, and straight answers.</span></div>
-      </div>
-      <a routerLink="/sell-your-car" class="fc-btn fc-btn-red" prestigeMagnetic>Get a valuation <span aria-hidden="true">→</span></a>
-    </div>
+<!-- ================= 7. BRANDS strip ================= -->
+<section class="fc-sec" aria-labelledby="fc-brand-title">
+  <div class="fc-wrap fc-head" data-reveal>
+    <h2 id="fc-brand-title" class="fc-h2"><span class="fc-num-tag">04</span>Shop by <span class="fc-red">make</span></h2>
+    <p class="fc-side">Swipe through every make we have in stock.</p>
   </div>
-</section>
-
-<!-- ================= 7. BRANDS ON THE FORECOURT ================= -->
-<section #sec class="fc-wrap fc-sec" aria-labelledby="fc-brands-title">
-  <div class="fc-head">
-    <div>
-      <p class="fc-eyebrow">Browse by make</p>
-      <h2 id="fc-brands-title" class="fc-h2">Brands on the <em>forecourt.</em></h2>
-    </div>
-    <p class="fc-side">{{ makes().slice(0, 5).join(', ') }} and more, every one inspected and sold with a warranty.</p>
-  </div>
-  <div class="fc-brands">
+  <div class="fc-brands" tabindex="0" role="region" aria-label="Makes in stock, scroll sideways">
     @for (b of brands(); track b.name) {
       <a routerLink="/cars" [queryParams]="{ make: b.name }" class="fc-brand">
         <img [src]="b.image! | thumb" alt="" loading="lazy" decoding="async" />
-        <span class="fc-brand-n">{{ b.count }} in stock</span>
-        <span class="fc-brand-name">{{ b.name }}<small>From {{ formatPrice(b.from) }}</small></span>
+        <span class="fc-brand-name">{{ b.name }}</span>
+        <span class="fc-brand-meta">{{ b.count }} in stock · from {{ formatPrice(b.from) }}</span>
       </a>
     }
   </div>
 </section>
 
-<!-- ================= 8. FINANCE EXPLAINED ================= -->
-<section #sec class="fc-wrap fc-sec" aria-labelledby="fc-fin-title">
-  <p class="fc-eyebrow">Car finance explained</p>
-  <h2 id="fc-fin-title" class="fc-h2">Spread the cost, <em>your way.</em></h2>
-  <div class="fc-fin">
-    @for (f of [
-      { k: 'Own it', t: 'Hire purchase', d: 'A deposit, then the balance in monthly instalments plus interest. After the final payment the car is yours.' },
-      { k: 'Flexible', t: 'PCP', d: 'A deposit and lower monthly payments. At the end, pay the balance, hand the car back, or put any equity towards your next one.' },
-      { k: 'Lease', t: 'Contract hire', d: 'Much like PCP, without the option to buy the car outright at the end of the agreement.' },
-    ]; track f.t) {
-      <div class="fc-fin-card" appReveal>
-        <p class="fc-fin-k">{{ f.k }}</p>
-        <h3>{{ f.t }}</h3>
-        <p>{{ f.d }}</p>
+<!-- ================= 8. FINANCE tabs ================= -->
+<section class="fc-wrap fc-sec" aria-labelledby="fc-fin-title">
+  <h2 id="fc-fin-title" class="fc-h2" data-reveal><span class="fc-num-tag">05</span>Finance, <span class="fc-red">your way</span></h2>
+  <div class="fc-tabs" role="tablist" aria-label="Finance types" [style.--i]="finTab()">
+    @for (f of financeTabs; track f.id; let i = $index) {
+      <button type="button" role="tab" [id]="'fc-tab-' + f.id" [attr.aria-selected]="finTab() === i" [attr.aria-controls]="'fc-tabp-' + f.id" [attr.tabindex]="finTab() === i ? 0 : -1" [class.on]="finTab() === i" (click)="finTab.set(i)"
+        (keydown.arrowRight)="finTab.set((finTab() + 1) % financeTabs.length)" (keydown.arrowLeft)="finTab.set((finTab() + financeTabs.length - 1) % financeTabs.length)">{{ f.t }}</button>
+    }
+    <span class="fc-tab-ink" aria-hidden="true"></span>
+  </div>
+  @for (f of financeTabs; track f.id; let i = $index) {
+    @if (finTab() === i) {
+      <div class="fc-tabpanel" role="tabpanel" [id]="'fc-tabp-' + f.id" [attr.aria-labelledby]="'fc-tab-' + f.id">
+        <div>
+          <p class="fc-tab-k">{{ f.k }}</p>
+          <p class="fc-tab-d">{{ f.d }}</p>
+        </div>
+        <ul class="fc-checks fc-checks-dark">
+          @for (p of f.points; track p) { <li>{{ p }}</li> }
+        </ul>
+        <div class="fc-tab-cta">
+          <p>{{ apr }}% APR representative. All credit histories considered. Subject to status.</p>
+          <a routerLink="/finance" class="fc-btn fc-btn-red">Enquire about finance <span class="fc-arrow" aria-hidden="true">→</span></a>
+        </div>
       </div>
     }
-  </div>
-  <div class="fc-center"><a routerLink="/finance" class="fc-btn fc-btn-red" prestigeMagnetic>Enquire about finance <span aria-hidden="true">→</span></a></div>
+  }
 </section>
 
-<!-- ================= 9. REVIEWS ================= -->
-<section #sec class="fc-wrap fc-sec" aria-labelledby="fc-rev-title">
-  <div class="fc-head">
-    <div>
-      <p class="fc-eyebrow">Reviews @if (rating(); as r) { · {{ r.avg }} from {{ r.count }}}</p>
-      <h2 id="fc-rev-title" class="fc-h2">Buyers <em>talk.</em></h2>
+<!-- ================= 9. REVIEWS strip ================= -->
+@if (reviews().length) {
+  <section class="fc-sec fc-revs" aria-labelledby="fc-rev-title">
+    <div class="fc-wrap fc-head" data-reveal>
+      <h2 id="fc-rev-title" class="fc-h2"><span class="fc-num-tag">06</span>Buyers <span class="fc-red">talk</span></h2>
+      @if (rating(); as r) { <p class="fc-score"><b>{{ r.avg }}</b><span aria-hidden="true">★★★★★</span><small>{{ r.count }} reviews</small></p> }
     </div>
-    <a routerLink="/reviews" class="fc-btn fc-btn-ink">All reviews</a>
-  </div>
-  <div class="fc-reviews">
-    @for (r of reviews(); track r.id) {
-      <figure class="fc-review" appReveal>
-        <p class="fc-stars" [attr.aria-label]="r.rating + ' out of 5 stars'">{{ '★★★★★'.slice(0, r.rating) }}</p>
-        @if (r.title) { <h3>{{ r.title }}</h3> }
-        <blockquote>{{ r.body }}</blockquote>
-        <figcaption><span class="fc-avatar" aria-hidden="true">{{ initials(r.author) }}</span><span><b>{{ r.author }}</b><small>{{ reviewDate(r.date) }}</small><small>{{ r.source }}</small></span></figcaption>
-      </figure>
-    }
-  </div>
-</section>
+    <div class="fc-rev-strip">
+      <div class="fc-rev-track">
+        @for (rep of [0, 1]; track rep) {
+          @for (r of reviews(); track r.id) {
+            <figure class="fc-review" [attr.aria-hidden]="rep === 1 ? 'true' : null">
+              <p class="fc-stars" [attr.aria-label]="r.rating + ' out of 5 stars'">{{ '★★★★★'.slice(0, r.rating) }}</p>
+              @if (r.title) { <h3>{{ r.title }}</h3> }
+              <blockquote>{{ r.body }}</blockquote>
+              <figcaption><span class="fc-avatar" aria-hidden="true">{{ initials(r.author) }}</span><span><b>{{ r.author }}</b><small>{{ r.source }}</small></span></figcaption>
+            </figure>
+          }
+        }
+      </div>
+    </div>
+    <div class="fc-wrap fc-center"><a routerLink="/reviews" class="fc-btn fc-btn-line-dark">Read all reviews</a></div>
+  </section>
+}
 
-<!-- ================= 10. FAQ + VISIT THE FORECOURT ================= -->
-<section #sec class="fc-wrap fc-sec fc-visit-sec" aria-labelledby="fc-faq-title">
-  <div>
-    <p class="fc-eyebrow">Good to know</p>
-    <h2 id="fc-faq-title" class="fc-h2">Before you <em>visit.</em></h2>
+<!-- ================= 10. FAQ + VISIT ================= -->
+<section class="fc-wrap fc-sec fc-visit-sec" aria-labelledby="fc-faq-title">
+  <div data-reveal>
+    <h2 id="fc-faq-title" class="fc-h2"><span class="fc-num-tag">07</span>Good to <span class="fc-red">know</span></h2>
     <div class="fc-faq">
       @for (f of faqs; track f.q; let i = $index) {
         <div class="fc-faq-item" [class.open]="openFaq() === i">
           <button type="button" (click)="openFaq.set(openFaq() === i ? -1 : i)" [attr.aria-expanded]="openFaq() === i" [attr.aria-controls]="'fc-faq-' + i">
-            <span>{{ f.q }}</span><i aria-hidden="true">{{ openFaq() === i ? '−' : '+' }}</i>
+            <span>{{ f.q }}</span><i aria-hidden="true"></i>
           </button>
           <div class="fc-faq-a" [id]="'fc-faq-' + i" [hidden]="openFaq() !== i"><p>{{ f.a }}</p></div>
         </div>
@@ -313,22 +283,20 @@
   </div>
   @if (business(); as b) {
     <div class="fc-visit">
-      <p class="fc-eyebrow">Visit the forecourt</p>
-      <h3>{{ b.address.line1 }}, <em>{{ b.address.line2 }}</em></h3>
+      <p class="fc-tag-red">Visit the forecourt</p>
+      <h3>{{ b.address.line1 }}, {{ b.address.line2 }}</h3>
       <p class="fc-visit-addr">{{ b.address.town }}, {{ b.address.county }}, {{ b.address.postcode }}</p>
       <div class="fc-visit-contacts">
-        <a [href]="tel(b.phone)"><b>{{ b.phone }}</b><small>Sales</small></a>
-        <a [href]="tel(b.mobile)"><b>{{ b.mobile }}</b><small>Mobile</small></a>
-        <a [href]="'mailto:' + b.email"><b>{{ b.email }}</b><small>Email</small></a>
+        <a [href]="tel(b.phone)"><small>Sales</small><b>{{ b.phone }}</b></a>
+        <a [href]="tel(b.mobile)"><small>Mobile</small><b>{{ b.mobile }}</b></a>
+        <a [href]="'mailto:' + b.email"><small>Email</small><b>{{ b.email }}</b></a>
       </div>
       <ul class="fc-hours">
-        @for (h of b.openingHours; track h.day) {
-          <li><span>{{ h.day }}</span><span>{{ h.open }} – {{ h.close }}</span></li>
-        }
+        @for (h of b.openingHours; track h.day) { <li><span>{{ h.day }}</span><span>{{ h.open }} – {{ h.close }}</span></li> }
       </ul>
       <p class="fc-visit-note">{{ b.bankHolidayNote }}</p>
       <div class="fc-visit-acts">
-        <a [href]="mapsUrl()" target="_blank" rel="noopener noreferrer" class="fc-btn fc-btn-red">Get directions <span aria-hidden="true">→</span></a>
+        <a [href]="mapsUrl()" target="_blank" rel="noopener noreferrer" class="fc-btn fc-btn-red">Get directions <span class="fc-arrow" aria-hidden="true">→</span></a>
         <a routerLink="/contact" class="fc-btn fc-btn-line">Send a message</a>
       </div>
     </div>
