@@ -23,8 +23,8 @@ interface Faq {
     <div class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       @for (group of groups; track group.title) {
         <section class="mb-10" [attr.aria-labelledby]="'faq-' + $index">
-          <h2 [id]="'faq-' + $index" class="mb-4 text-xl font-bold text-ink">{{ group.title }}</h2>
-          <div class="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-card">
+          <h2 [id]="'faq-' + $index" class="faq-group-title mb-4 text-xl font-bold text-ink">{{ group.title }}</h2>
+          <div class="faq-group divide-y divide-line overflow-hidden rounded-2xl border border-line bg-surface-raised shadow-card">
             @for (item of group.items; track item.q) {
               <details class="faq-item group">
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-ink">

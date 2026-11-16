@@ -33,6 +33,8 @@
         <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.66-.9l.82-1.2A2 2 0 0110.07 4h3.86a2 2 0 011.66.9l.82 1.2a2 2 0 001.66.9H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
         {{ vehicle.images.length }}
       </span>
+      <!-- Forecourt theme: the price sits on the photo as a red tag -->
+      <span class="fc-card-tag" data-theme-only="forecourt" aria-hidden="true">{{ formatPrice(vehicle.price) }}@if (reduction()) {<s>{{ formatPrice(vehicle.previousPrice!) }}</s>}</span>
     } @else {
       <app-photo-pending [title]="vehicle.make + ' ' + vehicle.model" />
     }
@@ -79,13 +81,14 @@
 
   <!-- Details -->
   <div class="flex flex-1 flex-col p-5">
+    <p class="fc-card-kicker" data-theme-only="forecourt" aria-hidden="true">{{ vehicle.year }}@if (vehicle.bodyType) { · {{ vehicle.bodyType }}}</p>
     <h3 class="text-[17px] font-bold leading-tight text-gray-900 transition-colors group-hover:text-rose-700 dark:text-gray-100 dark:group-hover:text-rose-400">
       {{ vehicle.make }} {{ vehicle.model }}
     </h3>
     <p class="mt-0.5 truncate text-[13px] text-gray-500 dark:text-gray-400" [title]="vehicle.derivative">{{ vehicle.derivative }}</p>
 
-    <div class="mt-4 flex items-end justify-between gap-3">
-      <div>
+    <div class="card-prices mt-4 flex items-end justify-between gap-3">
+      <div class="card-cash">
         @if (reduction()) {
           <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">Was <s class="tabular-nums">{{ formatPrice(vehicle.previousPrice!) }}</s></p>
         } @else {

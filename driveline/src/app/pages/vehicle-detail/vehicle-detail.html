@@ -126,7 +126,7 @@
             <svg class="h-5 w-5 shrink-0 text-rose-500 dark:text-rose-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" [attr.d]="f.icon"/></svg>
             <span class="min-w-0">
               <span class="block text-[11px] font-medium uppercase tracking-wider text-ink-faint">{{ f.label }}</span>
-              <span class="block truncate text-sm font-semibold text-ink">{{ f.value }}</span>
+              <span class="block break-words text-sm font-semibold text-ink">{{ f.value }}</span>
             </span>
           </li>
         }
@@ -135,7 +135,7 @@
             <svg class="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.6-4A12 12 0 0112 3a12 12 0 01-8.6 3A12 12 0 003 9c0 5.6 3.8 10.3 9 11.6 5.2-1.3 9-6 9-11.6 0-1-.1-2-.4-3z"/></svg>
             <span class="min-w-0">
               <span class="block text-[11px] font-medium uppercase tracking-wider text-ink-faint">Emissions</span>
-              <span class="block truncate text-sm font-semibold text-ink">ULEZ standard</span>
+              <span class="block break-words text-sm font-semibold text-ink">ULEZ standard</span>
             </span>
           </li>
         }
@@ -436,7 +436,7 @@
             </div>
           </div>
           <!-- Enquiry Form -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 relative z-10 print:hidden">
+          <div class="form-panel bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 p-6 relative z-10 print:hidden">
             <h2 class="font-bold text-gray-900 dark:text-white mb-4 text-lg">Enquire About This Vehicle</h2>
             @if (enquirySent()) {
               <div class="text-center py-6">
@@ -516,7 +516,7 @@
                 @if (vehicle()!.photosPending) { <span class="badge badge-gray">Photos coming soon</span> }
               </div>
             </div>
-            <div class="mb-5 rounded-xl border border-stone-200/90 bg-stone-50/80 p-4 dark:border-slate-600 dark:bg-slate-900/60">
+            <div class="price-box mb-5 rounded-xl border border-stone-200/90 bg-stone-50/80 p-4 dark:border-slate-600 dark:bg-slate-900/60">
               <p class="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-slate-400">{{ sold() ? 'Last advertised at' : 'Cash price' }}</p>
               <p class="text-3xl font-bold tabular-nums" [class]="reduction() ? 'text-state-reduced' : 'text-gray-900 dark:text-white'">{{ formatPrice(vehicle()!.price) }}</p>
               @if (reduction()) {

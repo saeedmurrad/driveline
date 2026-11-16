@@ -149,7 +149,7 @@ const titleCase = (s: string | undefined) =>
             <!-- Before a search: what you get -->
             <ul class="grid gap-4 sm:grid-cols-3" aria-label="What the check shows">
               @for (f of features; track f.title) {
-                <li class="tool-card !p-5">
+                <li class="vc-feature tool-card !p-5">
                   <h2 class="font-bold text-gray-900 dark:text-white">{{ f.title }}</h2>
                   <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-slate-300">{{ f.text }}</p>
                 </li>
