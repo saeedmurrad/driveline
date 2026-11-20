@@ -74,6 +74,8 @@ export class SearchWidgetComponent implements OnInit {
       cleanFilters.minPrice = this.filters.minPrice;
     if (this.filters.maxPrice !== undefined)
       cleanFilters.maxPrice = this.filters.maxPrice;
+    if (this.filters.maxMonthly !== undefined && this.filters.maxMonthly !== null && Number(this.filters.maxMonthly) > 0)
+      cleanFilters.maxMonthly = Number(this.filters.maxMonthly);
     if (this.filters.minEngineSize !== undefined)
       cleanFilters.minEngineSize = this.filters.minEngineSize;
     if (this.filters.maxEngineSize !== undefined)
@@ -102,6 +104,7 @@ export class SearchWidgetComponent implements OnInit {
     if (filters.maxEngineSize !== undefined) qp['maxEngineSize'] = filters.maxEngineSize;
     if (filters.minPrice !== undefined) qp['minPrice'] = filters.minPrice;
     if (filters.maxPrice !== undefined) qp['maxPrice'] = filters.maxPrice;
+    if (filters.maxMonthly !== undefined) qp['maxMonthly'] = filters.maxMonthly;
     if (filters.minYear !== undefined) qp['minYear'] = filters.minYear;
     if (filters.maxYear !== undefined) qp['maxYear'] = filters.maxYear;
     if (filters.maxMileage !== undefined) qp['maxMileage'] = filters.maxMileage;
@@ -127,6 +130,7 @@ export class SearchWidgetComponent implements OnInit {
       fuelType: '',
       minPrice: undefined,
       maxPrice: undefined,
+      maxMonthly: undefined,
       minEngineSize: undefined,
       maxEngineSize: undefined,
       doors: undefined,

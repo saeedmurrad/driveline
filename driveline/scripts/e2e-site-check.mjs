@@ -495,6 +495,8 @@ await step('theme switch', async () => {
   const panelTitle = (await page.locator('.fc-panel h3').innerText()).trim();
   check('forecourt home: details panel follows the car you point at', panelTitle.endsWith(fcTitle), `${fcTitle} / ${panelTitle}`);
   await page.locator('.fc-tabs [role=tab]', { hasText: 'PCP' }).click();
+  // The page redraws a moment after the click, so wait for the tab to show as selected.
+  await page.locator('.fc-tabs [aria-selected=true]', { hasText: 'PCP' }).waitFor({ timeout: 4000 }).catch(() => {});
   check('forecourt home: finance tabs switch', /PCP/i.test(await page.locator('.fc-tabs [aria-selected=true]').innerText()) && /lower monthly/i.test(await page.locator('.fc-tabpanel').innerText()));
   check('forecourt home: brands, reviews and visit blocks', (await page.locator('.fc-brand').count()) > 0 && (await page.locator('.fc-review').count()) > 0 && (await page.locator('.fc-visit').count()) === 1);
   const countAll = Number(await page.locator('.fc-count b').innerText());

@@ -5,6 +5,7 @@ import { PlatformApiService } from './platform-api.service';
 import { DealerContextService } from './dealer-context.service';
 import { environment } from '../../environments/environment';
 import { VEHICLES } from '../data/vehicles.data';
+import { monthlyPaymentForVehicle } from '../utils/finance-display';
 
 @Injectable({
   providedIn: 'root',
@@ -94,6 +95,12 @@ export class VehicleService {
     }
     if (f.maxPrice !== undefined) {
       result = result.filter((v) => v.price <= f.maxPrice!);
+    }
+    if (f.maxMonthly !== undefined) {
+      result = result.filter((v) => {
+        const monthly = monthlyPaymentForVehicle(v);
+        return monthly !== undefined && monthly <= f.maxMonthly!;
+      });
     }
     if (f.minYear !== undefined) {
       result = result.filter((v) => v.year >= f.minYear!);

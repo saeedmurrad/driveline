@@ -124,6 +124,8 @@ export interface SearchFilters {
   maxEngineSize?: number;
   minPrice?: number;
   maxPrice?: number;
+  /** Highest illustrative monthly payment (same figure the cards show). */
+  maxMonthly?: number;
   minYear?: number;
   maxYear?: number;
   maxMileage?: number;

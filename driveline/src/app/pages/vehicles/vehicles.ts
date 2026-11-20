@@ -55,6 +55,7 @@ export class VehiclesComponent implements OnInit {
       maxEngineSize: this.toNumber(params.get('maxEngineSize')),
       minPrice: this.toNumber(params.get('minPrice')),
       maxPrice: this.toNumber(params.get('maxPrice')),
+      maxMonthly: this.toNumber(params.get('maxMonthly')),
       minYear: this.toNumber(params.get('minYear')),
       maxYear: this.toNumber(params.get('maxYear')),
       maxMileage: this.toNumber(params.get('maxMileage')),
@@ -81,6 +82,11 @@ export class VehiclesComponent implements OnInit {
 
   get allVehicles() {
     return this.vehicleService.filteredVehicles();
+  }
+
+  /** Monthly budget in force, shown next to the result count. */
+  get monthlyBudget(): number | undefined {
+    return this.vehicleService.getCurrentFilters().maxMonthly;
   }
 
   get totalCount(): number {

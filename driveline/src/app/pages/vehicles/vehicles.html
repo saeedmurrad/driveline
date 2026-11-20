@@ -25,6 +25,9 @@
       <p class="text-gray-600 dark:text-gray-300 text-sm">
         Showing <span class="font-semibold text-gray-900 dark:text-white">{{ paginatedVehicles.length }}</span>
         of <span class="font-semibold text-gray-900 dark:text-white">{{ totalCount }}</span> vehicles
+        @if (monthlyBudget; as budget) {
+          <span data-monthly-budget>at up to <span class="font-semibold text-gray-900 dark:text-white">{{ formatPriceGBP(budget) }}</span> a month*</span>
+        }
       </p>
     </div>
     <div class="flex items-center gap-3">
