@@ -33,6 +33,10 @@ export class LegalComponent implements OnInit {
           body: 'This section outlines the type of data and information collected through this website and the steps available to users to request access, amendment and removal of data.',
         },
         {
+          heading: 'Alerts and Notifications',
+          body: 'If you turn on a price-drop or new-arrival alert, your browser gives us an anonymous notification address for that device. We keep that address with the vehicles or search you chose, only to send you those alerts. It contains no name, email, phone number or location. Turn the alert off on the same page, or block notifications for this site in your browser, and we stop; addresses that no longer work are removed automatically.',
+        },
+        {
           heading: 'Visitor Statistics',
           body: 'We count visits to this website so we know which pages and vehicles people look at and how they found us (for example Google or Facebook). We do this without cookies and without storing anything on your device: each page view only adds one to an anonymous daily total (page, vehicle viewed, the website you came from, and whether you use a phone, tablet or computer). No IP address, name or other information that could identify you is kept. We do not use Google Analytics or advertising trackers.',
         },

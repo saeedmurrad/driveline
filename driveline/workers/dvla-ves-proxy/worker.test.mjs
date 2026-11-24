@@ -105,7 +105,7 @@ test('MOT: 404 when DVSA has no record, 503 when not set up', async () => {
 
 test('health says which services are set up', async () => {
   const r = await worker.fetch(req('/health'), { DVLA_API_KEY: 'x' });
-  assert.deepEqual(await r.json(), { dvla: true, mot: false });
+  assert.deepEqual(await r.json(), { dvla: true, mot: false, push: false });
 });
 
 test('compactMot handles a brand-new car with no tests', () => {

@@ -10,10 +10,12 @@ import { Vehicle, SearchFilters } from '../../models/vehicle.model';
 import { monthlyPaymentForVehicle } from '../../utils/finance-display';
 import { VehicleCardComponent } from '../../components/vehicles/vehicle-card/vehicle-card';
 import { SearchWidgetComponent } from '../../components/search/search-widget/search-widget';
+import { AlertButtonComponent } from '../../components/shared/alert-button/alert-button';
+import type { SavedSearch } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-vehicles',
-  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent, FindMeACarComponent, PhotoPendingComponent],
+  imports: [FormsModule, CommonModule, RouterLink, VehicleCardComponent, SearchWidgetComponent, FindMeACarComponent, PhotoPendingComponent, AlertButtonComponent],
   templateUrl: './vehicles.html',
   styleUrl: './vehicles.css',
 })
@@ -82,6 +84,29 @@ export class VehiclesComponent implements OnInit {
 
   get allVehicles() {
     return this.vehicleService.filteredVehicles();
+  }
+
+  private alertSearchKey = '';
+  private alertSearchValue: SavedSearch = {};
+
+  /** The parts of the current search a new-arrival alert can follow (same object until the search changes). */
+  get alertSearch(): SavedSearch {
+    const f = this.vehicleService.getCurrentFilters();
+    const next: SavedSearch = {
+      category: this.category,
+      make: f.make || undefined,
+      bodyType: f.bodyType || undefined,
+      fuelType: f.fuelType || undefined,
+      transmission: f.transmission || undefined,
+      maxPrice: f.maxPrice,
+      maxMonthly: f.maxMonthly,
+    };
+    const key = JSON.stringify(next);
+    if (key !== this.alertSearchKey) {
+      this.alertSearchKey = key;
+      this.alertSearchValue = next;
+    }
+    return this.alertSearchValue;
   }
 
   /** Monthly budget in force, shown next to the result count. */

@@ -55,3 +55,7 @@ data/platform/platform.json
 
 # Local report from `npm run verify:stock` (adverts to review); not for the repository
 STOCK-CHECK-REPORT.md
+
+# Cloudflare worker local secrets (wrangler dev)
+.dev.vars
+.wrangler/

@@ -11,3 +11,15 @@ main = "worker.js"
 compatibility_date = "2024-01-01"
 workers_dev = true
 preview_urls = false
+
+# Alerts (push.js). The public signing key and project id are not secrets.
+# Secrets: VAPID_PRIVATE_JWK (scripts/make-vapid-keys.mjs), PUSH_ADMIN_KEY.
+[vars]
+VAPID_PUBLIC_KEY = "BNS8gCZe7anSfg7EfnErXGuP4faEEE4Ga5g6ydDyszYYndMzVo_G-EGPfxqBPZWnR2FA5sRgwlntkTI8_PXGzCQ"
+PUSH_SUBJECT = "https://drivelinecarsales.co.uk"
+FIREBASE_PROJECT_ID = "driveline-car-sales"
+
+# Who follows which car / search, and which staff devices get enquiry alerts.
+[[kv_namespaces]]
+binding = "PUSH_KV"
+id = "32f48cb001fb4c7fa1b1259958585152"

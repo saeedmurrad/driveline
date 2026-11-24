@@ -10,6 +10,7 @@
  *                          → make, model, colour, fuel, engine, recall status and every MOT
  *                            test (date, result, mileage, advisories, failures)
  *   GET  /health           which services are configured (no lookups made)
+ *   POST /push/*           price-drop, new-stock and staff enquiry notifications (see push.js)
  *
  * Secrets (wrangler secret put NAME):
  *   DVLA_API_KEY                      DVLA VES key
@@ -25,6 +26,8 @@
  *
  * Spec: dvsa-mot-history-openapi.yml (copied from documentation.history.mot.api.gov.uk).
  */
+
+import { handlePush, pushConfigured } from './push.js';
 
 export const DVLA_URL = 'https://driver-vehicle-licensing.api.gov.uk/vehicle-enquiry/v1/vehicles';
 export const MOT_BASE = 'https://history.mot.api.gov.uk/v1/trade/vehicles/registration/';
@@ -199,12 +202,17 @@ export default {
     const path = new URL(request.url).pathname.replace(/\/+$/, '') || '/';
     if (request.method === 'GET' && path === '/health') {
       return json(
-        { dvla: !!env.DVLA_API_KEY, mot: !!(env.MOT_CLIENT_ID && env.MOT_CLIENT_SECRET && env.MOT_TOKEN_URL && env.MOT_API_KEY) },
+        { dvla: !!env.DVLA_API_KEY, mot: !!(env.MOT_CLIENT_ID && env.MOT_CLIENT_SECRET && env.MOT_TOKEN_URL && env.MOT_API_KEY), push: pushConfigured(env) },
         200,
         origin,
       );
     }
     if (request.method === 'GET' && path.startsWith('/mot/')) return mot(decodeURIComponent(path.slice(5)), env, origin, ctx);
+    // Alerts (see push.js)
+    if (request.method === 'POST' && path.startsWith('/push/')) {
+      const [status, body] = await handlePush(path, request, env);
+      return json(body, status, origin);
+    }
     if (request.method === 'POST' && (path === '/' || path === '/vehicle')) return dvla(request, env, origin);
     return err(404, 'Not found', 'Use POST / or GET /mot/{registration}.', origin);
   },

@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { HubVisitorsComponent } from './hub-visitors';
 import { Meta, Title } from '@angular/platform-browser';
 import { LeadsService } from '../../../services/leads.service';
+import { AlertsService } from '../../../services/alerts.service';
 import { VehicleService } from '../../../services/vehicle.service';
 import {
   LEAD_STATUSES,
@@ -24,6 +25,14 @@ import {
 })
 export class HubLeadsComponent implements OnInit, OnDestroy {
   protected readonly leadsService = inject(LeadsService);
+  protected readonly alerts = inject(AlertsService);
+  private readonly installHint = signal(false);
+  /** Result of pressing the alerts button, or how to get alerts on an iPhone. */
+  readonly alertHint = computed(() =>
+    this.installHint()
+      ? 'On iPhone and iPad, alerts work once the site is on your Home Screen: tap Share, then “Add to Home Screen”, open it from there and sign in to the hub.'
+      : this.alerts.notice(),
+  );
   private readonly vehicles = inject(VehicleService);
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
@@ -167,6 +176,15 @@ export class HubLeadsComponent implements OnInit, OnDestroy {
     }
     this.signInError.set(null);
     this.resetSent.set(true);
+  }
+
+  /** New-enquiry notifications on this device, on or off. */
+  toggleAlerts(): void {
+    if (this.alerts.status() === 'needs-install') {
+      this.installHint.set(true);
+      return;
+    }
+    void this.alerts.setStaff(!this.alerts.staffOn());
   }
 
   signOut(): void {

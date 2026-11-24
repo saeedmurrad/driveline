@@ -7,6 +7,7 @@ import { openSalesEnquiryEmail } from '../utils/enquiry-mailto';
 import { firebaseConfigured } from './firebase-client';
 import { LeadsService } from './leads.service';
 import { leadFromEnquiry } from '../models/lead.model';
+import { AlertsService } from './alerts.service';
 
 export interface PlatformEnquiryPayload {
   type: string;
@@ -23,6 +24,7 @@ export class EnquirySubmitService {
   private readonly dealerContext = inject(DealerContextService);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly leads = inject(LeadsService);
+  private readonly alerts = inject(AlertsService);
 
   async submit(
     enquiry: PlatformEnquiryPayload,
@@ -52,6 +54,8 @@ export class EnquirySubmitService {
             page: window.location.pathname,
           }),
         );
+        // Staff devices with alerts on hear about it straight away.
+        this.alerts.pingStaff(enquiry.type);
         callbacks.onSuccess();
       } catch {
         this.fallbackToEmail(enquiry, callbacks);

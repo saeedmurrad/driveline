@@ -534,6 +534,9 @@
               }
             </div>
 
+            @if (!sold()) {
+              <app-alert-button class="mb-4 print:hidden" [vehicleId]="vehicle()!.id" />
+            }
             @if (vehicle()!.registration) {
               <p class="mb-4 text-xs text-gray-500 dark:text-slate-400">Reg <span class="font-semibold tracking-wide text-gray-800 dark:text-slate-200">{{ vehicle()!.registration }}</span> · Stock ref {{ vehicle()!.id }}</p>
             }

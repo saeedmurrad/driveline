@@ -18,7 +18,7 @@ export function firebaseConfigured(): boolean {
   return !!environment.firebase;
 }
 
-function useEmulators(): boolean {
+export function useEmulators(): boolean {
   if (typeof window === 'undefined') return false;
   const local = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   if (!local) return false;

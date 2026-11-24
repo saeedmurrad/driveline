@@ -49,9 +49,11 @@ import {
   FINANCE_DISCLAIMER_DETAIL,
 } from '../../utils/finance-display';
 
+import { AlertButtonComponent } from '../../components/shared/alert-button/alert-button';
+
 @Component({
   selector: 'app-vehicle-detail',
-  imports: [ThumbPipe, 
+  imports: [AlertButtonComponent, ThumbPipe, 
     RouterLink,
     FormsModule,
     CommonModule,

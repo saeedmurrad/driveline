@@ -14,6 +14,9 @@ export const environment = {
   /** Keys are server-only in production; empty in browser builds when using platform API */
   dvlaApiKey: '',
   web3formsAccessKey: '',
+  /** Alerts are only switched on for the static DriveLine site. */
+  pushApiUrl: '',
+  vapidPublicKey: '',
   /** Platform builds store enquiries through the platform API instead. */
   firebase: null as FirebaseWebConfig | null,
 };

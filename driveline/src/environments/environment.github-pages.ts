@@ -8,6 +8,9 @@ export const environment = {
   dvlaLookupUrl: '',
   dvlaApiKey: '',
   web3formsAccessKey: '',
+  /** Alerts (price drops, new arrivals, staff enquiry alerts): worker URL and its public signing key. Both are public. */
+  pushApiUrl: 'https://driveline-dvla-ves-proxy.snatechltd.workers.dev',
+  vapidPublicKey: 'BNS8gCZe7anSfg7EfnErXGuP4faEEE4Ga5g6ydDyszYYndMzVo_G-EGPfxqBPZWnR2FA5sRgwlntkTI8_PXGzCQ',
   /**
    * DriveLine's Firebase project (enquiries + /hub leads). Web config is public by
    * design; access is controlled by firestore.rules.
