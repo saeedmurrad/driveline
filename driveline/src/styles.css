@@ -2152,3 +2152,17 @@ html[data-theme='forecourt'] .vehicle-showroom :is(.price-card h1, .price-box > 
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 639px) {
+  html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-media > .absolute.flex-col {
+    top: 3.75rem;
+    left: 0.25rem;
+    right: 0.25rem;
+  }
+
+  html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-media .badge {
+    padding-inline: 0.25rem;
+    font-size: 0.625rem;
+    white-space: nowrap;
+  }
+}
