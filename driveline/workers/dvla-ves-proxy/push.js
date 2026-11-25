@@ -103,6 +103,9 @@ export function notification({ title, body, url, tag }) {
   });
 }
 
+/** What the push service answered last time (shown in sign-up answers to make faults easy to trace). */
+let lastPushStatus = '';
+
 /** Sends one notification. Returns 'sent', 'gone' (browser unsubscribed) or 'failed'. */
 export async function sendPush(sub, payload, env) {
   try {
@@ -117,9 +120,11 @@ export async function sendPush(sub, payload, env) {
       },
       body: await encryptPayload(sub, payload),
     });
+    lastPushStatus = `${r.status} ${r.ok ? '' : (await r.text()).slice(0, 300)}`.trim();
     if (r.status === 404 || r.status === 410) return 'gone';
     return r.ok ? 'sent' : 'failed';
-  } catch {
+  } catch (e) {
+    lastPushStatus = `error ${String(e && e.message).slice(0, 200)}`;
     return 'failed';
   }
 }
@@ -197,8 +202,10 @@ async function subscribe(body, env) {
   let confirmed;
   if (body.confirm) {
     confirmed = await sendPush(record.sub, notification({ title: 'Alerts are on', body: 'We will tell you here when a price drops or a matching car arrives.', url: '/saved', tag: 'alerts-on' }), env);
+    // An address the push service has already dropped is not kept; the site signs up again with a new one.
+    if (confirmed === 'gone') await env.PUSH_KV.delete(key);
   }
-  return [200, { ok: true, following: vehicleIds.length + searches.length, confirmed }];
+  return [200, { ok: true, following: vehicleIds.length + searches.length, confirmed, ...(confirmed && confirmed !== 'sent' ? { pushService: lastPushStatus } : {}) }];
 }
 
 /** True when the Firebase sign-in belongs to someone on the staff list (Firestore checks the token). */
@@ -227,7 +234,8 @@ async function staff(body, env) {
   const record = { sub: { endpoint: sub.endpoint, keys: { p256dh: sub.keys.p256dh, auth: sub.keys.auth } }, uid, at: new Date().toISOString() };
   await env.PUSH_KV.put(key, JSON.stringify(record));
   const confirmed = await sendPush(record.sub, notification({ title: 'Enquiry alerts are on', body: 'This device will be told when a new website enquiry arrives.', url: '/hub', tag: 'staff-on' }), env);
-  return [200, { ok: true, on: true, confirmed }];
+  if (confirmed === 'gone') await env.PUSH_KV.delete(key);
+  return [200, { ok: true, on: true, confirmed, ...(confirmed !== 'sent' ? { pushService: lastPushStatus } : {}) }];
 }
 
 const LEAD_GAP_MS = 4000;

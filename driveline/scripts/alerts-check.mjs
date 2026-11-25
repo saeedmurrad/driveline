@@ -73,11 +73,15 @@ try {
   await page.goto(`${BASE}/vehicle/${CAR}?emulators=1`, { waitUntil: 'networkidle' });
   await page.locator('[data-alert="price"] button').waitFor({ timeout: 15_000 });
   check('car page: price alert button shows', /Tell me if the price drops/.test(await page.locator('[data-alert="price"] button').innerText()));
+  // With GONE_ONCE=1 on the local worker the first answer is "gone" and the site must renew and retry.
+  const answers = [];
+  page.on('response', async (r) => { if (r.url().includes('/push/subscribe')) answers.push(await r.json().catch(() => ({}))); });
   const [subRes] = await Promise.all([
-    page.waitForResponse((r) => r.url().includes('/push/subscribe'), { timeout: 60_000 }),
+    page.waitForResponse(async (r) => r.url().includes('/push/subscribe') && (await r.json().catch(() => ({}))).confirmed === 'sent', { timeout: 60_000 }),
     page.locator('[data-alert="price"] button').click(),
   ]);
   const subBody = await subRes.json();
+  if (process.env.GONE_ONCE === '1') check('a rejected sign-up is renewed and retried by the site', answers.length === 2 && answers[0].confirmed === 'gone' && answers[1].confirmed === 'sent', JSON.stringify(answers.map((a) => a.confirmed)));
   check('car page: sign-up accepted and confirmation sent to the browser', subRes.ok() && subBody.confirmed === 'sent', JSON.stringify(subBody));
   check('car page: button now says the alert is on', (await page.locator('[data-alert="price"] button').getAttribute('aria-pressed')) === 'true' && /Price alert on/.test(await page.locator('[data-alert="price"] button').innerText()));
   check('car page: says what will happen', /price drops/i.test(await page.locator('[data-alert="price"] .alert-note').innerText()));

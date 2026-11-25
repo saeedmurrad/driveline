@@ -160,7 +160,15 @@ export class AlertsService {
           return;
         }
       } else {
-        await this.post('/push/subscribe', { subscription, vehicleIds, searches, confirm: wasEmpty && turningOn });
+        const confirm = wasEmpty && turningOn;
+        const answer = await this.post('/push/subscribe', { subscription, vehicleIds, searches, confirm });
+        if (confirm && answer.confirmed === 'gone') {
+          // The push service no longer knows this address: make a new one and sign up again, once.
+          const renewed = await this.subscription(true, true);
+          if (!renewed) throw new Error('could not renew');
+          const second = await this.post('/push/subscribe', { subscription: renewed, vehicleIds, searches, confirm });
+          if (second.confirmed === 'gone') throw new Error('push service rejected the device');
+        }
       }
       this.vehicleIds.set(vehicleIds);
       this.searches.set(searches);
@@ -190,7 +198,13 @@ export class AlertsService {
         const auth = await firebaseAuth();
         const idToken = await auth.currentUser?.getIdToken();
         if (!idToken) throw new Error('signed out');
-        await this.post('/push/staff', { subscription, idToken, on });
+        const answer = await this.post('/push/staff', { subscription, idToken, on });
+        if (on && answer.confirmed === 'gone') {
+          const renewed = await this.subscription(true, true);
+          if (!renewed) throw new Error('could not renew');
+          const second = await this.post('/push/staff', { subscription: renewed, idToken, on });
+          if (second.confirmed === 'gone') throw new Error('push service rejected the device');
+        }
       }
       this.staffOn.set(on);
       try {
@@ -223,7 +237,7 @@ export class AlertsService {
   }
 
   /** The browser's notification address; asks permission when `create` is true. */
-  private async subscription(create: boolean): Promise<PushSubscriptionJSON | null> {
+  private async subscription(create: boolean, renew = false): Promise<PushSubscriptionJSON | null> {
     if (this.status() === 'unavailable' || this.status() === 'needs-install') return null;
     const registration = await Promise.race([
       navigator.serviceWorker.ready,
@@ -231,6 +245,10 @@ export class AlertsService {
     ]);
     if (!registration) return null;
     let sub = await registration.pushManager.getSubscription();
+    if (sub && renew) {
+      await sub.unsubscribe().catch(() => false);
+      sub = null;
+    }
     if (!sub && create) {
       const permission = await Notification.requestPermission();
       if (permission !== 'granted') {
@@ -242,9 +260,10 @@ export class AlertsService {
     return sub ? sub.toJSON() : null;
   }
 
-  private async post(path: string, body: unknown): Promise<void> {
+  private async post(path: string, body: unknown): Promise<{ confirmed?: string }> {
     const r = await fetch(this.apiUrl() + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
     if (!r.ok) throw new Error(`alerts ${r.status}`);
+    return (await r.json().catch(() => ({}))) as { confirmed?: string };
   }
 
   private say(message: string): void {

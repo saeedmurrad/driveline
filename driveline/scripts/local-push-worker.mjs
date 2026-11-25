@@ -23,6 +23,19 @@ for (const line of readFileSync(join(DIR, '.dev.vars'), 'utf8').split('\n')) {
 const toml = readFileSync(join(DIR, 'wrangler.toml'), 'utf8');
 for (const m of toml.matchAll(/^([A-Z_]+)\s*=\s*"([^"]*)"/gm)) vars[m[1]] ??= m[2];
 
+// GONE_ONCE=1: the first notification is answered "410 gone", to test that the site renews its sign-up.
+if (process.env.GONE_ONCE === '1') {
+  const real = globalThis.fetch;
+  let used = false;
+  globalThis.fetch = (url, init) => {
+    if (!used && /fcm\.googleapis\.com|push\.apple\.com|mozilla\.com/.test(String(url))) {
+      used = true;
+      return Promise.resolve(new Response('push subscription has unsubscribed or expired.', { status: 410 }));
+    }
+    return real(url, init);
+  };
+}
+
 const store = new Map();
 const env = {
   ...vars,

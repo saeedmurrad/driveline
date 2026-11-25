@@ -166,6 +166,21 @@ test('subscribe stores the device, confirms by notification, and empty lists rem
   }
 });
 
+test('a sign-up the push service has already dropped is not kept', async () => {
+  const { env, store } = await vapidEnv();
+  const browser = await fakeBrowser();
+  const net = mockNetwork({ pushStatus: 410 });
+  try {
+    const r = await worker.fetch(post('/push/subscribe', { subscription: browser.subscription, vehicleIds: ['1'], confirm: true }), env, {});
+    const out = await r.json();
+    assert.equal(out.confirmed, 'gone');
+    assert.match(out.pushService, /^410/);
+    assert.equal(store.size, 0);
+  } finally {
+    net.restore();
+  }
+});
+
 test('other websites cannot call the alert routes', async () => {
   const { env } = await vapidEnv();
   const r = await worker.fetch(post('/push/lead', { type: 'contact' }, {}, 'https://evil.example'), env, {});
