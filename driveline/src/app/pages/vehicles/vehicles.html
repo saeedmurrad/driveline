@@ -15,7 +15,7 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <!-- Search Widget -->
-  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 mb-8">
+  <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-700 mb-8 stock-filters">
     <app-search-widget variant="page" [initialCategory]="category"></app-search-widget>
   </div>
 
@@ -23,7 +23,7 @@
   <app-alert-button class="mb-5 sm:max-w-sm" [searchInput]="alertSearch" />
 
   <!-- Controls Bar -->
-  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 stock-toolbar">
     <div>
       <p class="text-gray-600 dark:text-gray-300 text-sm">
         Showing <span class="font-semibold text-gray-900 dark:text-white">{{ paginatedVehicles.length }}</span>
@@ -84,7 +84,7 @@
   <!-- Vehicles Grid/List -->
   @if (paginatedVehicles.length > 0) {
     @if (viewMode() === 'grid') {
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stock-grid">
         @for (vehicle of paginatedVehicles; track vehicle.id) {
           <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
         }

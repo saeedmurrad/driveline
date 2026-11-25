@@ -116,7 +116,7 @@
     </div>
 
     <div class="print:hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:py-8 lg:pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:py-8 lg:pb-8 vehicle-showroom">
       <app-vehicle-gallery class="mb-5 lg:mb-6" [vehicleInput]="vehicle()!" (requestPhotos)="openVisit('video')" />
 
       <!-- Key facts -->
@@ -142,7 +142,7 @@
       </ul>
 
       @if (videoId(); as vid) {
-        <section class="mb-8 overflow-hidden rounded-2xl bg-black shadow-card" aria-label="Video walkaround">
+        <section class="vehicle-walkaround mb-8 overflow-hidden rounded-2xl bg-black shadow-card" aria-label="Video walkaround">
           @if (videoPlaying()) {
             <iframe class="aspect-video w-full" [src]="videoEmbedUrl(vid)" title="Video walkaround" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
           } @else {
@@ -158,9 +158,9 @@
           }
         </section>
       }
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 vehicle-detail-columns">
         <!-- Left Column: Gallery + Details -->
-        <div class="order-2 lg:order-1 lg:col-span-2">
+        <div class="order-2 lg:order-1 lg:col-span-2 vehicle-information">
           <!-- What the DVLA and DVSA hold for this car, compared with the advert -->
           @if (vehicle()!.registration) {
             <app-official-check [vehicle]="vehicle()!" class="mb-6 print:hidden" />
@@ -499,7 +499,7 @@
         </div>
 
         <!-- Price and actions: first on phones, pinned beside the details on computers -->
-        <div class="order-1 lg:order-2 lg:col-span-1 print:hidden">
+        <div class="order-1 lg:order-2 lg:col-span-1 print:hidden vehicle-purchase">
           <div class="lg:sticky lg:top-24">
           <!-- Price Card -->
           <div #priceCard class="price-card bg-white dark:bg-slate-800 rounded-2xl shadow-card border border-gray-100 dark:border-slate-700 p-5 sm:p-6">

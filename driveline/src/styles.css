@@ -1967,3 +1967,188 @@ html[data-theme='forecourt'] .price-card .price-box > div { border-color: rgb(25
 
 /* The floating compare tray never permanently covers the end of a page */
 html.has-compare-tray app-footer > footer { padding-bottom: 5.5rem; }
+
+/* Stock and vehicle layouts extend each homepage's design into the buying flow. */
+html[data-theme='prestige'] .stock-filters {
+  border-width: 0 0 1px;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-theme='prestige'] .stock-toolbar {
+  border-block: 1px solid rgb(var(--p-rose-500) / 0.35);
+  padding-block: 0.75rem;
+}
+
+html[data-theme='prestige'] .stock-grid {
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+html[data-theme='prestige'] .stock-grid app-vehicle-card .card {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-theme='prestige'] .stock-grid app-vehicle-card .card-media {
+  aspect-ratio: 3 / 2;
+  border-radius: 0;
+}
+
+html[data-theme='prestige'] .stock-grid app-vehicle-card .card-details {
+  padding: 1.1rem 0 1rem;
+  border-bottom: 1px solid rgb(var(--p-rose-500) / 0.35);
+}
+
+html[data-theme='prestige'] :is(.stock-grid h3, .vehicle-showroom .price-card h1) {
+  font-family: Georgia, serif;
+  font-size: clamp(1.6rem, 3vw, 2.65rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+html[data-theme='prestige'] .vehicle-showroom :is(.gallery-mosaic, .price-card, .price-box) {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+html[data-theme='prestige'] .vehicle-showroom .price-box {
+  border-width: 1px 0;
+  padding-inline: 0;
+  background: transparent;
+}
+
+@media (min-width: 1024px) {
+  html[data-theme='prestige'] .stock-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html[data-theme='prestige'] .vehicle-showroom .gallery-mosaic {
+    height: clamp(360px, 49vw, 660px);
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+
+  html[data-theme='prestige'] .vehicle-showroom .gallery-mosaic.few {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  html[data-theme='prestige'] .vehicle-showroom .gallery-mosaic.single {
+    grid-template-columns: 1fr;
+  }
+}
+
+html[data-theme='forecourt'] .stock-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+html[data-theme='forecourt'] .stock-toolbar {
+  border-block: 1px solid rgb(var(--p-rose-500) / 0.35);
+  padding-block: 0.6rem;
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card {
+  display: grid;
+  grid-template-columns: clamp(6rem, 28vw, 19rem) minmax(0, 1fr);
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-media {
+  aspect-ratio: auto;
+  min-height: 100%;
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-details {
+  min-width: 0;
+  padding: clamp(0.7rem, 2vw, 1.5rem);
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .fc-card-tag {
+  display: none;
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card .card-cash {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  margin: 0;
+  clip: auto;
+  white-space: normal;
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-actions {
+  flex-wrap: wrap;
+}
+
+html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-cta {
+  flex-basis: 100%;
+}
+
+html[data-theme='forecourt'] .vehicle-showroom :is(.gallery-mosaic, .price-card, .price-box) {
+  border-radius: 0.2rem;
+}
+
+html[data-theme='forecourt'] .vehicle-showroom .price-card {
+  border-top: 4px solid rgb(var(--dl-brand-rgb));
+}
+
+html[data-theme='forecourt'] .vehicle-showroom :is(.price-card h1, .price-box > p:nth-child(2)) {
+  font-family: var(--dl-font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-media {
+    min-height: 12rem;
+  }
+
+  html[data-theme='forecourt'] .stock-grid app-vehicle-card .card-cta {
+    flex-basis: auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  html[data-theme='forecourt'] .vehicle-showroom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.54fr);
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
+  html[data-theme='forecourt'] .vehicle-detail-columns {
+    display: contents;
+  }
+
+  html[data-theme='forecourt'] .vehicle-showroom > :is(app-vehicle-gallery, .key-facts, .vehicle-walkaround),
+  html[data-theme='forecourt'] .vehicle-information {
+    grid-column: 1;
+    order: 0;
+    min-width: 0;
+  }
+
+  html[data-theme='forecourt'] .vehicle-purchase {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    order: 0;
+    align-self: stretch;
+    min-width: 0;
+  }
+
+  html[data-theme='forecourt'] .vehicle-showroom .gallery-mosaic {
+    height: clamp(285px, 32vw, 440px);
+    grid-template-columns: 3fr 1fr 1fr;
+  }
+
+  html[data-theme='forecourt'] .vehicle-showroom .gallery-mosaic.few {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  html[data-theme='forecourt'] .vehicle-showroom .gallery-mosaic.single {
+    grid-template-columns: 1fr;
+  }
+}
